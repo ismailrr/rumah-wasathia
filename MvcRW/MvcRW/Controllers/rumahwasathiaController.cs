@@ -39,22 +39,52 @@ namespace MvcRW.Controllers
             return "This is the biografi action method...";
         }
 
-        // GET: /rumahwasathia/Perpustakaan/
-        public string Perpustakaan()
+        // GET: /rumahwasathia/TanyaJawab/
+        public string TanyaJawab()
         {
-            return "This is the perpustakaan action method...";
+            return "This is the TanyaJawab action method...";
         }
 
-        // GET: /rumahwasathia/Media/
-        public string Media()
+        // GET: /rumahwasathia/Artikel/
+        public ActionResult Artikel()
         {
-            return "This is the media action method...";
+            return View();
         }
 
+        // GET: /rumahwasathia/Buku/
+        public ActionResult Buku()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/KajianVideo/
+        public ActionResult audio()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/KajianSuara/
+        public ActionResult video()
+        {
+            return View();
+        }
         // GET: /rumahwasathia/Berita/
-        public string Berita()
+        public ActionResult Berita()
         {
-            return "This is the berita action method...";
+            return View();
+        }
+        // GET: /rumahwasathia/Galeri/
+        public ActionResult Galeri()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/SubBuku(Fiqih)/
+        public ActionResult SubBuku()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/SubBuku(Fiqih)/
+        public ActionResult fiqih()
+        {
+            return View();
         }
     }
 }
