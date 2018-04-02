@@ -1,0 +1,653 @@
+﻿.icons-media-social a {
+    padding: 0 15px;
+    font-size: 20px;
+    color:#fff;
+}
+.icons-media-social {
+    padding: 5px 0;
+    background-image: url('../images/general/marque-bg-blue.png');
+    background-repeat: repeat;
+    line-height: 28px;
+    border-left: 3px solid #fff;
+}
+.list-unstyled li {
+    padding: 10px 0;
+}
+
+.download i {
+    padding-right: 15px;
+    font-size: 20px;
+}
+
+.download {
+    padding-top: 10px;
+}
+
+.book-desc h3 {
+    width: 220px;
+    color: #3D566E;
+}
+
+.gapTop {
+    margin-top: 30px;
+}
+
+.main-title-outer .topic {
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+html {
+    background: #0A100F;
+}
+.thumb-video .video {
+    padding: 0;
+}
+
+.soundCloud {
+    margin-top: 60px;
+    padding: 0 15px;
+    margin-bottom: 25px;
+}
+.album {
+    padding: 0 15px;
+}
+.slider-image .carousel {
+    max-height: 226px;
+}
+
+.item h4 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.popular-tags {
+    padding-right: 20px;
+    padding-left: 20px;
+    border-right: 1px solid #486581;
+    height: 260px;
+    overflow: hidden;
+}
+.readMore li {
+    background: #486581;
+    width: 72%;
+}
+.readMore li i {
+    padding-left: 15px;
+}
+.readMore-link {
+    list-style: none;
+    padding-left: 0;
+}
+.readMore-link li{
+    font-size: 15px;
+    margin: 16px 0;
+    text-align:center;
+    font-weight:400;
+}
+.readMore-link li a {
+    color: #fff;
+}
+.menu li {
+    background: #486581;
+    width: 100%;
+}
+.menu li i {
+    padding-right: 15px;
+}
+.menu-link {
+    list-style: none;
+    padding-left: 0;
+}
+.menu-link li{
+    font-size: 14px;
+    background: #486581;
+    margin: 9px 0;
+    font-weight:400;
+}
+.menu-link li a {
+    color: #fff;
+    margin-left:10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.main-title-modif span a {
+    font-size:10px;
+    color:#fff;
+}
+.main-title-modif span a:hover, .main-title-modif span a:active {
+    color: #486581;
+}
+.main-title-modif span {
+    background: #f3c33a;
+    max-height: 100%;
+    padding: 0 10px;
+}
+.main-title-modif {
+    border-left: solid 2px #3fc997;
+    position: relative;
+    z-index: 1;
+    background-color: #3fc997;
+    margin: 0 0 0 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: none;
+    padding: 0 10px 0 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+}
+.main-title-modif:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -8px;
+    border-left: solid 4px #3fc997;
+    width: auto;
+    margin-top: 0;
+    min-height: 100%;
+    z-index: 10;
+}
+.footer-icon {
+    padding: 20px 0;
+}
+.footer-icon a {
+    padding: 0 15px;
+    font-size: 20px;
+    color:#fff;
+}
+.add-information span i {
+    font-size: 25px;
+    padding-right: 20px;
+    float: left;
+}
+.add-information {
+    padding:10px 0;
+    color:#fff;
+}
+#responsive-image img {
+    margin-bottom:20px;
+}
+.moveToLeft{
+    margin-left:-14px;
+}
+.footer-link {
+    list-style: none;
+    padding-left: 0;
+}
+.footer-link li{
+    font-size: 16px;
+    margin: 16px 0;
+    font-weight: 400;
+}
+.footer-link li a{
+    color:#fff;
+}
+#bio-footer {
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 400;
+    color:#fff;
+}
+.lineBottom {
+    border-bottom: 1px solid #373c3b;
+}
+.line-footer {
+    margin-left: 0 !important;
+    margin-right: -10px !important;
+    border-bottom: 1px solid #373c3b;
+}
+.bioLinkFooter div {
+    position: relative;
+    z-index: 1;
+    background: #486581;
+    width: 47%;
+    margin: 10px 0;
+}
+.bioLinkFooter div a {
+    color: #fff;
+    padding: 7px 12px;
+    background: #486581;
+    display: block;
+}
+.bioLinkFooter div i {
+    padding-left: 15px;
+}
+/*Running Text*/
+.runtext-container {
+    background-color: transparent;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-image: url('../images/general/marque-bg-blue.png');
+    background-repeat: repeat;
+}
+
+.runtext-container .holder .text-container {
+    display:inline;
+}
+
+.runtext-container .holder a{
+    text-decoration: none;
+    color:#fff;
+    font-size:14px;
+}
+
+.runtext-container .holder a:hover{
+    text-decoration: none;
+    color:#fff;
+}
+.news-title {
+    padding: 5px 0;
+    background: #394F6E;
+}
+.news-title h6 {
+    color:#ECB20E;
+    padding: 3px 0;
+    line-height: 16px;
+}
+.no-padding {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+#news-row {
+    padding: 0 5px;
+    margin-top: -10px;
+    padding-bottom: 15px;
+}
+.flex-container {
+  display: flex;
+  padding:100px 0;
+}
+
+.flex-container > div {
+    text-align: center;
+    margin: 0 10px;
+}
+.flex-container i {
+    color: #fff;
+    font-size: 24px;
+}
+
+.flex-container p {
+    color: #ECB20E;
+    font-weight: 600;
+    font-size:13px;
+}
+#logo {
+    text-align: right;
+    width: 100%;
+    padding: 100px 0;
+}
+/*Qaradhawi*/
+.relative-block {
+    position: relative;
+    display: block;
+}
+.second-news, .second-news:hover {
+    background: #1b5275;
+    font-size: 16px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    min-width: 98px;
+    color: #fff;
+    padding: 3px 8px;
+    text-decoration: none;
+}
+.theme-color-blue .second-news, .theme-color-blue .second-news:hover {
+    background: #1b5275;
+}
+.theme-color-blue .absolute-text-item h2 {
+    color: #15445e;
+}
+.absolute-text-item h2 {
+    font-size: 22px;
+    margin-top: 6px;
+}
+.absolute-text-item p {
+    color: #313433;
+    font-size: 14px;
+}
+.absolute-text-item img {
+    width:100%;
+}
+.absolute-text-item {
+    padding: 0px 10px;
+}
+.read-more-yellow {
+    color: #fff;
+    font-size: 17px;
+    background: #ecb20e;
+    float: right;
+    padding: 5px 20px;
+    margin: 10px 0px;
+}
+.module1 {
+    height: 183px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.module2 {
+    height: 60px;
+    overflow: hidden;
+}
+.module3 {
+    height: 70px;
+    overflow: hidden;
+}
+.module4 {
+    height: 125px;
+    overflow: hidden;
+}
+.soundCloud iframe {
+    width:100%;
+}
+.main-info i {
+    padding-left:10px;
+}
+.module-artikel {
+    height: 290px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+.module-artikel p{
+    color: #313433;
+    font-size: 16px;
+}
+.kitab, .kajian, .sering-dibaca {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+.list-menu {
+    padding: 0px 15px;
+}
+.youtube-channel {
+    padding: 10px 15px;
+}
+.book-cover {
+    width: 150px;
+    height: 200px;
+}
+.perpustakaan {
+    padding: 15px 10px;
+}
+.twitter-timeline {
+    padding:0px 10px!important;
+}
+.RekamanKajian iframe, .fiqih iframe {
+    width: 100%;
+}
+.fiqih iframe {
+    width: 100%;
+    height: 210px;
+}
+.RekamanKajian {
+    padding: 0px 15px;
+}
+.RekamanKajian .pathRekaman {
+    padding: 5px 5px;
+}
+/*The Issue*/
+.custom {
+   animation-fill-mode: none;
+}
+.galeri-size img {
+    width: 335px;
+    height: 220px;
+}
+.download-icon i {
+    padding-right:10px;
+}
+.book-detail span {
+    font-size: 16px;
+}
+.book-detail {
+    text-align: center;
+    margin: 0px 10px;
+}
+.book-detail img{
+    margin-bottom: 10px;
+}
+table, td, th {
+    border: 0;
+}
+table {
+    border-collapse: collapse;
+    width: 65%;
+    font-size: 15px;
+    margin: 20px 0;
+}
+td {
+    height: 30px;
+}
+.description p {
+    color: #313433;
+}
+.description {
+    padding: 25px 15px;
+}
+.album-desc {
+    padding: 0 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Bootstrap 3 Media Queries*/
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    .slider-image .carousel {
+        max-height: 180px;
+    }
+    .module3 {
+        height: 80px;
+    }
+    .module1 {
+        height: 123px;
+    }
+    #responsive-image img {
+        max-width: 70%;
+    }
+    .module-artikel {
+        height: 200px;
+    }
+    .book-cover {
+        height: 170px;
+    }
+    .galeri-size img {
+        height: 180px;
+    }
+    .fiqih iframe {
+        height: 180px;
+    }
+}
+
+/* Small Devices, Tablets */
+
+@media only screen and (min-width : 480px) and (max-width : 768px) {
+    .wrap-content {
+        margin-top: 85%;
+    }
+    .slider-image .carousel {
+        max-height: 270px;
+    }
+    .flex-container {
+        padding: 30px 0;
+        align-items: center;
+        justify-content: center;
+    }
+    #logo {
+        width: 100%;
+        padding: 0 70px 40px 70px;
+    }
+
+    .navbar-nav > li > a {
+        padding: 15px 10px;
+        font-size: 12px;
+    }
+
+    .mega-menu {
+        min-width: 280px;
+    }
+
+    .icons-media-social a {
+        padding: 0 10px;
+        font-size: 18px;
+    }
+
+    .demo-2 {
+        -webkit-line-clamp: 7;
+    }
+
+    .list-unstyled h4 {
+        font-size: 20px;
+    }
+
+    .list-unstyled .sub-info {
+        font-size: 16px;
+    }
+
+    .list-unstyled .stars {
+        font-size: 18px;
+    }
+
+    .right-side-style {
+        padding-left: 0 !important;
+    }
+
+    .slider-image .carousel {
+        max-height: 415px;
+    }
+
+    .tab-content {
+        padding: 10px 70px 0 70px;
+    }
+
+    .add-information span i {
+        float: none;
+    }
+
+    .add-information {
+        text-align: center !important;
+    }
+
+    .moveToLeft {
+        text-align: center;
+        margin-left: 0 !important;
+    }
+
+    #responsive-image img {
+        margin: 0 auto;
+        padding-bottom: 20px;
+    }
+
+    .module1 {
+        height: 124px;
+    }
+
+    .module2 {
+        height: 60px;
+    }
+    .item h4 {
+     text-align:left;
+    }
+    .book-cover {
+        width: 320px;
+        height: 470px;
+    }
+    .galeri-size img {
+        height: 240px;
+    }
+}
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+    .soundCloud {
+        margin-top: 40px;
+    }
+    .owl-next, .owl-prev {
+        display: none!important;
+    }
+    .wrap-content {
+        margin-top: 2%;
+    }
+    .navbar-inverse .navbar-nav li a{
+        padding-left: 15px;
+    }
+    .right-side-style .list-unstyled li {
+        margin-bottom: 50px;
+    }
+    .slider-image .carousel {
+        max-height: 250px;
+    }
+    .icons-media-social {
+        border-left: none;
+    }
+    .galeri-size img {
+        width: 100%;
+        height: 280px;
+    }
+    .detail {
+        padding: 10px 15px;
+    }
+    .fiqih iframe {
+        height: 280px;
+    }
+}
+@media only screen and (max-width : 320px) {
+    #responsive-image img {
+        max-width: 100%!important;
+    }
+    .right-side-style {
+        padding-left: 0!important;
+    }
+    .flex-container {
+        padding: 30px 0 15px 0;
+        margin: 0 20px;
+    }
+    #logo {
+        width: 100%;
+        padding: 0px 0 30px 0px;
+    }
+    .slider-image .carousel {
+        max-height: 155px;
+    }
+    .book-cover {
+        width: 320px;
+        height: 390px;
+    }
+    .galeri-size img {
+        width: 100%;
+        height: 170px;
+    }
+    table {
+        width: 100%;
+    }
+    .fiqih iframe {
+        height: 160px;
+    }
+}

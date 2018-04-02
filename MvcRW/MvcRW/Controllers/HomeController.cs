@@ -29,6 +29,27 @@ namespace MvcRW.Controllers
             return View();
         }
 
+        public IActionResult Perpustakaan()
+        {
+            ViewData["Message"] = "Ini adalah halaman perpustakaan, berisi sub menu buku dan artikel.";
+
+            return View();
+        }
+
+        public IActionResult Media()
+        {
+            ViewData["Message"] = "Ini adalah halaman media, berisi sub menu foto dan video.";
+
+            return View();
+        }
+
+        public IActionResult Berita()
+        {
+            ViewData["Message"] = "Ini adalah halaman berita.";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
