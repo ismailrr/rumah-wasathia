@@ -57,12 +57,12 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/KajianVideo/
-        public ActionResult audio()
+        public ActionResult Audio()
         {
             return View();
         }
         // GET: /rumahwasathia/KajianSuara/
-        public ActionResult video()
+        public ActionResult Video()
         {
             return View();
         }
