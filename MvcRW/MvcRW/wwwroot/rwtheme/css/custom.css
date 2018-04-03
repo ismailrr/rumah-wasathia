@@ -196,7 +196,7 @@ html {
     border-bottom: 1px solid #373c3b;
 }
 .line-footer {
-    margin-left: 0 !important;
+    margin-left: 0!important;
     margin-right: -10px !important;
     border-bottom: 1px solid #373c3b;
 }
@@ -377,7 +377,7 @@ html {
     padding: 15px 10px;
 }
 .twitter-timeline {
-    padding:0px 10px!important;
+    padding:0 10px!important;
 }
 .RekamanKajian iframe, .fiqih iframe {
     width: 100%;
@@ -631,7 +631,7 @@ td {
     }
     #logo {
         width: 100%;
-        padding: 0px 0 30px 0px;
+        padding: 0 0 30px 0;
     }
     .slider-image .carousel {
         max-height: 155px;
