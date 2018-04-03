@@ -40,9 +40,9 @@ namespace MvcRW.Controllers
         }
 
         // GET: /rumahwasathia/TanyaJawab/
-        public string TanyaJawab()
+        public ActionResult tanya_jawab()
         {
-            return "This is the TanyaJawab action method...";
+            return View();
         }
 
         // GET: /rumahwasathia/Artikel/
