@@ -37,7 +37,6 @@ namespace MvcRW.Controllers
         public ActionResult Biografi()
         {
             return View();
-            return "This is the biografi action method...";
         }
 
         // GET: /rumahwasathia/TanyaJawab/
