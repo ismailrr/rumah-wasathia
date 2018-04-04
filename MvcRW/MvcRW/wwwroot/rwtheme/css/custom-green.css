@@ -715,6 +715,7 @@ position: relative;
 .search-container input {
 background-color: #ECB20E;
 border: none;
+font-size: 20px;
 color: #fff;
 padding: 1.875rem 0;
 width: 100%;

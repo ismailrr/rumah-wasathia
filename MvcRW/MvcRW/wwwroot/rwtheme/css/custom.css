@@ -15,8 +15,9 @@
 }
 
 .download i {
-    padding-right: 15px;
-    font-size: 20px;
+    padding-right: 12px;
+    font-size: 24px;
+    vertical-align: middle;
 }
 
 .download {
@@ -435,98 +436,205 @@ td {
     padding: 0 5px;
 }
 /*===================     Accordion     ======================*/
-.accordion {
-    font-size: 1rem;
-    width: 30vw;
-    margin: 0 auto;
-    border-radius: 5px;
+.transition, #accordion p, #accordion ul li i:before, #accordion ul li i:after {
+    transition: all 0.25s ease-in-out;
 }
 
-.accordion-header,
-.accordion-body {
-    background: white;
+.flipIn, #accordion h1, #accordion ul li {
+    animation: flipdown 0.5s ease both;
 }
 
-.accordion-header {
-    padding: 1.5em 1.5em;
-    background: #3F51B5;
+.no-select, #accordion h2 {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#x {
+    min-height: 0;
+    display: inline-block;
+    margin: 90px 0;
+    background-color: #fefffa;
+    padding: 0 20px;
+    margin: 0 20px;
+}
+@media (max-width: 550px) {
+  #x {
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    left: 0;
+  }
+}
+
+#accordion h1 {
     text-transform: uppercase;
-    color: white;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: 3px;
+    font-weight: 100;
+}
+
+#accordion h2 {
+    font-size: 18px;
+    line-height: 34px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    background-color: #fefffa;
+    margin: 0;
     cursor: pointer;
-    font-size: .8em;
-    letter-spacing: .1em;
-    transition: all .3s;
 }
 
-    .accordion-header:hover {
-        background: #2D3D99;
-        position: relative;
-        z-index: 5;
-    }
-
-.accordion-body {
-    background: #fcfcfc;
-    color: #3f3c3c;
-    display: none;
-}
-
-.accordion-body__contents {
-    padding: 1.5em 1.5em;
-    font-size: .85em;
-}
-
-.accordion__item.active:last-child .accordion-header {
-    border-radius: none;
-}
-
-.accordion:first-child > .accordion__item > .accordion-header {
-    border-bottom: 1px solid transparent;
-}
-
-.accordion__item > .accordion-header:after {
-    content: "\f3d0";
-    font-family: IonIcons;
-    font-size: 1.2em;
-    float: right;
+#accordion p {
+    color: rgba(48, 69, 92, 0.8);
+    font-size: 17px;
+    line-height: 26px;
+    letter-spacing: 1px;
     position: relative;
-    top: -2px;
-    transition: .3s all;
-    transform: rotate(0deg);
+    overflow: hidden;
+    max-height: 800px;
+    opacity: 1;
+    transform: translate(0, 0);
+    margin-top: 14px;
+    z-index: 2;
 }
 
-.accordion__item.active > .accordion-header:after {
-    transform: rotate(-180deg);
+#accordion ul {
+    list-style: none;
+    perspective: 900px;
+    margin: 10px 0;
+    padding: 0;
+}
+#accordion ul li {
+  position: relative;
+    padding: 5px 0;
+    margin: 0;
+    border-top: 1px solid #dce7eb;
+}
+#accordion ul li:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+#accordion ul li:nth-of-type(2) {
+  animation-delay: 0.75s;
+}
+#accordion ul li:nth-of-type(3) {
+  animation-delay: 1s;
+}
+#accordion ul li:last-of-type {
+  padding-bottom: 0;
+}
+#accordion ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 16px;
+  right: 0;
+}
+#accordion ul li i:before,#accordion  ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #ff6873;
+  width: 3px;
+  height: 9px;
+}
+#accordion ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+#accordion ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+#accordion ul li input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+}
+#accordion ul li input[type=checkbox]:checked ~ p {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translate(0, 50%);
+}
+#accordion ul li input[type=checkbox]:checked ~ i:before {
+  transform: translate(2px, 0) rotate(45deg);
+}
+#accordion ul li input[type=checkbox]:checked ~ i:after {
+  transform: translate(-2px, 0) rotate(-45deg);
 }
 
-.accordion__item.active .accordion-header {
-    background: #2D3D99;
-}
-
-.accordion__item .accordion__item .accordion-header {
-    background: #f1f1f1;
-    color: black;
-}
-
-@media screen and (max-width: 1000px) {
-    body {
-        padding: 1em;
-    }
-
-    .accordion {
-        width: 100%;
-    }
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
 }
 /*===================     Accordion     ======================*/
+/* Style the tab */
+.tab {
+    float: left;
+    background-color: #f1f1f1;
+    width: 30%;
+    height: 100%;
+}
 
+/* Style the buttons inside the tab */
+.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
 
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
 
+/* Create an active/current "tab button" class */
+.tab button.active {
+    background-color: #ccc;
+}
 
-
-
-
-
-
-
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border: none;
+    height: 100%;
+}
 
 
 

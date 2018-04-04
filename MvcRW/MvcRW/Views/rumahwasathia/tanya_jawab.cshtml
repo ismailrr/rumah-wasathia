@@ -11,409 +11,71 @@
         <div class="page-header">
             <ol class="breadcrumb">
                 <li><a href="#">Beranda</a></li>
-                <li class="active">Perpustakaan</li>
+                <li class="active">Tanya Jawab</li>
             </ol>
         </div>
         <!-- breadcrumb end -->
-        <!-- Kollom artikel Begin -->
+        <!-- Kolom artikel Begin -->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+            <div class="col-sm-16 col-md-16 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
-                    <div class="main-title left-side">Kumpulan Buku</div>
+                    <div class="main-title left-side album-desc" style="margin-bottom:0!important;">Pertanyaan &amp; Jawaban</div>
                     <div class="row">
-                        <div class="item topic col-xs-16">
-                            <div class="accordion js-accordion">
-                                <div class="accordion__item js-accordion-item">
-                                    <div class="accordion-header js-accordion-header">Panel 1</div>
-                                    <div class="accordion-body js-accordion-body">
-                                        <div class="accordion-body__contents">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                            eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                        </div>
-                                        <div class="accordion js-accordion">
-                                            <div class="accordion__item js-accordion-item">
-                                                <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                                <div class="accordion-body js-accordion-body">
-                                                    <div class="accordion-body__contents">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                    </div>
-                                                    <!-- end of sub accordion item body contents -->
-                                                </div>
-                                                <!-- end of sub accordion item body -->
-                                            </div>
-                                            <!-- end of sub accordion item -->
-                                            <div class="accordion__item js-accordion-item">
-                                                <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                                <div class="accordion-body js-accordion-body">
-                                                    <div class="accordion-body__contents">
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                    </div>
-                                                    <!-- end of sub accordion item body contents -->
-                                                </div>
-                                                <!-- end of sub accordion item body -->
-                                            </div>
-                                            <!-- end of sub accordion item -->
-                                        </div>
-                                        <!-- end of sub accordion -->
-                                    </div>
-                                </div>
-                                <!-- end of accordion body -->
+                        <div class="col-xs-16">
+                            <div class="tab">
+                                <button class="tablinks" onclick="openCity(event, 'Fiqh')" id="defaultOpen">Fiqh</button>
+                                <button class="tablinks" onclick="openCity(event, 'Aqidah')">Aqidah</button>
+                                <button class="tablinks" onclick="openCity(event, 'Tafsir')">Tafsir</button>
+                                <button class="tablinks" onclick="openCity(event, 'Muamalah')">Muamalah</button>
+                                <button class="tablinks" onclick="openCity(event, 'Hadist')">Hadist</button>
                             </div>
-                            <!-- end of accordion item -->
-                            <div class="accordion__item js-accordion-item active">
-                                <div class="accordion-header js-accordion-header">Panel 2</div>
-                                <div class="accordion-body js-accordion-body">
-                                    <div class="accordion-body__contents">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                    </div>
-                                    <div class="accordion js-accordion">
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                    </div>
-                                    <!-- end of sub accordion -->
+                            <div id="Fiqh" class="tabcontent">
+                                <div id="accordion">
+                                    <ul id="x">
+                                        <li>
+                                            <input type="checkbox" checked>
+                                            <i></i>
+                                            <h2>Languages Used</h2>
+                                            <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" checked>
+                                            <i></i>
+                                            <h2>How it Works</h2>
+                                            <p>Using the sibling and checked selectors, we can determine the styling of sibling elements based on the checked state of the checkbox input element. One use, as demonstrated here, is an entirely CSS and HTML accordion element. Media queries are used to make the element responsive to different screen sizes.</p>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" checked>
+                                            <i></i>
+                                            <h2>Points of Interest</h2>
+                                            <p>By making the open state default for when :checked isn't detected, we can make this system accessable for browsers that don't recognize :checked. The fallback is simply an open accordion. The accordion can be manipulated with Javascript (if needed) by changing the "checked" property of the input element.</p>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- end of accordion body -->
                             </div>
-                            <!-- end of accordion item -->
-                            <div class="accordion__item js-accordion-item">
-                                <div class="accordion-header js-accordion-header">Panel 3</div>
-                                <div class="accordion-body js-accordion-body">
-                                    <div class="accordion-body__contents">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                    </div>
-                                    <div class="accordion js-accordion">
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                    </div>
-                                    <!-- end of sub accordion -->
-                                </div>
-                                <!-- end of accordion body -->
+
+                            <div id="Aqidah" class="tabcontent">
+                                <h3>Paris</h3>
+                                <p>Paris is the capital of France.</p>
                             </div>
-                            <!-- end of accordion item -->
-                            <div class="accordion__item js-accordion-item">
-                                <div class="accordion-header js-accordion-header">Panel 4</div>
-                                <div class="accordion-body js-accordion-body">
-                                    <div class="accordion-body__contents">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                    </div>
-                                    <div class="accordion js-accordion">
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                    </div>
-                                    <!-- end of sub accordion -->
-                                </div>
-                                <!-- end of accordion body -->
+
+                            <div id="Tafsir" class="tabcontent">
+                                <h3>Tokyo</h3>
+                                <p>Tokyo is the capital of Japan.</p>
                             </div>
-                            <!-- end of accordion item -->
-                            <div class="accordion__item js-accordion-item">
-                                <div class="accordion-header js-accordion-header">Panel 5</div>
-                                <div class="accordion-body js-accordion-body">
-                                    <div class="accordion-body__contents">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                    </div>
-                                    <div class="accordion js-accordion">
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                    </div>
-                                    <!-- end of sub accordion -->
-                                </div>
-                                <!-- end of accordion body -->
+                            <div id="Muamalah" class="tabcontent">
+                                <h3>Tokyo</h3>
+                                <p>Tokyo is the capital of Japan.</p>
                             </div>
-                            <!-- end of accordion item -->
-                            <div class="accordion__item js-accordion-item">
-                                <div class="accordion-header js-accordion-header">Panel 6</div>
-                                <div class="accordion-body js-accordion-body">
-                                    <div class="accordion-body__contents">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                        eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                    </div>
-                                    <div class="accordion js-accordion">
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 1</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                        <div class="accordion__item js-accordion-item">
-                                            <div class="accordion-header js-accordion-header">Sub Panel 2</div>
-                                            <div class="accordion-body js-accordion-body">
-                                                <div class="accordion-body__contents">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sequi placeat distinctio dolor, amet magnam voluptatibus
-                                                    eos ex vero, sunt veritatis esse. Nostrum voluptatum et repudiandae vel sed, explicabo in?
-                                                </div>
-                                                <!-- end of sub accordion item body contents -->
-                                            </div>
-                                            <!-- end of sub accordion item body -->
-                                        </div>
-                                        <!-- end of sub accordion item -->
-                                    </div>
-                                    <!-- end of sub accordion -->
-                                </div>
-                                <!-- end of accordion body -->
+                            <div id="Hadist" class="tabcontent">
+                                <h3>Tokyo</h3>
+                                <p>Tokyo is the capital of Japan.</p>
                             </div>
-                            <!-- end of accordion item -->
-                        </div>
-                        <!-- end of accordion -->
-                    </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-16 text-center">
-                            <ul class="pagination">
-                                <li><a href="#">Terdahulu</a></li>
-                                <li><a href="#">&laquo;</a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">&raquo;</a></li>
-                                <li><a href="#">Terbaru</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer">
-                            <div class="main-title right-side">Perpustakaan</div>
-                            <ul class="list-unstyled kitab">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/bookCover1.jpg" height="800" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Out of The box</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-cloud-download-alt"></i>Download PDF</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4 "><img class="img-thumbnail" src="~/rwtheme/images/book/bookCover2.jpg" height="800" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Take Back Your Time</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-cloud-download-alt"></i>Download PDF</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/bookCover3.jpg" height="800" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>You're Hired!</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-cloud-download-alt"></i>Download PDF</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/bookCover1.jpg" height="800" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>The Grow Girl</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-cloud-download-alt"></i>Download PDF</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer pull-left">
-                            <div class="main-title right-side">Kajian</div>
-                            <ul class="list-unstyled kajian">
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-1.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-2.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-3.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-4.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-5.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Second Section Begin -->
     </div>
 </div>
 <!-- data end -->
