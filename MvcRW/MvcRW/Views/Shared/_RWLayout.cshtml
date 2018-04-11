@@ -18,10 +18,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
     <!-- ionicons font -->
     <link href="~/rwtheme/css/ionicons.min.css" rel="stylesheet">
-    <!-- animation styles -->
-    <link rel="stylesheet" href="~/rwtheme/css/animate.css" />
     <!-- developer custom(Dzaki) styles -->
     <link rel="stylesheet" href="~/rwtheme/css/custom.css" />
+    <!-- fontawesome style -->
     <link rel="stylesheet" href="~/rwtheme/fontawesome/css/fontawesome-all.min.css" />
     <link rel="stylesheet" href="~/rwtheme/fontawesome/css/fontawesome.min.css" />
     <!-- custom styles -->
@@ -33,21 +32,25 @@
     <link rel="stylesheet" href="~/rwtheme/css/magnific-popup.css">
 </head>
 <body>
+    <!-- preloader start -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+    <!-- preloader end -->
     <!-- sticky header start -->
     <div class="sticky-header">
         <!-- header start -->
         <div class="container header">
             <div class="row header-image">
-                <div class="col-sm-7 col-md-6 hidden-sm hidden-xs wow fadeInUpLeft animated text-center"><img src="~/rwtheme/images/general/yusuf.png" hight="auto" alt="" id="author" /></div>
+                <div class="col-sm-7 col-md-6 hidden-sm hidden-xs wow fadeInUpLeft animated text-center"><img src="~/rwtheme/images/general/owner.png" height="300" alt="" id="author" /></div>
                 <div class="col-sm-16 col-md-4">
                     <div class="flex-container">
-                        <div><a href="#"><i class="far fa-envelope"></i><p>Pertanyaan</p></a></div>
-                        <div><a href="#"><i class="far fa-envelope-open"></i><p>Proposal</p></a></div>
-                        <div><a href="#"><i class="far fa-heart"></i><p>Donasi</p></a></div>
+                        <div><a class="open-popup-link" href="#log-in" data-effect="mfp-zoom-in"><i class="far fa-envelope"></i><p>Pertanyaan</p></a></div>
+                        <div><a class="open-popup-link" href="#create-account" data-effect="mfp-zoom-in"><i class="far fa-heart"></i><p>Donasi</p></a></div>
                     </div>
 
                 </div>
-                <div class="col-sm-16 col-md-6"><img src="~/rwtheme/images/general/logo-01.png" alt="" id="logo" /></div>
+                <div class="col-sm-16 col-md-6"><img src="~/rwtheme/images/general/logo-02.png" alt="" id="logo" /></div>
             </div>
         </div>
         <!-- header end -->
@@ -58,7 +61,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-16">
-                            <a href="javascript:;" class="toggle-search pull-right"><span class="ion-ios7-search"></span></a>
+                            <a href="" class="toggle-search pull-right"><span class="ion-ios7-search"></span></a>
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                             </div>
@@ -67,14 +70,20 @@
                                     <li class="active"><a href="@Url.Action("Index","rumahwasathia")">beranda</a></li>
                                     <li> <a href="@Url.Action("Profil","rumahwasathia")">profil</a></li>
                                     <li> <a href="@Url.Action("Biografi","rumahwasathia")">biografi</a></li>
-                                    <li> <a href="@Url.Action("tanya_jawab","rumahwasathia")">tanya jawab</a></li>
+                                    <li class="dropdown">
+                                        <a href="@Url.Action("tanya_jawab","rumahwasathia")" class="dropdown-toggle" data-toggle="dropdown">tanya jawab<span class="ion-ios7-arrow-down nav-icn"></span></a>
+                                        <ul class="dropdown-menu text-capitalize" role="menu">
+                                            <li><a href="@Url.Action("republika","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>republika</a></li>
+                                            <li><a href="@Url.Action("mingguan","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>mingguan</a></li>
+                                        </ul>
+                                    </li>
                                     <li> <a href="@Url.Action("Artikel","rumahwasathia")">artikel</a></li>
                                     <li> <a href="@Url.Action("Buku","rumahwasathia")">buku</a></li>
                                     <li class="dropdown">
                                         <a href="@Url.Action("Kajian","rumahwasathia")" class="dropdown-toggle" data-toggle="dropdown">Kajian<span class="ion-ios7-arrow-down nav-icn"></span></a>
                                         <ul class="dropdown-menu text-capitalize" role="menu">
-                                            <li><a href="@Url.Action("Video","rumahwasathia")" style="padding-left: 30px;"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Video</a></li>
-                                            <li><a href="@Url.Action("Audio","rumahwasathia")" style="padding-left: 30px;"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Audio</a></li>
+                                            <li><a href="@Url.Action("Video","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Video</a></li>
+                                            <li><a href="@Url.Action("Audio","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Audio</a></li>
                                         </ul>
                                     </li>
                                     <li> <a href="@Url.Action("Berita","rumahwasathia")">berita</a></li>
@@ -166,7 +175,7 @@
                         <div class="row">
                             <div class="col-sm-16">
                                 <div id="responsive-image">
-                                    <img src="~/rwtheme/images/general/logo-01.png" alt="placeholder 960" class="img-responsive" />
+                                    <img src="~/rwtheme/images/general/logo-02.png" alt="placeholder 960" class="img-responsive" />
                                 </div>
                             </div>
                             <div class="col-sm-16 text-left add-information">
@@ -257,64 +266,44 @@
     </footer>
     <!-- Footer end -->
     <div id="create-account" class="white-popup mfp-with-anim mfp-hide">
-        <form role="form">
-            <h3>Create Account</h3>
-            <hr>
+        <div id="donasi-wrapper">
+            <h2>Donasi</h2>
             <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name" tabindex="1">
-                    </div>
+                <div class="col-xs-16">
+                    <table class="table2">
+                        <tr>
+                            <th>Bank</th>
+                            <th>no rekening</th>
+                        </tr>
+                        <tr>
+                            <td>BNI Syariah</td>
+                            <td>8900900567</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name" tabindex="2">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" name="display_name" id="display_name" class="form-control" placeholder="Display Name" tabindex="3">
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control " placeholder="Email Address" tabindex="4">
             </div>
             <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control " placeholder="Password" tabindex="5">
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirm Password" tabindex="6">
+                <div class="col-xs-16">
+                    <div id="note">
+                        <span><b>Note:</b></span>
+                        <p>a.n RUMAHWASATHIA</p>
+                        <p>Untuk informasi lebih lanjut, silahkan hubungi admin kami.</p>
+                        <a href="https://goo.gl/sWbvBu">Rahmat Hidayat, S.E | +62 812–875–785-22</a>
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-16">
-                    <input type="submit" value="Register" class="btn btn-danger btn-block btn-lg" tabindex="7">
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
     <div id="log-in" class="white-popup mfp-with-anim mfp-hide">
-        <form role="form">
-            <h3>Log In Your Account</h3>
-            <hr>
-            <div class="form-group">
-                <input type="text" name="access_name" id="access_name" class="form-control" placeholder="Name" tabindex="3">
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" id="password" class="form-control " placeholder="Password" tabindex="4">
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-16">
-                    <input type="submit" value="Log In" class="btn btn-danger btn-block btn-lg" tabindex="7">
+        <div class="row">
+            <div class="col-xs-16">
+                <div class="pertanyaan-wrapper">
+                    <i class="fab fa-telegram"></i>
+                    <p>Untuk pertanyaan bisa melaui Telegram dengan tautan berikut</p>
+                    <a href="http://telegram.me/onisahronii">Dr. Oni Sahroni, M.A</a>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <!-- jQuery -->
     <script src="~/rwtheme/js/jquery.min.js"></script>
@@ -323,7 +312,8 @@
     <!-- bootstrab js -->
     <script src="~/rwtheme/js/bootstrap.js"></script>
     <!--style switcher-->
-    <script src="~/rwtheme/js/style-switcher.js"></script> <!--wow animation-->
+    <script src="~/rwtheme/js/style-switcher.js"></script>
+    <!--wow animation-->
     <script src="~/rwtheme/js/wow.min.js"></script>
     <!-- time and date -->
     <script src="~/rwtheme/js/moment.min.js"></script>
@@ -333,8 +323,6 @@
     <script src="~/rwtheme/js/owl.carousel.js"></script>
     <!-- magnific popup -->
     <script src="~/rwtheme/js/jquery.magnific-popup.js"></script>
-    <!-- weather -->
-    <script src="~/rwtheme/js/jquery.simpleWeather.min.js"></script>
     <!-- calendar-->
     <script src="~/rwtheme/js/jquery.pickmeup.js"></script>
     <!-- go to top -->

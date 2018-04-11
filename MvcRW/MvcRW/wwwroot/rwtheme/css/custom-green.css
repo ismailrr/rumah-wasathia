@@ -258,10 +258,8 @@ font-size: 14px;
 color: #3D566E;
 }
 /*1-7 MODAL BOX*/
-.mfp-zoom-in { /* start state */ /* animate in */ /* animate out */
-}
 
-/*.mfp-zoom-in .mfp-with-anim {
+.mfp-zoom-in .mfp-with-anim {
 opacity: 0;
 transition: all 0.2s ease-in-out;
 transform: scale(0.8);
@@ -301,7 +299,7 @@ margin: 0 auto;
 
 .mfp-close-btn-in .mfp-close {
 color: #ECB20E;
-}*/
+}
 /*------------------------------------*\
 2-TYPOGRAPHY
 \*------------------------------------*/
@@ -551,7 +549,7 @@ padding: 0;
 
 /*5-1 PARENT NAVIGATION*/
 .sticky-header {
-background-image: url('../images/general/header-background.png');
+background-image: url('../images/general/islamic_ornament.jpg');
 background-repeat: repeat;
 }
 
