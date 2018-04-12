@@ -18,7 +18,7 @@ namespace MvcRW.Controllers
         }
 
         // GET: /rumahwasathia/Beranda/
-        public ActionResult Beranda()
+        public ActionResult Beranda(
         {
             ViewData["Message"] = "This is the welcome action method...";
 
