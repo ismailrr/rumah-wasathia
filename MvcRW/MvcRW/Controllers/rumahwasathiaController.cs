@@ -86,5 +86,25 @@ namespace MvcRW.Controllers
         {
             return View();
         }
+        // GET: /rumahwasathia/tes(It's preview requsted from client)/
+        public ActionResult tes()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/SubArtikel/
+        public ActionResult SubArtikel()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/republika/
+        public ActionResult republika()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/mingguan/
+        public ActionResult mingguan()
+        {
+            return View();
+        }
     }
 }
