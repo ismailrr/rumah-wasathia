@@ -35,7 +35,7 @@
 
 .main-title-outer .topic {
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: 5px 10px;
 }
 html {
     background: #0A100F;
@@ -311,7 +311,7 @@ html {
 }
 .absolute-text-item h2 {
     font-size: 22px;
-    margin-top: 6px;
+    margin-top: 10px;
 }
 .absolute-text-item p {
     color: #313433;

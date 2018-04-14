@@ -118,7 +118,7 @@
                     <div class="col-sm-3 col-md-2 news-title text-center">
                         <h6>Artikel Baru: </h6>
                     </div>
-                    <div class="col-sm-8 no-padding col-md-9">
+                    <div class="col-sm-9 no-padding col-md-10">
                         <div class="runtext-container">
                             <marquee direction="" onmouseover="this.stop();" onmouseout="this.start();">
                                 <div class="holder">
@@ -149,11 +149,10 @@
                             </marquee>
                         </div>
                     </div>
-                    <div class="col-sm-5 col-md-5 icons-media-social text-center">
+                    <div class="col-sm-4 col-md-4 icons-media-social text-center">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
 
                     </div>
@@ -193,13 +192,6 @@
                                     <i class="fas fa-envelope-open"></i>rumahwasathia@yahoo.com
                                 </span>
                             </div>
-                            <div class="col-sm-16 text-left footer-icon moveToLeft">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-telegram-plane"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                            </div>
                         </div>
                     </div>
                     <div class="hidden-md col-lg-1"></div>
@@ -208,19 +200,19 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-8">
                                 <ul class="footer-link">
-                                    <li><a href="#">Beranda</a></li>
-                                    <li><a href="#">Profil</a></li>
-                                    <li><a href="#">Biografi</a></li>
-                                    <li><a href="#">Tanya Jawab</a></li>
-                                    <li><a href="#">Artikel</a></li>
+                                    <li><a href="@Url.Action("Index","rumahwasathia")">Beranda</a></li>
+                                    <li><a href="@Url.Action("Profil","rumahwasathia")">Profil</a></li>
+                                    <li><a href="@Url.Action("Biografi","rumahwasathia")">Biografi</a></li>
+                                    <li><a href="@Url.Action("mingguan","rumahwasathia")">Tanya Jawab</a></li>
+                                    <li><a href="@Url.Action("Artikel","rumahwasathia")">Artikel</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-8 col-sm-8">
                                 <ul class="footer-link">
-                                    <li><a href="#">Buku</a></li>
-                                    <li><a href="#">Kajian</a></li>
-                                    <li><a href="#">Berita</a></li>
-                                    <li><a href="#">Galeri</a></li>
+                                    <li><a href="@Url.Action("Buku","rumahwasathia")">Buku</a></li>
+                                    <li><a href="@Url.Action("video","rumahwasathia")">Kajian</a></li>
+                                    <li><a href="@Url.Action("Berita","rumahwasathia")">Berita</a></li>
+                                    <li><a href="@Url.Action("galeri","rumahwasathia")">Galeri</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -236,12 +228,12 @@
                         <div class="f-title line-footer">Biografi</div>
                         <div id="bio-footer">
                             <div class="module4">
-                                <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, </p>
+                                <p>Rumahwasathia hadir sebagai solusi dari banyaknya pertanyaan masyarakat seputar persoalan kehidupan sehari-hari menurut aspek Syari’ah Islam, yang dimana pada realita sekarang ini, sangat minim referensi Islam yang genuine dan bernash. Selain itu, rumahwasathia meyakini perkembangan pendidikan yang semakin berkualitas dalam mencetak Sumber Daya Manusia ahli Fiqih, yang nantinya akan fokus dalam mengelola tugas ini.</p>
                             </div>
                         </div>
                         <div class="readMore">
                             <ul class="tags readMore-link">
-                                <li><a href="#">Selengkapnya<i class="fas fa-arrow-right"></i></a></li>
+                                <li><a href="@Url.Action("Profil","rumahwasathia")">Selengkapnya<i class="fas fa-arrow-right"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -284,7 +276,7 @@
                         <span><b>Note:</b></span>
                         <p>a.n RUMAHWASATHIA</p>
                         <p>Untuk informasi lebih lanjut, silahkan hubungi admin kami.</p>
-                        <a href="https://goo.gl/sWbvBu">Rahmat Hidayat, S.E | +62 812–875–785-22</a>
+                        @*<a href="https://goo.gl/sWbvBu">Rahmat Hidayat, S.E | +62 812–875–785-22</a>*@
                     </div>
                 </div>
             </div>

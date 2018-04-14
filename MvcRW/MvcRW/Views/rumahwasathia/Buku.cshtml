@@ -10,8 +10,8 @@
         <!-- breadcrumb start -->
         <div class="page-header">
             <ol class="breadcrumb">
-                <li><a href="#">Beranda</a></li>
-                <li class="active">Perpustakaan</li>
+                <li><a href="@Url.Action("Index","rumahwasathia")">Beranda</a></li>
+                <li class="active">Buku</li>
             </ol>
         </div>
         <!-- breadcrumb end -->
@@ -22,75 +22,27 @@
                     <div class="main-title left-side">Kumpulan Buku</div>
                     <div class="row">
                         <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/bookCover1.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
+                            <a href="@Url.Action("SubBuku","rumahwasathia")">
+                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover1.jpg" alt="" />
+                                <h4>Riba, Gharar & Kaidah Ekonomi Syariah</h4>
                             </a>
                         </div>
                         <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/bookCover2.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
+                            <a href="@Url.Action("SubBuku","rumahwasathia")">
+                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover2.jpg" alt="" />
+                                <h4>Maqashid Bisnis & Keuangan Islam</h4>
                             </a>
                         </div>
                         <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/bookCover3.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
+                            <a href="@Url.Action("SubBuku","rumahwasathia")">
+                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover3.jpg" alt="" />
+                                <h4>Ushul Fiqh Muamalah</h4>
                             </a>
                         </div>
                         <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/bookCover4.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover5.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover6.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover7.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover8.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover9.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover10.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover11.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                            </a>
-                        </div>
-                        <div class="item topic col-sm-8 col-md-4 col-xs-16">
-                            <a href="#">
-                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/book-cover12.jpg" alt="" />
-                                <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
+                            <a href="@Url.Action("SubBuku","rumahwasathia")">
+                                <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover4.jpg" alt="" />
+                                <h4>Fikih Muamalah</h4>
                             </a>
                         </div>
                     </div>
@@ -156,94 +108,10 @@
                                         <div class="col-sm-12 book-desc">
                                             <h3>Fikih Muamalah</h3>
                                             <div class="download">
-                                                <a href="@Url.Action("SubBuku","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
+                                                <a href=""><i class="fas fa-tasks"></i>Lihat Detail</a>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer pull-left">
-                            <div class="main-title right-side">Kajian</div>
-                            <ul class="list-unstyled kajian">
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-1.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-2.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-3.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-4.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6"><img class="img-thumbnail pull-left" src="~/rwtheme/images/sec/sec-5.jpg" width="400" height="300" alt="" /> </div>
-                                            <div class="col-md-10 col-sm-10">
-                                                <h4>Nielsen forecasts smaller black friday </h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 16 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>351</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </li>
                             </ul>
                         </div>
