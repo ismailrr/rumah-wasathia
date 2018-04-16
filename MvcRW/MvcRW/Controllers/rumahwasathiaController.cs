@@ -66,11 +66,6 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        // GET: /rumahwasathia/Berita/
-        public ActionResult Berita()
-        {
-            return View();
-        }
         // GET: /rumahwasathia/Galeri/
         public ActionResult Galeri()
         {
