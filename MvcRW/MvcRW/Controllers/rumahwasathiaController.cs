@@ -102,12 +102,31 @@ namespace MvcRW.Controllers
         }
 
         // Admin
-        public ActionResult Berita()
+        public ActionResult ABerita()
         {
             return View();
         }
-
-        public ActionResult Pdf()
+        public ActionResult AArtikel()
+        {
+            return View();
+        }
+        public ActionResult APdf()
+        {
+            return View();
+        }
+        public ActionResult AKategori()
+        {
+            return View();
+        }
+        public ActionResult ATag()
+        {
+            return View();
+        }
+        public ActionResult ATanyaJawab()
+        {
+            return View();
+        }
+        public ActionResult AIndex()
         {
             return View();
         }

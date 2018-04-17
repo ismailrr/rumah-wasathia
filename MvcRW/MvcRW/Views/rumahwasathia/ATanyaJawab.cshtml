@@ -41,7 +41,7 @@
                     </span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="~/Home/Artikel">
                     <i class="fa fa-dashboard"></i> <span>Artikel</span>
                     <span class="pull-right-container">
@@ -55,7 +55,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="~/Home/TanyaJawab">
                     <i class="fa fa-dashboard"></i> <span>Tanya Jawab</span>
                     <span class="pull-right-container">
@@ -113,12 +113,9 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
-                            ADD NEW POST
+                            QUESTION
                         </h3>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1"> </label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter title here">
-                        </div>
+
                         <!-- tools box -->
                         <div class="pull-right box-tools">
                             <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
@@ -133,24 +130,38 @@
                         <!-- /. tools -->
                     </div>
                     <!-- /.box-header -->
+
                     <div class="box-body pad">
                         <form>
                             <textarea id="editor1" name="editor1" rows="10" cols="80">
                                             This is my textarea to be replaced with CKEditor.
                     </textarea>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-info pull-right">Publish</button>
 
-                            </div>
                         </form>
                     </div>
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            ANSWER
+                        </h3>
+                        <div class="box-body pad">
+                            <form>
+                                <textarea id="editor2" name="editor2" rows="10" cols="80">
+                                            This is my textarea to be replaced with CKEditor.
+                    </textarea>
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-info pull-right">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+
+
                 </div>
-                <!-- /.box -->
-
-
+                <!-- /.col-->
             </div>
-            <!-- /.col-->
         </div>
+
         <!-- ./row -->
     </section>
     <!-- /.content -->
