@@ -166,9 +166,6 @@ border-left: solid 4px #ECB20E;
 }
 
 /*1-4 PAGINATION*/
-.pagination {
-}
-
 .pagination li a, .pagination li span {
 border: 1px solid #ededed !important;
 }

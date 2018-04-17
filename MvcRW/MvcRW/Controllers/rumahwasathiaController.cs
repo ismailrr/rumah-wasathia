@@ -27,20 +27,14 @@ namespace MvcRW.Controllers
         }
 
         // GET: /rumahwasathia/Profil/
-        public ActionResult Profil()
+        public ActionResult profil()
         {
             return View();
             //return "This is the profil action method...";
         }
 
         // GET: /rumahwasathia/Biografi/
-        public ActionResult Biografi()
-        {
-            return View();
-        }
-
-        // GET: /rumahwasathia/TanyaJawab/
-        public ActionResult tanya_jawab()
+        public ActionResult biografi()
         {
             return View();
         }
@@ -67,7 +61,12 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/Galeri/
-        public ActionResult Galeri()
+        public ActionResult galeri()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/Sub-Galeri/
+        public ActionResult SubGaleri()
         {
             return View();
         }
