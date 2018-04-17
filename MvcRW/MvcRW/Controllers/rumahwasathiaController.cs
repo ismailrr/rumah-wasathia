@@ -93,5 +93,16 @@ namespace MvcRW.Controllers
         {
             return View();
         }
+
+        // Admin
+        public ActionResult Berita()
+        {
+            return View();
+        }
+
+        public ActionResult Pdf()
+        {
+            return View();
+        }
     }
 }

@@ -3,7 +3,6 @@
     ViewBag.Title = "Tags";
     Layout = "~/Views/Shared/_Tags.cshtml";
 }
-
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -41,7 +40,7 @@
                     </span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="~/Home/Artikel">
                     <i class="fa fa-dashboard"></i> <span>Artikel</span>
                     <span class="pull-right-container">
@@ -76,7 +75,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="~/Home/Tags">
                     <i class="fa fa-dashboard"></i> <span>Tags</span>
                     <span class="pull-right-container">
@@ -89,9 +88,6 @@
     </section>
     <!-- /.sidebar -->
 </aside>
-
-<!-- =============================================== -->
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -113,7 +109,7 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
-                            ADD NEW POST
+                            ADD NEW TAGS
                         </h3>
                         <div class="form-group">
                             <label for="exampleInputEmail1"> </label>
@@ -135,9 +131,7 @@
                     <!-- /.box-header -->
                     <div class="box-body pad">
                         <form>
-                            <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                            This is my textarea to be replaced with CKEditor.
-                    </textarea>
+
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-info pull-right">Publish</button>
 
