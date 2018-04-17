@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcRW.Models;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace MvcRW.Controllers
 {
     public class rumahwasathiaController : Controller
@@ -66,7 +64,7 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/Sub-Galeri/
-        public ActionResult subgaleri()
+        public ActionResult SubGaleri()
         {
             return View();
         }
@@ -77,11 +75,6 @@ namespace MvcRW.Controllers
         }
         // GET: /rumahwasathia/SubBuku(Fiqih)/
         public ActionResult fiqih()
-        {
-            return View();
-        }
-        // GET: /rumahwasathia/tes(It's preview requsted from client)/
-        public ActionResult tes()
         {
             return View();
         }
@@ -97,17 +90,6 @@ namespace MvcRW.Controllers
         }
         // GET: /rumahwasathia/mingguan/
         public ActionResult mingguan()
-        {
-            return View();
-        }
-
-        // Admin
-        public ActionResult Berita()
-        {
-            return View();
-        }
-
-        public ActionResult Pdf()
         {
             return View();
         }
