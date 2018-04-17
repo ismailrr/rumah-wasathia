@@ -70,6 +70,11 @@ namespace MvcRW.Controllers
         {
             return View();
         }
+        // GET: /rumahwasathia/KEgiatan Ust Oni/
+        public ActionResult SubGaleri()
+        {
+            return View();
+        }
         // GET: /rumahwasathia/SubBuku(Fiqih)/
         public ActionResult SubBuku()
         {

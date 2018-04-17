@@ -193,6 +193,7 @@ html {
 .add-information {
     padding: 10px 0;
     color: #fff;
+    font-size: 13px;
 }
 
 #responsive-image img {
@@ -216,6 +217,7 @@ html {
 
         .footer-link li a {
             color: #fff;
+            font-size: 13px;
         }
 
 #bio-footer {
@@ -405,6 +407,7 @@ html {
 .module4 {
     height: 125px;
     overflow: hidden;
+    font-size:13px;
 }
 
 .soundCloud iframe {
