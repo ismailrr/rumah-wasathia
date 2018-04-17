@@ -64,7 +64,12 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/Sub-Galeri/
-        public ActionResult SubGaleri()
+        public ActionResult galeri1()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/Sub-Galeri/
+        public ActionResult galeri2()
         {
             return View();
         }
