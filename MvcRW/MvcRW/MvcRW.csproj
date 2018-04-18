@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ArtikelKategori.cs" />
+    <Compile Remove="Models\GaleriPath.cs" />
+    <Compile Remove="Models\KonsultasiMedsosKatgeori.cs" />
+    <Compile Remove="Models\KonsultasiRepublikaKategori.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\mytemplate\bower_components\bootstrap\.bower.json" />
     <Content Include="wwwroot\mytemplate\bower_components\bootstrap\bower.json" />
     <Content Include="wwwroot\mytemplate\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -1063,6 +1070,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
 
