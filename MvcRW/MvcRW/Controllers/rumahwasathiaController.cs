@@ -99,7 +99,7 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/ViaMedsos/
-        public ActionResult ViaMedsos()
+        public ActionResult ViaMediaSosial()
         {
             return View();
         }
