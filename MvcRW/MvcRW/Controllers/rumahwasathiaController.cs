@@ -73,13 +73,18 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        // GET: /rumahwasathia/SubBuku(Fiqih)/
+        // GET: /rumahwasathia/SubBuku/
         public ActionResult SubBuku()
         {
             return View();
         }
-        // GET: /rumahwasathia/SubBuku(Fiqih)/
-        public ActionResult fiqih()
+        // GET: /rumahwasathia/ChannelMuamalah/
+        public ActionResult ChannelMuamalah()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/ChannelRumahWasathia/
+        public ActionResult ChannelRumahWasathia()
         {
             return View();
         }

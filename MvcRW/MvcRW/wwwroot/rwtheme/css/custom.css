@@ -1081,7 +1081,7 @@ table.table2 {
 .gallery a{
     padding:10px;
 }
-.icon-effect {
+/*.icon-effect {
     overflow: hidden;
 }
 .icon-effect:before {
@@ -1096,7 +1096,7 @@ table.table2 {
 }
 .icon-effect:hover:before {
     left: 7px;
-}
+}*/
 
 
 
