@@ -105,7 +105,52 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public ActionResult Pdf()
+        public ActionResult AGaleri()
+        {
+            return View();
+        }
+
+        public ActionResult Aartikel()
+        {
+            return View();
+        }
+
+        public ActionResult AKonsultasi()
+        {
+            return View();
+        }
+
+        public ActionResult APdf()
+        {
+            return View();
+        }
+
+        public ActionResult ABuku()
+        {
+            return View();
+        }
+
+        public ActionResult AKategori()
+        {
+            return View();
+        }
+
+        public ActionResult ATag()
+        {
+            return View();
+        }
+
+        public ActionResult AIndex()
+        {
+            return View();
+        }
+
+        public ActionResult AAudio()
+        {
+            return View();
+        }
+
+        public ActionResult AVideo()
         {
             return View();
         }

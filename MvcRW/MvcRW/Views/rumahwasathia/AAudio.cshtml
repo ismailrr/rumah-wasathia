@@ -1,9 +1,7 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Tags";
     Layout = "~/Views/Shared/_Tags.cshtml";
 }
-
 <!-- MENU #############################-->-->
 <aside class="main-sidebar">
     <section class="sidebar">
@@ -58,7 +56,7 @@
                     </span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-group"></i> <span>Kajian</span>
                     <span class="pull-right-container">
@@ -66,7 +64,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="~/Home/Audio"><i class="fa fa-volume-up"></i> Audio</a></li>
+                    <li class="active"><a href="~/Home/Audio"><i class="fa fa-volume-up"></i> Audio</a></li>
                     <li><a href="~/Home/Video"><i class="fa fa-video-camera"></i> Video</a></li>
                 </ul>
             </li>
@@ -85,7 +83,7 @@
                     </span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="~/Home/Pdf">
                     <i class="fa fa-file-pdf-o"></i> <span>PDF</span>
                     <span class="pull-right-container">
@@ -103,15 +101,15 @@
     </section>
 </aside>
 <!-- /MENU -->
+<!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            UNGGAH PDF
+            UNGGAH AUDIO
         </h1>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -119,7 +117,7 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
-                            MASUKKAN PDF
+                            MASUKKAN AUDIO
                         </h3>
                         <!-- tools box -->
                         <div class="pull-right box-tools">
@@ -129,6 +127,8 @@
                             </button>
                         </div>
                     </div>
+                    <!-- /.box-header -->
+
                     <div class="box-body pad">
                         <form role="form">
                             <div class="box-body">
@@ -138,15 +138,15 @@
 
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1"> </label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Keterangan">
-                                </div>
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                                </div>
                             </div>
                         </form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"> </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter title here">
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-info pull-right">Publish</button>
+                        </div>
                     </div>
                 </div>
                 <!-- /.box -->
@@ -156,68 +156,6 @@
             <!-- /.col-->
         </div>
         <!-- ./row -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Kategori</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <form role="form">
-                            <!-- checkbox -->
-                            <div class="form-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">
-                                        Checkbox 1
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox">
-                                        Checkbox 2
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" disabled>
-                                        Checkbox disabled
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Tag</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <form class="form-horizontal">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-4 control-label"></label>
-
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" placeholder="Tambah Tag">
-                                    </div>
-                                    <button type="submit" class="btn btn-info pull-right"> ADD </button>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-                            <!-- /.box-footer -->
-
-                        </form>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-            </div>
-        </div>
     </section>
     <!-- /.content -->
 </div>

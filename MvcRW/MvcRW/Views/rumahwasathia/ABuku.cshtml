@@ -3,7 +3,6 @@
     ViewBag.Title = "Tags";
     Layout = "~/Views/Shared/_Tags.cshtml";
 }
-
 <!-- MENU #############################-->-->
 <aside class="main-sidebar">
     <section class="sidebar">
@@ -44,7 +43,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="~/Home/Buku">
                     <i class="fa fa-book"></i> <span>Buku</span>
                     <span class="pull-right-container">
@@ -77,7 +76,6 @@
                     </span>
                 </a>
             </li>
-
             <li>
                 <a href="~/Home/Konsultasi">
                     <i class="fa fa-question"></i> <span>Konsultasi</span>
@@ -85,7 +83,7 @@
                     </span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="~/Home/Pdf">
                     <i class="fa fa-file-pdf-o"></i> <span>PDF</span>
                     <span class="pull-right-container">
@@ -103,15 +101,14 @@
     </section>
 </aside>
 <!-- /MENU -->
+<!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            UNGGAH PDF
+            UNGGAH BUKU
         </h1>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -119,8 +116,12 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
-                            MASUKKAN PDF
+                            
                         </h3>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"> </label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter title here">
+                        </div>
                         <!-- tools box -->
                         <div class="pull-right box-tools">
                             <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
@@ -129,22 +130,21 @@
                             </button>
                         </div>
                     </div>
+                    <!-- /.box-header -->
                     <div class="box-body pad">
-                        <form role="form">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">File input</label>
-                                    <input type="file" id="exampleInputFile">
+                        <form>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" id="exampleInputFile">
 
-                                    <p class="help-block">Example block-level help text here.</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1"> </label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Keterangan">
-                                </div>
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
-                                </div>
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                            <textarea id="editor1" name="editor1" rows="10" cols="80">
+                                            This is my textarea to be replaced with CKEditor.
+                            </textarea>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary pull-right">Submit</button>
                             </div>
                         </form>
                     </div>
