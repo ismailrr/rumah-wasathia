@@ -6,6 +6,10 @@ namespace MvcRW.Data
 {
     public class RWContext : DbContext
     {
+        public RWContext(DbContextOptions<RWContext> options)
+            : base(options)
+        { }
+
         /// <summary>
         /// Entity Framework context class.
         /// </summary>
@@ -14,10 +18,10 @@ namespace MvcRW.Data
         public DbSet<KategoriArtikel> DaftarKategoriArtikel { get; set; }
         public DbSet<KategoriKonsultasi> DaftarKategoriKonsultasi { get; set; }
         public DbSet<KonsultasiMedsos> DaftarKonsultasiMedsos { get; set; }
-        public DbSet<KonsultasiRepublika> DaftarKonsulatasiRepublika { get; set; }
+        public DbSet<KonsultasiRepublika> DaftarKonsultasiRepublika { get; set; }
         public DbSet<PathArtikel> DaftarPathArtikel { get; set; }
         public DbSet<PathGaleri> DaftarPathGaleri { get; set; }
-        public DbSet<PathKonsultasiRepublika> PathKonsultasiRepublika { get; set; }
+        public DbSet<PathKonsultasiRepublika> DaftarPathKonsultasiRepublika { get; set; }
 
 
 
