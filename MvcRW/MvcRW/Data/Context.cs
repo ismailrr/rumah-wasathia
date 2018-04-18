@@ -4,7 +4,7 @@ using System;
 
 namespace MvcRW.Data
 {
-    public class Context : DbContext
+    public class RWContext : DbContext
     {
         /// <summary>
         /// Entity Framework context class.
@@ -26,10 +26,18 @@ namespace MvcRW.Data
             throw new NotImplementedException();
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Artikel>().ToTable("Artikel");
+            modelBuilder.Entity<Galeri>().ToTable("Galeri");
+            modelBuilder.Entity<KategoriArtikel>().ToTable("Kategori_Artikel");
+            modelBuilder.Entity<KategoriKonsultasi>().ToTable("Kategori_Konsultasi");
+            modelBuilder.Entity<KonsultasiMedsos>().ToTable("Konsultasi_Medsos");
+            modelBuilder.Entity<KonsultasiRepublika>().ToTable("Konsultasi_Republika");
+            modelBuilder.Entity<PathArtikel>().ToTable("Path_Artikel");
+            modelBuilder.Entity<PathGaleri>().ToTable("Path_Galeri");
+            modelBuilder.Entity<PathKonsultasiRepublika>().ToTable("Path_Konsultasi_Republika");
         }
+
     }
 }
