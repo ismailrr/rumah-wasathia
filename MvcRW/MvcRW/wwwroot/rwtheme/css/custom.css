@@ -729,8 +729,8 @@ table.table1 {
         transform: rotateX(0deg);
     }
 }
-/*===================     Accordion     ======================*/
-/* Style the tab */
+/*===================     Tanya Jawab Republika     ======================*/
+
 .tab {
     width: 100%;
     height: 100%;
@@ -771,7 +771,47 @@ table.table1 {
     width: 100%;
     height: 100%;
 }
+/*===================     Tanya Jawab ViaMediaSosial     ======================*/
+/* Style the tab */
+.tab1 {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+.tab1 i{
+    padding: 0 15px;
+    font-size: 30px;
+    vertical-align: middle;
+}
+/* Style the buttons inside the tab */
+.tab1 button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
 
+/* Change background color of buttons on hover */
+.tab1 button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab1 button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent1 {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
 #donasi-wrapper h2 {
     text-align: center;
     padding-bottom: 30px;
@@ -1041,9 +1081,22 @@ table.table2 {
 .gallery a{
     padding:10px;
 }
-
-
-
+/*.icon-effect {
+    overflow: hidden;
+}
+.icon-effect:before {
+	font-family: FontAwesome;
+	content:"\f07a";
+	position: absolute;
+	top: 11px;
+    color:red;
+    background:blue;
+	left: -30px;
+	transition: all 200ms ease;
+}
+.icon-effect:hover:before {
+    left: 7px;
+}*/
 
 
 
@@ -1115,6 +1168,9 @@ table.table2 {
     .fiqih iframe {
         height: 180px;
     }
+    /*.right-side-style {
+        padding-left: 0!important;
+    }*/
 }
 
 @media only screen and (min-width : 768px) and (max-width : 991px) {
@@ -1179,10 +1235,6 @@ table.table2 {
 
     .list-unstyled .stars {
         font-size: 18px;
-    }
-
-    .right-side-style {
-        padding-left: 0 !important;
     }
 
     .slider-image .carousel {

@@ -406,8 +406,8 @@ color: #ECB20E;
 }
 
 .img-thumbnail {
-background-color: #f8f8f8;
-border: 1px solid #ededed;
+    background-color: #f8f8f8;
+    border: 1px solid #ededed;
 }
 
 .text-danger {
@@ -2097,9 +2097,9 @@ background: #395067;
 border-color: #395067;
 }
 
-.right-side-style {
+/*.right-side-style {
 padding-left: 20px;
-}
+}*/
 
 .right-side-style .img-thumbnail {
 background: #fff;

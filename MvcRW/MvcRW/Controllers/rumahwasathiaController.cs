@@ -73,13 +73,18 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        // GET: /rumahwasathia/SubBuku(Fiqih)/
+        // GET: /rumahwasathia/SubBuku/
         public ActionResult SubBuku()
         {
             return View();
         }
-        // GET: /rumahwasathia/SubBuku(Fiqih)/
-        public ActionResult fiqih()
+        // GET: /rumahwasathia/ChannelMuamalah/
+        public ActionResult ChannelMuamalah()
+        {
+            return View();
+        }
+        // GET: /rumahwasathia/ChannelRumahWasathia/
+        public ActionResult ChannelRumahWasathia()
         {
             return View();
         }
@@ -99,7 +104,7 @@ namespace MvcRW.Controllers
             return View();
         }
         // GET: /rumahwasathia/ViaMedsos/
-        public ActionResult ViaMedsos()
+        public ActionResult ViaMediaSosial()
         {
             return View();
         }
@@ -109,7 +114,52 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public ActionResult Pdf()
+        public ActionResult AGaleri()
+        {
+            return View();
+        }
+
+        public ActionResult Aartikel()
+        {
+            return View();
+        }
+
+        public ActionResult AKonsultasi()
+        {
+            return View();
+        }
+
+        public ActionResult APdf()
+        {
+            return View();
+        }
+
+        public ActionResult ABuku()
+        {
+            return View();
+        }
+
+        public ActionResult AKategori()
+        {
+            return View();
+        }
+
+        public ActionResult ATag()
+        {
+            return View();
+        }
+
+        public ActionResult AIndex()
+        {
+            return View();
+        }
+
+        public ActionResult AAudio()
+        {
+            return View();
+        }
+
+        public ActionResult AVideo()
         {
             return View();
         }
