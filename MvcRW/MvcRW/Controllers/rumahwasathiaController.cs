@@ -98,7 +98,11 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-
+        // GET: /rumahwasathia/ViaMedsos/
+        public ActionResult ViaMedsos()
+        {
+            return View();
+        }
         // Admin
         public ActionResult Berita()
         {
