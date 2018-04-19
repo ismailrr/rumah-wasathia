@@ -66,6 +66,7 @@
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                             </div>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Contoso University</a>
                             <div class="collapse navbar-collapse" id="navbar-collapse">
                                 <ul class="nav navbar-nav text-uppercase main-nav ">
                                     <li class="active"><a class="anchor" href="@Url.Action("Index","rumahwasathia")">beranda</a></li>
@@ -85,6 +86,7 @@
                                         </ul>
                                     </li>
                                     <li> <a class="anchor" href="@Url.Action("Artikel","rumahwasathia")">artikel</a></li>
+                                    <li><a asp-area="" asp-controller="Artikel" asp-action="Index">Artikel</a></li>
                                     <li> <a class="anchor" href="@Url.Action("Buku","rumahwasathia")">buku</a></li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kajian<span class="ion-ios7-arrow-down nav-icn"></span></a>

@@ -23,13 +23,6 @@ namespace MvcRW.Data
         public DbSet<PathGaleri> DaftarPathGaleri { get; set; }
         public DbSet<PathKonsultasiRepublika> DaftarPathKonsultasiRepublika { get; set; }
 
-
-
-        public override void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Artikel>().ToTable("Artikel");
