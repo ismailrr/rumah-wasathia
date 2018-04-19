@@ -93,13 +93,13 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        // GET: /rumahwasathia/republika/
-        public ActionResult republika()
+        // GET: /rumahwasathia/Konsultasi Republika/
+        public ActionResult KonsultasiRepublika()
         {
             return View();
         }
-        // GET: /rumahwasathia/mingguan/
-        public ActionResult mingguan()
+        // GET: /rumahwasathia/Rebuplika Online/
+        public ActionResult republikaOnline()
         {
             return View();
         }
