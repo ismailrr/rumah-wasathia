@@ -407,7 +407,7 @@ html {
 .module4 {
     height: 125px;
     overflow: hidden;
-    font-size:13px;
+    font-size: 13px;
 }
 
 .soundCloud iframe {
@@ -456,15 +456,13 @@ html {
     padding: 0 10px !important;
 }
 
-.RekamanKajian iframe, .fiqih iframe {
+.RekamanKajian iframe, iframe {
     width: 100%;
 }
-
-.fiqih iframe {
+.video-wasathia iframe {
     width: 100%;
     height: 210px;
 }
-
 .RekamanKajian {
     padding: 0;
 }
@@ -476,7 +474,8 @@ html {
 .custom {
     animation-fill-mode: none;
 }
-.download-icon i {
+
+.download-icon .ion-bag {
     padding-right: 10px;
 }
 
@@ -518,6 +517,7 @@ table.table1 {
 
 .album-desc {
     padding: 0 5px;
+    text-transform:capitalize;
 }
 /*===================     Accordion     ======================*/
 .transition, #accordion p, #accordion ul li i:before, #accordion ul li i:after {
@@ -539,7 +539,7 @@ table.table1 {
 
 #x {
     min-height: 0;
-    display: inline-block;
+    /*display: inline-block;*/
     margin: 90px 0;
     background-color: #fefffa;
     padding: 0 20px;
@@ -617,7 +617,20 @@ table.table1 {
     z-index: 2;
     transform: translate(0, 0);
 }
+#accordion ol {
+    perspective: 900px;
+    margin: 10px 0px;
+    padding: 0;
+    font-weight: 600;
+    color: #3D566E;
+}
 
+#accordion ol li {
+    position: relative;
+    padding: 5px 0;
+    margin: 0;
+    border-top: 1px solid #dce7eb;
+}
 #accordion ul {
     list-style: none;
     perspective: 900px;
@@ -778,32 +791,33 @@ table.table1 {
     border: 1px solid #ccc;
     background-color: #f1f1f1;
 }
-.tab1 i{
-    padding: 0 15px;
-    font-size: 30px;
-    vertical-align: middle;
-}
-/* Style the buttons inside the tab */
-.tab1 button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-}
 
-/* Change background color of buttons on hover */
-.tab1 button:hover {
-    background-color: #ddd;
-}
+    .tab1 i {
+        padding: 0 15px;
+        font-size: 30px;
+        vertical-align: middle;
+    }
+    /* Style the buttons inside the tab */
+    .tab1 button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
 
-/* Create an active/current tablink class */
-.tab1 button.active {
-    background-color: #ccc;
-}
+        /* Change background color of buttons on hover */
+        .tab1 button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab1 button.active {
+            background-color: #ccc;
+        }
 
 /* Style the tab content */
 .tabcontent1 {
@@ -812,6 +826,7 @@ table.table1 {
     border: 1px solid #ccc;
     border-top: none;
 }
+
 #donasi-wrapper h2 {
     text-align: center;
     padding-bottom: 30px;
@@ -1056,17 +1071,17 @@ table.table2 {
     line-height: 36px;
 }
 
-.inner-title:before {
-    content: "";
-    display: block;
-    position: absolute;
-    left: -8px;
-    border-left: solid 4px #3D566E;
-    width: auto;
-    margin-top: 0;
-    min-height: 100%;
-    z-index: 10;
-}
+    .inner-title:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -8px;
+        border-left: solid 4px #3D566E;
+        width: auto;
+        margin-top: 0;
+        min-height: 100%;
+        z-index: 10;
+    }
 
 .custom-btn {
     border: 0;
@@ -1075,27 +1090,28 @@ table.table2 {
     background: #3D566E;
 }
 
-.custom-btn:hover {
-    color: #fff;
-}
-.gallery a{
-    padding:10px;
+    .custom-btn:hover {
+        color: #fff;
+    }
+
+.gallery a {
+    padding: 10px;
 }
 /*.icon-effect {
-    overflow: hidden;
+overflow: hidden;
 }
 .icon-effect:before {
-	font-family: FontAwesome;
-	content:"\f07a";
-	position: absolute;
-	top: 11px;
-    color:red;
-    background:blue;
-	left: -30px;
-	transition: all 200ms ease;
+font-family: FontAwesome;
+content:"\f07a";
+position: absolute;
+top: 11px;
+color:red;
+background:blue;
+left: -30px;
+transition: all 200ms ease;
 }
 .icon-effect:hover:before {
-    left: 7px;
+left: 7px;
 }*/
 
 
@@ -1161,16 +1177,9 @@ table.table2 {
         height: 170px;
     }
 
-    /*.galeri-size img {
-        height: 180px;
-    }*/
-
-    .fiqih iframe {
+    .galeri-size img {
         height: 180px;
     }
-    /*.right-side-style {
-        padding-left: 0!important;
-    }*/
 }
 
 @media only screen and (min-width : 768px) and (max-width : 991px) {
@@ -1190,9 +1199,9 @@ table.table2 {
 }
 /* Small Devices, Tablets */
 @media only screen and (min-width : 480px) and (max-width : 767px) {
-    /*.wrap-content {
-            margin-top: 85%;
-        }*/
+    .wrap-content {
+        margin-top: 85%;
+    }
 
     .slider-image .carousel {
         max-height: 270px;
@@ -1280,9 +1289,9 @@ table.table2 {
         height: 470px;
     }
 
-    /*.galeri-size img {
+    .galeri-size img {
         height: 240px;
-    }*/
+    }
 }
 
 @media only screen and (min-width : 320px) and (max-width : 479px) {
@@ -1328,17 +1337,13 @@ table.table2 {
         border-left: none;
     }
 
-    /*.galeri-size img {
+    .galeri-size img {
         width: 100%;
         height: 280px;
-    }*/
+    }
 
     .detail {
         padding: 10px 15px;
-    }
-
-    .fiqih iframe {
-        height: 280px;
     }
 }
 
@@ -1365,10 +1370,10 @@ table.table2 {
         height: 390px;
     }
 
-    /*.galeri-size img {
+    .galeri-size img {
         width: 100%;
         height: 170px;
-    }*/
+    }
 
     .flex-container {
         height: 6em;
@@ -1378,7 +1383,65 @@ table.table2 {
         width: 100%;
     }
 
-    .fiqih iframe {
-        height: 160px;
+}
+/*=============================================================*/
+.custom-grid {
+    position: relative;
+    min-height: 1px;
+    padding: 5px;
+}
+
+.custom-grid {
+    float: left;
+}
+
+.custom-grid {
+    width: 33.33333333%;
+}
+@media (min-width: 320px) {
+    .custom-grid {
+        float: left;
+    }
+
+    .custom-grid {
+        width: 100%;
+    }
+}
+@media (min-width: 480px) {
+    .custom-grid {
+        float: left;
+    }
+
+    .custom-grid {
+        width: 50%;
+    }
+}
+@media (min-width: 768px) {
+    .custom-grid {
+        float: left;
+    }
+
+    .custom-grid {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-grid {
+        float: left;
+    }
+
+    .custom-grid {
+        width: 33.33333333%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .custom-grid {
+        float: left;
+    }
+
+    .custom-grid {
+        width: 33.33333333%;
     }
 }
