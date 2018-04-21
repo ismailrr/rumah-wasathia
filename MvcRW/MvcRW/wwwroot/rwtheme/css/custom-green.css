@@ -103,7 +103,6 @@ margin: -100px 0 0 -100px;
 /*1-2 GO TO TOP*/
 
 #scrollUp {
-background-color: #ECB20E;
 background-image: url("../images/general/top-wasathia.jpg");
 bottom: 20px;
 right: 20px;
@@ -409,7 +408,6 @@ color: #ECB20E;
     background-color: #f8f8f8;
     border: 1px solid #ededed;
 }
-
 .text-danger {
 color: #3D566E;
 }

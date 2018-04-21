@@ -65,6 +65,7 @@ html {
 .item h4 {
     text-align: center;
     margin-top: 10px;
+    min-height: 55px;
 }
 
 .popular-tags {
@@ -1199,7 +1200,6 @@ table.table2 th {
     padding: 10px;
     counter-increment: item-counter;
 }
-
     
 
 

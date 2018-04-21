@@ -103,7 +103,7 @@
    var seq = 0;
    $("html").niceScroll({
      styler: "fb",
-     cursorcolor: "#e74c3c"
+     cursorcolor: "#ECB20E"
    });
    $(window).load(function() {
      setTimeout(function() {
