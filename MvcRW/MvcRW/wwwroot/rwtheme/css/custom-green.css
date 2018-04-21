@@ -103,11 +103,12 @@ margin: -100px 0 0 -100px;
 /*1-2 GO TO TOP*/
 
 #scrollUp {
-background-image: url("../images/general/top-wasathia.jpg");
-bottom: 20px;
-right: 20px;
-width: 38px; /* Width of image */
-height: 38px; /* Height of image */
+    background: #3D566E;
+    background-image: url("../images/general/top-wasathia.jpg");
+    bottom: 20px;
+    right: 20px;
+    width: 38px; /* Width of image */
+    height: 38px; /* Height of image */
 }
 /*1-3 ANY TOPIC TITLE*/
 .main-title-outer {
@@ -234,7 +235,7 @@ line-height: 36px;
 }
 
 .time {
-padding-right: 10px;
+padding:10px 0;
 display: inline-block;
 }
 
@@ -608,7 +609,10 @@ background: none;
 color: #ECB20E;
 padding-left: 15px;
 }
-
+/*Custom menu*/
+.link-target:nth-child(1):focus, .link-target:nth-child(1):target {
+    padding-left: 15px;
+}
 .navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 border: none;
 background: #ECB20E;
