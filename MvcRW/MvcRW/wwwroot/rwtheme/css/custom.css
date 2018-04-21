@@ -397,7 +397,7 @@ html {
 }
 
 .module1 {
-    height: 183px;
+    max-height: 160px;
     margin-top: 20px;
     overflow: hidden;
 }
@@ -1130,6 +1130,7 @@ table.table2 th {
 
 .custom-btn {
     border: 0;
+    padding: 5px 10px;
     color: #fff;
     border-radius: 2px;
     background: #3D566E;
