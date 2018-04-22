@@ -89,15 +89,15 @@ z-index: 3000; /* makes sure it stays on top */
 }
 
 #status {
-width: 250px;
-height: 250px;
-position: absolute;
-left: 50%;
-top: 50%;
-background-image: url(../images/general/wasathia-preloader.gif);
-background-repeat: no-repeat;
-background-position: center;
-margin: -100px 0 0 -100px;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image: url(../images/general/wasathia-preloader.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -120px 0 0 -120px;
 }
 
 /*1-2 GO TO TOP*/
@@ -578,9 +578,9 @@ border-left: none;
 border-radius: 0;
 }
 
-.navbar-inverse .navbar-nav li:first-child a {
+/*.navbar-inverse .navbar-nav li:first-child a {
 padding-left: 0;
-}
+}*/
 
 .navbar-inverse .navbar-nav li a {
 color: #fff;
@@ -610,9 +610,9 @@ color: #ECB20E;
 padding-left: 15px;
 }
 /*Custom menu*/
-.link-target:nth-child(1):focus, .link-target:nth-child(1):target {
+/*.link-target:nth-child(1):focus, .link-target:nth-child(1):target {
     padding-left: 15px;
-}
+}*/
 .navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
 border: none;
 background: #ECB20E;
@@ -640,7 +640,7 @@ border-right: none !important;
 }
 
 .navbar-inverse .dropdown-menu li:first-child a {
-padding-left: 20px;
+padding-left: 25px;
 }
 
 .dropdown-menu > li > a {
@@ -1841,7 +1841,7 @@ border: none;
 font-size: 13px;
 }
 /*11-4 CALENDAR*/
-.pickmeup {
+/*.pickmeup {
 background: #fff;
 -moz-box-sizing: content-box;
 box-sizing: content-box;
@@ -1861,7 +1861,7 @@ width: 100%;
 display: inline-block;
 height: 13.8em;
 padding: 5px;
-text-align: left; /*width: 15em;*/
+text-align: left;
 }
 
 .pickmeup .pmu-instance .pmu-button {
@@ -1975,7 +1975,7 @@ display: table-cell;
 
 .pickmeup:not(.pmu-view-days) .pmu-days, .pickmeup:not(.pmu-view-days) .pmu-day-of-week, .pickmeup:not(.pmu-view-months) .pmu-months, .pickmeup:not(.pmu-view-years) .pmu-years {
 display: none;
-}
+}*/
 /*------------------------------------*\
 12-FOOTER
 \*------------------------------------*/
