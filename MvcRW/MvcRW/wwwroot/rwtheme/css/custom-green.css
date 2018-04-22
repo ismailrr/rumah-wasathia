@@ -639,10 +639,6 @@ color: #fff !important;
 border-right: none !important;
 }
 
-.navbar-inverse .dropdown-menu li:first-child a {
-padding-left: 25px;
-}
-
 .dropdown-menu > li > a {
 color: #fff;
 }

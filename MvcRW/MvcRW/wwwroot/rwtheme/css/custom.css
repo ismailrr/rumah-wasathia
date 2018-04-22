@@ -1232,6 +1232,9 @@ table.table2 th {
         float: right;
         margin-right: 10px;
     }
+    .navbar-inverse .dropdown-menu li:first-child a {
+        padding-left: 25px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
