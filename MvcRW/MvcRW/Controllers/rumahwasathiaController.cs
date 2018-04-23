@@ -171,5 +171,10 @@ namespace MvcRW.Controllers
         {
             return View();
         }
+
+        public ActionResult ALogin()
+        {
+            return View();
+        }
     }
 }
