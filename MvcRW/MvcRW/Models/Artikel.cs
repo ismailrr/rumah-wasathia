@@ -13,7 +13,6 @@ namespace MvcRW.Models
         [Required, StringLength(100)]
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
-        [Required]
         public PathArtikel Path { get; set; }
 
         //public ICollection<ArtikelKategori> DaftarKategori { get; set; }

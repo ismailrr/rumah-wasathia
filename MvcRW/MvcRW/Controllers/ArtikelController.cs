@@ -20,9 +20,51 @@ namespace MvcRW.Controllers
         }
 
         // GET: Artikel
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View(await _context.DaftarArtikel.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var artikel = from s in _context.DaftarArtikel
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                artikel = artikel.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    artikel = artikel.OrderByDescending(s => s.Judul);
+                    break;
+                case "Date":
+                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    break;
+                case "date_desc":
+                    artikel = artikel.OrderByDescending(s => s.Tanggal);
+                    break;
+                default:
+                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Artikel/Details/5
@@ -34,6 +76,7 @@ namespace MvcRW.Controllers
             }
 
             var artikel = await _context.DaftarArtikel
+                .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (artikel == null)
             {
@@ -52,15 +95,26 @@ namespace MvcRW.Controllers
         // POST: Artikel/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("Judul,Tanggal")] Artikel artikel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(artikel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(artikel);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(artikel);
+            }
+            catch (DbUpdateException /* ex */)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(artikel);
         }
@@ -84,7 +138,7 @@ namespace MvcRW.Controllers
         // POST: Artikel/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] Artikel artikel)
         {
@@ -92,26 +146,21 @@ namespace MvcRW.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(artikel);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException /* ex */)
                 {
-                    if (!ArtikelExists(artikel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(artikel);
         }

@@ -10,7 +10,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rumahwasathia</title>
     <link rel="shortcut icon" href="~/rwtheme/images/favicon-wasathia.ico" type="image/x-icon">
     <link rel="icon" href="~/rwtheme/images/favicon-wasathia.ico" type="image/x-icon">
     <!-- bootstrap styles-->
@@ -68,33 +67,33 @@
                             </div>
                             <div class="collapse navbar-collapse" id="navbar-collapse">
                                 <ul class="nav navbar-nav text-uppercase main-nav ">
-                                    <li class="active"><a class="anchor" href="@Url.Action("Index","rumahwasathia")">beranda</a></li>
+                                    <li class="link-target active"><a class="anchor" href="@Url.Action("Index","rumahwasathia")">beranda</a></li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profil<span class="ion-ios7-arrow-down nav-icn"></span></a>
+                                        <a href="#" class="link-target dropdown-toggle" data-toggle="dropdown">Profil<span class="ion-ios7-arrow-down nav-icn"></span></a>
                                         <ul class="dropdown-menu text-capitalize" role="menu">
                                             <li><a class="anchor" href="@Url.Action("biografi","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Ust. Oni</a></li>
                                             <li><a class="anchor" href="@Url.Action("profil","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Rumahwasathia</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Konsultasi<span class="ion-ios7-arrow-down nav-icn"></span></a>
+                                        <a href="#" class="link-target dropdown-toggle" data-toggle="dropdown">Konsultasi<span class="ion-ios7-arrow-down nav-icn"></span></a>
                                         <ul class="dropdown-menu text-capitalize" role="menu">
                                             <li><a class="anchor" href="@Url.Action("republikaOnline","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Republika Online</a></li>
                                             <li><a class="anchor" href="@Url.Action("KonsultasiRepublika","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Konsultasi Republika</a></li>
                                             <li><a class="anchor" href="@Url.Action("ViaMediaSosial","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Via Medsos</a></li>
                                         </ul>
                                     </li>
-                                    <li> <a class="anchor" href="@Url.Action("Artikel","rumahwasathia")">artikel</a></li>
-                                    <li><a asp-area="" asp-controller="Artikel" asp-action="Index">Artikel</a></li>
-                                    <li> <a class="anchor" href="@Url.Action("Buku","rumahwasathia")">buku</a></li>
+                                    <li> <a class="link-target anchor" href="@Url.Action("Artikel","rumahwasathia")">artikel</a></li>
+                                    <li style="display:none;"><a asp-area="" asp-controller="Artikel" asp-action="Index">Artikel</a></li>
+                                    <li> <a class="link-target anchor" href="@Url.Action("Buku","rumahwasathia")">buku</a></li>
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kajian<span class="ion-ios7-arrow-down nav-icn"></span></a>
+                                        <a href="#" class="link-target dropdown-toggle" data-toggle="dropdown">Kajian<span class="ion-ios7-arrow-down nav-icn"></span></a>
                                         <ul class="dropdown-menu text-capitalize" role="menu">
                                             <li><a class="anchor" href="@Url.Action("Video","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Video</a></li>
                                             <li><a class="anchor" href="@Url.Action("Audio","rumahwasathia")"><span class="ion-ios7-arrow-right nav-sub-icn"></span>Audio</a></li>
                                         </ul>
                                     </li>
-                                    <li> <a class="anchor" href="@Url.Action("Galeri","rumahwasathia")">Galeri</a></li>
+                                    <li> <a class="link-target anchor" href="@Url.Action("Galeri","rumahwasathia")">Galeri</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -237,11 +236,6 @@
                                 <p>Rumahwasathia hadir sebagai solusi dari banyaknya pertanyaan masyarakat seputar persoalan kehidupan sehari-hari menurut aspek Syari’ah Islam, yang dimana pada realita sekarang ini, sangat minim referensi Islam yang genuine dan bernash. Selain itu, rumahwasathia meyakini perkembangan pendidikan yang semakin berkualitas dalam mencetak Sumber Daya Manusia ahli Fiqih, yang nantinya akan fokus dalam mengelola tugas ini.</p>
                             </div>
                         </div>
-                        <div class="readMore">
-                            <ul class="tags readMore-link">
-                                <li><a href="@Url.Action("Profil","rumahwasathia")">Selengkapnya<i class="fas fa-arrow-right"></i></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -344,5 +338,14 @@
             $(this).parent('li').addClass('active');
         });
     </script>
+    @*<script>
+        $(".link-target").click(function () {
+            if (!$(this).hasClass("active")) {
+
+                $(".link-target.active").removeClass("active");
+                $(this).addClass("active");
+            }
+        });
+    </script>*@
 </body>
 </html>
