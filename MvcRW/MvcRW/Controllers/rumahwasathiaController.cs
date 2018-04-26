@@ -112,7 +112,11 @@ namespace MvcRW.Controllers
             return View();
         }
         
-        public ActionResult ViaMediaSosial()
+        public ActionResult infografis()
+        {
+            return View();
+        }
+        public ActionResult rumahwasathia()
         {
             return View();
         }

@@ -206,7 +206,7 @@ font-size: 12px;
 }
 
 .sub-info-bordered {
-font-size: 12px;
+/*font-size: 12px;*/
 border-top: 1px solid #ededed;
 border-bottom: 1px solid #ededed;
 padding: 8px 0;
@@ -219,6 +219,7 @@ display: inline-block;
 
 .sub-info-bordered .stars {
 float: right;
+line-height:35px;
 }
 
 .sub-info-bordered a {
@@ -246,6 +247,7 @@ display: inline-block;
 
 .comments {
 display: inline-block;
+padding-left:10px;
 }
 
 .stars {

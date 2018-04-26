@@ -3,194 +3,133 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
+
+<!--data start galeri.cshtml-->
 <div class="container blogging-style">
     <div class="row">
         <!-- breadcrumb start -->
         <div class="page-header">
             <ol class="breadcrumb">
                 <li><a href="#">Beranda</a></li>
-                <li><a href="#">Artikel</a></li>
-                <li class="active">Air Force Base Airmen supporting the Operation Noble Eagle alert mission</li>
+                <li><a href="#">Konsultasi</a></li>
+                <li class="active">Rumahwasathia</li>
             </ol>
         </div>
         <!-- breadcrumb end -->
-        <!-- data Start -->
+        <!-- data start -->
         <section>
             <div class="container ">
                 <div class="row ">
-                    <!-- left sec Start -->
+                    <!-- left sec start -->
                     <div class="col-md-11 col-sm-11">
                         <div class="row">
-                            <!-- post details start -->
-                            <div class="col-sm-16">
-                                <div class="row">
-                                    <div class="sec-topic col-sm-16  wow fadeInDown animated " data-wow-delay="0.5s">
-                                        <div class="row">
-                                            <div class="col-sm-16"><img width="1000" height="606" alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail"></div>
-                                            <div class="col-sm-16 sec-info">
-                                                <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
-                                                <div class="text-danger sub-info-bordered">
-                                                    <div class="author"><span class="ion-person icon"></span>Ditulis oleh: Roman Polyarush</div>
-                                                    <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                    <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
-                                                </div>
-                                                <p>
-                                                    <span class="letter-badge">L</span>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-
-                                                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. <a href="#">Vivamus elementum semper</a> nisi. Aenean vulputate eleifend tellus. <br>
-                                                    Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.Etiam ultricies>nisi vel augue. Curabitur ullamcorper ultricies nisi.
-                                                </p>
-                                                <blockquote>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                                </blockquote>
-                                                <p> Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.</p>
-                                                <ul class="icn-list">
-                                                    <li>Lorem ipsum dolor sit amet</li>
-                                                    <li>Consectetur adipiscing elit</li>
-                                                    <li>Integer molestie lorem at massa</li>
-                                                    <li>Facilisis in pretium nisl aliquet</li>
-                                                    <li>
-                                                        Nulla volutpat aliquam velit
-                                                        <ul>
-                                                            <li>Phasellus iaculis neque</li>
-                                                            <li>Purus sodales ultricies</li>
-                                                            <li>Vestibulum laoreet porttitor sem</li>
-                                                            <li>Ac tristique libero volutpat at</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>Faucibus porta lacus fringilla vel</li>
-                                                    <li>Aenean sit amet erat nunc</li>
-                                                    <li>Eget porttitor lorem</li>
-                                                </ul>
-                                                <p>
-                                                    Aenean commodo ligula eget dolor. Aenean massa.
-                                                    <mark> Cum sociis</mark>
-                                                    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-
-                                                    Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo
-                                                </p>
-                                                <hr>
-                                            </div>
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="@Url.Action("SubArtikel","rumahwasathia")">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
                                         </div>
                                     </div>
-                                    <div class="col-sm-16 related">
-                                        <div class="subtitle pull-left">
-                                            <div class="inner-title">related topics</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="item topic col-sm-5 col-xs-16">
-                                                <a href="#">
-                                                    <img width="274" height="121" alt="" src="images/lifestyle/lifestyle-slide-1.jpg" class="img-thumbnail">
-                                                    <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                                                    <div class="text-danger sub-info-bordered remove-borders">
-                                                        <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                        <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
-                                                        <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="item topic col-sm-5 col-xs-16">
-                                                <a href="#">
-                                                    <img width="274" height="121" alt="" src="images/lifestyle/lifestyle-slide-2.jpg" class="img-thumbnail">
-                                                    <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                                                    <div class="text-danger sub-info-bordered remove-borders">
-                                                        <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                        <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
-                                                        <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="item topic col-sm-5 col-xs-16">
-                                                <a href="#">
-                                                    <img width="274" height="121" alt="" src="images/lifestyle/lifestyle-slide-3.jpg" class="img-thumbnail">
-                                                    <h4>Etiam rhoncus. Maecenas tempus, tellus eget condimentum</h4>
-                                                    <div class="text-danger sub-info-bordered remove-borders">
-                                                        <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                        <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
-                                                        <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-16 comments-area">
-                                        <div class="main-title-outer pull-left">
-                                            <div class="main-title">comments</div>
-                                        </div>
-                                        <div class="opinion pull-left">
-                                            <div class="media">
-                                                <a href="#" class="pull-left"> <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="images/comments/com-1.jpg"> </a>
-                                                <div class="media-body">
-                                                    <div>
-                                                        <h4 class="media-heading">John Doe</h4>
-                                                        <div class="time text-danger"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                    </div>
-                                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                                    <div class="col-sm-16"><a href="#"><span class="reply pull-right ion-ios7-compose"></span></a></div>
-                                                </div>
-                                            </div>
-                                            <div class="media">
-                                                <a href="#" class="pull-left"> <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="images/comments/com-2.jpg"> </a>
-                                                <div class="media-body">
-                                                    <div>
-                                                        <h4 class="media-heading">John Doe</h4>
-                                                        <div class="time text-danger"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                    </div>
-                                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                                                    <div class="col-sm-16"><a href="#"><span class="reply pull-right ion-ios7-compose"></span></a></div>
-                                                    <div class="media nested-rep pull-left">
-                                                        <a href="#" class="pull-left"> <img alt="64x64" class="media-object" style="width: 64px; height: 64px;" src="images/comments/com-1.jpg"> </a>
-                                                        <div class="media-body ">
-                                                            <div>
-                                                                <h4 class="media-heading">John Doe</h4>
-                                                                <div class="time text-danger"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                                            </div>
-                                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                                            <div class="col-sm-16"><a href="#"><span class="reply pull-right ion-ios7-compose"></span></a></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-16">
-                                        <div class="main-title-outer pull-left">
-                                            <div class="main-title">leave a comment</div>
-                                        </div>
-                                        <div class="col-xs-16 wow zoomIn animated">
-                                            <form action="" method="post" name="" class="comment-form">
-                                                <div class="row">
-                                                    <div class="form-group col-sm-8 name-field">
-                                                        <input type="text" placeholder="Name*" required="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group col-sm-8 email-field">
-                                                        <input type="email" placeholder="Email*" required="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group col-sm-16">
-                                                        <textarea placeholder="Your Message" rows="8" class="form-control" required id="message" name="message">                  </textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <button class="btn btn-danger" type="submit"> Post Reply </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
                             </div>
-                            <!-- post details end -->
-
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="#">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-2.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+                            </div>
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="#">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-3.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+                            </div>
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="#">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-4.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+                            </div>
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="#">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-5.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+                            </div>
+                            <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="#">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-6.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Air Force Base Airmen supporting the Operation Noble Eagle alert mission</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                                <p>Lorem Ipsum has been the standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it </p>
+                            </div>
+                            <div class="col-sm-16">
+                                <hr>
+                                <ul class="pagination">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <!-- left sec End -->
+                    <!-- left sec end -->
                     <!-- right sec start -->
                     <div class="col-sm-5 hidden-xs right-sec">
                         <div class="bordered">
                             <div class="row ">
-                                <div class="col-sm-16">
-
+                                <div class="col-sm-16" >
+                                    
                                 </div>
-
+                                
                                 <!-- activities start -->
                                 <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
                                     <!-- Nav tabs -->
@@ -358,6 +297,7 @@
                 </div>
             </div>
         </section>
-        <!-- Data End -->
+        <!-- data end -->
     </div>
 </div>
+<!-- data end -->

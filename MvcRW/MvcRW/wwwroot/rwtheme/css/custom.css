@@ -1179,7 +1179,10 @@ table.table2 th {
     padding: 10px;
     counter-increment: item-counter;
 }
-
+/*Rumahwasathia*/
+.sec-topic img {
+    min-height: 265px;
+}
 
 
 
