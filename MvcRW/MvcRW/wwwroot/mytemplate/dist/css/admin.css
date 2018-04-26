@@ -1,0 +1,35 @@
+.login-page {
+  background-image: url("../img/b.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-attachment: fixed;
+  padding-left: 0;
+  margin: 5% auto;
+  overflow: hidden; }
+.box{
+  border-radius: 7px;
+   -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+            box-shadow: 0 10px 6px -6px #777;
+}
+.rw{
+  color: #9ee8fc;
+    font-size: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+.logogram{
+   display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+}
+#example1 {
+    border: 5px solid white;
+    padding: 10px;
+    border-radius: 15px;
+}
