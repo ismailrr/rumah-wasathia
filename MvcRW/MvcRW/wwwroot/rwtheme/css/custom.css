@@ -475,7 +475,6 @@ table.table1 td {
 
 .album-desc {
     padding: 0 5px;
-    text-transform: capitalize;
     margin-top:5px;
 }
 
@@ -1180,8 +1179,10 @@ table.table2 th {
     counter-increment: item-counter;
 }
 /*Rumahwasathia*/
-.sec-topic img {
-    min-height: 265px;
+#consultation-detail p {
+    font-size: 18px;
+    padding:10px 0;
+    color: #3D566E;
 }
 
 
@@ -1218,58 +1219,72 @@ table.table2 th {
         height: 180px;
     }
 }
+@media only screen and (min-width: 768px) and (min-width: 1200px) {
 
-/* Medium Devices, Desktops */
-
-@media only screen and (max-width: 992px) {
-    .slider-image .carousel {
-        max-height: 180px;
-    }
-    #responsive-image img {
-        max-width: 70%;
-    }
-    .galeri-size img {
-        height: 180px;
-    }
-    .nav-icn {
-        float: right;
-        margin-right: 10px;
-    }
-    .navbar-inverse .dropdown-menu li:first-child a {
-        padding-left: 25px;
+    .sec-topic img {
+        min-height: 265px;
     }
 }
+    /* Medium Devices, Desktops */
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    #logo {
-        max-width: 100%;
-        padding: 30px 120px;
-    }
-    .right-side-style {
-        padding-left: 0 !important;
-    }
-    .flex-container {
-        height: 6em;
-    }
-}
-@media only screen and (max-width: 991px) {
-    .module1 {
-        max-height: 100%;
+    @media only screen and (max-width: 992px) {
+        .slider-image .carousel {
+            max-height: 180px;
+        }
+
+        #responsive-image img {
+            max-width: 70%;
+        }
+
+        .galeri-size img {
+            height: 180px;
+        }
+
+        .nav-icn {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .navbar-inverse .dropdown-menu li:first-child a {
+            padding-left: 25px;
+        }
     }
 
-    .read-more-yellow {
-        display: none;
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        #logo {
+            max-width: 100%;
+            padding: 30px 120px;
+        }
+
+        .right-side-style {
+            padding-left: 0 !important;
+        }
+
+        .flex-container {
+            height: 6em;
+        }
     }
-    #hidden-book {
-        display: none;
+
+    @media only screen and (max-width: 991px) {
+        .module1 {
+            max-height: 100%;
+        }
+
+        .read-more-yellow {
+            display: none;
+        }
+
+        #hidden-book {
+            display: none;
+        }
     }
-}
     /* Small Devices, Tablets */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
         .library-wrapper img {
             width: 70%;
         }
+
         .wrap-content {
             margin-top: 85%;
         }
@@ -1333,6 +1348,7 @@ table.table2 th {
             margin: 0 auto;
             padding-bottom: 20px;
         }
+
         .galeri-size img {
             height: 240px;
         }
@@ -1340,6 +1356,7 @@ table.table2 th {
         .consult-service ol {
             margin-top: 40px;
         }
+
         .book-cover {
             width: 50%;
         }
@@ -1403,6 +1420,7 @@ table.table2 th {
         .detail {
             padding: 10px 15px;
         }
+
         .book-cover {
             width: 100%;
         }

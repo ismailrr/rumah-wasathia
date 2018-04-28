@@ -102,7 +102,7 @@ namespace MvcRW.Controllers
             return View();
         }
         
-        public ActionResult KonsultasiRepublika()
+        public ActionResult epaperRepublika()
         {
             return View();
         }
