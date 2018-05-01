@@ -4,175 +4,444 @@
     Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
 
-<!--data start Artikel.cshtml-->
+<!--data start galeri.cshtml-->
 <div class="container blogging-style">
     <div class="row">
         <!-- breadcrumb start -->
         <div class="page-header">
             <ol class="breadcrumb">
                 <li><a href="#">Beranda</a></li>
-                <li><a href="#">Kajian</a></li>
-                <li class="active">Video</li>
+                <li><a href="#">Galeri</a></li>
+                <li class="active">Kegiatan Ust Oni</li>
             </ol>
         </div>
         <!-- breadcrumb end -->
-        <!-- Kolom artikel Begin -->
-        <div class="col-sm-16 banner-outer gapTop">
-            <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
-                <div class="main-title-outer center-block">
-                    <div class="main-title left-side">Kumpulan Video Kajian</div>
-                    <div class="row">
-                        <div class="item topic col-sm-8 col-xs-16">
-                            <a href="@Url.Action("galeri1","rumahwasathia")">
-                                <img class="img-thumbnail" src="~/rwtheme/images/sec/sec-1.jpg" width="1000" height="606" alt="" />
-                                <h4>Dokumentasi kegiatan Ust. Oni</h4>
-                            </a>
+        <!-- Masonry Begin -->
+        <div class="masonry-wrapper">
+            <div class="masonry text-center">
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (2).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (2).jpg" class="img-thumbnail">
                         </div>
-                        <div class="item topic col-sm-8 col-xs-16">
-                            <a href="@Url.Action("galeri2","rumahwasathia")">
-                                <img class="img-thumbnail" src="~/rwtheme/images/sec/sec-2.jpg" width="1000" height="606" alt="" />
-                                <h4>Album RumahWasathia</h4>
-                            </a>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
-                @*<div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer">
-                            <div class="main-title right-side">Perpustakaan</div>
-                            <ul class="list-unstyled kitab">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/cover1.jpg" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Riba, Gharar & Kaidah Ekonomi Syariah</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4 "><img class="img-thumbnail" src="~/rwtheme/images/book/cover2.jpg" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Maqashid Bisnis & Keuangan Islam</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/cover3.jpg" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Ushul Fiqh Muamalah</h3>
-                                            <div class="download">
-                                                <a href="#"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4"><img class="img-thumbnail" src="~/rwtheme/images/book/cover4.jpg" alt="" /> </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Fikih Muamalah</h3>
-                                            <div class="download">
-                                                <a href="@Url.Action("SubBuku","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (1).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (1).jpg" class="img-thumbnail">
                         </div>
-                    </div>
-                </div>*@
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer pull-left">
-                            <div class="main-title right-side">Artikel Terbaru</div>
-                            <ul class="list-unstyled kajian">
-                                <li>
-                                    <a href="~/rwtheme/pdf/Belanja dengan Kartu Diskon.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Belanja dengan Kartu Diskon</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Bitcoin Menurut Fikih.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Bitcoin Menurut Fikih</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Denda Keterlambatan pada bank syariah.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Denda Keterlambatan pada bank syariah</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Fikih Bekerja di Lembaga konvensional.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Fikih Bekerja di Lembaga konvensional</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Fikih Biaya Perjalanan Dinas yang Dipersingkat.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Fikih Biaya Perjalanan Dinas yang Dipersingkat</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
                         </div>
-                    </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (3).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (3).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (4).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (4).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (5).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (5).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (6).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (6).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (7).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (7).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (8).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (8).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (9).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (9).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (10).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (10).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (11).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (11).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (12).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (12).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (13).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (13).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (14).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (14).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (15).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (15).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (16).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (16).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/a/a (17).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/a/a (17).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Kajian Bandung</span>
+                            <span>2 Januari 2018</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (1).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (2).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (2).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (2).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (3).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (3).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (4).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (4).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (5).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (5).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (6).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (6).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (7).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (7).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (8).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (8).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (9).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (9).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (10).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (10).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (11).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (11).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/d/d (12).jpeg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/d/d (12).jpeg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Mudzakarah Maybank di Malaysia</span>
+                            <span>20 November 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (1).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (1).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (2).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (2).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (3).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (3).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (4).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (4).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (5).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (5).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/e/e (6).jpg">
+                        <div class="thumb-box">
+                            <span class="ion-arrow-expand"></span>
+                            <img alt="" src="~/rwtheme/images/galeri/e/e (6).jpg" class="img-thumbnail">
+                        </div>
+                        <div class="album-desc">
+                            <span>Pelatihan Wakaf Yakesma di Jakarta</span>
+                            <span>05 Agustus 2017</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-        <!-- Second Section Begin -->
+        <!-- Masonry End -->
     </div>
 </div>
 <!-- data end -->

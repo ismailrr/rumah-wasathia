@@ -209,7 +209,7 @@ font-size: 12px;
 /*font-size: 12px;*/
 border-top: 1px solid #ededed;
 border-bottom: 1px solid #ededed;
-padding: 8px 0;
+padding: 0;
 margin-bottom: 10px;
 }
 
@@ -253,6 +253,7 @@ padding-left:10px;
 .stars {
 font-size: 14px;
 color: #3D566E;
+display:none;
 }
 /*1-7 MODAL BOX*/
 
