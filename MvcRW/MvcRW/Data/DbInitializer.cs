@@ -1,5 +1,7 @@
 ﻿using MvcRW.Models;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace MvcRW.Data
@@ -18,10 +20,12 @@ namespace MvcRW.Data
             {
                 return;
             }
-
+            var ext = new List<string> { "pdf" };
+            var myFiles = Directory.GetFiles("~/rwtheme/file-document/article/", "*.*", SearchOption.AllDirectories)
+                 .Where(s => ext.Contains(Path.GetExtension(s)));
             var pathArtikel = new PathArtikel[]
             {
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
+            new PathArtikel{Path=myFiles[0]},
             new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
             new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
             new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
