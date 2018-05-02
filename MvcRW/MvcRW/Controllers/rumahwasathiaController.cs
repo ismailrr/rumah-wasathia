@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MvcRW.Data;
 using MvcRW.Models;
 
 namespace MvcRW.Controllers
 {
     public class rumahwasathiaController : Controller
     {
+        private readonly RWContext _context;
+            
+        public rumahwasathiaController(RWContext context)
+        {
+            _context = context;
+        }
+
         // GET: /<controller>/
         public ActionResult Index()
         {
@@ -32,9 +41,51 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public ActionResult Artikel()
+        public async Task<IActionResult> Artikel(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View();
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var artikel = from s in _context.DaftarArtikel
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                artikel = artikel.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    artikel = artikel.OrderByDescending(s => s.Judul);
+                    break;
+                case "Date":
+                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    break;
+                case "date_desc":
+                    artikel = artikel.OrderByDescending(s => s.Tanggal);
+                    break;
+                default:
+                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
         }
 
         public ActionResult Buku()
