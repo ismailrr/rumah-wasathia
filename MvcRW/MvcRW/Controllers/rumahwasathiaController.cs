@@ -41,53 +41,6 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Artikel(
-            string sortOrder,
-            string currentFilter,
-            string searchString,
-            int? page)
-        {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewData["CurrentFilter"] = searchString;
-
-            var artikel = from s in _context.DaftarArtikel
-                          select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                artikel = artikel.Where(s => s.Judul.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    artikel = artikel.OrderByDescending(s => s.Judul);
-                    break;
-                case "Date":
-                    artikel = artikel.OrderBy(s => s.Tanggal);
-                    break;
-                case "date_desc":
-                    artikel = artikel.OrderByDescending(s => s.Tanggal);
-                    break;
-                default:
-                    artikel = artikel.OrderBy(s => s.Tanggal);
-                    break;
-            }
-
-            int pageSize = 10;
-            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
-        }
-
         public ActionResult Buku()
         {
             return View();
@@ -99,21 +52,6 @@ namespace MvcRW.Controllers
         }
         
         public ActionResult Video()
-        {
-            return View();
-        }
-        
-        public ActionResult galeri()
-        {
-            return View();
-        }
-        
-        public ActionResult galeri1()
-        {
-            return View();
-        }
-        
-        public ActionResult galeri2()
         {
             return View();
         }
@@ -162,10 +100,52 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        
-        public ActionResult infografis()
+
+        public async Task<IActionResult> Infografis(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View();
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var infografis = from s in _context.DaftarInfografis
+                             select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                infografis = infografis.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    infografis = infografis.OrderByDescending(s => s.Judul);
+                    break;
+                case "Date":
+                    infografis = infografis.OrderBy(s => s.Tanggal);
+                    break;
+                case "date_desc":
+                    infografis = infografis.OrderByDescending(s => s.Tanggal);
+                    break;
+                default:
+                    infografis = infografis.OrderBy(s => s.Judul);
+                    break;
+            }
+
+            int pageSize = 12;
+            return View(await PaginatedList<Infografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
         }
         public ActionResult rumahwasathia()
         {

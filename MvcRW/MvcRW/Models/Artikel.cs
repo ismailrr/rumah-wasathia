@@ -32,5 +32,13 @@ namespace MvcRW.Models
         //        KategoriId = kategoriId
         //    });
         //}
+
+        public string DisplayTextPath
+        {
+            get
+            {
+                return $"{Path?.Path}";
+            }
+        }
     }
 }
