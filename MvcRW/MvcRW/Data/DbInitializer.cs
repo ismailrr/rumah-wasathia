@@ -20,45 +20,58 @@ namespace MvcRW.Data
             {
                 return;
             }
-            var ext = new List<string> { "pdf" };
-            var myFiles = Directory.GetFiles("~/rwtheme/file-document/article/", "*.*", SearchOption.AllDirectories)
-                 .Where(s => ext.Contains(Path.GetExtension(s)));
-            var pathArtikel = new PathArtikel[]
+
+            /* Artikel */
+            //var ext = new List<string> { "pdf" };
+            var myFilesArtikel = Directory.GetFiles("wwwroot/rwtheme/file-document/article/", "*.pdf");
+
+            var pathArtikel = new List<PathArtikel>();
+
+            foreach (string s in myFilesArtikel.Select(Path.GetFileName))
             {
-            new PathArtikel{Path=myFiles[0]},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"},
-            new PathArtikel{Path="~/rwtheme/pdf/37-masalah-populer.pdf"}
-            };
+                string PathString = s;
+                pathArtikel.Add(new PathArtikel { Path = PathString });
+            }
+
             foreach (PathArtikel a in pathArtikel)
             {
                 context.DaftarPathArtikel.Add(a);
             }
             context.SaveChanges();
 
-            var pathGaleri = new PathGaleri[]
+            /* Galeri */
+            var extGambar = new List<string> { ".jpeg",".jpg",".png",".webp"};
+            var myFilesGambar = Directory.GetFiles("wwwroot/rwtheme/images/galeri/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
+
+            var pathGaleri = new List<PathGaleri>();
+
+            foreach (string s in myFilesGambar.Select(Path.GetFileName))
             {
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-1.jpg"},
-            new PathGaleri{Path="~/rwtheme/images/sec/sec-2.jpg"}
-            };
+                string PathString = s;
+                pathGaleri.Add(new PathGaleri { Path = PathString });
+            }
+
             foreach (PathGaleri a in pathGaleri)
             {
                 context.DaftarPathGaleri.Add(a);
+            }
+            context.SaveChanges();
+
+            /* Infografis */
+            //var ext = new List<string> { "pdf" };
+            var myFilesInfografis = Directory.GetFiles("wwwroot/rwtheme/file-document/pdf/", "*.pdf");
+
+            var pathInfografis = new List<PathInfografis>();
+
+            foreach (string s in myFilesInfografis.Select(Path.GetFileName))
+            {
+                string PathString = s;
+                pathInfografis.Add(new PathInfografis { Path = PathString });
+            }
+
+            foreach (PathInfografis a in pathInfografis)
+            {
+                context.DaftarPathInfografis.Add(a);
             }
             context.SaveChanges();
 
@@ -109,39 +122,52 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            var artikel = new Artikel[]
+            /*Artikel*/
+            var artikel = new List<Artikel>();
+
+            foreach (PathArtikel s in pathArtikel)
             {
-            new Artikel{Judul="PDF 1",Tanggal=DateTime.Parse("2018-03-08"),Path=pathArtikel[0]},
-            new Artikel{Judul="PDF 2",Tanggal=DateTime.Parse("2018-04-07"),Path=pathArtikel[1]},
-            new Artikel{Judul="PDF 3",Tanggal=DateTime.Parse("2018-02-08"),Path=pathArtikel[2]},
-            new Artikel{Judul="PDF 4",Tanggal=DateTime.Parse("2018-04-10"),Path=pathArtikel[3]},
-            new Artikel{Judul="PDF 5",Tanggal=DateTime.Parse("2018-04-01"),Path=pathArtikel[4]},
-            new Artikel{Judul="PDF 6",Tanggal=DateTime.Parse("2018-03-15"),Path=pathArtikel[5]},
-            new Artikel{Judul="PDF 7",Tanggal=DateTime.Parse("2018-03-11"),Path=pathArtikel[6]},
-            new Artikel{Judul="PDF 8",Tanggal=DateTime.Parse("2018-02-02"),Path=pathArtikel[1]},
-            new Artikel{Judul="PDF 9",Tanggal=DateTime.Parse("2018-03-21"),Path=pathArtikel[5]}
-            };
+                string MyString = s.Path.ToString();
+                string JudulString = MyString.Replace(".pdf","");
+                artikel.Add(new Artikel { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+            }
+
             foreach (Artikel a in artikel)
             {
                 context.DaftarArtikel.Add(a);
             }
             context.SaveChanges();
 
-            var galeri = new Galeri[]
+            /* Galeri */
+            var galeri = new List<Galeri>();
+
+            foreach (PathGaleri s in pathGaleri)
             {
-            new Galeri{Judul="Galeri 1",Tanggal=DateTime.Parse("2018-03-08"),Path=pathGaleri[0]},
-            new Galeri{Judul="Galeri 2",Tanggal=DateTime.Parse("2018-04-07"),Path=pathGaleri[1]},
-            new Galeri{Judul="Galeri 3",Tanggal=DateTime.Parse("2018-02-08"),Path=pathGaleri[2]},
-            new Galeri{Judul="Galeri 4",Tanggal=DateTime.Parse("2018-04-10"),Path=pathGaleri[3]},
-            new Galeri{Judul="Galeri 5",Tanggal=DateTime.Parse("2018-04-01"),Path=pathGaleri[4]},
-            new Galeri{Judul="Galeri 6",Tanggal=DateTime.Parse("2018-03-15"),Path=pathGaleri[5]},
-            new Galeri{Judul="Galeri 7",Tanggal=DateTime.Parse("2018-03-11"),Path=pathGaleri[6]},
-            new Galeri{Judul="Galeri 8",Tanggal=DateTime.Parse("2018-02-02"),Path=pathGaleri[5]},
-            new Galeri{Judul="Galeri 9",Tanggal=DateTime.Parse("2018-03-21"),Path=pathGaleri[2]}
-            };
+                string MyString = s.Path.ToString();
+                int index = MyString.LastIndexOf(".");
+                string JudulString = MyString.Replace(".pdf", "");
+                galeri.Add(new Galeri { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+            }
+
             foreach (Galeri a in galeri)
             {
                 context.DaftarGaleri.Add(a);
+            }
+            context.SaveChanges();
+
+            /* Infografis */
+            var infografis = new List<Infografis>();
+
+            foreach (PathInfografis s in pathInfografis)
+            {
+                string MyString = s.Path.ToString();
+                string JudulString = MyString.Replace(".pdf", "");
+                infografis.Add(new Infografis { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+            }
+
+            foreach (Infografis a in infografis)
+            {
+                context.DaftarInfografis.Add(a);
             }
             context.SaveChanges();
 

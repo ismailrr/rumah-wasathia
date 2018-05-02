@@ -15,12 +15,14 @@ namespace MvcRW.Data
         /// </summary>
         public DbSet<Artikel> DaftarArtikel { get; set; }
         public DbSet<Galeri> DaftarGaleri { get; set; }
+        public DbSet<Infografis> DaftarInfografis { get; set; }
         public DbSet<KategoriArtikel> DaftarKategoriArtikel { get; set; }
         public DbSet<KategoriKonsultasi> DaftarKategoriKonsultasi { get; set; }
         public DbSet<KonsultasiMedsos> DaftarKonsultasiMedsos { get; set; }
         public DbSet<KonsultasiRepublika> DaftarKonsultasiRepublika { get; set; }
         public DbSet<PathArtikel> DaftarPathArtikel { get; set; }
         public DbSet<PathGaleri> DaftarPathGaleri { get; set; }
+        public DbSet<PathInfografis> DaftarPathInfografis { get; set; }
         public DbSet<PathKonsultasiRepublika> DaftarPathKonsultasiRepublika { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,6 +37,8 @@ namespace MvcRW.Data
             modelBuilder.Entity<PathGaleri>().ToTable("Path_Galeri");
             modelBuilder.Entity<PathKonsultasiRepublika>().ToTable("Path_Konsultasi_Republika");
         }
+
+        public DbSet<MvcRW.Models.Infografis> Infografis { get; set; }
 
     }
 }

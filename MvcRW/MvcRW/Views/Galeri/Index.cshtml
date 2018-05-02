@@ -1,0 +1,65 @@
+﻿@model PaginatedList<MvcRW.Models.Galeri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
+}
+
+<!--data start galeri.cshtml-->
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Galeri</a></li>
+                <li class="active">Kegiatan Ust Oni</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <!-- Masonry Begin -->
+        <div class="masonry-wrapper">
+            <div class="masonry text-center">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/@{@item.Judul}">
+                            <div class="thumb-box">
+                                <span class="ion-arrow-expand"></span>
+                                <img alt="" src="~/rwtheme/images/galeri/@{@item.Judul}" class="img-thumbnail">
+                            </div>
+                            <div class="album-desc">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- Masonry End -->
+        <div class="row">
+            <div class="col-sm-16 text-center">
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- data end -->   

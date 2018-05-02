@@ -42,20 +42,20 @@
                     </div>
                     <div class="row text-center">
                         @foreach (var item in Model)
-        {
-                <div class="item topic col-md-4 col-xs-8">
-                    <a href="~/rwtheme/file-document/pdf/@{@item.Judul}.pdf " target="_blank">
-                        <img class="img-thumbnail icon-effect" src="~/rwtheme/images/general/chart.png" alt="" />
-                        <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
-                    </a>
-                </div>
-}
+                        {
+                            <div class="item topic col-md-4 col-xs-8">
+                                <a href="~/rwtheme/file-document/pdf/@{@item.Judul}.pdf " target="_blank">
+                                    <img class="img-thumbnail icon-effect" src="~/rwtheme/images/general/chart.png" alt="" />
+                                    <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
+                                </a>
+                            </div>
+                        }
                     </div>
                     <div class="row">
                         <div class="col-sm-16 text-center">
                             @{
-                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
                             }
                             <a asp-action="Index"
                                asp-route-sortOrder="@ViewData["CurrentSort"]"
