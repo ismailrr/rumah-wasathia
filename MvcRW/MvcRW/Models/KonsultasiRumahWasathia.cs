@@ -18,7 +18,7 @@ namespace MvcRW.Models
         public string Pertanyaan { get; set; }
         [Required, StringLength(1000)]
         public string Jawaban { get; set; }
-        [Required, StringLength(50)]
+        [StringLength(50)]
         public string Penulis { get; set; }
         //public KategoriKonsultasi Kategori { get; set; }
     }
