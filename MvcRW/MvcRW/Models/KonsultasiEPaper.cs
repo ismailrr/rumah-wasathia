@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class Admin
+    public class KonsultasiEPaper
     {
         public int Id { get; set; }
-        [Required, StringLength(20), Display(Name = "Nama Pengguna")]
-        public string NamaPengguna { get; set; }
-        [Required, StringLength(50), Display(Name = "Kata Sandi")]
-        public string KataSandi { get; set; }
+        [Required, StringLength(100)]
+        public string Judul { get; set; }
+        [Required]
         public DateTime Tanggal { get; set; }
+        [Required]
+        public PathKonsultasiEPaper Path { get; set; }
+        public KategoriKonsultasi Kategori { get; set; }
 
     }
 }

@@ -145,7 +145,7 @@ namespace MvcRW.Controllers
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<Infografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<KonsultasiInfografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
         }
         public ActionResult rumahwasathia()
         {

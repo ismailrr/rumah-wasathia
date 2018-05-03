@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class PathKonsultasiRepublika
+    public class PathKajianVideo
     {
-        public PathKonsultasiRepublika()
+        public PathKajianVideo()
         {
-            DaftarKonsultasiRepublika = new List<KonsultasiRepublika>();
+            DaftarKajianVideo = new List<KajianVideo>();
         }
 
         public int Id { get; set; }
-        [Required, StringLength(200)]      
+        [Required, StringLength(200)]
         public string Path { get; set; }
+        public DateTime Tanggal { get; set; }
 
-        public ICollection<KonsultasiRepublika> DaftarKonsultasiRepublika { get; set; }
+        public ICollection<KajianVideo> DaftarKajianVideo { get; set; }
     }
 }

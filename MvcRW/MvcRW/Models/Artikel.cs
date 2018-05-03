@@ -14,6 +14,15 @@ namespace MvcRW.Models
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
         public PathArtikel Path { get; set; }
+        public KategoriArtikel Kategori { get; set; }
+
+        public string DisplayTextPath
+        {
+            get
+            {
+                return $"{Path?.Path}";
+            }
+        }
 
         //public ICollection<ArtikelKategori> DaftarKategori { get; set; }
 
@@ -32,13 +41,5 @@ namespace MvcRW.Models
         //        KategoriId = kategoriId
         //    });
         //}
-
-        public string DisplayTextPath
-        {
-            get
-            {
-                return $"{Path?.Path}";
-            }
-        }
     }
 }

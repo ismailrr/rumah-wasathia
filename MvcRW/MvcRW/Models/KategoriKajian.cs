@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class KategoriArtikel
+    public class KategoriKajian
     {
-        public KategoriArtikel()
+        public KategoriKajian()
         {
-            DaftarArtikel = new List<Artikel>();
+            DaftarKajianAudio = new List<KajianAudio>();
+            DaftarKajianVideo = new List<KajianVideo>();
         }
 
         public int Id { get; set; }
@@ -19,6 +20,7 @@ namespace MvcRW.Models
         public string Nama { get; set; }
         public DateTime Tanggal { get; set; }
 
-        public ICollection<Artikel> DaftarArtikel { get; set; }
+        public ICollection<KajianAudio> DaftarKajianAudio { get; set; }
+        public ICollection<KajianVideo> DaftarKajianVideo { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace MvcRW.Controllers
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<Infografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<KonsultasiInfografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Infografis/Details/5
@@ -75,7 +75,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.Infografis
+            var infografis = await _context.DaftarInfografis
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
@@ -96,7 +96,7 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal")] Infografis infografis)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal")] KonsultasiInfografis infografis)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.Infografis.SingleOrDefaultAsync(m => m.Id == id);
+            var infografis = await _context.DaftarInfografis.SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
                 return NotFound();
@@ -128,7 +128,7 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] Infografis infografis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] KonsultasiInfografis infografis)
         {
             if (id != infografis.Id)
             {
@@ -166,7 +166,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.Infografis
+            var infografis = await _context.DaftarInfografis
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
@@ -181,15 +181,15 @@ namespace MvcRW.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var infografis = await _context.Infografis.SingleOrDefaultAsync(m => m.Id == id);
-            _context.Infografis.Remove(infografis);
+            var infografis = await _context.DaftarInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            _context.DaftarInfografis.Remove(infografis);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool InfografisExists(int id)
         {
-            return _context.Infografis.Any(e => e.Id == id);
+            return _context.DaftarInfografis.Any(e => e.Id == id);
         }
     }
 }

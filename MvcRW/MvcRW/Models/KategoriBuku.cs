@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class PathInfografis
+    public class KategoriBuku
     {
-        public PathInfografis()
+        public KategoriBuku()
         {
-            DaftarInfografis = new List<Infografis>();
+            DaftarBuku = new List<Buku>();
         }
 
         public int Id { get; set; }
         [Required, StringLength(200)]
-        public string Path { get; set; }
+        public string Nama { get; set; }
+        public DateTime Tanggal { get; set; }
 
-        public ICollection<Infografis> DaftarInfografis { get; set; }
+        public ICollection<Buku> DaftarBuku { get; set; }
     }
 }

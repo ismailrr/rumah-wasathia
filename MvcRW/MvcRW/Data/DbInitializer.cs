@@ -15,22 +15,39 @@ namespace MvcRW.Data
         public static void Initialize(RWContext context)
         {
             context.Database.EnsureCreated();
-
+            var extGambar = new List<string> { ".jpeg", ".jpg", ".png", ".webp" };
+            var extPdf = new List<string> { ".pdf"};
+            //Cek jika data sudah dibuat
             if (context.DaftarArtikel.Any())
             {
                 return;
             }
 
-            /* Artikel */
-            //var ext = new List<string> { "pdf" };
-            var myFilesArtikel = Directory.GetFiles("wwwroot/rwtheme/file-document/article/", "*.pdf");
+            /* 
+             * Admin 
+             */
+            var admin = new Admin[]
+            {
+            new Admin{NamaPengguna="RWAdmin",KataSandi="RWMVCAdmin9090",Tanggal= DateTime.Now}
+            };
+
+            foreach (Admin a in admin)
+            {
+                context.DaftarAdmin.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Path Artikel 
+             */
+            var myFilesArtikel = Directory.GetFiles("wwwroot/rwtheme/file-document/article/", "*.*", SearchOption.AllDirectories).Where(s => extPdf.Contains(Path.GetExtension(s)));
 
             var pathArtikel = new List<PathArtikel>();
 
             foreach (string s in myFilesArtikel.Select(Path.GetFileName))
             {
                 string PathString = s;
-                pathArtikel.Add(new PathArtikel { Path = PathString });
+                pathArtikel.Add(new PathArtikel {Path = PathString, Tanggal = DateTime.Now});
             }
 
             foreach (PathArtikel a in pathArtikel)
@@ -39,16 +56,36 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            /* Galeri */
-            var extGambar = new List<string> { ".jpeg",".jpg",".png",".webp"};
-            var myFilesGambar = Directory.GetFiles("wwwroot/rwtheme/images/galeri/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
+            /* 
+             * Path Buku 
+             */
+            var myFilesBuku = Directory.GetFiles("wwwroot/rwtheme/images/book/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
+
+            var pathBuku = new List<PathBuku>();
+
+            foreach (string s in myFilesBuku.Select(Path.GetFileName))
+            {
+                string PathString = s;
+                pathBuku.Add(new PathBuku {Path = PathString, Tanggal = DateTime.Now});
+            }
+
+            foreach (PathBuku a in pathBuku)
+            {
+                context.DaftarPathBuku.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Path Galeri 
+             */
+            var myFilesGaleri = Directory.GetFiles("wwwroot/rwtheme/images/galeri/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
 
             var pathGaleri = new List<PathGaleri>();
 
-            foreach (string s in myFilesGambar.Select(Path.GetFileName))
+            foreach (string s in myFilesGaleri.Select(Path.GetFileName))
             {
                 string PathString = s;
-                pathGaleri.Add(new PathGaleri { Path = PathString });
+                pathGaleri.Add(new PathGaleri {Path = PathString, Tanggal = DateTime.Now });
             }
 
             foreach (PathGaleri a in pathGaleri)
@@ -57,48 +94,84 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            /* Infografis */
-            //var ext = new List<string> { "pdf" };
-            var myFilesInfografis = Directory.GetFiles("wwwroot/rwtheme/file-document/pdf/", "*.pdf");
+            /* 
+             * Path Infografis 
+             */
+            var myFilesInfografis = Directory.GetFiles("wwwroot/rwtheme/file-document/pdf/", "*.*", SearchOption.AllDirectories).Where(s => extPdf.Contains(Path.GetExtension(s)));
 
-            var pathInfografis = new List<PathInfografis>();
+            var pathInfografis = new List<PathKonsultasiInfografis>();
 
             foreach (string s in myFilesInfografis.Select(Path.GetFileName))
             {
                 string PathString = s;
-                pathInfografis.Add(new PathInfografis { Path = PathString });
+                pathInfografis.Add(new PathKonsultasiInfografis {Path = PathString, Tanggal = DateTime.Now});
             }
 
-            foreach (PathInfografis a in pathInfografis)
+            foreach (PathKonsultasiInfografis a in pathInfografis)
             {
-                context.DaftarPathInfografis.Add(a);
+                context.DaftarPathKonsultasiInfografis.Add(a);
             }
             context.SaveChanges();
 
-            var pathKonsultasiRepublika = new PathKonsultasiRepublika[]
+            /* 
+             * Path KajianAudio 
+             */
+            var pathKajianAudio = new PathKajianAudio[]
             {
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/1. Perjalanan Dinas yang dipersingkat.jpg"},
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/2. Bisnis Reseller.jpg"},
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/3. Dropship.jpeg"},
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/1. Perjalanan Dinas yang dipersingkat.jpg"},
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/2. Bisnis Reseller.jpg"},
-            new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/3. Dropship.jpeg"}
+            new PathKajianAudio{Path = "",Tanggal=DateTime.Now}
             };
-            foreach (PathKonsultasiRepublika a in pathKonsultasiRepublika)
+
+            foreach (PathKajianAudio a in pathKajianAudio)
             {
-                context.DaftarPathKonsultasiRepublika.Add(a);
+                context.DaftarPathKajianAudio.Add(a);
             }
             context.SaveChanges();
 
+            /* 
+             * Path KajianVideo 
+             */
+            var pathKajianVideo = new PathKajianVideo[]
+            {
+            new PathKajianVideo{Path = "",Tanggal=DateTime.Now}
+            };
+
+            foreach (PathKajianVideo a in pathKajianVideo)
+            {
+                context.DaftarPathKajianVideo.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Path Konsultasi E Paper 
+             */
+            var myFilesEPaper = Directory.GetFiles("wwwroot/rwtheme/images/e-paper/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
+
+            var pathKonsultasiEPaper = new List<PathKonsultasiEPaper>();
+
+            foreach (string s in myFilesEPaper.Select(Path.GetFileName))
+            {
+                string PathString = s;
+                pathKonsultasiEPaper.Add(new PathKonsultasiEPaper {Path = PathString, Tanggal = DateTime.Now});
+            }
+
+            foreach (PathKonsultasiEPaper a in pathKonsultasiEPaper)
+            {
+                context.DaftarPathKonsultasiEPaper.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Katgeori Artikel 
+             */
             var kategoriArtikel = new KategoriArtikel[]
             {
-            new KategoriArtikel{Nama="Bisnis Online"},
-            new KategoriArtikel{Nama="Bisnis"},
-            new KategoriArtikel{Nama="Syariah"},
-            new KategoriArtikel{Nama="Fikih"},
-            new KategoriArtikel{Nama="Muamalah"},
-            new KategoriArtikel{Nama="Hadist"},
-            new KategoriArtikel{Nama="Alquran"}
+            new KategoriArtikel{Nama="Bisnis Online",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Bisnis",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Syariah",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Fikih",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Muamalah",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Hadist",Tanggal=DateTime.Now},
+            new KategoriArtikel{Nama="Alquran",Tanggal=DateTime.Now}
             };
             foreach (KategoriArtikel a in kategoriArtikel)
             {
@@ -106,15 +179,56 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
+            /* 
+             * Katgeori Buku 
+             */
+            var kategoriBuku = new KategoriBuku[]
+            {
+            new KategoriBuku{Nama="Bisnis Online",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Bisnis",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Syariah",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Fikih",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Muamalah",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Hadist",Tanggal=DateTime.Now},
+            new KategoriBuku{Nama="Alquran",Tanggal=DateTime.Now}
+            };
+            foreach (KategoriBuku a in kategoriBuku)
+            {
+                context.DaftarKategoriBuku.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Katgeori Kajian 
+             */
+            var kategoriKajian = new KategoriKajian[]
+            {
+            new KategoriKajian{Nama="Bisnis Online",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Bisnis",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Syariah",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Fikih",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Muamalah",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Hadist",Tanggal=DateTime.Now},
+            new KategoriKajian{Nama="Alquran",Tanggal=DateTime.Now}
+            };
+            foreach (KategoriKajian a in kategoriKajian)
+            {
+                context.DaftarKategoriKajian.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Katgeori Konsultasi 
+             */
             var kategoriKonsultasi = new KategoriKonsultasi[]
             {
-            new KategoriKonsultasi{Nama="Bisnis Online"},
-            new KategoriKonsultasi{Nama="Bisnis"},
-            new KategoriKonsultasi{Nama="Syariah"},
-            new KategoriKonsultasi{Nama="Fikih"},
-            new KategoriKonsultasi{Nama="Muamalah"},
-            new KategoriKonsultasi{Nama="Hadist"},
-            new KategoriKonsultasi{Nama="Alquran"}
+            new KategoriKonsultasi{Nama="Bisnis Online",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Bisnis",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Syariah",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Fikih",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Muamalah",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Hadist",Tanggal=DateTime.Now},
+            new KategoriKonsultasi{Nama="Alquran",Tanggal=DateTime.Now}
             };
             foreach (KategoriKonsultasi a in kategoriKonsultasi)
             {
@@ -122,14 +236,16 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            /*Artikel*/
+            /*
+             * Artikel
+             */
             var artikel = new List<Artikel>();
 
             foreach (PathArtikel s in pathArtikel)
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf","");
-                artikel.Add(new Artikel { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+                artikel.Add(new Artikel { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
             }
 
             foreach (Artikel a in artikel)
@@ -138,15 +254,35 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            /* Galeri */
+            /*
+             * Buku
+             */
+            var buku = new List<Buku>();
+
+            foreach (PathBuku s in pathBuku)
+            {
+                string MyString = s.Path.ToString();
+                string JudulString = MyString.Replace(".pdf", "");
+                buku.Add(new Buku { Judul = JudulString, Penulis = "", Terbitan = "", ISBN = "", Deskripsi ="", Tebal = 1, Tanggal = DateTime.Now, Path = s });
+            }
+
+            foreach (Buku a in buku)
+            {
+                context.DaftarBuku.Add(a);
+            }
+            context.SaveChanges();
+
+            /*
+             * Galeri 
+             */
             var galeri = new List<Galeri>();
 
             foreach (PathGaleri s in pathGaleri)
             {
                 string MyString = s.Path.ToString();
-                int index = MyString.LastIndexOf(".");
+                //int index = MyString.LastIndexOf(".");
                 string JudulString = MyString.Replace(".pdf", "");
-                galeri.Add(new Galeri { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+                galeri.Add(new Galeri { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
             }
 
             foreach (Galeri a in galeri)
@@ -155,51 +291,86 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            /* Infografis */
-            var infografis = new List<Infografis>();
+            /* 
+             * Infografis 
+             */
+            var infografis = new List<KonsultasiInfografis>();
 
-            foreach (PathInfografis s in pathInfografis)
+            foreach (PathKonsultasiInfografis s in pathInfografis)
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf", "");
-                infografis.Add(new Infografis { Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+                infografis.Add(new KonsultasiInfografis { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
             }
 
-            foreach (Infografis a in infografis)
+            foreach (KonsultasiInfografis a in infografis)
             {
-                context.DaftarInfografis.Add(a);
-            }
-            context.SaveChanges();
-
-            var konsultasiMedsos = new KonsultasiMedsos[]
-            {
-            new KonsultasiMedsos{Judul="1.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-08"),Kategori=kategoriKonsultasi[0],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="2.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-07"),Kategori=kategoriKonsultasi[1],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="3.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-08"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="4.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-10"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="5.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-01"),Kategori=kategoriKonsultasi[4],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="6.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-15"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="7.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-11"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="8.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-02"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="9.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-21"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"}
-            };
-            foreach (KonsultasiMedsos a in konsultasiMedsos)
-            {
-                context.DaftarKonsultasiMedsos.Add(a);
+                context.DaftarKonsultasiInfografis.Add(a);
             }
             context.SaveChanges();
 
+            /* 
+             * Kajian Audio 
+             */
+            var kajianAudio = new List<KajianAudio>();
+
+            foreach (PathKajianAudio s in pathKajianAudio)
+            {
+                string MyString = s.Path.ToString();
+                string JudulString = MyString.Replace(".pdf", "");
+                kajianAudio.Add(new KajianAudio { Link = "", Tanggal = DateTime.Now, Path = s });
+            }
+
+            foreach (KajianAudio a in kajianAudio)
+            {
+                context.DaftarKajianAudio.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Kajian Video 
+             */
+            var kajianVideo = new List<KajianVideo>();
+
+            foreach (PathKajianVideo s in pathKajianVideo)
+            {
+                string MyString = s.Path.ToString();
+                string JudulString = MyString.Replace(".pdf", "");
+                kajianVideo.Add(new KajianVideo { Link = "", Tanggal = DateTime.Now, Path = s });
+            }
+
+            foreach (KajianVideo a in kajianVideo)
+            {
+                context.DaftarKajianVideo.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Konsultasi E Paper 
+             */
+            var konsultasiEPaper = new List<KonsultasiEPaper>();
+
+            foreach (PathKonsultasiEPaper s in pathKonsultasiEPaper)
+            {
+                string MyString = s.Path.ToString();
+                int index = MyString.LastIndexOf(".");
+                string JudulString = MyString.Replace(".pdf", "");
+                konsultasiEPaper.Add(new KonsultasiEPaper{ Judul = JudulString, Tanggal = DateTime.Now, Path = s });
+            }
+
+            foreach (KonsultasiEPaper a in konsultasiEPaper)
+            {
+                context.DaftarKonsultasiEPaper.Add(a);
+            }
+            context.SaveChanges();
+
+            /* 
+             * Konsultasi Republika 
+             */
             var konsultasiRepublika = new KonsultasiRepublika[]
             {
-            new KonsultasiRepublika{Judul="PDF 1",Tanggal=DateTime.Parse("2018-03-08"),Kategori=kategoriKonsultasi[0],Path=pathKonsultasiRepublika[4]},
-            new KonsultasiRepublika{Judul="PDF 2",Tanggal=DateTime.Parse("2018-04-07"),Kategori=kategoriKonsultasi[1],Path=pathKonsultasiRepublika[5]},
-            new KonsultasiRepublika{Judul="PDF 3",Tanggal=DateTime.Parse("2018-02-08"),Kategori=kategoriKonsultasi[2],Path=pathKonsultasiRepublika[0]},
-            new KonsultasiRepublika{Judul="PDF 4",Tanggal=DateTime.Parse("2018-04-10"),Kategori=kategoriKonsultasi[3],Path=pathKonsultasiRepublika[5]},
-            new KonsultasiRepublika{Judul="PDF 5",Tanggal=DateTime.Parse("2018-04-01"),Kategori=kategoriKonsultasi[4],Path=pathKonsultasiRepublika[1]},
-            new KonsultasiRepublika{Judul="PDF 6",Tanggal=DateTime.Parse("2018-03-15"),Kategori=kategoriKonsultasi[5],Path=pathKonsultasiRepublika[1]},
-            new KonsultasiRepublika{Judul="PDF 7",Tanggal=DateTime.Parse("2018-03-11"),Kategori=kategoriKonsultasi[5],Path=pathKonsultasiRepublika[3]},
-            new KonsultasiRepublika{Judul="PDF 8",Tanggal=DateTime.Parse("2018-02-02"),Kategori=kategoriKonsultasi[3],Path=pathKonsultasiRepublika[2]},
-            new KonsultasiRepublika{Judul="PDF 9",Tanggal=DateTime.Parse("2018-03-21"),Kategori=kategoriKonsultasi[2],Path=pathKonsultasiRepublika[5]}
+            new KonsultasiRepublika{Judul="Konsultasi Republika",Tanggal = DateTime.Now, Link = ""},
+            new KonsultasiRepublika{Judul="Konsultasi Republika",Tanggal = DateTime.Now, Link = ""}
             };
             foreach (KonsultasiRepublika a in konsultasiRepublika)
             {
@@ -207,6 +378,19 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
+            /* 
+             * Konsultasi Rumah Wasathia 
+             */
+            var konsultasiRumahWasathia = new KonsultasiRumahWasathia[]
+            {
+            new KonsultasiRumahWasathia{Judul="Konsultasi Rumah Wasathia",Tanggal=DateTime.Now,Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text", Penulis = ""},
+            new KonsultasiRumahWasathia{Judul="Konsultasi Rumah Wasathia",Tanggal=DateTime.Now,Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text", Penulis = ""}
+            };
+            foreach (KonsultasiRumahWasathia a in konsultasiRumahWasathia)
+            {
+                context.DaftarKonsultasiRumahWasathia.Add(a);
+            }
+            context.SaveChanges();
         }
     }
 }
