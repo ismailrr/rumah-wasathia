@@ -15,7 +15,7 @@ namespace MvcRW.Models
         }
 
         public int Id { get; set; }
-        [Required, StringLength(200)]
+        [Required, StringLength(500)]
         public string Path { get; set; }
         public DateTime Tanggal { get; set; }
 

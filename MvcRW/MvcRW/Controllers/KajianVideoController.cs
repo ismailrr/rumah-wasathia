@@ -20,9 +20,29 @@ namespace MvcRW.Controllers
         }
 
         // GET: KajianVideo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            int? page)
         {
-            return View(await _context.DaftarKajianVideo.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            var kajianVideo = from s in _context.DaftarKajianVideo
+                              select s;
+
+            switch (sortOrder)
+            {
+                case "date_desc":
+                    kajianVideo = kajianVideo.OrderByDescending(s => s.Tanggal);
+                    break;
+                default:
+                    kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: KajianVideo/Details/5

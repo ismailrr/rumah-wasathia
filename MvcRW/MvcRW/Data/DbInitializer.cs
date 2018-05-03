@@ -312,14 +312,27 @@ namespace MvcRW.Data
             /* 
              * Kajian Audio 
              */
-            var kajianAudio = new List<KajianAudio>();
+            var kajianAudio = new KajianAudio[]
+            {
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/268727142&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/224844275&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/292675007&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/224844275&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212773651&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/413160264&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now },
+                new KajianAudio{ Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/196296200&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now }
+            };
+            
+            //var kajianAudio = new List<KajianAudio>();
 
+            /*
             foreach (PathKajianAudio s in pathKajianAudio)
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf", "");
-                kajianAudio.Add(new KajianAudio { Link = "", Tanggal = DateTime.Now, Path = s });
-            }
+                kajianAudio.Add(new KajianAudio { Link = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Path = s });
+            }*/
 
             foreach (KajianAudio a in kajianAudio)
             {
@@ -336,7 +349,7 @@ namespace MvcRW.Data
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf", "");
-                kajianVideo.Add(new KajianVideo { Link = "", Tanggal = DateTime.Now, Path = s });
+                kajianVideo.Add(new KajianVideo { Link = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Path = s });
             }
 
             foreach (KajianVideo a in kajianVideo)

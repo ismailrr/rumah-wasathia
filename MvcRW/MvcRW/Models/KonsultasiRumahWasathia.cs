@@ -11,14 +11,14 @@ namespace MvcRW.Models
     {
 
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(200)]
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
-        [Required, StringLength(1000)]
+        [Required, StringLength(5000)]
         public string Pertanyaan { get; set; }
-        [Required, StringLength(1000)]
+        [Required, StringLength(5000)]
         public string Jawaban { get; set; }
-        [StringLength(50)]
+        [StringLength(200)]
         public string Penulis { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
     }

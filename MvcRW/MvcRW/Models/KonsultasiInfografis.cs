@@ -10,7 +10,7 @@ namespace MvcRW.Models
     public class KonsultasiInfografis
     {
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(200)]
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
         public PathKonsultasiInfografis Path { get; set; }

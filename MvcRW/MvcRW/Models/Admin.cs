@@ -10,7 +10,7 @@ namespace MvcRW.Models
     public class Admin
     {
         public int Id { get; set; }
-        [Required, StringLength(20), Display(Name = "Nama Pengguna")]
+        [Required, StringLength(50), Display(Name = "Nama Pengguna")]
         public string NamaPengguna { get; set; }
         [Required, StringLength(50), Display(Name = "Kata Sandi")]
         public string KataSandi { get; set; }
