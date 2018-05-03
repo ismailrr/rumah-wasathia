@@ -49,14 +49,14 @@ body {
     }
 
 a {
-    color: #FF9000;
+    color: #3d566e;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
 }
 
     a:hover, a:active, a:focus {
-        color: #FF9000;
+        color: #3d566e;
         outline: none;
         text-decoration: none;
     }
@@ -77,17 +77,17 @@ h3 {
 
 ::-webkit-selection {
     color: #fff;
-    background: #FF9000;
+    background: #3d566e;
 }
 
 ::-moz-selection {
     color: #fff;
-    background: #FF9000;
+    background: #3d566e;
 }
 
 ::selection {
     color: #fff;
-    background: #FF9000;
+    background: #3d566e;
 }
 
 #fh5co-header,
@@ -266,7 +266,7 @@ h3 {
     }
 
 #fh5co-features {
-    background: #FF9000;
+    background: #3d566e;
 }
 
     #fh5co-features h2 {
@@ -307,7 +307,7 @@ h3 {
         display: table-cell;
         vertical-align: middle;
         height: 100px;
-        color: #FF9000 !important;
+        color: #3d566e !important;
     }
 
 #fh5co-features .feature-left .feature-copy {
@@ -364,7 +364,7 @@ h3 {
 
 .fh5co-bg-dark {
     background: #2F3C4F;
-    background: #FF9000;
+    background: #3d566e;
 }
 
     .fh5co-bg-dark .fh5co-heading h2 {
@@ -429,7 +429,7 @@ h3 {
             display: inline-block;
             zoom: 1;
             *display: inline;
-            color: #FF9000;
+            color: #3d566e;
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -471,7 +471,7 @@ h3 {
             }
 
             #fh5co-about .fh5co-social-icons li a:hover {
-                background: #FF9000;
+                background: #3d566e;
             }
 
 .fh5co-heading {
@@ -612,7 +612,7 @@ h3 {
 }
 
 .timeline > li > .timeline-badge {
-    color: #FF9000;
+    color: #3d566e;
     width: 44px;
     height: 44px;
     line-height: 50px;
@@ -926,7 +926,7 @@ h3 {
         height: 54px;
         border: none !important;
         background: #fff;
-        color: #FF9000;
+        color: #3d566e;
         font-size: 16px;
         text-transform: uppercase;
         font-weight: 400;
@@ -1243,8 +1243,8 @@ input[type="text"] {
             text-decoration: none;
             outline: none;
             background: #fff;
-            color: #FF9000;
-            border: 1px solid #FF9000;
+            color: #3d566e;
+            border: 1px solid #3d566e;
         }
 
 .btn {
@@ -1273,9 +1273,9 @@ input[type="text"] {
     }
 
 .btn-primary {
-    background: #FF9000;
+    background: #3d566e;
     color: #fff;
-    border: 2px solid #FF9000;
+    border: 2px solid #3d566e;
 }
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -1337,7 +1337,7 @@ input[type="text"] {
     .form-control:active, .form-control:focus {
         outline: none;
         box-shadow: none;
-        border-color: #FF9000;
+        border-color: #3d566e;
     }
 
 .row-pb-md {
