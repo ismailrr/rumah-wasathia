@@ -34,6 +34,7 @@ namespace MvcRW.Controllers
             }
 
             var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (konsultasiRumahWasathia == null)
             {

@@ -30,6 +30,7 @@ namespace MvcRW.Controllers
 
             var kajianVideo = from s in _context.DaftarKajianVideo
                               .Include(ee => ee.Path)
+                              .Include(ee => ee.Kategori)
                               select s;
 
             switch (sortOrder)
@@ -55,6 +56,8 @@ namespace MvcRW.Controllers
             }
 
             var kajianVideo = await _context.DaftarKajianVideo
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (kajianVideo == null)
             {

@@ -43,6 +43,7 @@ namespace MvcRW.Controllers
 
             var buku = from s in _context.DaftarBuku
                        .Include(ee => ee.Path)
+                       .Include(ee => ee.Kategori)
                        select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -76,6 +77,8 @@ namespace MvcRW.Controllers
             }
 
             var buku = await _context.DaftarBuku
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (buku == null)
             {

@@ -30,6 +30,7 @@ namespace MvcRW.Controllers
 
             var kajianAudio = from s in _context.DaftarKajianAudio
                               .Include(ee => ee.Path)
+                              .Include(ee => ee.Kategori)
                               select s;
 
             switch (sortOrder)
@@ -55,6 +56,8 @@ namespace MvcRW.Controllers
             }
 
             var kajianAudio = await _context.DaftarKajianAudio
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (kajianAudio == null)
             {

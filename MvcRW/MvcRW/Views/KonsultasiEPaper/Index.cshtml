@@ -24,19 +24,10 @@
                 <div class="gallery">
                     <div class="row">
                         <div class="col-sm-16 text-center">
+                            <p>Urutan Sesuai :</p>
                             <p>
                                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
                             </p>
-
-                            <form asp-action="Index" method="get">
-                                <div class="form-actions no-color">
-                                    <p>
-                                        Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                                        <input type="submit" value="Search" class="btn btn-default" /> |
-                                        <a asp-action="Index">Back to Full List</a>
-                                    </p>
-                                </div>
-                            </form>
                         </div>
                         <div class="col-md-16">
                             @foreach (var item in Model)

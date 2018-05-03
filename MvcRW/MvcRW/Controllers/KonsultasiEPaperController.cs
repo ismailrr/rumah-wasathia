@@ -30,6 +30,7 @@ namespace MvcRW.Controllers
 
             var konsultasiEPaper = from s in _context.DaftarKonsultasiEPaper
                                    .Include(ee => ee.Path)
+                                   .Include(ee => ee.Kategori)
                                    select s;
 
             switch (sortOrder)
@@ -61,6 +62,8 @@ namespace MvcRW.Controllers
             }
 
             var konsultasiEPaper = await _context.DaftarKonsultasiEPaper
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (konsultasiEPaper == null)
             {

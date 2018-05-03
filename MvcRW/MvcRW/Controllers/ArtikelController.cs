@@ -43,6 +43,7 @@ namespace MvcRW.Controllers
 
             var artikel = from s in _context.DaftarArtikel
                           .Include(ee => ee.Path)
+                          .Include(ee => ee.Kategori)
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -77,6 +78,8 @@ namespace MvcRW.Controllers
             }
 
             var artikel = await _context.DaftarArtikel
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (artikel == null)

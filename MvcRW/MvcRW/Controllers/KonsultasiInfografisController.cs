@@ -43,6 +43,7 @@ namespace MvcRW.Controllers
 
             var infografis = from s in _context.DaftarKonsultasiInfografis
                              .Include(ee => ee.Path)
+                             .Include(ee => ee.Kategori)
                              select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -77,6 +78,8 @@ namespace MvcRW.Controllers
             }
 
             var infografis = await _context.DaftarKonsultasiInfografis
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {

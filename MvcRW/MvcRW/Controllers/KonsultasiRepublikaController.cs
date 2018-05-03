@@ -34,6 +34,7 @@ namespace MvcRW.Controllers
             }
 
             var konsultasiRepublika = await _context.DaftarKonsultasiRepublika
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (konsultasiRepublika == null)
             {

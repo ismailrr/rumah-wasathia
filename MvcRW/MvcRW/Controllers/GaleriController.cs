@@ -30,6 +30,7 @@ namespace MvcRW.Controllers
 
             var galeri = from s in _context.DaftarGaleri
                          .Include(ee => ee.Path)
+                         .Include(ee => ee.Kategori)
                          select s;
 
             switch (sortOrder)
@@ -61,6 +62,8 @@ namespace MvcRW.Controllers
             }
 
             var galeri = await _context.DaftarGaleri
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (galeri == null)
             {
