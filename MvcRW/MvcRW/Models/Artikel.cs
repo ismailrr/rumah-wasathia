@@ -10,7 +10,7 @@ namespace MvcRW.Models
     public class Artikel
     {
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(200)]
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
         public PathArtikel Path { get; set; }

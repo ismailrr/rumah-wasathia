@@ -1,41 +1,55 @@
-﻿@model IEnumerable<MvcRW.Models.KajianAudio>
+﻿@model PaginatedList<MvcRW.Models.KajianAudio>
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Link)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tanggal)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tanggal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!--data start Artikel.cshtml-->
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Kajian</a></li>
+                <li class="active">Suara</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <!-- Kollom artikel Begin -->
+        <div class="col-sm-16 banner-outer gapTop">
+            <div class="row RekamanKajian">
+                @foreach (var item in Model)
+                {
+                    <div class="item topic custom-grid">
+                        <iframe scrolling="no" frameborder="0" allow="autoplay" src="@item.Link"></iframe>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-sm-16 text-center">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- data end -->

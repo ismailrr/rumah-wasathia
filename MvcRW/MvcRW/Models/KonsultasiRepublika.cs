@@ -11,9 +11,9 @@ namespace MvcRW.Models
     {
 
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(200)]
         public string Judul { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(500)]
         public string Link { get; set; }
         [Required]
         public DateTime Tanggal { get; set; }

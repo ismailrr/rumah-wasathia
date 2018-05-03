@@ -10,7 +10,7 @@ namespace MvcRW.Models
     public class KajianVideo
     {
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(500)]
         public string Link { get; set; }
         public DateTime Tanggal { get; set; }
         public PathKajianVideo Path { get; set; }

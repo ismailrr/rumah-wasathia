@@ -1,0 +1,54 @@
+﻿@model MvcRW.Models.KonsultasiRumahWasathia
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>KonsultasiRumahWasathia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Judul" class="control-label"></label>
+                <input asp-for="Judul" class="form-control" />
+                <span asp-validation-for="Judul" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tanggal" class="control-label"></label>
+                <input asp-for="Tanggal" class="form-control" />
+                <span asp-validation-for="Tanggal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pertanyaan" class="control-label"></label>
+                <input asp-for="Pertanyaan" class="form-control" />
+                <span asp-validation-for="Pertanyaan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Jawaban" class="control-label"></label>
+                <input asp-for="Jawaban" class="form-control" />
+                <span asp-validation-for="Jawaban" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Penulis" class="control-label"></label>
+                <input asp-for="Penulis" class="form-control" />
+                <span asp-validation-for="Penulis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

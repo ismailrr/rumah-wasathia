@@ -10,42 +10,22 @@ using MvcRW.Models;
 
 namespace MvcRW.Controllers
 {
-    public class KajianVideoController : Controller
+    public class KonsultasiRumahWasathiaController : Controller
     {
         private readonly RWContext _context;
 
-        public KajianVideoController(RWContext context)
+        public KonsultasiRumahWasathiaController(RWContext context)
         {
             _context = context;
         }
 
-        // GET: KajianVideo
-        public async Task<IActionResult> Index(
-            string sortOrder,
-            int? page)
+        // GET: KonsultasiRumahWasathia
+        public async Task<IActionResult> Index()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-
-            var kajianVideo = from s in _context.DaftarKajianVideo
-                              select s;
-
-            switch (sortOrder)
-            {
-                case "date_desc":
-                    kajianVideo = kajianVideo.OrderByDescending(s => s.Tanggal);
-                    break;
-                default:
-                    kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
-                    break;
-            }
-
-            int pageSize = 15;
-            return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize));
+            return View(await _context.DaftarKonsultasiRumahWasathia.ToListAsync());
         }
 
-        // GET: KajianVideo/Details/5
+        // GET: KonsultasiRumahWasathia/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,39 +33,39 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var kajianVideo = await _context.DaftarKajianVideo
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (kajianVideo == null)
+            if (konsultasiRumahWasathia == null)
             {
                 return NotFound();
             }
 
-            return View(kajianVideo);
+            return View(konsultasiRumahWasathia);
         }
 
-        // GET: KajianVideo/Create
+        // GET: KonsultasiRumahWasathia/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KajianVideo/Create
+        // POST: KonsultasiRumahWasathia/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Link,Tanggal")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,Penulis")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(kajianVideo);
+                _context.Add(konsultasiRumahWasathia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(kajianVideo);
+            return View(konsultasiRumahWasathia);
         }
 
-        // GET: KajianVideo/Edit/5
+        // GET: KonsultasiRumahWasathia/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,22 +73,22 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
-            if (kajianVideo == null)
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            if (konsultasiRumahWasathia == null)
             {
                 return NotFound();
             }
-            return View(kajianVideo);
+            return View(konsultasiRumahWasathia);
         }
 
-        // POST: KajianVideo/Edit/5
+        // POST: KonsultasiRumahWasathia/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,Penulis")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
-            if (id != kajianVideo.Id)
+            if (id != konsultasiRumahWasathia.Id)
             {
                 return NotFound();
             }
@@ -117,12 +97,12 @@ namespace MvcRW.Controllers
             {
                 try
                 {
-                    _context.Update(kajianVideo);
+                    _context.Update(konsultasiRumahWasathia);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KajianVideoExists(kajianVideo.Id))
+                    if (!KonsultasiRumahWasathiaExists(konsultasiRumahWasathia.Id))
                     {
                         return NotFound();
                     }
@@ -133,10 +113,10 @@ namespace MvcRW.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(kajianVideo);
+            return View(konsultasiRumahWasathia);
         }
 
-        // GET: KajianVideo/Delete/5
+        // GET: KonsultasiRumahWasathia/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,30 +124,30 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var kajianVideo = await _context.DaftarKajianVideo
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (kajianVideo == null)
+            if (konsultasiRumahWasathia == null)
             {
                 return NotFound();
             }
 
-            return View(kajianVideo);
+            return View(konsultasiRumahWasathia);
         }
 
-        // POST: KajianVideo/Delete/5
+        // POST: KonsultasiRumahWasathia/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
-            _context.DaftarKajianVideo.Remove(kajianVideo);
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            _context.DaftarKonsultasiRumahWasathia.Remove(konsultasiRumahWasathia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool KajianVideoExists(int id)
+        private bool KonsultasiRumahWasathiaExists(int id)
         {
-            return _context.DaftarKajianVideo.Any(e => e.Id == id);
+            return _context.DaftarKonsultasiRumahWasathia.Any(e => e.Id == id);
         }
     }
 }

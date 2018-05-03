@@ -10,15 +10,15 @@ namespace MvcRW.Models
     public class Buku
     {
         public int Id { get; set; }
-        [Required, StringLength(100)]
+        [Required, StringLength(200)]
         public string Judul { get; set; }
-        [StringLength(50)]
+        [StringLength(200)]
         public string Penulis { get; set; }
         [StringLength(50), Display(Name = "Tahun Terbit")]
         public string Terbitan { get; set; }
         [StringLength(50)]
         public string ISBN { get; set; }
-        [StringLength(1000)]
+        [StringLength(5000)]
         public string Deskripsi { get; set; }
         public int Tebal { get; set; }
         public DateTime Tanggal { get; set; }
