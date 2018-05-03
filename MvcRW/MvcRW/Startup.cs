@@ -25,7 +25,8 @@ namespace MvcRW
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<RWContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddMvc();
             

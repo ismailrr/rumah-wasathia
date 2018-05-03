@@ -42,6 +42,7 @@ namespace MvcRW.Controllers
             ViewData["CurrentFilter"] = searchString;
 
             var buku = from s in _context.DaftarBuku
+                       .Include(ee => ee.Path)
                        select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -62,7 +63,6 @@ namespace MvcRW.Controllers
                     buku = buku.OrderBy(s => s.Judul);
                     break;
             }
-
             int pageSize = 12;
             return View(await PaginatedList<Buku>.CreateAsync(buku.AsNoTracking(), page ?? 1, pageSize));
         }
