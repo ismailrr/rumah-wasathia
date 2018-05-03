@@ -10,11 +10,11 @@ using MvcRW.Models;
 
 namespace MvcRW.Controllers
 {
-    public class InfografisController : Controller
+    public class KonsultasiInfografisController : Controller
     {
         private readonly RWContext _context;
 
-        public InfografisController(RWContext context)
+        public KonsultasiInfografisController(RWContext context)
         {
             _context = context;
         }
@@ -41,8 +41,8 @@ namespace MvcRW.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var infografis = from s in _context.DaftarInfografis
-                          select s;
+            var infografis = from s in _context.DaftarKonsultasiInfografis
+                             select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 infografis = infografis.Where(s => s.Judul.Contains(searchString));
@@ -75,7 +75,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.DaftarInfografis
+            var infografis = await _context.DaftarKonsultasiInfografis
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
@@ -115,7 +115,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.DaftarInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            var infografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
                 return NotFound();
@@ -166,7 +166,7 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.DaftarInfografis
+            var infografis = await _context.DaftarKonsultasiInfografis
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
@@ -181,15 +181,15 @@ namespace MvcRW.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var infografis = await _context.DaftarInfografis.SingleOrDefaultAsync(m => m.Id == id);
-            _context.DaftarInfografis.Remove(infografis);
+            var infografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            _context.DaftarKonsultasiInfografis.Remove(infografis);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool InfografisExists(int id)
         {
-            return _context.DaftarInfografis.Any(e => e.Id == id);
+            return _context.DaftarKonsultasiInfografis.Any(e => e.Id == id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model MvcRW.Models.Artikel
+﻿@model MvcRW.Models.KajianAudio
 
 @{
     ViewData["Title"] = "Create";
@@ -6,16 +6,16 @@
 
 <h2>Create</h2>
 
-<h4>Artikel</h4>
+<h4>KajianAudio</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tanggal" class="control-label"></label>

@@ -20,9 +20,35 @@ namespace MvcRW.Controllers
         }
 
         // GET: KonsultasiEPaper
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            int? page)
         {
-            return View(await _context.DaftarKonsultasiEPaper.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            var konsultasiEPaper = from s in _context.DaftarKonsultasiEPaper
+                                   select s;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Judul);
+                    break;
+                case "Date":
+                    konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Tanggal);
+                    break;
+                case "date_desc":
+                    konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Tanggal);
+                    break;
+                default:
+                    konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Judul);
+                    break;
+            }
+
+            int pageSize = 15;
+            return View(await PaginatedList<KonsultasiEPaper>.CreateAsync(konsultasiEPaper.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: KonsultasiEPaper/Details/5

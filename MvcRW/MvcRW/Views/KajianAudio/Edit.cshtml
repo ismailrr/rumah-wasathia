@@ -1,4 +1,4 @@
-﻿@model MvcRW.Models.Infografis
+﻿@model MvcRW.Models.KajianAudio
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-<h4>Infografis</h4>
+<h4>KajianAudio</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tanggal" class="control-label"></label>

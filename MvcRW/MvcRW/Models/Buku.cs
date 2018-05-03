@@ -14,7 +14,7 @@ namespace MvcRW.Models
         public string Judul { get; set; }
         [StringLength(50)]
         public string Penulis { get; set; }
-        [StringLength(50)]
+        [StringLength(50), Display(Name = "Tahun Terbit")]
         public string Terbitan { get; set; }
         [StringLength(50)]
         public string ISBN { get; set; }

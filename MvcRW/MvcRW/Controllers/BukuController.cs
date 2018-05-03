@@ -10,16 +10,16 @@ using MvcRW.Models;
 
 namespace MvcRW.Controllers
 {
-    public class ArtikelController : Controller
+    public class BukuController : Controller
     {
         private readonly RWContext _context;
 
-        public ArtikelController(RWContext context)
+        public BukuController(RWContext context)
         {
             _context = context;
         }
 
-        // GET: Artikel
+        // GET: Buku
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -41,33 +41,33 @@ namespace MvcRW.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var artikel = from s in _context.DaftarArtikel
-                          select s;
+            var buku = from s in _context.DaftarBuku
+                       select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                artikel = artikel.Where(s => s.Judul.Contains(searchString));
+                buku = buku.Where(s => s.Judul.Contains(searchString));
             }
             switch (sortOrder)
             {
                 case "name_desc":
-                    artikel = artikel.OrderByDescending(s => s.Judul);
+                    buku = buku.OrderByDescending(s => s.Judul);
                     break;
                 case "Date":
-                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    buku = buku.OrderBy(s => s.Tanggal);
                     break;
                 case "date_desc":
-                    artikel = artikel.OrderByDescending(s => s.Tanggal);
+                    buku = buku.OrderByDescending(s => s.Tanggal);
                     break;
                 default:
-                    artikel = artikel.OrderBy(s => s.Judul);
+                    buku = buku.OrderBy(s => s.Judul);
                     break;
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<Buku>.CreateAsync(buku.AsNoTracking(), page ?? 1, pageSize));
         }
 
-        // GET: Artikel/Details/5
+        // GET: Buku/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -75,51 +75,39 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.DaftarArtikel
-                .AsNoTracking()
+            var buku = await _context.DaftarBuku
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (artikel == null)
+            if (buku == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(buku);
         }
 
-        // GET: Artikel/Create
+        // GET: Buku/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Artikel/Create
+        // POST: Buku/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Create")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Judul,Tanggal")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Penulis,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(artikel);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(artikel);
+                _context.Add(buku);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.
-                ModelState.AddModelError("", "Unable to save changes. " +
-                    "Try again, and if the problem persists " +
-                    "see your system administrator.");
-            }
-            return View(artikel);
+            return View(buku);
         }
 
-        // GET: Artikel/Edit/5
+        // GET: Buku/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -127,45 +115,50 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
-            if (artikel == null)
+            var buku = await _context.DaftarBuku.SingleOrDefaultAsync(m => m.Id == id);
+            if (buku == null)
             {
                 return NotFound();
             }
-            return View(artikel);
+            return View(buku);
         }
 
-        // POST: Artikel/Edit/5
+        // POST: Buku/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Penulis,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
         {
-            if (id != artikel.Id)
+            if (id != buku.Id)
             {
                 return NotFound();
             }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(artikel);
+                    _context.Update(buku);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateConcurrencyException)
                 {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
+                    if (!BukuExists(buku.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            return View(artikel);
+            return View(buku);
         }
 
-        // GET: Artikel/Delete/5
+        // GET: Buku/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -173,30 +166,30 @@ namespace MvcRW.Controllers
                 return NotFound();
             }
 
-            var artikel = await _context.DaftarArtikel
+            var buku = await _context.DaftarBuku
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (artikel == null)
+            if (buku == null)
             {
                 return NotFound();
             }
 
-            return View(artikel);
+            return View(buku);
         }
 
-        // POST: Artikel/Delete/5
+        // POST: Buku/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
-            _context.DaftarArtikel.Remove(artikel);
+            var buku = await _context.DaftarBuku.SingleOrDefaultAsync(m => m.Id == id);
+            _context.DaftarBuku.Remove(buku);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArtikelExists(int id)
+        private bool BukuExists(int id)
         {
-            return _context.DaftarArtikel.Any(e => e.Id == id);
+            return _context.DaftarBuku.Any(e => e.Id == id);
         }
     }
 }

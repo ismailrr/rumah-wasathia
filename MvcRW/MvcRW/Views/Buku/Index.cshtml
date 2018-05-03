@@ -1,4 +1,4 @@
-﻿@model PaginatedList<MvcRW.Models.Infografis>
+﻿@model PaginatedList<MvcRW.Models.Buku>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,19 +11,17 @@
         <!-- breadcrumb start -->
         <div class="page-header">
             <ol class="breadcrumb">
-                <li><a href="#">Beranda</a></li>
-                <li><a href="#">Konsultasi</a></li>
-                <li class="active">Infografis</li>
+                <li><a href="@Url.Action("Index","rumahwasathia")">Beranda</a></li>
+                <li class="active">Buku</li>
             </ol>
         </div>
-        <!--tes-->
         <!-- breadcrumb end -->
-        <!-- Kolom artikel Begin -->
+        <!-- Kollom artikel Begin -->
         <div class="col-sm-16 banner-outer gapTop">
             <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
-                    <div class="main-title left-side">Infografis</div>
-                    <div class="row text-center">
+                    <div class="main-title left-side">Kumpulan Buku</div>
+                    <div class="row">
                         <div class="col-sm-16 text-center">
                             <p>
                                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
@@ -39,19 +37,20 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-                    <div class="row text-center">
                         @foreach (var item in Model)
                         {
-                            <div class="item topic col-md-4 col-xs-8">
-                                <a href="~/rwtheme/file-document/pdf/@{@item.Judul}.pdf " target="_blank">
-                                    <img class="img-thumbnail icon-effect" src="~/rwtheme/images/general/chart.png" alt="" />
-                                    <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
-                                </a>
-                            </div>
+                            <div class="col-md-4 col-sm-8">
+                                <div class="item topic text-center">
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details
+                   
+                                        <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/@{@item.Judul}" alt="" />
+                                        <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
+                                    </a>
+                        
+                                </div>
+                        </div>
                         }
-                    </div>
-                    <div class="row">
+                        <div class="row">
                         <div class="col-sm-16 text-center">
                             @{
                                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -73,9 +72,42 @@
                             </a>
                         </div>
                     </div>
+                        <div class="col-md-4 col-sm-8">
+                            <div class="item topic text-center">
+                                <a href="@Url.Action("SubBuku1","rumahwasathia")">
+                                    <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover1.jpg" alt="" />
+                                    <h4>Riba, Gharar & Kaidah Ekonomi Syariah</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-8">
+                            <div class="item topic text-center">
+                                <a href="@Url.Action("SubBuku2","rumahwasathia")">
+                                    <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover2.jpg" alt="" />
+                                    <h4>Maqashid Bisnis & Keuangan Islam</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-8">
+                            <div class="item topic text-center">
+                                <a href="@Url.Action("SubBuku3","rumahwasathia")">
+                                    <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover3.jpg" alt="" />
+                                    <h4>Ushul Fiqh Muamalah</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-8">
+                            <div class="item topic text-center">
+                                <a href="@Url.Action("SubBuku4","rumahwasathia")">
+                                    <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/cover4.jpg" alt="" />
+                                    <h4>Fikih Muamalah</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
+            <div id="hidden-book" class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
                 <div class="row">
                     <div class="col-sm-16">
                         <div class="main-title-outer">
