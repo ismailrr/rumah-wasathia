@@ -75,6 +75,24 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
+            /* Konsultasi E Paper */
+            var extEPaper = new List<string> { ".jpeg", ".jpg", ".png", ".webp" };
+            var myFilesEPaper = Directory.GetFiles("wwwroot/rwtheme/images/e-paper/", "*.*", SearchOption.AllDirectories).Where(s => extGambar.Contains(Path.GetExtension(s)));
+
+            var pathKonsultasiEPaper = new List<PathKonsultasiEPaper>();
+
+            foreach (string s in myFilesGambar.Select(Path.GetFileName))
+            {
+                string PathString = s;
+                pathKonsultasiEPaper.Add(new PathKonsultasiEPaper { Path = PathString });
+            }
+
+            foreach (PathKonsultasiEPaper a in pathKonsultasiEPaper)
+            {
+                context.DaftarPathKonsultasiEPaper.Add(a);
+            }
+            context.SaveChanges();
+
             var pathKonsultasiRepublika = new PathKonsultasiRepublika[]
             {
             new PathKonsultasiRepublika{Path="~/rwtheme/images/e-paper/1. Perjalanan Dinas yang dipersingkat.jpg"},
@@ -171,21 +189,38 @@ namespace MvcRW.Data
             }
             context.SaveChanges();
 
-            var konsultasiMedsos = new KonsultasiMedsos[]
+            /* Konsultasi E Paper */
+            var konsultasiEPaper = new List<KonsultasiEPaper>();
+
+            foreach (PathKonsultasiEPaper s in pathKonsultasiEPaper)
             {
-            new KonsultasiMedsos{Judul="1.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-08"),Kategori=kategoriKonsultasi[0],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="2.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-07"),Kategori=kategoriKonsultasi[1],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="3.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-08"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="4.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-10"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="5.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-01"),Kategori=kategoriKonsultasi[4],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="6.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-15"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="7.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-11"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="8.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-02"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
-            new KonsultasiMedsos{Judul="9.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-21"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"}
+                string MyString = s.Path.ToString();
+                int index = MyString.LastIndexOf(".");
+                string JudulString = MyString.Replace(".pdf", "");
+                konsultasiEPaper.Add(new KonsultasiEPaper{ Judul = JudulString, Tanggal = DateTime.Parse("2018-03-08"), Path = s });
+            }
+
+            foreach (KonsultasiEPaper a in konsultasiEPaper)
+            {
+                context.DaftarKonsultasiEPaper.Add(a);
+            }
+            context.SaveChanges();
+
+            var konsultasiRumahWasathia = new KonsultasiRumahWasathia[]
+            {
+            new KonsultasiRumahWasathia{Judul="1.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-08"),Kategori=kategoriKonsultasi[0],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="2.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-07"),Kategori=kategoriKonsultasi[1],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="3.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-08"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="4.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-10"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="5.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-04-01"),Kategori=kategoriKonsultasi[4],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="6.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-15"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="7.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-11"),Kategori=kategoriKonsultasi[5],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="8.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-02-02"),Kategori=kategoriKonsultasi[3],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"},
+            new KonsultasiRumahWasathia{Judul="9.Lorem Ipsum is simply dummy text",Tanggal=DateTime.Parse("2018-03-21"),Kategori=kategoriKonsultasi[2],Pertanyaan="Lorem Ipsum is simply dummy text",Jawaban="Lorem Ipsum is simply dummy text"}
             };
-            foreach (KonsultasiMedsos a in konsultasiMedsos)
+            foreach (KonsultasiRumahWasathia a in konsultasiRumahWasathia)
             {
-                context.DaftarKonsultasiMedsos.Add(a);
+                context.DaftarKonsultasiRumahWasathia.Add(a);
             }
             context.SaveChanges();
 

@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class KonsultasiRepublika
+    public class KajianVideo
     {
-
         public int Id { get; set; }
         [Required, StringLength(100)]
-        public string Judul { get; set; }
-        [Required]
+        public string Link { get; set; }
         public DateTime Tanggal { get; set; }
-        [Required]
-        public PathKonsultasiRepublika Path { get; set; }
-        //public KategoriKonsultasi Kategori { get; set; }
+        public PathKajianVideo Path { get; set; }
+
+        public string DisplayTextPath
+        {
+            get
+            {
+                return $"{Path?.Path}";
+            }
+        }
     }
 }

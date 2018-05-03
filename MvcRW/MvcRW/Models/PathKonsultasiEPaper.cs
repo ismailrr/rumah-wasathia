@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class PathArtikel
+    public class PathKonsultasiEPaper
     {
-        public PathArtikel()
+        public PathKonsultasiEPaper()
         {
-            DaftarArtikel = new List<Artikel>();
+            DaftarKonsultasiEPaper = new List<KonsultasiEPaper>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace MvcRW.Models
         public string Path { get; set; }
         public DateTime Tanggal { get; set; }
 
-        public ICollection<Artikel> DaftarArtikel { get; set; }
+        public ICollection<KonsultasiEPaper> DaftarKonsultasiEPaper { get; set; }
     }
 }

@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class KonsultasiMedsos
+    public class KonsultasiRumahWasathia
     {
 
         public int Id { get; set; }
         [Required, StringLength(100)]
         public string Judul { get; set; }
-        [Required]
         public DateTime Tanggal { get; set; }
+        [Required, StringLength(1000)]
         public string Pertanyaan { get; set; }
+        [Required, StringLength(1000)]
         public string Jawaban { get; set; }
-        [Required]
-        public KategoriKonsultasi Kategori { get; set; }
+        [Required, StringLength(50)]
+        public string Penulis { get; set; }
+        //public KategoriKonsultasi Kategori { get; set; }
     }
 }
