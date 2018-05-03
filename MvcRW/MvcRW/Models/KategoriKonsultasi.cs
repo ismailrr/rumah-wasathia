@@ -11,7 +11,9 @@ namespace MvcRW.Models
     {
         public KategoriKonsultasi()
         {
-            DaftarKonsultasiMedsos = new List<KonsultasiRumahWasathia>();
+            DaftarKonsultasiEPaper = new List<KonsultasiEPaper>();
+            DaftarKonsultasiInfografis = new List<KonsultasiInfografis>();
+            DaftarKonsultasiRumahWasathia = new List<KonsultasiRumahWasathia>();
             DaftarKonsultasiRepublika = new List<KonsultasiRepublika>();
         }
 
@@ -20,7 +22,9 @@ namespace MvcRW.Models
         public string Nama { get; set; }
         public DateTime Tanggal { get; set; }
 
-        public ICollection<KonsultasiRumahWasathia> DaftarKonsultasiMedsos { get; set; }
+        public ICollection<KonsultasiEPaper> DaftarKonsultasiEPaper { get; set; }
+        public ICollection<KonsultasiInfografis> DaftarKonsultasiInfografis { get; set; }
+        public ICollection<KonsultasiRumahWasathia> DaftarKonsultasiRumahWasathia { get; set; }
         public ICollection<KonsultasiRepublika> DaftarKonsultasiRepublika { get; set; }
     }
 }

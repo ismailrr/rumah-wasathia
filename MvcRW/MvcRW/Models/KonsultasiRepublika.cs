@@ -17,6 +17,6 @@ namespace MvcRW.Models
         public string Link { get; set; }
         [Required]
         public DateTime Tanggal { get; set; }
-        //public KategoriKonsultasi Kategori { get; set; }
+        public KategoriKonsultasi Kategori { get; set; }
     }
 }

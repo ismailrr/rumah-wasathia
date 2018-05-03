@@ -16,6 +16,7 @@ namespace MvcRW.Models
         public DateTime Tanggal { get; set; }
         [Required]    
         public PathGaleri Path { get; set; }
+        public KategoriGaleri Kategori { get; set; }
 
     }
 }

@@ -14,6 +14,7 @@ namespace MvcRW.Models
         public string Link { get; set; }
         public DateTime Tanggal { get; set; }
         public PathKajianAudio Path { get; set; }
+        public KategoriKajian Kategori { get; set; }
 
         public string DisplayTextPath
         {

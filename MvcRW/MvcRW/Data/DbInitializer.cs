@@ -99,17 +99,17 @@ namespace MvcRW.Data
              */
             var myFilesInfografis = Directory.GetFiles("wwwroot/rwtheme/file-document/pdf/", "*.*", SearchOption.AllDirectories).Where(s => extPdf.Contains(Path.GetExtension(s)));
 
-            var pathInfografis = new List<PathInfografis>();
+            var pathInfografis = new List<PathKonsultasiInfografis>();
 
             foreach (string s in myFilesInfografis.Select(Path.GetFileName))
             {
                 string PathString = s;
-                pathInfografis.Add(new PathInfografis {Path = PathString, Tanggal = DateTime.Now});
+                pathInfografis.Add(new PathKonsultasiInfografis {Path = PathString, Tanggal = DateTime.Now});
             }
 
-            foreach (PathInfografis a in pathInfografis)
+            foreach (PathKonsultasiInfografis a in pathInfografis)
             {
-                context.DaftarPathInfografis.Add(a);
+                context.DaftarPathKonsultasiInfografis.Add(a);
             }
             context.SaveChanges();
 
@@ -294,18 +294,18 @@ namespace MvcRW.Data
             /* 
              * Infografis 
              */
-            var infografis = new List<Infografis>();
+            var infografis = new List<KonsultasiInfografis>();
 
-            foreach (PathInfografis s in pathInfografis)
+            foreach (PathKonsultasiInfografis s in pathInfografis)
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf", "");
-                infografis.Add(new Infografis { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
+                infografis.Add(new KonsultasiInfografis { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
             }
 
-            foreach (Infografis a in infografis)
+            foreach (KonsultasiInfografis a in infografis)
             {
-                context.DaftarInfografis.Add(a);
+                context.DaftarKonsultasiInfografis.Add(a);
             }
             context.SaveChanges();
 

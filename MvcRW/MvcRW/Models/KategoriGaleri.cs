@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class KonsultasiEPaper
+    public class KategoriGaleri
     {
-        public int Id { get; set; }
-        [Required, StringLength(100)]
-        public string Judul { get; set; }
-        [Required]
-        public DateTime Tanggal { get; set; }
-        [Required]
-        public PathKonsultasiEPaper Path { get; set; }
-        public KategoriKonsultasi Kategori { get; set; }
+        public KategoriGaleri()
+        {
+            DaftarGaleri = new List<Galeri>();
+        }
 
+        public int Id { get; set; }
+        [Required, StringLength(200)]
+        public string Nama { get; set; }
+        public DateTime Tanggal { get; set; }
+
+        public ICollection<Galeri> DaftarGaleri { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace MvcRW.Controllers
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<Infografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<KonsultasiInfografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Infografis/Details/5
@@ -96,7 +96,7 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal")] Infografis infografis)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal")] KonsultasiInfografis infografis)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +128,7 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] Infografis infografis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] KonsultasiInfografis infografis)
         {
             if (id != infografis.Id)
             {

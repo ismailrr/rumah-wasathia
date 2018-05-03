@@ -20,6 +20,6 @@ namespace MvcRW.Models
         public string Jawaban { get; set; }
         [StringLength(50)]
         public string Penulis { get; set; }
-        //public KategoriKonsultasi Kategori { get; set; }
+        public KategoriKonsultasi Kategori { get; set; }
     }
 }

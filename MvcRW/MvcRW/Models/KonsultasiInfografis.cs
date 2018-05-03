@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class Infografis
+    public class KonsultasiInfografis
     {
         public int Id { get; set; }
         [Required, StringLength(100)]
         public string Judul { get; set; }
         public DateTime Tanggal { get; set; }
-        public PathInfografis Path { get; set; }
+        public PathKonsultasiInfografis Path { get; set; }
+        public KategoriKonsultasi Kategori { get; set; }
 
         public string DisplayTextPath
         {

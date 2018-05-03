@@ -23,6 +23,7 @@ namespace MvcRW.Models
         public int Tebal { get; set; }
         public DateTime Tanggal { get; set; }
         public PathBuku Path { get; set; }
+        public KategoriBuku Kategori { get; set; }
 
         public string DisplayTextPath
         {
