@@ -343,14 +343,53 @@ namespace MvcRW.Data
             /* 
              * Kajian Video 
              */
-            var kajianVideo = new List<KajianVideo>();
+            var kajianVideo = new KajianVideo[]
+            {
+                new KajianVideo{ Link = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/INK1IvY4WSA", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/HXOy6M8Vedk", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/8bPY1JfdHoo", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/RUaYn6sogWA", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/veSwehsY0-Q", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/cVsrwXnQytM", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/qggLZOQS87U", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/Rqe8OWIOm0w", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/tRlsZGYqc14", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/qtV6syQ6gAY", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/8BrivQ_Qgm4", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/JckLDRJ1VSE", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/dZeLwE_1pao", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/N2sE_WJJeHM", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/7_TO7NfwVsE", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/083V4Njtmsk", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/5rcYyusDdHk", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/ASg2un67amU", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/AxSr716O0rE", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/GqCh2wyO_J0", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/TZCHofmT-jg", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/FDIU0GCyNqE", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/S0QswxWoazs", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/oK0_M5pnpqg", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/-EVhTEnfEJs", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/gTpf2BoMZq0", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/QxbyH80YlZk", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/wNlUv40LWRQ", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/oPyR7aKwn_8", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/BkY3zK14b4k", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/7KiO2FjOJkU", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/YleGMu9qILE", Tanggal = DateTime.Now },
+                new KajianVideo{ Link = "https://www.youtube.com/embed/4E-oEEvw5G8", Tanggal = DateTime.Now }
+            };
 
+            //var kajianVideo = new List<KajianVideo>();
+            /*
             foreach (PathKajianVideo s in pathKajianVideo)
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf", "");
                 kajianVideo.Add(new KajianVideo { Link = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Path = s });
             }
+            */
 
             foreach (KajianVideo a in kajianVideo)
             {
