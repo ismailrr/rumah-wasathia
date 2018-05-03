@@ -29,6 +29,7 @@ namespace MvcRW.Controllers
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
             var konsultasiEPaper = from s in _context.DaftarKonsultasiEPaper
+                                   .Include(ee => ee.Path)
                                    select s;
 
             switch (sortOrder)

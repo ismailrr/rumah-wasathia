@@ -42,6 +42,7 @@ namespace MvcRW.Controllers
             ViewData["CurrentFilter"] = searchString;
 
             var artikel = from s in _context.DaftarArtikel
+                          .Include(ee => ee.Path)
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {

@@ -42,6 +42,7 @@ namespace MvcRW.Controllers
             ViewData["CurrentFilter"] = searchString;
 
             var infografis = from s in _context.DaftarKonsultasiInfografis
+                             .Include(ee => ee.Path)
                              select s;
             if (!String.IsNullOrEmpty(searchString))
             {
