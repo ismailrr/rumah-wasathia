@@ -12,8 +12,9 @@ namespace MvcRW.Models
         public int Id { get; set; }
         [Required, StringLength(50), Display(Name = "Nama Pengguna")]
         public string NamaPengguna { get; set; }
-        [Required, StringLength(50), Display(Name = "Kata Sandi")]
+        [Required, StringLength(50), Display(Name = "Kata Sandi"), DataType(DataType.Password)]
         public string KataSandi { get; set; }
+        public bool RememberMe { get; set; }
         public DateTime Tanggal { get; set; }
 
     }
