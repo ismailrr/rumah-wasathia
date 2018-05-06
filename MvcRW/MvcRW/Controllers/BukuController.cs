@@ -54,14 +54,14 @@ namespace MvcRW.Controllers
                 case "name_desc":
                     buku = buku.OrderByDescending(s => s.Judul);
                     break;
+                case "Name":
+                    buku = buku.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     buku = buku.OrderBy(s => s.Tanggal);
                     break;
-                case "date_desc":
-                    buku = buku.OrderByDescending(s => s.Tanggal);
-                    break;
                 default:
-                    buku = buku.OrderBy(s => s.Judul);
+                    buku = buku.OrderByDescending(s => s.Tanggal);
                     break;
             }
             int pageSize = 12;
@@ -91,8 +91,7 @@ namespace MvcRW.Controllers
         // GET: Buku/Create
         public IActionResult Create()
         {
-            var model = new Buku { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: Buku/Create
@@ -104,6 +103,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                buku.Tanggal = DateTime.Now;
                 _context.Add(buku);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

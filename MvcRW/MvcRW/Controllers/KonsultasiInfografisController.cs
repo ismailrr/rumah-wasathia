@@ -54,14 +54,14 @@ namespace MvcRW.Controllers
                 case "name_desc":
                     infografis = infografis.OrderByDescending(s => s.Judul);
                     break;
+                case "Name":
+                    infografis = infografis.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     infografis = infografis.OrderBy(s => s.Tanggal);
                     break;
-                case "date_desc":
-                    infografis = infografis.OrderByDescending(s => s.Tanggal);
-                    break;
                 default:
-                    infografis = infografis.OrderBy(s => s.Judul);
+                    infografis = infografis.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -92,8 +92,7 @@ namespace MvcRW.Controllers
         // GET: Infografis/Create
         public IActionResult Create()
         {
-            var model = new KonsultasiInfografis { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: Infografis/Create
@@ -105,6 +104,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                infografis.Tanggal = DateTime.Now;
                 _context.Add(infografis);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

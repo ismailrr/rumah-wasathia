@@ -35,11 +35,11 @@ namespace MvcRW.Controllers
 
             switch (sortOrder)
             {
-                case "date_desc":
-                    kajianVideo = kajianVideo.OrderByDescending(s => s.Tanggal);
+                case "Date":
+                    kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
                     break;
                 default:
-                    kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
+                    kajianVideo = kajianVideo.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -70,8 +70,7 @@ namespace MvcRW.Controllers
         // GET: KajianVideo/Create
         public IActionResult Create()
         {
-            var model = new KajianVideo { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: KajianVideo/Create
@@ -83,6 +82,8 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                kajianVideo.Tanggal = DateTime.Now;
+                kajianVideo.Link = kajianVideo.Link.Replace("watch?v=", "embed/");
                 _context.Add(kajianVideo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

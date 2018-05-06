@@ -47,8 +47,7 @@ namespace MvcRW.Controllers
         // GET: KonsultasiRepublika/Create
         public IActionResult Create()
         {
-            var model = new KonsultasiRepublika { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: KonsultasiRepublika/Create
@@ -60,6 +59,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                konsultasiRepublika.Tanggal = DateTime.Now;
                 _context.Add(konsultasiRepublika);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

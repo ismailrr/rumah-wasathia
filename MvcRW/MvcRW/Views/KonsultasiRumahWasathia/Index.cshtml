@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MvcRW.Models.KonsultasiRumahWasathia>
+﻿@model PaginatedList<MvcRW.Models.KonsultasiRumahWasathia>
 
 
 @{
@@ -25,6 +25,69 @@
                     <!-- left sec start -->
                     <div class="col-md-11 col-sm-11">
                         <div class="row">
+                            <div class="col-sm-16 text-center">
+                                <p>Urutan Sesuai :</p>
+                                <p>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
+                                </p>
+
+                                <form asp-action="Index" method="get">
+                                    <div class="form-actions no-color">
+                                        <p>
+                                            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                            <input type="submit" value="Search" class="btn btn-default" /> |
+                                            <a asp-action="Index">Back to Full List</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-md-4 col-sm-8">
+                                    <div class="item topic text-center">
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                            <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="sec-topic col-sm-16 col-md-8">
+                                <a href="@Url.Action("Details","KonsultasiRumahWasathia")">
+                                    <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">
+                                    <div class="sec-info">
+                                        <h3>Bagaimana Fikih Biaya Perjalanan Dinas yang Dipersingkat?</h3>
+                                        <div class="text-danger sub-info-bordered">
+                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
+                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            }
+                            <div class="row">
+                                <div class="col-sm-16 text-center">
+                                    @{
+                                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                                    }
+                                    <a asp-action="Index"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                       asp-route-page="@(Model.PageIndex - 1)"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                       class="btn btn-default @prevDisabled">
+                                        Previous
+                                    </a>
+                                    <a asp-action="Index"
+                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                       asp-route-page="@(Model.PageIndex + 1)"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                       class="btn btn-default @nextDisabled">
+                                        Next
+                                    </a>
+                                </div>
+                            </div>
                             <div class="sec-topic col-sm-16 col-md-8">
                                 <a href="@Url.Action("SubArtikel","rumahwasathia")">
                                     <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">

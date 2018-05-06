@@ -38,14 +38,14 @@ namespace MvcRW.Controllers
                 case "name_desc":
                     konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Judul);
                     break;
+                case "Name":
+                    konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Tanggal);
                     break;
-                case "date_desc":
-                    konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Tanggal);
-                    break;
                 default:
-                    konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Judul);
+                    konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -76,8 +76,7 @@ namespace MvcRW.Controllers
         // GET: KonsultasiEPaper/Create
         public IActionResult Create()
         {
-            var model = new KonsultasiEPaper { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: KonsultasiEPaper/Create
@@ -89,6 +88,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                konsultasiEPaper.Tanggal = DateTime.Now;
                 _context.Add(konsultasiEPaper);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -38,14 +38,14 @@ namespace MvcRW.Controllers
                 case "name_desc":
                     galeri = galeri.OrderByDescending(s => s.Judul);
                     break;
+                case "Name":
+                    galeri = galeri.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     galeri = galeri.OrderBy(s => s.Tanggal);
                     break;
-                case "date_desc":
-                    galeri = galeri.OrderByDescending(s => s.Tanggal);
-                    break;
                 default:
-                    galeri = galeri.OrderBy(s => s.Judul);
+                    galeri = galeri.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -76,8 +76,7 @@ namespace MvcRW.Controllers
         // GET: Galeri/Create
         public IActionResult Create()
         {
-            var model = new Galeri { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: Galeri/Create
@@ -89,6 +88,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                galeri.Tanggal = DateTime.Now;
                 _context.Add(galeri);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

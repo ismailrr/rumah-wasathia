@@ -11,6 +11,8 @@ namespace MvcRW.Models
     {
 
         public int Id { get; set; }
+        [StringLength(200)]
+        public string Penulis { get; set; }
         [Required, StringLength(200)]
         public string Judul { get; set; }
         [DataType(DataType.Date)]
@@ -19,8 +21,7 @@ namespace MvcRW.Models
         public string Pertanyaan { get; set; }
         [Required, StringLength(5000)]
         public string Jawaban { get; set; }
-        [StringLength(200)]
-        public string Penulis { get; set; }
+        public PathKonsultasiRumahWasathia Path { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
     }
 }

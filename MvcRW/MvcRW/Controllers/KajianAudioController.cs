@@ -35,11 +35,11 @@ namespace MvcRW.Controllers
 
             switch (sortOrder)
             {
-                case "date_desc":
-                    kajianAudio = kajianAudio.OrderByDescending(s => s.Tanggal);
+                case "Date":
+                    kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
                     break;
                 default:
-                    kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
+                    kajianAudio = kajianAudio.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -70,8 +70,7 @@ namespace MvcRW.Controllers
         // GET: KajianAudio/Create
         public IActionResult Create()
         {
-            var model = new KajianAudio { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: KajianAudio/Create
@@ -83,6 +82,9 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                kajianAudio.Tanggal = DateTime.Now;
+                kajianAudio.Link = kajianAudio.Link.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"","");
+                kajianAudio.Link = kajianAudio.Link.Replace("\"></iframe>", "");
                 _context.Add(kajianAudio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

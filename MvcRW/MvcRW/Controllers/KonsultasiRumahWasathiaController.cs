@@ -20,9 +20,51 @@ namespace MvcRW.Controllers
         }
 
         // GET: KonsultasiRumahWasathia
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View(await _context.DaftarKonsultasiRumahWasathia.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var konsultasiRumahWasathia = from s in _context.DaftarKonsultasiRumahWasathia
+                       .Include(ee => ee.Kategori)
+                       select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                konsultasiRumahWasathia = konsultasiRumahWasathia.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+            int pageSize = 12;
+            return View(await PaginatedList<KonsultasiRumahWasathia>.CreateAsync(konsultasiRumahWasathia.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: KonsultasiRumahWasathia/Details/5
@@ -47,8 +89,7 @@ namespace MvcRW.Controllers
         // GET: KonsultasiRumahWasathia/Create
         public IActionResult Create()
         {
-            var model = new KonsultasiRumahWasathia { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: KonsultasiRumahWasathia/Create
@@ -60,6 +101,7 @@ namespace MvcRW.Controllers
         {
             if (ModelState.IsValid)
             {
+                konsultasiRumahWasathia.Tanggal = DateTime.Now;
                 _context.Add(konsultasiRumahWasathia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

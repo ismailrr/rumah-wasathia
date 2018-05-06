@@ -54,14 +54,14 @@ namespace MvcRW.Controllers
                 case "name_desc":
                     artikel = artikel.OrderByDescending(s => s.Judul);
                     break;
+                case "Name":
+                    artikel = artikel.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     artikel = artikel.OrderBy(s => s.Tanggal);
                     break;
-                case "date_desc":
-                    artikel = artikel.OrderByDescending(s => s.Tanggal);
-                    break;
                 default:
-                    artikel = artikel.OrderBy(s => s.Judul);
+                    artikel = artikel.OrderByDescending(s => s.Tanggal);
                     break;
             }
 
@@ -93,8 +93,7 @@ namespace MvcRW.Controllers
         // GET: Artikel/Create
         public IActionResult Create()
         {
-            var model = new Artikel { Tanggal = DateTime.Now };
-            return View(model);
+            return View();
         }
 
         // POST: Artikel/Create
@@ -108,6 +107,7 @@ namespace MvcRW.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    artikel.Tanggal = DateTime.Now;
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));

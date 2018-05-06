@@ -85,11 +85,6 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-        
-        public ActionResult SubArtikel()
-        {
-            return View();
-        }
 
         public ActionResult republikaOnline()
         {

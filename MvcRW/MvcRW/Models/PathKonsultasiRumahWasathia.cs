@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace MvcRW.Models
 {
-    public class PathKonsultasiInfografis
+    public class PathKonsultasiRumahWasathia
     {
-        public PathKonsultasiInfografis()
+        public PathKonsultasiRumahWasathia()
         {
-            DaftarKonsultasiInfografis = new List<KonsultasiInfografis>();
+            DaftarkonsultasiRumahWasathia = new List<KonsultasiRumahWasathia>();
         }
 
         public int Id { get; set; }
@@ -20,6 +20,6 @@ namespace MvcRW.Models
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
 
-        public ICollection<KonsultasiInfografis> DaftarKonsultasiInfografis { get; set; }
+        public ICollection<KonsultasiRumahWasathia> DaftarkonsultasiRumahWasathia { get; set; }
     }
 }
