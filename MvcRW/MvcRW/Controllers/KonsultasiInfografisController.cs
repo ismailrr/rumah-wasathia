@@ -92,7 +92,8 @@ namespace MvcRW.Controllers
         // GET: Infografis/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new KonsultasiInfografis { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: Infografis/Create

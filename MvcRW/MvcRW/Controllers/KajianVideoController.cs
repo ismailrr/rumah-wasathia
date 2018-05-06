@@ -70,7 +70,8 @@ namespace MvcRW.Controllers
         // GET: KajianVideo/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new KajianVideo { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: KajianVideo/Create

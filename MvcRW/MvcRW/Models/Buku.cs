@@ -21,6 +21,7 @@ namespace MvcRW.Models
         [StringLength(5000)]
         public string Deskripsi { get; set; }
         public int Tebal { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         public PathBuku Path { get; set; }
         public KategoriBuku Kategori { get; set; }

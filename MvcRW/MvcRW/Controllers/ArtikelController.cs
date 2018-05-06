@@ -93,7 +93,8 @@ namespace MvcRW.Controllers
         // GET: Artikel/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Artikel { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: Artikel/Create

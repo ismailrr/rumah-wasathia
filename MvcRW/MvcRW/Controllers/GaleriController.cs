@@ -76,7 +76,8 @@ namespace MvcRW.Controllers
         // GET: Galeri/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Galeri { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: Galeri/Create

@@ -91,7 +91,8 @@ namespace MvcRW.Controllers
         // GET: Buku/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Buku { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: Buku/Create

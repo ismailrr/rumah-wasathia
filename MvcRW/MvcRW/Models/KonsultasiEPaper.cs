@@ -12,7 +12,7 @@ namespace MvcRW.Models
         public int Id { get; set; }
         [Required, StringLength(200)]
         public string Judul { get; set; }
-        [Required]
+        [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         [Required]
         public PathKonsultasiEPaper Path { get; set; }

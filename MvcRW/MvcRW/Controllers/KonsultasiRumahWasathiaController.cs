@@ -47,7 +47,8 @@ namespace MvcRW.Controllers
         // GET: KonsultasiRumahWasathia/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new KonsultasiRumahWasathia { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: KonsultasiRumahWasathia/Create

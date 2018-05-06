@@ -76,7 +76,8 @@ namespace MvcRW.Controllers
         // GET: KonsultasiEPaper/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new KonsultasiEPaper { Tanggal = DateTime.Now };
+            return View(model);
         }
 
         // POST: KonsultasiEPaper/Create

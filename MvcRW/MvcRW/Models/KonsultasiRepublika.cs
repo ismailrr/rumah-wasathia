@@ -15,7 +15,7 @@ namespace MvcRW.Models
         public string Judul { get; set; }
         [Required, StringLength(500)]
         public string Link { get; set; }
-        [Required]
+        [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
     }

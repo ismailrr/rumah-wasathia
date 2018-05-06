@@ -17,6 +17,7 @@ namespace MvcRW.Models
         public int Id { get; set; }
         [Required, StringLength(500)]
         public string Path { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
 
         public ICollection<Galeri> DaftarGaleri { get; set; }
