@@ -57,22 +57,22 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public IActionResult Konsultasi()
+        public IActionResult KonsultasiEpaper()
         {
             return View();
         }
 
-        public IActionResult Pdf()
+        public IActionResult KonsultasiInfografis()
         {
             return View();
         }
 
-        public IActionResult Tag()
+        public IActionResult KonsultasiRepublika()
         {
             return View();
         }
 
-        public IActionResult Video()
+        public IActionResult KonsultasiRumahWasathia()
         {
             return View();
         }
