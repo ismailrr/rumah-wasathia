@@ -188,6 +188,7 @@ namespace MvcRW.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //cek data sama
         private bool PathArtikelExists(int id)
         {
             return _context.DaftarPathArtikel.Any(e => e.Id == id);
