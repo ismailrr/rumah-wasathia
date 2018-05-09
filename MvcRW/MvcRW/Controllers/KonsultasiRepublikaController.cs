@@ -20,9 +20,52 @@ namespace MvcRW.Controllers
         }
 
         // GET: KonsultasiRepublika
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
         {
-            return View(await _context.DaftarKonsultasiRepublika.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var konsultasiRepublika = from s in _context.DaftarKonsultasiRepublika
+                          .Include(ee => ee.Kategori)
+                                      select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                konsultasiRepublika = konsultasiRepublika.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    konsultasiRepublika = konsultasiRepublika.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    konsultasiRepublika = konsultasiRepublika.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 12;
+            return View(await PaginatedList<KonsultasiRepublika>.CreateAsync(konsultasiRepublika.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: KonsultasiRepublika/Details/5
@@ -64,7 +107,7 @@ namespace MvcRW.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(konsultasiRepublika);
+            return RedirectToPage("Create");
         }
 
         // GET: KonsultasiRepublika/Edit/5

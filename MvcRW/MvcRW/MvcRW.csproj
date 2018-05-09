@@ -1077,6 +1077,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
@@ -4516,6 +4517,10 @@
     <None Include="wwwroot\mytemplate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
     <None Include="wwwroot\mytemplate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
     <None Include="wwwroot\mytemplate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.min.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Uploads\" />
   </ItemGroup>
 
 </Project>

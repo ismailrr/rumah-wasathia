@@ -2,6 +2,7 @@
 using MvcRW.Models;
 using MySql.Data.MySqlClient;
 using System;
+using MvcRW.ViewModels;
 
 namespace MvcRW.Data
 {
@@ -62,6 +63,8 @@ namespace MvcRW.Data
             modelBuilder.Entity<PathKonsultasiEPaper>().ToTable("Path_Konsultasi_E_Paper");
             modelBuilder.Entity<PathKonsultasiInfografis>().ToTable("Path_Konsultasi_Infografis");
         }
+
+        public DbSet<MvcRW.ViewModels.PathArtikelVM> PathArtikelVM { get; set; }
 
     }
 }

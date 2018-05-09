@@ -14,6 +14,7 @@ namespace MvcRW.Models
             DaftarArtikel = new List<Artikel>();
         }
 
+        [Key]
         public int Id { get; set; }
         [Required, StringLength(500)]
         public string Path { get; set; }

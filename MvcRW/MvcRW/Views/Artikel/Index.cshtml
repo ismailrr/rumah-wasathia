@@ -27,6 +27,7 @@
                             <p>Urutan Sesuai :</p>
                             <p>
                                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
+                                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Tanggal</a>
                             </p>
 
                             <form asp-action="Index" method="get">

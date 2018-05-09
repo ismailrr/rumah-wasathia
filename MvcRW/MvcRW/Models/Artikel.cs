@@ -24,23 +24,5 @@ namespace MvcRW.Models
                 return $"{Path?.Path}";
             }
         }
-
-        //public ICollection<ArtikelKategori> DaftarKategori { get; set; }
-
-        //public void TambahKategori(KategoriArtikel kategori)
-        //{
-        //    DaftarKategori.Add(new ArtikelKategori()
-        //    {
-        //        Kategori = kategori
-        //    });
-        //}
-
-        //public void TambahKategori(int kategoriId)
-        //{
-        //    DaftarKategori.Add(new ArtikelKategori()
-        //    {
-        //        KategoriId = kategoriId
-        //    });
-        //}
     }
 }

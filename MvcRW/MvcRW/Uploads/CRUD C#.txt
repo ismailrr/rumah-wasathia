@@ -1,0 +1,72 @@
+CRUD C#
+
+
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+
+namespace Treehouse.CodeChallenges
+{
+    public static class Repository
+    {
+        public static List<Course> GetCourses()
+        {
+            using (var context = new Context())
+            {
+                return context.Courses
+                              .OrderBy(c => c.Teacher.LastName)
+                              .ThenBy(c => c.Teacher.FirstName)
+                              .ToList();
+            }
+        }
+
+        public static List<Course> GetCoursesByTeacher(string lastName)
+        {
+            using (var context = new Context())
+            {
+                return context.Courses
+                              .Where(c => c.Teacher.LastName == lastName)
+                              .ToList();
+            }
+        }
+
+        public static Course GetCourse(int id)
+        {
+            using (var context = new Context())
+            {
+                return context.Courses
+                              .Include(c => c.Teacher)
+                              .SingleOrDefault(c => c.Id == id);
+            }
+        }
+
+        public static void AddCourse(Course course)
+        {
+            using (var context = new Context())
+            {
+                context.Courses.Add(course);
+                context.SaveChanges();
+            }
+        }
+
+        public static void UpdateCourse(Course course)
+        {
+            using (var context = new Context())
+            {
+                context.Courses.Attach(course);
+                context.Entry(course).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public static void DeleteCourse(int id)
+        {
+            using (var context = new Context())
+            {
+                var course = new Course(){Id = id};
+                context.Entry(course).State = EntityState.Deleted;
+                context.SaveChanges();
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -40,41 +41,6 @@ namespace MvcRW.Controllers
         {
             return View();
         }
-
-        public ActionResult Buku()
-        {
-            return View();
-        }
-        
-        public ActionResult Audio()
-        {
-            return View();
-        }
-        
-        public ActionResult Video()
-        {
-            return View();
-        }
-        
-        public ActionResult SubBuku1()
-        {
-            return View();
-        }
-        
-        public ActionResult SubBuku2()
-        {
-            return View();
-        }
-        
-        public ActionResult SubBuku3()
-        {
-            return View();
-        }
-        
-        public ActionResult SubBuku4()
-        {
-            return View();
-        }
         
         public ActionResult ChannelMuamalah()
         {
@@ -82,11 +48,6 @@ namespace MvcRW.Controllers
         }
         
         public ActionResult ChannelRumahWasathia()
-        {
-            return View();
-        }
-
-        public ActionResult republikaOnline()
         {
             return View();
         }
@@ -101,58 +62,9 @@ namespace MvcRW.Controllers
             return View();
         }
 
-        public ActionResult AGaleri()
+        public IActionResult Error()
         {
-            return View();
-        }
-
-        public ActionResult Aartikel()
-        {
-            return View();
-        }
-
-        public ActionResult AKonsultasi()
-        {
-            return View();
-        }
-
-        public ActionResult APdf()
-        {
-            return View();
-        }
-
-        public ActionResult ABuku()
-        {
-            return View();
-        }
-
-        public ActionResult AKategori()
-        {
-            return View();
-        }
-
-        public ActionResult ATag()
-        {
-            return View();
-        }
-
-        public ActionResult AIndex()
-        {
-            return View();
-        }
-
-        public ActionResult AAudio()
-        {
-            return View();
-        }
-
-        public ActionResult AVideo()
-        {
-            return View();
-        }
-
-        public ActionResult ALogin()
-        {
+            ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
             return View();
         }
     }
