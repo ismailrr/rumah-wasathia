@@ -49,9 +49,15 @@ namespace MvcRW
             services.AddDbContext<RWContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<ApplicationDbContext>();
+            services.AddScoped<DbContext>(sp => sp.GetService<ApplicationDbContext>());
+            
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                  .AddEntityFrameworkStores<ApplicationDbContext>()
                  .AddDefaultTokenProviders();
+
+            
 
             services.AddMvc();
         }
