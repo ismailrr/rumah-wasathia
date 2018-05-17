@@ -64,7 +64,5 @@ namespace MvcRW.Data
             modelBuilder.Entity<PathKonsultasiInfografis>().ToTable("Path_Konsultasi_Infografis");
         }
 
-        public DbSet<MvcRW.ViewModels.PathArtikelVM> PathArtikelVM { get; set; }
-
     }
 }

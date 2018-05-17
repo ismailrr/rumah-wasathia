@@ -16,50 +16,35 @@ namespace MvcRW.Controllers
 {
     public class PathArtikelController : Controller
     {
-        private readonly RWContext _context;
+        protected Repository Repository { get; private set; }
+        private PathArtikelRepository _pathArtikelRepository = null;
         private readonly IHostingEnvironment _environment;
 
         public PathArtikelController(RWContext context, IHostingEnvironment environment)
         {
-            _context = context;
+            _pathArtikelRepository = new PathArtikelRepository(context);
             _environment = environment;
         }
 
         // GET: PathArtikel
-        public async Task<IActionResult> Index(
-            string sortOrder,
-            int? page)
+        public IActionResult Index()
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
 
-            var pathArtikel = from s in _context.DaftarPathArtikel
-                             select s;
-            switch (sortOrder)
-            {
-                case "Date":
-                    pathArtikel = pathArtikel.OrderBy(s => s.Tanggal);
-                    break;
-                default:
-                    pathArtikel = pathArtikel.OrderByDescending(s => s.Tanggal);
-                    break;
-            }
+            var pathArtikel = _pathArtikelRepository.GetList();
 
-            int pageSize = 12;
-            return View(await PaginatedList<PathArtikel>.CreateAsync(pathArtikel.AsNoTracking(), page ?? 1, pageSize));
+            return View(pathArtikel);
         }
 
         // GET: PathArtikel/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pathArtikel = await _context.DaftarPathArtikel
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var pathArtikel = _pathArtikelRepository.Get((int)id);
+
             if (pathArtikel == null)
             {
                 return NotFound();
@@ -69,9 +54,14 @@ namespace MvcRW.Controllers
         }
 
         // GET: PathArtikel/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new PathArtikelAddVM();
+
+            viewModel.Init(Repository);
+
+            return View(viewModel);
         }
 
         // POST: PathArtikel/Create
@@ -79,16 +69,16 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] PathArtikelVM pathArtikelVM)
+        public IActionResult Create([FromForm] PathArtikelAddVM pathArtikelVM)
         {
-            if (ModelState.IsValid)
+            if (pathArtikelVM !=null && ModelState.IsValid)
             {
                 //Directory.GetCurrentDirectory(),
                 var filePath = Path.Combine("Uploads", pathArtikelVM.Path.FileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await pathArtikelVM.Path.CopyToAsync(stream);
+                    pathArtikelVM.Path.CopyToAsync(stream);
                 }
 
                 PathArtikel pathArtikel = new PathArtikel() 
@@ -97,30 +87,40 @@ namespace MvcRW.Controllers
                     Tanggal = DateTime.Now
                 };
 
-                _context.Add(pathArtikel);
-                await _context.SaveChangesAsync();
+                _pathArtikelRepository.Add(pathArtikel);
 
                 //Message = $"Upload document {UploadFile.FilePath} has been successfully!";
 
                 return RedirectToAction(nameof(Index));
             }
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            pathArtikelVM.Init(Repository);
+
             return View(pathArtikelVM);
         }
 
         // GET: PathArtikel/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pathArtikel = await _context.DaftarPathArtikel.SingleOrDefaultAsync(m => m.Id == id);
+            var pathArtikel = _pathArtikelRepository.Get((int)id,
+                includeRelatedEntities: false);
+
             if (pathArtikel == null)
             {
                 return NotFound();
             }
+
+            var viewModel = new PathArtikelEditVM()
+            {
+                PathArtikel = pathArtikel
+            };
+            viewModel.Init(Repository);
+
             return View(pathArtikel);
         }
 
@@ -129,46 +129,28 @@ namespace MvcRW.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Path,Tanggal")] PathArtikel pathArtikel)
+        public IActionResult Edit(PathArtikelEditVM viewModel)
         {
-            if (id != pathArtikel.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(pathArtikel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PathArtikelExists(pathArtikel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                var pathArtikel = viewModel.PathArtikel;
+                _pathArtikelRepository.Update(pathArtikel);
+                
+                return RedirectToAction("Detail", new { id = pathArtikel.Id });
             }
-            return View(pathArtikel);
+            viewModel.Init(Repository);
+            return View(viewModel);
         }
 
         // GET: PathArtikel/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pathArtikel = await _context.DaftarPathArtikel
-                .SingleOrDefaultAsync(m => m.Id == id);
+            var pathArtikel = _pathArtikelRepository.Get((int)id);
             if (pathArtikel == null)
             {
                 return NotFound();
@@ -180,18 +162,17 @@ namespace MvcRW.Controllers
         // POST: PathArtikel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var pathArtikel = await _context.DaftarPathArtikel.SingleOrDefaultAsync(m => m.Id == id);
-            _context.DaftarPathArtikel.Remove(pathArtikel);
-            await _context.SaveChangesAsync();
+            _pathArtikelRepository.Delete(id);
+
             return RedirectToAction(nameof(Index));
         }
 
         //cek data sama
-        private bool PathArtikelExists(int id)
-        {
-            return _context.DaftarPathArtikel.Any(e => e.Id == id);
-        }
+        //private bool PathArtikelExists(int id)
+        //{
+        //    return _context.DaftarPathArtikel.Any(e => e.Id == id);
+        //}
     }
 }
