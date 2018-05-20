@@ -1,0 +1,77 @@
+﻿@model PaginatedList<MvcRWV2.Models.KonsultasiRepublika>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
+}
+
+<!--data start Artikel.cshtml-->
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Konsultasi</a></li>
+                <li class="active">Republika Online</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <!-- Kolom artikel Begin -->
+        <div class="col-sm-16 banner-outer gapTop">
+            <div class="row no-margin">
+                <div class="col-sm-16 text-center">
+                    <p>Urutan Sesuai :</p>
+                    <p>
+                        <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
+                    </p>
+
+                    <form asp-action="Index" method="get">
+                        <div class="form-actions no-color">
+                            <p>
+                                Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                <input type="submit" value="Search" class="btn btn-default" /> |
+                                <a asp-action="Index">Back to Full List</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-16">
+                    <div id="accordion">
+                        <ol id="x">
+                            @foreach (var item in Model)
+                            {
+                            <li>
+                                <h2><a href="@Html.DisplayFor(modelItem => item.Link)" target="_blank">@Html.DisplayFor(modelItem => item.Judul)</a></h2>
+                            </li>
+                            }
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-16 text-center">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- data end -->

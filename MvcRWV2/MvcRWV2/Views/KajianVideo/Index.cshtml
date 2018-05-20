@@ -1,0 +1,57 @@
+﻿@model PaginatedList<MvcRWV2.Models.KajianVideo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
+}
+
+<!--data start Artikel.cshtml-->
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Kajian</a></li>
+                <li><a href="#">Video</a></li>
+                <li class="active">Muamalah TV</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <!-- Kolom artikel Begin -->
+        <div class="col-sm-16 banner-outer gapTop">
+            <div class="row video-wasathia">
+                @foreach (var item in Model)
+                {
+                    <div class="item topic custom-grid">
+                        <iframe src="@item.Link" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-sm-16 text-center">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled">
+                        Previous
+                    </a>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Second Section Begin -->
+    </div>
+</div>
+<!-- data end -->
