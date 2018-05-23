@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class KajianAudioController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +23,14 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: KajianAudio
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             var kajianAudio = from s in _context.DaftarKajianAudio
                               .Include(ee => ee.Path)
@@ -47,8 +51,36 @@ namespace MvcRWV2.Controllers
             return View(await PaginatedList<KajianAudio>.CreateAsync(kajianAudio.AsNoTracking(), page ?? 1, pageSize));
         }
 
-            // GET: KajianAudio/Details/5
-            public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> List(
+            string sortOrder,
+            int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+
+            var kajianAudio = from s in _context.DaftarKajianAudio
+                              .Include(ee => ee.Path)
+                              .Include(ee => ee.Kategori)
+                              select s;
+
+            switch (sortOrder)
+            {
+                case "Date":
+                    kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    kajianAudio = kajianAudio.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<KajianAudio>.CreateAsync(kajianAudio.AsNoTracking(), page ?? 1, pageSize));
+        }
+
+        // GET: KajianAudio/Details/5
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -87,7 +119,7 @@ namespace MvcRWV2.Controllers
                 kajianAudio.Link = kajianAudio.Link.Replace("\"></iframe>", "");
                 _context.Add(kajianAudio);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(kajianAudio);
         }
@@ -124,6 +156,9 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    kajianAudio.Tanggal = DateTime.Now;
+                    kajianAudio.Link = kajianAudio.Link.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
+                    kajianAudio.Link = kajianAudio.Link.Replace("\"></iframe>", "");
                     _context.Update(kajianAudio);
                     await _context.SaveChangesAsync();
                 }
@@ -138,7 +173,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(kajianAudio);
         }
@@ -169,7 +204,7 @@ namespace MvcRWV2.Controllers
             var kajianAudio = await _context.DaftarKajianAudio.SingleOrDefaultAsync(m => m.Id == id);
             _context.DaftarKajianAudio.Remove(kajianAudio);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool KajianAudioExists(int id)

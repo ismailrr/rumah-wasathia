@@ -25,6 +25,8 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="~/rwtheme/css/custom-green.css" rel="stylesheet">
+    <link href="~/rwtheme/css/custom.css" rel="stylesheet">
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
 <!-- the fixed layout is not compatible with sidebar-mini -->
@@ -42,148 +44,8 @@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
+                @await Html.PartialAsync("_LoginPartial")
                 <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-
-                @*<div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/mytemplate/dist/img/logogram3.png" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-flag-o"></i>
-                                <span class="label label-danger">9</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="~/mytemplate/dist/img/logogram3.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Rumah Wasathia</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="~/mytemplate/dist/img/logogram3.png" class="img-circle" alt="User Image">
-
-                                    <p>
-                                        Rumah Wasathia - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
-                </div>*@
             </nav>
         </header>
 
@@ -226,21 +88,21 @@
                         </a>
                     </li>
                     <li>
-                        <a href="~/Admin/Artikel">
+                        <a href="@Url.Action("List","Artikel")">
                             <i class="fa fa-file-text"></i> <span>Artikel</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href="~/Admin/Buku">
+                        <a href="@Url.Action("List","Buku")">
                             <i class="fa fa-book"></i> <span>Buku</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href="~/Admin/Galeri">
+                        <a href="@Url.Action("List","Galeri")">
                             <i class="fa  fa-photo"></i> <span>Galeri</span>
                             <span class="pull-right-container">
                             </span>
@@ -248,19 +110,19 @@
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-group"></i> <span>Kajian</span>
+                            <i class="fa fa-navicon"></i> <span>Kajian</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="~/Admin/Audio"><i class="fa fa-volume-up"></i> Audio</a></li>
-                            <li><a href="~/Admin/Video"><i class="fa fa-video-camera"></i> Video</a></li>
+                            <li><a href="@Url.Action("List","KajianAudio")"><i class="fa fa-volume-up"></i> Audio</a></li>
+                            <li><a href="@Url.Action("List","KajianVideo")"><i class="fa fa-video-camera"></i> Video</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa  fa-navicon"></i> <span>Kategori</span>
+                            <i class="fa  fa-navicon"></i> <span>Konsultasi</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -272,31 +134,47 @@
                             <li><a href="~/Admin/KonsultasiRumahWasathia"><i class="fa fa-video-camera"></i> Konsultasi Rumah Wasathia</a></li>
                         </ul>
                     </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa  fa-navicon"></i> <span>Kategori</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("List","KategoriArtikel")"><i class="fa fa-volume-up"></i> Kategori Artikel</a></li>
+                            <li><a href="@Url.Action("List","KategoriBuku")"><i class="fa fa-video-camera"></i> Kategori Buku</a></li>
+                            <li><a href="@Url.Action("List","KategoriGaleri")"><i class="fa fa-volume-up"></i> Kategori Galeri</a></li>
+                            <li><a href="@Url.Action("List","KategoriKajian")"><i class="fa fa-video-camera"></i> Kategori Kajian</a></li>
+                            <li><a href="@Url.Action("List","KategoriKonsultasi")"><i class="fa fa-video-camera"></i> Kategori Konsultasi</a></li>
+
+                        </ul>
+                    </li>
                     <!--
-                    <li>
-                        <a href="~/Admin/Konsultasi">
-                            <i class="fa fa-question"></i> <span>Konsultasi</span>
-                            <span class="pull-right-container">
-                            </span>
-                        </a>
-                    </li>
-                    -->
+        <li>
+            <a href="~/Admin/Konsultasi">
+                <i class="fa fa-question"></i> <span>Konsultasi</span>
+                <span class="pull-right-container">
+                </span>
+            </a>
+        </li>
+        -->
                     <!--
-                    <li>
-                        <a href="~/Admin/Pdf">
-                            <i class="fa fa-file-pdf-o"></i> <span>PDF</span>
-                            <span class="pull-right-container">
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="~/Admin/Tag">
-                            <i class="fa  fa-tags"></i> <span>Tags</span>
-                            <span class="pull-right-container">
-                            </span>
-                        </a>
-                    </li>
-                    -->
+    <li>
+        <a href="~/Admin/Pdf">
+            <i class="fa fa-file-pdf-o"></i> <span>PDF</span>
+            <span class="pull-right-container">
+            </span>
+        </a>
+    </li>
+    <li>
+        <a href="~/Admin/Tag">
+            <i class="fa  fa-tags"></i> <span>Tags</span>
+            <span class="pull-right-container">
+            </span>
+        </a>
+    </li>
+    -->
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -537,6 +415,15 @@
             //bootstrap WYSIHTML5 - text editor
             $('.textarea').wysihtml5()
         })
+
+        //Pgae Number Hover
+        $(".page-number-unselected").hover(
+            function () {
+                $(this).addClass("page-number-hover");
+            }, function () {
+                $(this).removeClass("page-number-hover");
+            }
+        );
     </script>
 </body>
 </html>

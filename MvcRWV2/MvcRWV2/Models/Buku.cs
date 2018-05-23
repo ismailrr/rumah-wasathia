@@ -13,7 +13,7 @@ namespace MvcRWV2.Models
         [Required, StringLength(200)]
         public string Judul { get; set; }
         [StringLength(200)]
-        public string Penulis { get; set; }
+        public string PenulisBuku { get; set; }
         [StringLength(50), Display(Name = "Tahun Terbit")]
         public string Terbitan { get; set; }
         [StringLength(50)]
@@ -25,6 +25,10 @@ namespace MvcRWV2.Models
         public DateTime Tanggal { get; set; }
         public PathBuku Path { get; set; }
         public KategoriBuku Kategori { get; set; }
+        public Tag Tag { get; set; }
+        public bool Buang { get; set; }
+        public bool Post { get; set; }
+        public string Penulis { get; set; }
 
         public string DisplayTextPath
         {

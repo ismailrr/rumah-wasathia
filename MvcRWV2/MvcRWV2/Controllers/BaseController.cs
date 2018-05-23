@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MvcRWV2.Data;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public abstract class BaseController : Controller
     {
         private bool _disposed = false;

@@ -1001,7 +1001,7 @@ transition: all 0.3s ease;
 image-rendering: optimizequality;
 }
 
-.box:hover img {
+.box:hover img.img-hover-scale {
 -webkit-transform: scale(1.25); /* Safari and Chrome */
 -moz-transform: scale(1.25); /* Firefox */
 -ms-transform: scale(1.25); /* IE 9 */
@@ -2185,4 +2185,97 @@ border-top: 1px solid #ededed;
 .wrong-page {
 margin-top: 50px;
 margin-bottom: 50px;
+}
+
+/* Custom Admin Page */
+
+.box .gallery-preview {
+    height:100px;
+}
+.box .grid-gallery{
+    overflow:hidden;
+}
+.box-info {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding: 25px;
+}
+.btn-primary a {
+    color:white;
+}
+.gallery-preview{
+    margin:20px;
+    height:200px;
+    width:200px;
+}
+tbody tr td a {
+    color: #0073aa;
+    font-weight:600;
+}
+tbody tr td a:hover {
+    color: #00a0d2;
+}
+
+.preview{
+    height:100px;
+}
+
+.hover-show{
+    margin-top:10px;
+    display:none;
+    color:red;
+}
+
+tr td:hover .hover-show {
+    display: inline-block;
+    font-weight:100;
+}
+
+.sort-button{
+    width:100%;
+    height:100%;
+    padding:8px;
+}
+
+.sort-button:focus {
+    outline-color: #00a0d2;
+}
+
+.page-number {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.total-item p {
+    margin: 20px;
+    margin-right: 0;
+    color:black;
+    font-weight:bold;
+}
+
+.page-number-unselected {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid transparent;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.page-number-hover {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+    border-radius: 3px;
+    border: 1px solid transparent;
+}
+
+th{
+    color:black;
 }

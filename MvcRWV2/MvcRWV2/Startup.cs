@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
 using MvcRWV2.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace MvcRWV2
 {
@@ -35,6 +36,17 @@ namespace MvcRWV2
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            //Redirect ke halaman error apabila tidak login
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Shared/Error");
+
+            services.AddAuthentication()
+                .Services.ConfigureApplicationCookie(options =>
+                {
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                });
+
 
             services.AddMvc();
         }

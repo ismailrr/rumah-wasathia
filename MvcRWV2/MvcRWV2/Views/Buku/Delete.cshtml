@@ -18,10 +18,10 @@
             @Html.DisplayFor(model => model.Judul)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Penulis)
+            @Html.DisplayNameFor(model => model.PenulisBuku)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Penulis)
+            @Html.DisplayFor(model => model.PenulisBuku)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Terbitan)
@@ -58,6 +58,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="List">Kembali</a>
     </form>
 </div>

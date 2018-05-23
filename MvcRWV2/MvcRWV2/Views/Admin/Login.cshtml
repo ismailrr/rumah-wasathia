@@ -1,11 +1,6 @@
-﻿@page
-@model MvcRWV2.Models.Admin
-
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+﻿
 @{
     ViewBag.Title = "Admin Rumah Wasathia";
-    Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
 <div class="login-box">
     <img src="~/mytemplate/dist/img/logogram2.png" class="logogram" id="example1">
@@ -19,12 +14,12 @@
             <div class="form-group has-feedback">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <label>Username</label>
-                <input asp-for="NamaPengguna" value="username" type="text" class="form-control" placeholder="Username"><br />
+                <input value="username" type="text" class="form-control" placeholder="Username"><br />
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <label>Password</label>
-                <input asp-for="KataSandi" value="password" type="password" class="form-control" placeholder="Password" /><br />
+                <input value="password" type="password" class="form-control" placeholder="Password" /><br />
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -36,7 +31,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <input asp-for="RememberMe" type="checkbox" /><br />
+                    <input type="checkbox" /><br />
                     <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                 </div>
                 @Html.AntiForgeryToken()

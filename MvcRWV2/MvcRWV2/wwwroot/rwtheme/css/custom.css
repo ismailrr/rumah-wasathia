@@ -407,8 +407,7 @@ html {
     padding: 0 10px !important;
 }
 
-.RekamanKajian iframe,
-iframe {
+.RekamanKajian iframe{
     width: 100%;
 }
 

@@ -46,3 +46,4 @@ $('#myCarousel').on('click', '.nav a', function () {
     }
     clickEvent = false;
     });
+

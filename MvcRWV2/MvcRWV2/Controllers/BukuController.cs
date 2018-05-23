@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class BukuController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +23,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: Buku
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -27,8 +31,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             if (searchString != null)
             {
@@ -68,8 +72,76 @@ namespace MvcRWV2.Controllers
             return View(await PaginatedList<Buku>.CreateAsync(buku.AsNoTracking(), page ?? 1, pageSize));
         }
 
+        public async Task<IActionResult> List(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var buku = from s in _context.DaftarBuku
+                       .Include(ee => ee.Path)
+                       .Include(ee => ee.Kategori)
+                       select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                buku = buku.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    buku = buku.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    buku = buku.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    buku = buku.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    buku = buku.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+            int pageSize = 20;
+            return View(await PaginatedList<Buku>.CreateAsync(buku.AsNoTracking(), page ?? 1, pageSize));
+        }
+
         // GET: Buku/Details/5
         public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var buku = await _context.DaftarBuku
+                .Include(ee => ee.Path)
+                .Include(ee => ee.Kategori)
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (buku == null)
+            {
+                return NotFound();
+            }
+
+            return View(buku);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> DetailsView(int? id)
         {
             if (id == null)
             {
@@ -99,14 +171,14 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Penulis,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
+        public async Task<IActionResult> Create([Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
         {
             if (ModelState.IsValid)
             {
                 buku.Tanggal = DateTime.Now;
                 _context.Add(buku);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(buku);
         }
@@ -132,7 +204,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Penulis,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
         {
             if (id != buku.Id)
             {
@@ -143,6 +215,7 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    buku.Tanggal = DateTime.Now;
                     _context.Update(buku);
                     await _context.SaveChangesAsync();
                 }
@@ -157,7 +230,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(buku);
         }
@@ -188,7 +261,7 @@ namespace MvcRWV2.Controllers
             var buku = await _context.DaftarBuku.SingleOrDefaultAsync(m => m.Id == id);
             _context.DaftarBuku.Remove(buku);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool BukuExists(int id)

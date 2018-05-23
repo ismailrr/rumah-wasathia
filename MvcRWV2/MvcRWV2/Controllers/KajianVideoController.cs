@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class KajianVideoController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +23,14 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: KajianVideo
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             var kajianVideo = from s in _context.DaftarKajianVideo
                               .Include(ee => ee.Path)
@@ -47,7 +51,35 @@ namespace MvcRWV2.Controllers
             return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize));
         }
 
+        public async Task<IActionResult> List(
+            string sortOrder,
+            int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+
+            var kajianVideo = from s in _context.DaftarKajianVideo
+                              .Include(ee => ee.Path)
+                              .Include(ee => ee.Kategori)
+                              select s;
+
+            switch (sortOrder)
+            {
+                case "Date":
+                    kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    kajianVideo = kajianVideo.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize));
+        }
+
         // GET: KajianVideo/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -86,7 +118,7 @@ namespace MvcRWV2.Controllers
                 kajianVideo.Link = kajianVideo.Link.Replace("watch?v=", "embed/");
                 _context.Add(kajianVideo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(kajianVideo);
         }
@@ -123,6 +155,8 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    kajianVideo.Tanggal = DateTime.Now;
+                    kajianVideo.Link = kajianVideo.Link.Replace("watch?v=", "embed/");
                     _context.Update(kajianVideo);
                     await _context.SaveChangesAsync();
                 }
@@ -137,7 +171,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(kajianVideo);
         }
@@ -168,7 +202,7 @@ namespace MvcRWV2.Controllers
             var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
             _context.DaftarKajianVideo.Remove(kajianVideo);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool KajianVideoExists(int id)

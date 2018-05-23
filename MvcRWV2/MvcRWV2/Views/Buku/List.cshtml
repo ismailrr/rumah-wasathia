@@ -1,0 +1,97 @@
+﻿@model PaginatedList<MvcRWV2.Models.Buku>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- MENU #############################-->
+<!-- /MENU -->
+<!-- =============================================== -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="col-md-12">
+                        <div type="button" class="btn btn-primary">
+                            <a asp-action="Create">Buat Baru</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-16 text-center">
+                        <form asp-action="List" method="get">
+                            <div class="form-actions no-color">
+                                <p>
+                                    <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                    <input type="submit" value="Search" class="btn btn-default" /> |
+                                    <a asp-action="List">Hapus Filter</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <div class="sort-button">
+                                            Judul
+                                        </div>
+                                    </a>
+                                </th>
+                                <th>
+                                    Preview
+                                </th>
+                                <th>
+                                    Penulis
+                                </th>
+                                <th>
+                                    Kategori
+                                </th>
+                                <th>
+                                    Tag
+                                </th>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Tanggal</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">
+                                        <p>@Html.DisplayFor(modelItem => item.Judul)</p>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show">Delete</a>
+                                </td>
+                                <td>
+                                    <img class="preview" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Penulis)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Kategori)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tanggal)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col-->
+        </div>
+        <!-- ./row -->
+    </section>
+    <!-- /.content -->
+</div>

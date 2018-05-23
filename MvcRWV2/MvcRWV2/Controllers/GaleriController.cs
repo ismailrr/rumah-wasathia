@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class GaleriController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +23,14 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: Galeri
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             var galeri = from s in _context.DaftarGaleri
                          .Include(ee => ee.Path)
@@ -53,7 +57,41 @@ namespace MvcRWV2.Controllers
             return View(await PaginatedList<Galeri>.CreateAsync(galeri.AsNoTracking(), page ?? 1, pageSize));
         }
 
+        public async Task<IActionResult> List(
+           string sortOrder,
+           int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+
+            var galeri = from s in _context.DaftarGaleri
+                         .Include(ee => ee.Path)
+                         .Include(ee => ee.Kategori)
+                         select s;
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    galeri = galeri.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    galeri = galeri.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    galeri = galeri.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    galeri = galeri.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<Galeri>.CreateAsync(galeri.AsNoTracking(), page ?? 1, pageSize));
+        }
+
         // GET: Galeri/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -91,7 +129,7 @@ namespace MvcRWV2.Controllers
                 galeri.Tanggal = DateTime.Now;
                 _context.Add(galeri);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(galeri);
         }
@@ -128,6 +166,7 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    galeri.Tanggal = DateTime.Now;
                     _context.Update(galeri);
                     await _context.SaveChangesAsync();
                 }
@@ -142,7 +181,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(galeri);
         }
@@ -173,7 +212,7 @@ namespace MvcRWV2.Controllers
             var galeri = await _context.DaftarGaleri.SingleOrDefaultAsync(m => m.Id == id);
             _context.DaftarGaleri.Remove(galeri);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool GaleriExists(int id)

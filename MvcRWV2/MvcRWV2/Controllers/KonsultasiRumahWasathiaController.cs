@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class KonsultasiRumahWasathiaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +23,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: KonsultasiRumahWasathia
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -27,8 +31,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             if (searchString != null)
             {
@@ -68,6 +72,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: KonsultasiRumahWasathia/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -97,7 +102,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,Penulis")] KonsultasiRumahWasathia konsultasiRumahWasathia)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,PenulisKonten")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (ModelState.IsValid)
             {
@@ -130,7 +135,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,Penulis")] KonsultasiRumahWasathia konsultasiRumahWasathia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,PenulisKonten")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (id != konsultasiRumahWasathia.Id)
             {

@@ -17,6 +17,10 @@ namespace MvcRWV2.Models
         [Required]
         public PathKonsultasiEPaper Path { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
+        public Tag Tag { get; set; }
+        public bool Buang { get; set; }
+        public bool Post { get; set; }
+        public string Penulis { get; set; }
 
     }
 }

@@ -16,6 +16,10 @@ namespace MvcRWV2.Models
         public DateTime Tanggal { get; set; }
         public PathArtikel Path { get; set; }
         public KategoriArtikel Kategori { get; set; }
+        public Tag Tag { get; set; }
+        public bool Buang { get; set; }
+        public bool Post { get; set; }
+        public string Penulis { get; set; }
 
         public string DisplayTextPath
         {

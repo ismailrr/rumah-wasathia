@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,8 @@ using MvcRWV2.ViewModels;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class PathArtikelController : Controller
     {
         protected Repository Repository { get; private set; }
@@ -27,6 +30,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: PathArtikel
+        [AllowAnonymous]
         public IActionResult Index()
         {
 
@@ -36,6 +40,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: PathArtikel/Details/5
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             if (id == null)

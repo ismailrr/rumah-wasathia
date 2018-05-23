@@ -1,0 +1,39 @@
+﻿@model PaginatedList<MvcRWV2.Models.Galeri>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- MENU #############################-->
+<!-- /MENU -->
+<!-- =============================================== -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="col-md-12">
+                        <div type="button" class="btn btn-primary">
+                            <a asp-action="Create">Buat Baru</a>
+                        </div>
+                    </div>            
+                    @foreach (var item in Model)
+                            {
+                            <div class="col-md-2">
+                                
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id"><img alt="" src="~/rwtheme/images/galeri/@{@item.Judul}" class="gallery-preview" /></a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                            }
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col-->
+        </div>
+        <!-- ./row -->
+    </section>
+    <!-- /.content -->
+</div>

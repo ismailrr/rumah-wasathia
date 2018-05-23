@@ -2,29 +2,57 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Details</h2>
+<div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Judul)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Judul)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Tanggal)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Tanggal)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="gallery-detail col-sm-5">
+                        <a class="open-popup-link" href="#gallery-detail-popup" data-effect="mfp-zoom-in">
+                            <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(model => model.Path.Path)" alt="" />
+                            <span class="download-icon"><span class="ion-bag"></span>Beli Buku</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col-->
+        </div>
+        <!-- ./row -->
+    </section>
+    <!-- /.content -->
+</div>
+<div id="gallery-detail-popup" class="white-popup mfp-with-anim mfp-hide">
+    <div class="row">
+        <div class="col-xs-16">
+            <div class="buying-book">
+                <div class="ion-bag"></div>
+                <p>Untuk Pembelian buku bisa hubungi tim kami melalui kontak berikut:</p>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a asp-action="List">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div>
-    <h4>Galeri</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Judul)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Judul)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tanggal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tanggal)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>

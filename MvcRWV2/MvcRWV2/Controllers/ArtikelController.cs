@@ -11,6 +11,8 @@ using MvcRWV2.Models;
 
 namespace MvcRWV2.Controllers
 {
+    [Authorize]
+    [Route("[controller]/[action]")]
     public class ArtikelController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +23,7 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: Artikel
+        [AllowAnonymous]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -28,8 +31,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
             if (searchString != null)
             {
@@ -70,7 +73,57 @@ namespace MvcRWV2.Controllers
             return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
         }
 
+        public async Task<IActionResult> List(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var artikel = from s in _context.DaftarArtikel
+                          .Include(ee => ee.Path)
+                          .Include(ee => ee.Kategori)
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                artikel = artikel.Where(s => s.Judul.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    artikel = artikel.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    artikel = artikel.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    artikel = artikel.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    artikel = artikel.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
+        }
+
         // GET: Artikel/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -111,7 +164,7 @@ namespace MvcRWV2.Controllers
                     artikel.Tanggal = DateTime.Now;
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(List));
                 }
                 return View(artikel);
             }
@@ -156,9 +209,10 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    artikel.Tanggal = DateTime.Now;
                     _context.Update(artikel);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(List));
                 }
                 catch (DbUpdateException /* ex */)
                 {
@@ -197,7 +251,7 @@ namespace MvcRWV2.Controllers
             var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
             _context.DaftarArtikel.Remove(artikel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool ArtikelExists(int id)
