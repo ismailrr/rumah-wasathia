@@ -172,7 +172,7 @@ namespace MvcRWV2.Data
             new KategoriArtikel{Nama="Fikih",Tanggal=DateTime.Now},
             new KategoriArtikel{Nama="Muamalah",Tanggal=DateTime.Now},
             new KategoriArtikel{Nama="Hadist",Tanggal=DateTime.Now},
-            new KategoriArtikel{Nama="Alquran",Tanggal=DateTime.Now}
+            new KategoriArtikel{Nama="Alquran",Tanggal=DateTime.Now }
             };
             foreach (KategoriArtikel a in kategoriArtikel)
             {
@@ -246,7 +246,7 @@ namespace MvcRWV2.Data
             {
                 string MyString = s.Path.ToString();
                 string JudulString = MyString.Replace(".pdf","");
-                artikel.Add(new Artikel { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
+                artikel.Add(new Artikel { Judul = JudulString, Tanggal = DateTime.Now, Path = s, Status = 1 });
             }
 
             foreach (Artikel a in artikel)

@@ -16,6 +16,8 @@ namespace MvcRWV2.Controllers
     public class ArtikelController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public ArtikelController(ApplicationDbContext context)
         {
@@ -48,6 +50,7 @@ namespace MvcRWV2.Controllers
             var artikel = from s in _context.DaftarArtikel
                           .Include(ee => ee.Path)
                           .Include(ee => ee.Kategori)
+                          where s.Status == published   
                           select s;
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -77,11 +80,13 @@ namespace MvcRWV2.Controllers
             string sortOrder,
             string currentFilter,
             string searchString,
-            int? page)
+            int? page,
+            int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["Status"] = status;
 
             if (searchString != null)
             {
@@ -94,14 +99,32 @@ namespace MvcRWV2.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
+            var countItem = (from s in _context.DaftarArtikel
+                             where s.Status == published 
+                             select s).Count();
+            var countTrash = (from s in _context.DaftarArtikel
+                         where s.Status == trash
+                         select s).Count();
+
             var artikel = from s in _context.DaftarArtikel
                           .Include(ee => ee.Path)
                           .Include(ee => ee.Kategori)
                           select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 artikel = artikel.Where(s => s.Judul.Contains(searchString));
             }
+
+            if (status == null)
+            {
+                artikel = artikel.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                artikel = artikel.Where(s => s.Status == trash);
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -119,7 +142,7 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 20;
-            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize, countItem, countTrash));
         }
 
         // GET: Artikel/Details/5
@@ -257,6 +280,24 @@ namespace MvcRWV2.Controllers
         private bool ArtikelExists(int id)
         {
             return _context.DaftarArtikel.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Trash(int id)
+        {
+            var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
+            artikel.Status = trash;
+            _context.DaftarArtikel.Update(artikel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
+            artikel.Status = published;
+            _context.DaftarArtikel.Update(artikel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List", new{ status = trash });
         }
     }
 }

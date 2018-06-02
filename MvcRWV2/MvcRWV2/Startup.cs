@@ -44,7 +44,7 @@ namespace MvcRWV2
                 .Services.ConfigureApplicationCookie(options =>
                 {
                     options.SlidingExpiration = true;
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(4000);
                 });
 
 

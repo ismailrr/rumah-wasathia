@@ -19,9 +19,8 @@ namespace MvcRWV2.Models
         public PathKajianAudio Path { get; set; }
         public KategoriKajian Kategori { get; set; }
         public Tag Tag { get; set; }
-        public bool Buang { get; set; }
-        public bool Post { get; set; }
         public string Penulis { get; set; }
+        public int Status { get; set; }
 
         public string DisplayTextPath
         {

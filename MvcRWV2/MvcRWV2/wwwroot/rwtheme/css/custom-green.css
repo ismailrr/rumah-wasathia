@@ -2226,9 +2226,27 @@ tbody tr td a:hover {
     color:red;
 }
 
-tr td:hover .hover-show {
+.hover-hide:hover .hover-show {
     display: inline-block;
-    font-weight:100;
+    font-weight: 100;
+}
+
+.item.hover-hide{
+    position:relative;
+}
+
+.hover-delete {
+    position:absolute !important;
+    top:0;
+    right:10px;
+    z-index:9999;
+    margin-top:0;
+    font-size:18px;
+}
+
+.hover-delete a:hover{
+    color:red;
+    opacity:0.5;
 }
 
 .sort-button{

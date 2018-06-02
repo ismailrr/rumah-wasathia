@@ -11,6 +11,17 @@ namespace MvcRWV2
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
         public int TotalItem { get; private set; }
+        public int TotalTrash { get; private set; }
+
+        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize,int totalItem, int totalTrash)
+        {
+            PageIndex = pageIndex;
+            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            TotalItem = totalItem;
+            TotalTrash = totalTrash;
+
+            this.AddRange(items);
+        }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
@@ -42,6 +53,13 @@ namespace MvcRWV2
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        }
+
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize, int totalItem, int totalTrash)
+        {
+            var count = await source.CountAsync();
+            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            return new PaginatedList<T>(items, count, pageIndex, pageSize, totalItem, totalTrash);
         }
     }
 }

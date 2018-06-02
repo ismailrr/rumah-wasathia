@@ -8,32 +8,80 @@
 <!-- /MENU -->
 <!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Main content -->
-    <section class="content">
+<div class="row">
+            <div class="col-md-6">
+                <h1 class="inline">Gambar</h1>
+                <div type="button" class="btn btn-primary">
+                    <a asp-action="Create">Upload Gambar</a>
+                </div>
+            </div>
+            <div class="col-md-8 text-right total-item">
+                <p>
+                    @Model.TotalItem Gambar              
+                </p>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-16">
                 <div class="box box-info">
-                    <div class="col-md-12">
-                        <div type="button" class="btn btn-primary">
-                            <a asp-action="Create">Buat Baru</a>
-                        </div>
-                    </div>            
-                    @foreach (var item in Model)
+                    <!-- Masonry Begin -->
+                    <div class="masonry-wrapper">
+                        <div class="masonry">
+                            @foreach (var item in Model)
                             {
-                            <div class="col-md-2">
-                                
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id"><img alt="" src="~/rwtheme/images/galeri/@{@item.Judul}" class="gallery-preview" /></a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <div class="item hover-hide">
+                                <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/@{@item.Judul}">
+                                    <div class="thumb-box">
+                                        <span class="ion-arrow-expand"></span>
+                                        <img alt="" src="~/rwtheme/images/galeri/@{@item.Judul}" class="img-thumbnail">
+                                    </div>
+                                </a>
+                                <div class="album-desc">
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="hover-delete">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="hover-show"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                             }
+                        </div>
+                    </div>
+                    <!-- Masonry End -->
+                </div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-6">
+                                    <a asp-action="Details" asp-route-id=""><img alt="" src="~/rwtheme/images/galeri/" class="gallery-preview" /></a>
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
             <!-- /.col-->
         </div>
         <!-- ./row -->
-    </section>
-    <!-- /.content -->
-</div>
