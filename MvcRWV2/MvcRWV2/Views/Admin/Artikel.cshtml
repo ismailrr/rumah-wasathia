@@ -1,4 +1,5 @@
-﻿
+﻿@model MvcRWV2.Models.Artikel
+
 @{
     ViewBag.Title = "Admin Rumah Wasathia";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -39,6 +40,24 @@
                                 <button type="submit" class="btn btn-primary pull-right">Bagikan</button>
                             </div>
                         </form>
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Judul" class="control-label"></label>
+                                <input asp-for="Judul" class="form-control" />
+                                <span asp-validation-for="Judul" class="text-danger"></span>
+                            </div>
+                            <div class="form-group-sm">
+                                <label asp-for="Path" class="col-md-3 control-label"></label>
+                                <div class="col-md-9">
+                                    <input asp-for="Path" type="file" class="form-control" style="height:auto" />
+                                    <span asp-validation-for="Path" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.box -->
@@ -49,3 +68,6 @@
     </section>
     <!-- /.content -->
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

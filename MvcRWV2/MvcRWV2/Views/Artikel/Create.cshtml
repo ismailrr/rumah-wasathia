@@ -1,40 +1,52 @@
 ﻿@model MvcRWV2.Models.Artikel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewBag.Title = "Admin Rumah Wasathia";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<!-- MENU #############################-->
+<!-- /MENU -->
+<!-- =============================================== -->
+<!-- Content Wrapper. Contains page content -->
 
-<h2>Create</h2>
-
-<h4>Artikel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
-            </div>
-            <div class="form-group-sm">
-                <label asp-for="Path" class="col-md-3 control-label"></label>
-                <div class="col-md-9">
-                    <input asp-for="Path" type="file" class="form-control" style="height:auto" />
-                    <span asp-validation-for="Path" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-16">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Unggah Artikel</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body pad">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Judul" class="control-label"></label>
+                                <input asp-for="Judul" class="form-control" />
+                                <span asp-validation-for="Judul" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Path" class="col-md-3 control-label">Upload File</label>
+                                <div class="col-md-9">
+                                    <input asp-for="Path" type="file" class="form-control" style="height:auto" />
+                                    <span asp-validation-for="Path" class="text-danger"></span>
+                                </div>
+                                <p class="help-block">Pilih Artikel yang akan diunggah</p>
+                            </div>
+                            <div class="box-footer form-group">
+                                <input type="submit" class="btn btn-primary pull-right" value="Bagikan" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <!-- /.box -->
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="List">Kembali</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+            <!-- /.col-->
+        </div>
+        <!-- ./row -->
+    

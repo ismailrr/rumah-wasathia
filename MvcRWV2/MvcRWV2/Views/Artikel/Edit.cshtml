@@ -2,38 +2,45 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Edit</h2>
 
-<h4>Artikel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
+    <div class="col-md-16">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Edit Artikel</h3>
+                <div class="pull-right box-tools">
+                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Tanggal" class="control-label"></label>
-                <input asp-for="Tanggal" class="form-control" />
-                <span asp-validation-for="Tanggal" class="text-danger"></span>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Judul" class="control-label"></label>
+                        <input asp-for="Judul" class="form-control" />
+                        <span asp-validation-for="Judul" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Simpan" class="btn btn-default" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
+        <!-- /.box -->
     </div>
+    <!-- /.col-->
 </div>
-
+<!-- ./row -->
 <div>
     <a asp-action="List">Kembali</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

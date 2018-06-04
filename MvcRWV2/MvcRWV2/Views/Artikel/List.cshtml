@@ -121,6 +121,7 @@
                                                     <div>
                                                         @if(@item.Status == 1)
                                                         {
+                                                            <a asp-action="Edit" asp-route-id="@item.Id" class="hover-show">Edit<span style="color:black"> | </span></a>
                                                             <a asp-action="Trash" asp-route-id="@item.Id" class="hover-show">Trash</a>
                                                         }
                                                         else if (@item.Status == 2)
