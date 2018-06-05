@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcRWV2.ViewModels
+namespace MvcRWV2.Models.ViewModels
 {
     public class PathArtikelEditVM
         : PathArtikelBaseVM

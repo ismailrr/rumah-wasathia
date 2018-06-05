@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace MvcRWV2.ViewModels
+namespace MvcRWV2.Models.ViewModels
 {
     public class PathArtikelAddVM : PathArtikelBaseVM
     {

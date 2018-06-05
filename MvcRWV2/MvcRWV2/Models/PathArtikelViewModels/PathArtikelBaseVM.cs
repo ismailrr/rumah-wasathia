@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MvcRWV2.ViewModels
+namespace MvcRWV2.Models.ViewModels
 {
     public abstract class PathArtikelBaseVM
     {

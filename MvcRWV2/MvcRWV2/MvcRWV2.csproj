@@ -25,4 +25,15 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\ArtikelViewModels\" />
+    <Folder Include="Models\BukuViewModels\" />
+    <Folder Include="Models\GaleriViewModels\" />
+    <Folder Include="Models\KonsultasiEPaperViewModels\" />
+    <Folder Include="Models\KonsultasiInfografisViewModels\" />
+    <Folder Include="Models\KonsultasiRepublikaViewModels\" />
+    <Folder Include="Models\KonsultasiRumahWasathiaViewModels\" />
+    <Folder Include="Models\PathArtikelViewModels\" />
+  </ItemGroup>
+
 </Project>
