@@ -1,4 +1,4 @@
-﻿@model MvcRWV2.Models.Buku
+﻿@model MvcRWV2.Models.BukuViewModels.DetailsBukuViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -26,29 +26,29 @@
                     <div class="row">
                         <div class="book-detail col-sm-5">
                             <a class="open-popup-link" href="#buy-book" data-effect="mfp-zoom-in">
-                                <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(model => model.Path.Path)" alt="" />
+                                <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(model => model.BukuModel.Path.Path)" alt="" />
                                 <span class="download-icon"><span class="ion-bag"></span>Beli Buku</span>
                             </a>
                         </div>
                         <div class="col-sm-10">
                             <div class="detail">
-                                <h2>@Html.DisplayFor(model => model.Judul)h</h2>
+                                <h2>@Html.DisplayFor(model => model.BukuModel.Judul)h</h2>
                                 <table class="table1">
                                     <tr>
-                                        <td width="25%">@Html.DisplayNameFor(model => model.PenulisBuku)</td>
-                                        <td width="75%">@Html.DisplayFor(model => model.PenulisBuku)</td>
+                                        <td width="25%">@Html.DisplayNameFor(model => model.BukuModel.PenulisBuku)</td>
+                                        <td width="75%">@Html.DisplayFor(model => model.BukuModel.PenulisBuku)</td>
                                     </tr>
                                     <tr>
-                                        <td>@Html.DisplayNameFor(model => model.Terbitan)</td>
-                                        <td>@Html.DisplayFor(model => model.Terbitan)</td>
+                                        <td>@Html.DisplayNameFor(model => model.BukuModel.Terbitan)</td>
+                                        <td>@Html.DisplayFor(model => model.BukuModel.Terbitan)</td>
                                     </tr>
                                     <tr>
-                                        <td>@Html.DisplayNameFor(model => model.Tebal)</td>
-                                        <td>@Html.DisplayFor(model => model.Tebal)</td>
+                                        <td>@Html.DisplayNameFor(model => model.BukuModel.Tebal)</td>
+                                        <td>@Html.DisplayFor(model => model.BukuModel.Tebal)</td>
                                     </tr>
                                     <tr>
-                                        <td>@Html.DisplayNameFor(model => model.ISBN)</td>
-                                        <td>@Html.DisplayFor(model => model.ISBN)</td>
+                                        <td>@Html.DisplayNameFor(model => model.BukuModel.ISBN)</td>
+                                        <td>@Html.DisplayFor(model => model.BukuModel.ISBN)</td>
                                     </tr>
                                 </table>
                             </div>
@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-xs-16">
                             <div class="description">
-                                <p>@Html.DisplayFor(model => model.Deskripsi)</p>
+                                <p>@Html.DisplayFor(model => model.BukuModel.Deskripsi)</p>
                             </div>
                         </div>
                     </div>
@@ -75,84 +75,55 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer pull-left">
-                            <div class="main-title right-side">Infografis Terbaru</div>
-                            <ul class="list-unstyled kajian">
-                                <li>
-                                    <a href="~/rwtheme/pdf/Belanja dengan Kartu Diskon.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Belanja dengan Kartu Diskon</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Bitcoin Menurut Fikih.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Bitcoin Menurut Fikih</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Denda Keterlambatan pada bank syariah.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Denda Keterlambatan pada bank syariah</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Fikih Bekerja di Lembaga konvensional.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Fikih Bekerja di Lembaga konvensional</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="~/rwtheme/pdf/Fikih Biaya Perjalanan Dinas yang Dipersingkat.pdf" target="_blank">
-                                        <div class="row">
-                                            <div class="col-sm-4"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                            <div class="col-sm-12">
-                                                <h4>Fikih Biaya Perjalanan Dinas yang Dipersingkat</h4>
-                                                <div class="text-danger sub-info">
-                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
+            <div class="col-sm-5 hidden-ms right-sec">
+                <div class="bordered">
+                    <div class="row ">
+                        <!-- activities start -->
+                        <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs nav-justified " role="tablist">
+                                <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Republika</a></li>
+                                <li><a href="#artikel" role="tab" data-toggle="tab">Artikel</a></li>
                             </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="infografis">
+                                    <ul class="list-unstyled kajian">
+                                        @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
+                                        {
+                                            <li>
+
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a href="~/KonsultasiInfografis/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                </div>
+                                <div class="tab-pane" id="artikel">
+                                    <ul class="list-unstyled kajian">
+                                        @foreach (Artikel item in Model.ArtikelModel)
+                                        {
+                                            <li>
+                                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                        <div class="col-sm-11">
+                                                            <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
+                                                            <div class="text-danger sub-info">
+                                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                </div>
+                            </div>
                         </div>
+                        <!-- activities end -->
                     </div>
                 </div>
             </div>

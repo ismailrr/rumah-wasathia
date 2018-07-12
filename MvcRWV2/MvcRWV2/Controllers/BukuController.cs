@@ -176,12 +176,31 @@ namespace MvcRWV2.Controllers
                 .Include(ee => ee.Path)
                 .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            DetailsBukuViewModel mymodel = new DetailsBukuViewModel();
+
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                                   where s.Status == published
+                                   select s;
+            mymodel.KonsultasiRepublikaModel = from s in _context.DaftarKonsultasiRepublika
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                                               where s.Status == published
+                                               select s;
+
+            var atikel = mymodel.ArtikelModel;
+            var konsultasiRepublika = mymodel.KonsultasiRepublikaModel;
+
             if (buku == null)
             {
                 return NotFound();
             }
 
-            return View(buku);
+            mymodel.BukuModel = buku;
+            return View(mymodel);
         }
 
         // GET: Buku/Create
