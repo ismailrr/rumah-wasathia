@@ -43,7 +43,7 @@ namespace MvcRWV2.Models
             {
                 if (Judul != null && Judul.Length > 50)
                 {
-                    return $"{Judul.Substring(0, 50)}";
+                    return $"{Judul.Substring(0, 50)}...";
                 }
                 else
                 {
