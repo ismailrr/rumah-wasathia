@@ -29,5 +29,20 @@ namespace MvcRWV2.Models
                 return $"{Path?.Path}";
             }
         }
+
+        public string DisplayTextJudul
+        {
+            get
+            {
+                if (Judul != null && Judul.Length > 50)
+                {
+                    return $"{Judul.Substring(0, 50)}";
+                }
+                else
+                {
+                    return $"{Judul}";
+                }
+            }
+        }
     }
 }

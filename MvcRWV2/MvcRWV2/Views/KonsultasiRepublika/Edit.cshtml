@@ -13,6 +13,9 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Status" />
+            <input type="hidden" asp-for="Tag" />
+            <input type="hidden" asp-for="Kategori" />
             <div class="form-group">
                 <label asp-for="Judul" class="control-label"></label>
                 <input asp-for="Judul" class="form-control" />

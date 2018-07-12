@@ -2,32 +2,47 @@
 
 @{
     ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>KonsultasiInfografis</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Judul)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Judul)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tanggal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tanggal)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<h2>Konfirmasi Hapus</h2>
+<div class="row">
+    <div class="col-md-16">
+        <div class="box box-info">
+            <div class="box-header">
+                <h3 class="box-title">Hapus File ?</h3>
+                <div class="pull-right box-tools">
+                    <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body pad">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Judul)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Judul)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Tanggal)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Tanggal)
+                    </dd>
+                </dl>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-action="List" asp-route-status="2">Kembali</a>
+                </form>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col-->
 </div>
+<!-- ./row -->

@@ -20,5 +20,20 @@ namespace MvcRWV2.Models
         public Tag Tag { get; set; }
         public string Penulis { get; set; }
         public int Status { get; set; }
+
+        public string DisplayTextJudul
+        {
+            get
+            {
+                if (Judul != null && Judul.Length > 50)
+                {
+                    return $"{Judul.Substring(0, 50)}";
+                }
+                else
+                {
+                    return $"{Judul}";
+                }
+            }
+        }
     }
 }

@@ -18,6 +18,5 @@ namespace MvcRWV2.Models
         [Required]    
         public PathGaleri Path { get; set; }
         public KategoriGaleri Kategori { get; set; }
-
     }
 }

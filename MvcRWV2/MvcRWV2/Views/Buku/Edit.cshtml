@@ -2,63 +2,173 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Edit</h2>
-
-<h4>Buku</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PenulisBuku" class="control-label"></label>
-                <input asp-for="PenulisBuku" class="form-control" />
-                <span asp-validation-for="PenulisBuku" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Terbitan" class="control-label"></label>
-                <input asp-for="Terbitan" class="form-control" />
-                <span asp-validation-for="Terbitan" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Deskripsi" class="control-label"></label>
-                <input asp-for="Deskripsi" class="form-control" />
-                <span asp-validation-for="Deskripsi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tebal" class="control-label"></label>
-                <input asp-for="Tebal" class="form-control" />
-                <span asp-validation-for="Tebal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tanggal" class="control-label"></label>
-                <input asp-for="Tanggal" class="form-control" />
-                <span asp-validation-for="Tanggal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+    <div class="col-md-6">
+        <h1 class="inline">Buku</h1>
+        <div type="button" class="btn btn-primary">
+            <a asp-action="Create">Buat Baru</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="List">Kembali</a>
+<hr />
+<div class="row">
+    <form asp-action="Edit">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Edit Buku</h3>
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body pad">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Status" />
+                    <input type="hidden" asp-for="Tag" />
+                    <input type="hidden" asp-for="Kategori" />
+                    <input type="hidden" asp-for="Penulis" />
+                    <div class="form-group">
+                        <label asp-for="Judul" class="control-label"></label>
+                        <input asp-for="Judul" class="form-control" />
+                        <span asp-validation-for="Judul" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PenulisBuku" class="control-label"></label>
+                        <input asp-for="PenulisBuku" class="form-control" />
+                        <span asp-validation-for="PenulisBuku" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Terbitan" class="control-label"></label>
+                        <input asp-for="Terbitan" class="form-control" />
+                        <span asp-validation-for="Terbitan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ISBN" class="control-label"></label>
+                        <input asp-for="ISBN" class="form-control" />
+                        <span asp-validation-for="ISBN" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Deskripsi" class="control-label"></label>
+                        <input asp-for="Deskripsi" class="form-control" />
+                        <span asp-validation-for="Deskripsi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tebal" class="control-label"></label>
+                        <input asp-for="Tebal" class="form-control" />
+                        <span asp-validation-for="Tebal" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-16">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Publish</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <p><i class="fa fa-info-circle"></i> Status: @if (@Model.Status == 1)
+                        {<strong>dipublish</strong>}
+                        else
+                        {<strong>tidak dipublish</strong>}</p>
+                        <p><i class="fa fa-calendar-alt"></i> Di Publish Pada: <strong>@Model.Tanggal.Date</strong></p>
+                        <hr>
+                        <div class="form-group">
+                            <a asp-action="Trash" asp-route-id="@Model.Id" style="color:darkred;">Pindah ke Trash</a>
+                            <span class="pull-right">
+                                <input type="submit" value="Simpan" class="btn btn-default" />
+                                <a asp-action="List" class="btn btn-info" role="button">Kembali</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-16">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Tag</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <select class="form-control" id="sel2" asp-for="Tag">
+                                <option value="null"></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <span asp-validation-for="Tag" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-16">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Kategori</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <select class="form-control" id="sel1" asp-for="Kategori">
+                                <option value="null"></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <span asp-validation-for="Kategori" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-16">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Gambar Cover</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            @if (@Model.Path.Path != null)
+                            {
+                                <img class="preview" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => @Model.Path.Path)" alt="" />
+                            }
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </form>
+    <!-- /.col-->
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<!-- ./row -->

@@ -1,4 +1,4 @@
-﻿@model PaginatedList<MvcRWV2.Models.Buku>
+﻿@model MvcRWV2.Models.BukuViewModels.IndexBukuViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -32,17 +32,17 @@
                                 <div class="form-actions no-color">
                                     <p>
                                         <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                                        <input type="submit" value="Search" class="btn btn-default" /> |
+                                        <input type="submit" value="Cari" class="btn btn-default" /> |
                                         <a asp-action="Index">Hapus Filter</a>
                                     </p>
                                 </div>
                             </form>
                         </div>
-                        @foreach (var item in Model)
+                        @foreach (Buku item in Model.BukuModel)
                         {
                             <div class="col-md-4 col-sm-8">
                                 <div class="item topic text-center">
-                                    <a asp-action="DetailsView" asp-route-id="@item.Id">
+                                    <a asp-action="Details" asp-route-id="@item.Id">
                                         <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                         <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
                                     </a>
@@ -53,19 +53,19 @@
                         <div class="row">
                             <div class="col-sm-16 text-center">
                                 @{
-                                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                                    var prevDisabled = !Model.BukuModel.HasPreviousPage ? "disabled" : "";
+                                    var nextDisabled = !Model.BukuModel.HasNextPage ? "disabled" : "";
                                 }
                                 <a asp-action="Index"
                                    asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                   asp-route-page="@(Model.PageIndex - 1)"
+                                   asp-route-page="@(Model.BukuModel.PageIndex - 1)"
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                    class="btn btn-default @prevDisabled">
                                     Previous
                                 </a>
                                 <a asp-action="Index"
                                    asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                   asp-route-page="@(Model.PageIndex + 1)"
+                                   asp-route-page="@(Model.BukuModel.PageIndex + 1)"
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                                    class="btn btn-default @nextDisabled">
                                     Next
@@ -75,74 +75,56 @@
                     </div>
                 </div>
             </div>
-            <div id="hidden-book" class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
-                <div class="row">
-                    <div class="col-sm-16">
-                        <div class="main-title-outer">
-                            <div class="main-title right-side">Perpustakaan</div>
-                            <ul class="list-unstyled kitab">
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="library-wrapper">
-                                                <img class="img-thumbnail" src="~/rwtheme/images/book/cover1.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Riba, Gharar & Kaidah Ekonomi Syariah</h3>
-                                            <div class="download">
-                                                <a href="@Url.Action("SubBuku1","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4 ">
-                                            <div class="library-wrapper">
-                                                <img class="img-thumbnail" src="~/rwtheme/images/book/cover2.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Maqashid Bisnis & Keuangan Islam</h3>
-                                            <div class="download">
-                                                <a href="@Url.Action("SubBuku2","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="library-wrapper">
-                                                <img class="img-thumbnail" src="~/rwtheme/images/book/cover3.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Ushul Fiqh Muamalah</h3>
-                                            <div class="download">
-                                                <a href="@Url.Action("SubBuku3","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="library-wrapper">
-                                                <img class="img-thumbnail" src="~/rwtheme/images/book/cover4.jpg" alt="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 book-desc">
-                                            <h3>Fikih Muamalah</h3>
-                                            <div class="download">
-                                                <a href="@Url.Action("SubBuku3","rumahwasathia")"><i class="fas fa-tasks"></i>Lihat Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+            <!-- right sec start -->
+            <div class="col-sm-5 hidden-ms right-sec">
+                <div class="bordered">
+                    <div class="row ">
+                        <!-- activities start -->
+                        <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs nav-justified " role="tablist">
+                                <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Republika</a></li>
+                                <li><a href="#artikel" role="tab" data-toggle="tab">Artikel</a></li>
                             </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="infografis">
+                                    <ul class="list-unstyled kajian">
+                                        @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
+                                        {
+                                            <li>
+                                                
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a href="~/KonsultasiInfografis/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                </div>
+                                <div class="tab-pane" id="artikel">
+                                    <ul class="list-unstyled kajian">
+                                        @foreach (Artikel item in Model.ArtikelModel)
+                                        {
+                                            <li>
+                                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                        <div class="col-sm-11">
+                                                            <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
+                                                            <div class="text-danger sub-info">
+                                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                </div>
+                            </div>
                         </div>
+                        <!-- activities end -->
                     </div>
                 </div>
             </div>

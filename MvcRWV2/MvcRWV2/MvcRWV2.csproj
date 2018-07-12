@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Uploads\NewFolder1\**" />
+    <Content Remove="Uploads\NewFolder1\**" />
+    <EmbeddedResource Remove="Uploads\NewFolder1\**" />
+    <None Remove="Uploads\NewFolder1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Models\KonsultasiMedsosKatgeori.cs" />
     <Compile Remove="Models\KonsultasiRepublikaKategori.cs" />
   </ItemGroup>
@@ -26,14 +33,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ArtikelViewModels\" />
-    <Folder Include="Models\BukuViewModels\" />
     <Folder Include="Models\GaleriViewModels\" />
     <Folder Include="Models\KonsultasiEPaperViewModels\" />
-    <Folder Include="Models\KonsultasiInfografisViewModels\" />
-    <Folder Include="Models\KonsultasiRepublikaViewModels\" />
-    <Folder Include="Models\KonsultasiRumahWasathiaViewModels\" />
     <Folder Include="Models\PathArtikelViewModels\" />
+    <Folder Include="Uploads\Image\" />
+    <Folder Include="Uploads\Music\" />
+    <Folder Include="Uploads\PDF\" />
+    <Folder Include="Uploads\Video\" />
+    <Folder Include="wwwroot\music\" />
+    <Folder Include="wwwroot\pdf\" />
+    <Folder Include="wwwroot\video\" />
   </ItemGroup>
 
 </Project>

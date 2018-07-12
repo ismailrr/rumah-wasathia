@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
-using MvcRWV2.ViewModels;
+using MvcRWV2.Models.ViewModels;
 
 namespace MvcRWV2.Controllers
 {

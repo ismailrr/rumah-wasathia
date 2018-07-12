@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
+using MvcRWV2.Models.KonsultasiInfografisViewModels;
 
 namespace MvcRWV2.Controllers
 {
@@ -16,6 +17,8 @@ namespace MvcRWV2.Controllers
     public class KonsultasiInfografisController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public KonsultasiInfografisController(ApplicationDbContext context)
         {
@@ -45,10 +48,30 @@ namespace MvcRWV2.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
+            IndexKonsultasiInfografisViewModel mymodel = new IndexKonsultasiInfografisViewModel();
+
             var infografis = from s in _context.DaftarKonsultasiInfografis
                              .Include(ee => ee.Path)
                              .Include(ee => ee.Kategori)
+                             where s.Status == published
                              select s;
+
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                                   where s.Status == published
+                                   select s;
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                                where s.Status == published
+                                select s;
+
+            var atikel = mymodel.ArtikelModel;
+            var buku = mymodel.BukuModel;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 infografis = infografis.Where(s => s.Judul.Contains(searchString));
@@ -70,7 +93,77 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<KonsultasiInfografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize));
+            mymodel.KonsultasiInfografisModel = await PaginatedList<KonsultasiInfografis>.CreateAsync(infografis.AsNoTracking(), page ?? 1, pageSize);
+            return View(mymodel);
+        }
+
+        public async Task<IActionResult> List(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page,
+            int? status)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["Status"] = status;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var countItem = (from s in _context.DaftarKonsultasiInfografis
+                             where s.Status == published
+                             select s).Count();
+            var countTrash = (from s in _context.DaftarKonsultasiInfografis
+                              where s.Status == trash
+                              select s).Count();
+
+            var konsultasiInfografis = from s in _context.DaftarKonsultasiInfografis
+                          .Include(ee => ee.Path)
+                          .Include(ee => ee.Kategori)
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                konsultasiInfografis = konsultasiInfografis.Where(s => s.Judul.Contains(searchString));
+            }
+
+            if (status == null)
+            {
+                konsultasiInfografis = konsultasiInfografis.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                konsultasiInfografis = konsultasiInfografis.Where(s => s.Status == trash);
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    konsultasiInfografis = konsultasiInfografis.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    konsultasiInfografis = konsultasiInfografis.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    konsultasiInfografis = konsultasiInfografis.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    konsultasiInfografis = konsultasiInfografis.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<KonsultasiInfografis>.CreateAsync(konsultasiInfografis.AsNoTracking(), page ?? 1, pageSize, countItem, countTrash));
         }
 
         // GET: Infografis/Details/5
@@ -125,7 +218,7 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
-            var infografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            var infografis = await _context.DaftarKonsultasiInfografis.Include(ee => ee.Path).SingleOrDefaultAsync(m => m.Id == id);
             if (infografis == null)
             {
                 return NotFound();
@@ -138,7 +231,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] KonsultasiInfografis infografis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Kategori,Tag,Penulis,Status")] KonsultasiInfografis infografis)
         {
             if (id != infografis.Id)
             {
@@ -200,6 +293,24 @@ namespace MvcRWV2.Controllers
         private bool InfografisExists(int id)
         {
             return _context.DaftarKonsultasiInfografis.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Trash(int id)
+        {
+            var konsultasiInfografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiInfografis.Status = trash;
+            _context.DaftarKonsultasiInfografis.Update(konsultasiInfografis);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            var konsultasiInfografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiInfografis.Status = published;
+            _context.DaftarKonsultasiInfografis.Update(konsultasiInfografis);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List", new { status = trash });
         }
     }
 }

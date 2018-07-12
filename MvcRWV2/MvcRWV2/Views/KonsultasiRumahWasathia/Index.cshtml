@@ -1,5 +1,4 @@
-﻿@model PaginatedList<MvcRWV2.Models.KonsultasiRumahWasathia>
-
+﻿@model MvcRWV2.Models.KonsultasiRumahWasathiaViewModels.IndexKonsultasiRWViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -35,48 +34,48 @@
                                     <div class="form-actions no-color">
                                         <p>
                                             Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                                            <input type="submit" value="Search" class="btn btn-default" /> |
+                                            <input type="submit" value="Cari" class="btn btn-default" /> |
                                             <a asp-action="Index">Back to Full List</a>
                                         </p>
                                     </div>
                                 </form>
                             </div>
-                            @foreach (var item in Model)
+                            @foreach (KonsultasiRumahWasathia item in Model.KonsultasiRumahWasathiaModel)
                             {
-                            <div class="sec-topic col-sm-16 col-md-8">
-                                <a href="@Url.Action("Details","KonsultasiRumahWasathia")">
-                                    <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">
-                                    <div class="sec-info">
-                                        <h3>@Html.DisplayFor(modelItem => item.Judul)</h3>
-                                        <div class="text-danger sub-info-bordered">
-                                            <div class="time"><span class="ion-android-data icon"></span>Dec 9 2014</div>
-                                            <div class="comments"><span class="ion-chatbubbles icon"></span>204</div>
+                                <div class="sec-topic col-sm-16 col-md-8">
+                                    <a asp-action="Details" asp-route-id="@item.Id">
+                                        <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">
+                                        <div class="sec-info">
+                                            <h3>@Html.DisplayFor(modelItem => item.Judul)</h3>
+                                            <div class="text-danger sub-info-bordered">
+                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                <!--<div class="comments"><span class="ion-chatbubbles icon"></span>204</div>-->
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                            }
-                            <div class="row">
-                                <div class="col-sm-16 text-center">
-                                    @{
-                                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                                    }
-                                    <a asp-action="Index"
-                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                       asp-route-page="@(Model.PageIndex - 1)"
-                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                       class="btn btn-default @prevDisabled">
-                                        Previous
-                                    </a>
-                                    <a asp-action="Index"
-                                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                       asp-route-page="@(Model.PageIndex + 1)"
-                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                       class="btn btn-default @nextDisabled">
-                                        Next
                                     </a>
                                 </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-16 text-center">
+                                @{
+                                    var prevDisabled = !Model.KonsultasiRumahWasathiaModel.HasPreviousPage ? "disabled" : "";
+                                    var nextDisabled = !Model.KonsultasiRumahWasathiaModel.HasNextPage ? "disabled" : "";
+                                }
+                                <a asp-action="Index"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.KonsultasiRumahWasathiaModel.PageIndex - 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @prevDisabled">
+                                    Previous
+                                </a>
+                                <a asp-action="Index"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.KonsultasiRumahWasathiaModel.PageIndex + 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @nextDisabled">
+                                    Next
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -89,7 +88,7 @@
                                 <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs nav-justified " role="tablist">
-                                        <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Infografis</a></li>
+                                        <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Buku</a></li>
                                         <li><a href="#artikel" role="tab" data-toggle="tab">Artikel</a></li>
                                     </ul>
 
@@ -97,151 +96,50 @@
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="infografis">
                                             <ul class="list-unstyled kajian">
+                                                @foreach (Buku item in Model.BukuModel)
+                                                {
                                                 <li>
-                                                    <a href="~/rwtheme/file-document/pdf/Belanja dengan Kartu Diskon.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Belanja dengan Kartu Diskon</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="library-wrapper">
+                                                                <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                                             </div>
                                                         </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/pdf/Bitcoin Menurut Fikih.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Bitcoin Menurut Fikih</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
+                                                        <div class="col-sm-12 book-desc">
+                                                            <h3>@Html.DisplayFor(modelItem => item.Judul)</h3>
+                                                            <div class="download">
+                                                                <a href="@Url.Action("Details","Buku",new {id=item.Id })">
+                                                                    <i class="fas fa-tasks"></i>Lihat Detail
+                                                                </a>
                                                             </div>
                                                         </div>
-                                                    </a>
+                                                    </div>
                                                 </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/pdf/Denda Keterlambatan pada bank syariah.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Denda Keterlambatan pada bank syariah</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/pdf/Fikih Bekerja di Lembaga konvensional.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Fikih Bekerja di Lembaga konvensional</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/pdf/Fikih Biaya Perjalanan Dinas yang Dipersingkat.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/chart.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Fikih Biaya Perjalanan Dinas yang Dipersingkat</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
+                                                }
                                             </ul>
+                                            <a href="~/KonsultasiInfografis/Index" class="btn btn-info" role="button">Lihat Semua</a>
                                         </div>
                                         <div class="tab-pane" id="artikel">
                                             <ul class="list-unstyled kajian">
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/article/Akad Ijarah Mausufah fi Dzimmah.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Akad Ijarah Mausufah fi Dzimmah</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                @foreach (Artikel item in Model.ArtikelModel)
+                                                {
+                                                    <li>
+                                                        <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                            <div class="row">
+                                                                <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                                <div class="col-sm-11">
+                                                                    <h4>@Html.DisplayFor(modelItem => item.Judul)</h4>
+                                                                    <div class="text-danger sub-info">
+                                                                        <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                        <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/article/Akad Musyarakah Mutanaqishah dalam LKS.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Akad Musyarakah Mutanaqishah dalam LKS</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/article/Akad Produk Giro dan Tabungan Wadiah di Perbankan Syariah.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Akad Produk Giro dan Tabungan Wadiah di Perbankan Syariah</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/article/Al-Hajah allati Tanzilu manzilata adh-dharurah Dan Penerapannya Dalam Ekonomi Syariah.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Al-Hajah allati Tanzilu manzilata adh-dharurah Dan Penerapannya Dalam Ekonomi Syariah</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="~/rwtheme/file-document/article/Bai Inah Tawarruq Fiqhi dan Tawarruq Munazham.pdf" target="_blank">
-                                                        <div class="row">
-                                                            <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
-                                                            <div class="col-sm-11">
-                                                                <h4>Bai Inah Tawarruq Fiqhi dan Tawarruq Munazham</h4>
-                                                                <div class="text-danger sub-info">
-                                                                    <div class="time"><span class="ion-android-data icon"></span>21 April 2018</div>
-                                                                    <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
+                                                        </a>
+                                                    </li>
+                                                }
                                             </ul>
+                                            <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
                                         </div>
                                     </div>
                                 </div>

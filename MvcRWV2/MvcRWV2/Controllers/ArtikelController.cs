@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
+using MvcRWV2.Models.ArtikelViewModels;
 
 namespace MvcRWV2.Controllers
 {
@@ -47,11 +48,29 @@ namespace MvcRWV2.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
+            IndexArtikelViewModel mymodel = new IndexArtikelViewModel();
+
             var artikel = from s in _context.DaftarArtikel
                           .Include(ee => ee.Path)
                           .Include(ee => ee.Kategori)
-                          where s.Status == published   
+                          where s.Status == published
                           select s;
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+            mymodel.KonsultasiRepublikaModel = from s in _context.DaftarKonsultasiRepublika
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+
+            var buku = mymodel.BukuModel;
+            var konsultasiRepublika = mymodel.KonsultasiRepublikaModel;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 artikel = artikel.Where(s => s.Judul.Contains(searchString));
@@ -73,7 +92,8 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 12;
-            return View(await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize));
+            mymodel.ArtikelModel = await PaginatedList<Artikel>.CreateAsync(artikel.AsNoTracking(), page ?? 1, pageSize);
+            return View(mymodel);
         }
 
         public async Task<IActionResult> List(
@@ -222,7 +242,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] Artikel artikel)
         {
             if (id != artikel.Id)
             {

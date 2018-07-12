@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
+using MvcRWV2.Models.KonsultasiRumahWasathiaViewModels;
 
 namespace MvcRWV2.Controllers
 {
@@ -16,6 +17,8 @@ namespace MvcRWV2.Controllers
     public class KonsultasiRumahWasathiaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public KonsultasiRumahWasathiaController(ApplicationDbContext context)
         {
@@ -45,9 +48,28 @@ namespace MvcRWV2.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
+            IndexKonsultasiRWViewModel mymodel = new IndexKonsultasiRWViewModel();
+
             var konsultasiRumahWasathia = from s in _context.DaftarKonsultasiRumahWasathia
                        .Include(ee => ee.Kategori)
+                       where s.Status == published
                        select s;
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 konsultasiRumahWasathia = konsultasiRumahWasathia.Where(s => s.Judul.Contains(searchString));
@@ -67,8 +89,79 @@ namespace MvcRWV2.Controllers
                     konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Tanggal);
                     break;
             }
+
             int pageSize = 12;
-            return View(await PaginatedList<KonsultasiRumahWasathia>.CreateAsync(konsultasiRumahWasathia.AsNoTracking(), page ?? 1, pageSize));
+            mymodel.KonsultasiRumahWasathiaModel = await PaginatedList<KonsultasiRumahWasathia>.CreateAsync(konsultasiRumahWasathia.AsNoTracking(), page ?? 1, pageSize);
+            return View(mymodel);
+        }
+
+        public async Task<IActionResult> List(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page,
+            int? status)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["Status"] = status;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var countItem = (from s in _context.DaftarKonsultasiRumahWasathia
+                             where s.Status == published
+                             select s).Count();
+            var countTrash = (from s in _context.DaftarKonsultasiRumahWasathia
+                              where s.Status == trash
+                              select s).Count();
+
+            var konsultasiRumahWasathia = from s in _context.DaftarKonsultasiRumahWasathia
+                          .Include(ee => ee.Path)
+                          .Include(ee => ee.Kategori)
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                konsultasiRumahWasathia = konsultasiRumahWasathia.Where(s => s.Judul.Contains(searchString));
+            }
+
+            if (status == null)
+            {
+                konsultasiRumahWasathia = konsultasiRumahWasathia.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                konsultasiRumahWasathia = konsultasiRumahWasathia.Where(s => s.Status == trash);
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Judul);
+                    break;
+                case "Date":
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Tanggal);
+                    break;
+                default:
+                    konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Tanggal);
+                    break;
+            }
+
+            int pageSize = 20;
+            return View(await PaginatedList<KonsultasiRumahWasathia>.CreateAsync(konsultasiRumahWasathia.AsNoTracking(), page ?? 1, pageSize, countItem, countTrash));
         }
 
         // GET: KonsultasiRumahWasathia/Details/5
@@ -122,7 +215,7 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
-            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.Include(ee => ee.Path).SingleOrDefaultAsync(m => m.Id == id);
             if (konsultasiRumahWasathia == null)
             {
                 return NotFound();
@@ -135,7 +228,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,PenulisKonten")] KonsultasiRumahWasathia konsultasiRumahWasathia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Pertanyaan,Jawaban,PenulisKonten,Kategori,Tag,Penulis,Status")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (id != konsultasiRumahWasathia.Id)
             {
@@ -197,6 +290,24 @@ namespace MvcRWV2.Controllers
         private bool KonsultasiRumahWasathiaExists(int id)
         {
             return _context.DaftarKonsultasiRumahWasathia.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Trash(int id)
+        {
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiRumahWasathia.Status = trash;
+            _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRumahWasathia);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiRumahWasathia.Status = published;
+            _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRumahWasathia);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List", new { status = trash });
         }
     }
 }

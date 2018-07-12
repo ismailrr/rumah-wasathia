@@ -16,6 +16,8 @@ namespace MvcRWV2.Controllers
     public class KajianAudioController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public KajianAudioController(ApplicationDbContext context)
         {
@@ -35,6 +37,7 @@ namespace MvcRWV2.Controllers
             var kajianAudio = from s in _context.DaftarKajianAudio
                               .Include(ee => ee.Path)
                               .Include(ee => ee.Kategori)
+                              where s.Status == published
                               select s;
 
             switch (sortOrder)
@@ -53,19 +56,61 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> List(
             string sortOrder,
-            int? page)
+            string currentFilter,
+            string searchString,
+            int? page,
+            int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["Status"] = status;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var countItem = (from s in _context.DaftarKajianAudio
+                             where s.Status == published
+                             select s).Count();
+            var countTrash = (from s in _context.DaftarKajianAudio
+                              where s.Status == trash
+                              select s).Count();
 
             var kajianAudio = from s in _context.DaftarKajianAudio
                               .Include(ee => ee.Path)
                               .Include(ee => ee.Kategori)
                               select s;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                kajianAudio = kajianAudio.Where(s => s.Judul.Contains(searchString));
+            }
+
+            if (status == null)
+            {
+                kajianAudio = kajianAudio.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                kajianAudio = kajianAudio.Where(s => s.Status == trash);
+            }
+
             switch (sortOrder)
             {
+                case "name_desc":
+                    kajianAudio = kajianAudio.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    kajianAudio = kajianAudio.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
                     break;
@@ -75,7 +120,7 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 20;
-            return View(await PaginatedList<KajianAudio>.CreateAsync(kajianAudio.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<KajianAudio>.CreateAsync(kajianAudio.AsNoTracking(), page ?? 1, pageSize, countItem, countTrash));
         }
 
         // GET: KajianAudio/Details/5
@@ -132,7 +177,7 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
-            var kajianAudio = await _context.DaftarKajianAudio.SingleOrDefaultAsync(m => m.Id == id);
+            var kajianAudio = await _context.DaftarKajianAudio.Include(ee => ee.Path).SingleOrDefaultAsync(m => m.Id == id);
             if (kajianAudio == null)
             {
                 return NotFound();
@@ -145,7 +190,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal")] KajianAudio kajianAudio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal,Kategori,Tag,Penulis,Status")] KajianAudio kajianAudio)
         {
             if (id != kajianAudio.Id)
             {
@@ -210,6 +255,24 @@ namespace MvcRWV2.Controllers
         private bool KajianAudioExists(int id)
         {
             return _context.DaftarKajianAudio.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Trash(int id)
+        {
+            var kajianAudio = await _context.DaftarKajianAudio.SingleOrDefaultAsync(m => m.Id == id);
+            kajianAudio.Status = trash;
+            _context.DaftarKajianAudio.Update(kajianAudio);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            var kajianAudio = await _context.DaftarKajianAudio.SingleOrDefaultAsync(m => m.Id == id);
+            kajianAudio.Status = published;
+            _context.DaftarKajianAudio.Update(kajianAudio);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List", new { status = trash });
         }
     }
 }

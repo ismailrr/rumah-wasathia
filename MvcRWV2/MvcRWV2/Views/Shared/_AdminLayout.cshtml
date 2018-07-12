@@ -57,6 +57,7 @@
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
+                <span><a href="@Url.Action("Index","rumahwasathia")">Lihat Web</a></span>
                 @await Html.PartialAsync("_LoginPartial")
                 <!-- Sidebar toggle button-->
             </nav>
@@ -141,10 +142,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="~/Admin/KonsultasiEPaper"><i class="fa fa-volume-up"></i> Konsultasi E Paper</a></li>
-                            <li><a href="~/Admin/KonsultasiInfografis"><i class="fa fa-video-camera"></i> Konsultasi Infografis</a></li>
-                            <li><a href="~/Admin/KonsultasiRepublika"><i class="fa fa-volume-up"></i> Konsultasi Republika Online</a></li>
-                            <li><a href="~/Admin/KonsultasiRumahWasathia"><i class="fa fa-video-camera"></i> Konsultasi Rumah Wasathia</a></li>
+                            <li><a href="@Url.Action("List","KonsultasiEPaper")"><i class="fa fa-volume-up"></i> Konsultasi E Paper</a></li>
+                            <li><a href="@Url.Action("List","KonsultasiInfografis")"><i class="fa fa-video-camera"></i> Konsultasi Infografis</a></li>
+                            <li><a href="@Url.Action("List","KonsultasiRepublika")"><i class="fa fa-volume-up"></i> Konsultasi Republika Online</a></li>
+                            <li><a href="@Url.Action("List","KonsultasiRumahWasathia")"><i class="fa fa-video-camera"></i> Konsultasi Rumah Wasathia</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

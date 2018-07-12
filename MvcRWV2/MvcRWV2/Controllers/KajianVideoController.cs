@@ -16,6 +16,8 @@ namespace MvcRWV2.Controllers
     public class KajianVideoController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public KajianVideoController(ApplicationDbContext context)
         {
@@ -35,6 +37,7 @@ namespace MvcRWV2.Controllers
             var kajianVideo = from s in _context.DaftarKajianVideo
                               .Include(ee => ee.Path)
                               .Include(ee => ee.Kategori)
+                              where s.Status == published
                               select s;
 
             switch (sortOrder)
@@ -53,19 +56,61 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> List(
             string sortOrder,
-            int? page)
+            string currentFilter,
+            string searchString,
+            int? page,
+            int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["Status"] = status;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            var countItem = (from s in _context.DaftarKajianVideo
+                             where s.Status == published
+                             select s).Count();
+            var countTrash = (from s in _context.DaftarKajianVideo
+                              where s.Status == trash
+                              select s).Count();
 
             var kajianVideo = from s in _context.DaftarKajianVideo
                               .Include(ee => ee.Path)
                               .Include(ee => ee.Kategori)
                               select s;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                kajianVideo = kajianVideo.Where(s => s.Judul.Contains(searchString));
+            }
+
+            if (status == null)
+            {
+                kajianVideo = kajianVideo.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                kajianVideo = kajianVideo.Where(s => s.Status == trash);
+            }
+
             switch (sortOrder)
             {
+                case "name_desc":
+                    kajianVideo = kajianVideo.OrderByDescending(s => s.Judul);
+                    break;
+                case "Name":
+                    kajianVideo = kajianVideo.OrderBy(s => s.Judul);
+                    break;
                 case "Date":
                     kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
                     break;
@@ -75,7 +120,7 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 20;
-            return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize));
+            return View(await PaginatedList<KajianVideo>.CreateAsync(kajianVideo.AsNoTracking(), page ?? 1, pageSize, countItem, countTrash));
         }
 
         // GET: KajianVideo/Details/5
@@ -131,7 +176,7 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
-            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
+            var kajianVideo = await _context.DaftarKajianVideo.Include(ee => ee.Path).SingleOrDefaultAsync(m => m.Id == id);
             if (kajianVideo == null)
             {
                 return NotFound();
@@ -144,7 +189,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal,Kategori,Tag,Penulis,Status")] KajianVideo kajianVideo)
         {
             if (id != kajianVideo.Id)
             {
@@ -208,6 +253,24 @@ namespace MvcRWV2.Controllers
         private bool KajianVideoExists(int id)
         {
             return _context.DaftarKajianVideo.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Trash(int id)
+        {
+            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
+            kajianVideo.Status = trash;
+            _context.DaftarKajianVideo.Update(kajianVideo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
+            kajianVideo.Status = published;
+            _context.DaftarKajianVideo.Update(kajianVideo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("List", new { status = trash });
         }
     }
 }
