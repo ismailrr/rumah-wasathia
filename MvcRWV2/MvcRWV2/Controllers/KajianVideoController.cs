@@ -155,7 +155,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Link,Tanggal")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianVideo kajianVideo)
         {
             if (ModelState.IsValid)
             {
@@ -189,7 +189,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Link,Tanggal,Kategori,Tag,Penulis,Status")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianVideo kajianVideo)
         {
             if (id != kajianVideo.Id)
             {

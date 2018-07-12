@@ -195,7 +195,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal")] Buku buku)
+        public async Task<IActionResult> Create([Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,Path")] Buku buku)
         {
             if (ModelState.IsValid)
             {
@@ -228,7 +228,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status")] Buku buku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,Path")] Buku buku)
         {
             if (id != buku.Id)
             {

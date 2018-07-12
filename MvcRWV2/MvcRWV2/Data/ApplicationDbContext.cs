@@ -36,6 +36,8 @@ namespace MvcRWV2.Data
         public DbSet<PathKajianVideo> DaftarPathKajianVideo { get; set; }
         public DbSet<PathKonsultasiEPaper> DaftarPathKonsultasiEPaper { get; set; }
         public DbSet<PathKonsultasiInfografis> DaftarPathKonsultasiInfografis { get; set; }
+        public DbSet<PathKonsultasiRepublika> DaftarPathKonsultasiRepublika { get; set; }
+        public DbSet<PathKonsultasiRumahWasathia> DaftarPathKonsultasiRumahWasathia { get; set; }
         public DbSet<Tag> DaftarTag { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -64,6 +66,8 @@ namespace MvcRWV2.Data
             builder.Entity<PathKajianVideo>().ToTable("Path_Kajian_Video");
             builder.Entity<PathKonsultasiEPaper>().ToTable("Path_Konsultasi_E_Paper");
             builder.Entity<PathKonsultasiInfografis>().ToTable("Path_Konsultasi_Infografis");
+            builder.Entity<PathKonsultasiRepublika>().ToTable("Path_Konsultasi_Republika");
+            builder.Entity<PathKonsultasiRumahWasathia>().ToTable("Path_Konsultasi_Rumah_Wasathia");
             builder.Entity<Tag>().ToTable("Tag");
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.

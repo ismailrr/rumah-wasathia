@@ -17,6 +17,7 @@ namespace MvcRWV2.Models
         public string Link { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
+        public PathKonsultasiRepublika Path { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
         public Tag Tag { get; set; }
         public string Penulis { get; set; }
