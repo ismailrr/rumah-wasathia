@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h1 class="inline">Kajian Video</h1>
         <div type="button" class="btn btn-primary">
             <a asp-action="Create">Buat Baru</a>
@@ -15,7 +15,7 @@
 <hr />
 <div class="row">
     <form asp-action="Edit">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title">Edit Kajian Video</h3>
@@ -39,16 +39,16 @@
                         <span asp-validation-for="Judul" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Link" class="control-label"></label>
-                        <input asp-for="Link" class="form-control" />
-                        <span asp-validation-for="Link" class="text-danger"></span>
+                        <label asp-for="Source" class="control-label"></label>
+                        <input asp-for="Source" class="form-control" />
+                        <span asp-validation-for="Source" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             <!-- /.box -->
         </div>
-        <div class="col-md-4">
-            <div class="col-md-16">
+        <div class="col-md-3">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">Publish</h3>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-16">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">Tag</h3>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-16">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">Kategori</h3>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-16">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">Gambar Cover</h3>
@@ -141,15 +141,26 @@
                     </div>
                     <div class="box-body pad">
                         <div class="form-group">
-                            @if (@Model.Link != null)
+                            @if (@Model.FImage != null && @Model.FImage != "")
                             {
-                                <iframe class="preview" width="150" src="@Model.Link" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe class="preview-edit" width="150" src="@Model.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <a asp-action="RemoveCover" asp-route-id="@Model.Id" class="remove-cover">Hapus Gambar Cover</a>
+                            }
+                            else
+                            {
+                                <span>Pilih Gambar Cover</span>
+                                <div class="form-group">
+                                    <label asp-for="FImage" class="control-label"></label>
+                                    <input asp-for="FImage" class="form-control" />
+                                    <span asp-validation-for="FImage" class="text-danger"></span>
+                                </div>
                             }
                         </div>
                     </div>
                 </div>
                 <!-- /.box -->
             </div>
+        </div>
     </form>
     <!-- /.col-->
 </div>

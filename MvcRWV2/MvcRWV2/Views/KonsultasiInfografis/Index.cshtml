@@ -45,8 +45,8 @@
                         @foreach (KonsultasiInfografis item in Model.KonsultasiInfografisModel)
                         {
                             <div class="item topic col-md-4 col-xs-8">
-                                <a href="~/rwtheme/file-document/pdf/@{@item.Judul}.pdf " target="_blank">
-                                    <img class="img-thumbnail icon-effect" src="~/rwtheme/images/general/chart.png" alt="" />
+                                <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path)} else {@item.Source}" target="_blank">
+                                    <img class="img-thumbnail icon-effect" src="~/uploads/image/general/chart.png" alt="" />
                                     <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                 </a>
                             </div>
@@ -98,7 +98,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="library-wrapper">
-                                                            <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 book-desc">
@@ -122,7 +122,7 @@
                                             <li>
                                                 <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
                                                     <div class="row">
-                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
                                                         <div class="col-sm-11">
                                                             <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                                             <div class="text-danger sub-info">

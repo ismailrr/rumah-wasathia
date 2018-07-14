@@ -14,8 +14,9 @@ namespace MvcRWV2.Models
         public string Judul { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
-        [Required]
         public PathKonsultasiEPaper Path { get; set; }
+        public string Source { get; set; }
+        public string FImage { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
         public Tag Tag { get; set; }
         public string Penulis { get; set; }

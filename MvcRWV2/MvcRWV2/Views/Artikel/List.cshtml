@@ -9,38 +9,38 @@
 <!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <h1 class="inline">Artikel</h1>
                 <div type="button" class="btn btn-primary">
                     <a asp-action="Create">Buat Baru</a>
                 </div>
             </div>
-            <div class="col-md-10 text-right">
+            <div class="col-md-8 text-right">
                 <form asp-action="List" method="get">
                     <div class="form-actions no-color">
                         <p>
                             <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
                             <input type="submit" value="Cari" class="btn btn-default" /> |
-                            <a asp-action="List">Hapus Filter</a>
+                            <a asp-action="List">Hapus Pencarian</a>
                         </p>
                     </div>
                 </form>
             </div>
-            <div class="col-md-8 text-left">
+            <div class="col-md-4 text-left">
                 <a asp-action="List">Semua (@Model.TotalItem)</a> |
                 <a asp-action="List" asp-route-status="2">Trash (@Model.TotalTrash)</a>
             </div>
             <div class="col-md-8 text-right total-item">
-                <p>
+                <span>
                     @Model.TotalItem Post              
-                </p>
+                </span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-16">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="row">
-                         <div class="col-md-16 text-center">
+                         <div class="col-md-12 text-center">
                             @{
                                 var prevDisabled1 = !Model.HasPreviousPage ? "disabled" : "";
                                 var nextDisabled1 = !Model.HasNextPage ? "disabled" : "";
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-16">
+                        <div class="col-sm-12">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -119,16 +119,16 @@
                                                         @Html.DisplayFor(modelItem => item.DisplayTextJudul)
                                                     </a>
                                                     <div>
-                                                        <a asp-action="Details" asp-route-id="@item.Id" class="hover-show">Lihat<span> | </span></a>
+                                                        <a href="@item.Source" target="_blank" class="hover-show">Lihat<span> | </span></a>
                                                         @if(@item.Status == 1)
                                                         {
                                                             <a asp-action="Edit" asp-route-id="@item.Id" class="hover-show">Edit<span> | </span></a>
-                                                            <a asp-action="Trash" asp-route-id="@item.Id" class="hover-show">Trash</a>
+                                                            <a asp-action="Trash" asp-route-id="@item.Id" class="hover-show trash">Trash</a>
                                                         }
                                                         else if (@item.Status == 2)
                                                         {
                                                             <a asp-action="Restore" asp-route-id="@item.Id" class="hover-show">Restore | </a>
-                                                            <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show">Delete</a>     
+                                                            <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show trash">Delete</a>     
                                                         }
                                                     </div>
                                                 }
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-16 text-center">
+                        <div class="col-sm-12 text-center">
                             @{
                                 var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";

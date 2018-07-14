@@ -12,11 +12,12 @@ namespace MvcRWV2.Models
         public int Id { get; set; }
         [StringLength(500)]
         public string Judul { get; set; }
-        [Required, StringLength(500)]
-        public string Link { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         public PathKajianAudio Path { get; set; }
+        [Required, StringLength(500)]
+        public string Source { get; set; }
+        public string FImage { get; set; }
         public KategoriKajian Kategori { get; set; }
         public Tag Tag { get; set; }
         public string Penulis { get; set; }

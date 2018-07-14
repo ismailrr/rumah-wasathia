@@ -1,33 +1,34 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="id">
 <head>
+    <globalization uiCulture="id" culture="id-ID" />
     <meta name="viewport" content="width=device-width" />
     <title>RumahWasathia</title>
     @*Template Files*@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="~/rwtheme/images/favicon-wasathia.ico" type="image/x-icon">
-    <link rel="icon" href="~/rwtheme/images/favicon-wasathia.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="~/uploads/image/favicon-wasathia.ico" type="image/x-icon">
+    <link rel="icon" href="~/uploads/image/favicon-wasathia.ico" type="image/x-icon">
     <!-- bootstrap styles-->
-    <link href="~/rwtheme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/includes/css/bootstrap.min.css" rel="stylesheet">
     <!-- google font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
     <!-- ionicons font -->
-    <link href="~/rwtheme/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/includes/css/ionicons.min.css" rel="stylesheet">
     <!-- developer custom(Dzaki) styles -->
-    <link rel="stylesheet" href="~/rwtheme/css/custom.css" />
+    <link rel="stylesheet" href="~/includes/css/custom.css" />
     <!-- fontawesome style -->
-    <link rel="stylesheet" href="~/rwtheme/fontawesome/css/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="~/rwtheme/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/includes/fontawesome/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="~/includes/fontawesome/css/fontawesome.min.css" />
     <!-- custom styles -->
-    <link href="~/rwtheme/css/custom-green.css" rel="stylesheet" id="style">
+    <link href="~/includes/css/custom-green.css" rel="stylesheet" id="style">
     <!-- owl carousel styles-->
-    <link rel="stylesheet" href="~/rwtheme/css/owl.carousel.css">
-    <link rel="stylesheet" href="~/rwtheme/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/includes/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/includes/css/owl.transitions.css">
     <!-- magnific popup styles -->
-    <link rel="stylesheet" href="~/rwtheme/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/includes/css/magnific-popup.css">
 </head>
 <body>
     <!-- preloader start -->
@@ -35,12 +36,28 @@
         <div id="status"></div>
     </div>
     <!-- preloader end -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="@Url.Action("Index","Admin")" class="logo">
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Admin</b>RW</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                @await Html.PartialAsync("_LoginPartialIndex")
+            </nav>
+        </header>
+    }
+
     <!-- sticky header start -->
     <div class="sticky-header">
         <!-- header start -->
         <div class="container header">
             <div class="row header-image">
-                <div class="col-sm-7 col-md-6 hidden-sm hidden-xs wow fadeInUpLeft animated text-center"><img src="~/rwtheme/images/general/owner.png" height="300" alt="" id="author" /></div>
+                <div class="col-sm-7 col-md-6 hidden-sm hidden-xs wow fadeInUpLeft animated text-center"><img src="~/uploads/image/general/owner.png" height="300" alt="" id="author" /></div>
                 <div class="col-sm-16 col-md-4">
                     <div class="flex-container">
                         <div><a class="open-popup-link" href="#log-in" data-effect="mfp-zoom-in"><i class="far fa-envelope"></i><p>Pertanyaan</p></a></div>
@@ -48,7 +65,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-16 col-md-6"><img src="~/rwtheme/images/general/logo-RW-04.png" alt="" id="logo" /></div>
+                <div class="col-sm-16 col-md-6"><img src="~/uploads/image/general/logo-RW-04.png" alt="" id="logo" /></div>
             </div>
         </div>
         <!-- header end -->
@@ -179,7 +196,7 @@
                         <div class="row">
                             <div class="col-sm-16">
                                 <div id="responsive-image">
-                                    <img src="~/rwtheme/images/general/logo-02.png" alt="placeholder 960" class="img-responsive" />
+                                    <img src="~/uploads/image/general/logo-02.png" alt="placeholder 960" class="img-responsive" />
                                 </div>
                             </div>
                             <div class="col-sm-16 text-left add-information">
@@ -299,38 +316,38 @@
         </div>
     </div>
     <!-- jQuery -->
-    <script src="~/rwtheme/js/jquery.min.js"></script>
+    <script src="~/includes/js/jquery.min.js"></script>
     <!--jQuery easing-->
-    <script src="~/rwtheme/js/jquery.easing.1.3.js"></script>
+    <script src="~/includes/js/jquery.easing.1.3.js"></script>
     <!-- bootstrab js -->
-    <script src="~/rwtheme/js/bootstrap.js"></script>
+    <script src="~/includes/js/bootstrap.js"></script>
     <!--style switcher-->
-    <script src="~/rwtheme/js/style-switcher.js"></script>
+    <script src="~/includes/js/style-switcher.js"></script>
     <!--wow animation-->
-    <script src="~/rwtheme/js/wow.min.js"></script>
+    <script src="~/includes/js/wow.min.js"></script>
     <!-- time and date -->
-    <script src="~/rwtheme/js/moment.min.js"></script>
+    <script src="~/includes/js/moment.min.js"></script>
     <!--news ticker-->
-    <script src="~/rwtheme/js/jquery.ticker.js"></script>
+    <script src="~/includes/js/jquery.ticker.js"></script>
     <!-- owl carousel -->
-    <script src="~/rwtheme/js/owl.carousel.js"></script>
+    <script src="~/includes/js/owl.carousel.js"></script>
     <!-- magnific popup -->
-    <script src="~/rwtheme/js/jquery.magnific-popup.js"></script>
+    <script src="~/includes/js/jquery.magnific-popup.js"></script>
     <!-- calendar-->
-    <script src="~/rwtheme/js/jquery.pickmeup.js"></script>
+    <script src="~/includes/js/jquery.pickmeup.js"></script>
     <!-- go to top -->
-    <script src="~/rwtheme/js/jquery.scrollUp.js"></script>
+    <script src="~/includes/js/jquery.scrollUp.js"></script>
     <!-- scroll bar -->
-    <script src="~/rwtheme/js/jquery.nicescroll.js"></script>
-    <script src="~/rwtheme/js/jquery.nicescroll.plus.js"></script>
+    <script src="~/includes/js/jquery.nicescroll.js"></script>
+    <script src="~/includes/js/jquery.nicescroll.plus.js"></script>
     <!--masonry-->
-    <script src="~/rwtheme/js/masonry.pkgd.js"></script>
+    <script src="~/includes/js/masonry.pkgd.js"></script>
     <!--media queries to js-->
-    <script src="~/rwtheme/js/enquire.js"></script>
+    <script src="~/includes/js/enquire.js"></script>
     <!--custom functions-->
-    <script src="~/rwtheme/js/custom-fun.js"></script>
+    <script src="~/includes/js/custom-fun.js"></script>
     <!--custom Dzaki-->
-    <script src="~/rwtheme/js/custom.js"></script>
+    <script src="~/includes/js/custom.js"></script>
     <!--Instagram Feeds-->
     <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
     <script>
@@ -340,13 +357,13 @@
         });
     </script>
     @*<script>
-        $(".link-target").click(function () {
-            if (!$(this).hasClass("active")) {
+            $(".link-target").click(function () {
+                if (!$(this).hasClass("active")) {
 
-                $(".link-target.active").removeClass("active");
-                $(this).addClass("active");
-            }
-        });
-    </script>*@
+                    $(".link-target.active").removeClass("active");
+                    $(this).addClass("active");
+                }
+            });
+        </script>*@
 </body>
 </html>

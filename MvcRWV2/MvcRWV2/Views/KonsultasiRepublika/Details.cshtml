@@ -1,36 +1,138 @@
-﻿@model MvcRWV2.Models.KonsultasiRepublika
+﻿@model MvcRWV2.Models.KonsultasiRepublikaViewModels.DetailsKonsultasiRepublikaViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Artikel</a></li>
+                <li class="active">Bagaimana Fikih Biaya Perjalanan Dinas yang Dipersingkat?</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <!-- data Start -->
+        <section>
+            <div class="container ">
+                <div class="row ">
+                    <!-- left sec Start -->
+                    <div class="col-md-11 col-sm-11">
+                        <div class="row">
+                            <!-- post details start -->
+                            <div class="col-sm-16">
+                                <div class="row">
+                                    <div class="sec-topic col-sm-16  wow fadeInDown animated " data-wow-delay="0.5s">
+                                        <div class="row">
+                                            <div class="col-sm-16"><img width="1000" height="606" alt="" src="~/uploads/image/sec/sec-1.jpg" class="img-thumbnail"></div>
+                                            <div class="col-sm-16 sec-info">
+                                                <h3>@Html.DisplayFor(model => model.KonsultasiRepublikaModel.Judul)</h3>
+                                                <div class="text-danger sub-info-bordered">
+                                                    <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(model => model.KonsultasiRepublikaModel.Tanggal)</div>
+                                                    <!--<div class="comments"><span class="ion-chatbubbles icon"></span>204</div>-->
+                                                </div>
+                                                <div id="consultation-detail">
+                                                    <br />
+                                                    <p>
+                                                        <b>Pengasuh: Dr Oni  Sahroni,</b> Anggota Dewan Syariah Nasional Majelis Ulama Indonesia (DSN MUI)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-sm-16 comments-area">
+                                            <div id="fb-root"></div>
+                                            <script>
+                                                (function (d, s, id) {
+                                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                                    if (d.getElementById(id)) return;
+                                                    js = d.createElement(s); js.id = id;
+                                                    js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.12';
+                                                    fjs.parentNode.insertBefore(js, fjs);
+                                                }(document, 'script', 'facebook-jssdk'));
+                                            </script>
+                                            <div class="fb-comments" data-href="http://localhost:54591/rumahwasathia/SubArtikel" data-width="100%" data-numposts="10"></div>
+                                        </div>*@
+                                </div>
+                            </div>
+                            <!-- post details end -->
 
-<h2>Details</h2>
+                        </div>
+                    </div>
+                    <!-- left sec End -->
+                    <!-- right sec start -->
+                    <div class="col-sm-5 hidden-ms right-sec">
+                        <div class="bordered">
+                            <div class="row ">
+                                <!-- activities start -->
+                                <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-justified " role="tablist">
+                                        <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Buku</a></li>
+                                        <li><a href="#artikel" role="tab" data-toggle="tab">Artikel</a></li>
+                                    </ul>
 
-<div>
-    <h4>KonsultasiRepublika</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Judul)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Judul)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Tanggal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Tanggal)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="infografis">
+                                            <ul class="list-unstyled kajian">
+                                                @foreach (Buku item in Model.BukuModel)
+                                                {
+                                                    <li>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <div class="library-wrapper">
+                                                                    <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12 book-desc">
+                                                                <h3>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h3>
+                                                                <div class="download">
+                                                                    <a href="@Url.Action("Details","Buku",new {id=item.Id })">
+                                                                        <i class="fas fa-tasks"></i>Lihat Detail
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <a href="~/Buku/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                        </div>
+                                        <div class="tab-pane" id="artikel">
+                                            <ul class="list-unstyled kajian">
+                                                @foreach (Artikel item in Model.ArtikelModel)
+                                                {
+                                                    <li>
+                                                        <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                            <div class="row">
+                                                                <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
+                                                                <div class="col-sm-11">
+                                                                    <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
+                                                                    <div class="text-danger sub-info">
+                                                                        <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                        <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                            <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- activities end -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Data End -->
+    </div>
 </div>

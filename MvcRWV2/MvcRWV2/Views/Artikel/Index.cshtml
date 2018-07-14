@@ -43,8 +43,8 @@
                         @foreach (Artikel item in Model.ArtikelModel)
                         {
                             <div class="item topic col-md-4 col-xs-8">
-                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
-                                    <img class="img-thumbnail icon-effect" src="~/rwtheme/images/general/pdf.png" alt="" />
+                                <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path.Path)} else {@item.Source} " target="_blank">
+                                    <img class="img-thumbnail icon-effect" src="~/uploads/image/general/pdf.png" alt="" />
                                     <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                 </a>
                             </div>
@@ -96,7 +96,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="library-wrapper">
-                                                            <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 book-desc">

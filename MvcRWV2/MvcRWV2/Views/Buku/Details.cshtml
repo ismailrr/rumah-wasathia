@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="book-detail col-sm-5">
                             <a class="open-popup-link" href="#buy-book" data-effect="mfp-zoom-in">
-                                <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(model => model.BukuModel.Path.Path)" alt="" />
+                                <img class="img-thumbnail" src="@Html.DisplayFor(model => model.BukuModel.Path.Path)" alt="" />
                                 <span class="download-icon"><span class="ion-bag"></span>Beli Buku</span>
                             </a>
                         </div>
@@ -106,7 +106,7 @@
                                             <li>
                                                 <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
                                                     <div class="row">
-                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
                                                         <div class="col-sm-11">
                                                             <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                                             <div class="text-danger sub-info">

@@ -6,7 +6,7 @@
 
 .icons-media-social {
     padding: 5px 0;
-    background-image: url('../images/general/marque-bg-blue.png');
+    background-image: url('../../uploads/image/general/marque-bg-blue.png');
     background-repeat: repeat;
     line-height: 28px;
     border-left: 3px solid #fff;
@@ -232,7 +232,7 @@ html {
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 5px;
-    background-image: url('../images/general/marque-bg-blue.png');
+    background-image: url('../../uploads/image/general/marque-bg-blue.png');
     background-repeat: repeat;
 }
 

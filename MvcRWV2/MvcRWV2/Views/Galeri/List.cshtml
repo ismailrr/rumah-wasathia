@@ -9,20 +9,20 @@
 <!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
 <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <h1 class="inline">Gambar</h1>
                 <div type="button" class="btn btn-primary">
                     <a asp-action="Create">Upload Gambar</a>
                 </div>
             </div>
-            <div class="col-md-8 text-right total-item">
+            <div class="col-md-4 text-right total-item">
                 <p>
                     @Model.TotalItem Gambar              
                 </p>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-16">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <!-- Masonry Begin -->
                     <div class="masonry-wrapper">
@@ -30,10 +30,10 @@
                             @foreach (var item in Model)
                             {
                             <div class="item hover-hide">
-                                <a class="gallery-item popup-img" href="~/rwtheme/images/galeri/@{@item.Judul}">
+                                <a class="gallery-item popup-img" href="~/uploads/image/galeri/@{@item.Judul}">
                                     <div class="thumb-box">
                                         <span class="ion-arrow-expand"></span>
-                                        <img alt="" src="~/rwtheme/images/galeri/@{@item.Judul}" class="img-thumbnail">
+                                        <img alt="" src="~/uploads/image/galeri/@{@item.Judul}" class="img-thumbnail">
                                     </div>
                                 </a>
                                 <div class="album-desc">
@@ -66,10 +66,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="col-md-6">
-                                    <a asp-action="Details" asp-route-id=""><img alt="" src="~/rwtheme/images/galeri/" class="gallery-preview" /></a>
+                                <div class="col-md-4">
+                                    <a asp-action="Details" asp-route-id=""><img alt="" src="~/uploads/image/galeri/" class="gallery-preview" /></a>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                 </div>
                             </div>

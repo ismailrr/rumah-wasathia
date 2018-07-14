@@ -169,6 +169,7 @@ namespace MvcRWV2.Controllers
                     galeri.Tanggal = DateTime.Now;
                     _context.Update(galeri);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(List));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

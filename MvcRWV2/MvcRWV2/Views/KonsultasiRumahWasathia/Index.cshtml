@@ -44,11 +44,11 @@
                             {
                                 <div class="sec-topic col-sm-16 col-md-8">
                                     <a asp-action="Details" asp-route-id="@item.Id">
-                                        <img alt="" src="~/rwtheme/images/sec/sec-1.jpg" class="img-thumbnail">
+                                        <img width="359" height="265" alt="" src="@item.FImage" class="img-thumbnail">
                                         <div class="sec-info">
                                             <h3>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h3>
                                             <div class="text-danger sub-info-bordered">
-                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                <div class="time"><span class="ion-android-data icon"></span>pada @item.DisplayTanggalFormat1</div>
                                                 <!--<div class="comments"><span class="ion-chatbubbles icon"></span>204</div>-->
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                                                     <div class="row">
                                                         <div class="col-sm-4">
                                                             <div class="library-wrapper">
-                                                                <img class="img-thumbnail" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                                                <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-12 book-desc">
@@ -126,7 +126,7 @@
                                                     <li>
                                                         <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
                                                             <div class="row">
-                                                                <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                                <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
                                                                 <div class="col-sm-11">
                                                                     <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                                                     <div class="text-danger sub-info">

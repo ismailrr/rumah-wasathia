@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,10 @@ namespace MvcRWV2.Models
     {
 
         public int Id { get; set; }
-        [StringLength(200)]
-        public string PenulisKonten { get; set; }
         [Required, StringLength(200)]
         public string Judul { get; set; }
+        [StringLength(200)]
+        public string PenulisKonten { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         [Required, StringLength(5000)]
@@ -22,6 +23,7 @@ namespace MvcRWV2.Models
         [Required, StringLength(5000)]
         public string Jawaban { get; set; }
         public PathKonsultasiRumahWasathia Path { get; set; }
+        public string FImage { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
         public Tag Tag { get; set; }
         public string Penulis { get; set; }
@@ -38,6 +40,51 @@ namespace MvcRWV2.Models
                 else
                 {
                     return $"{Judul}";
+                }
+            }
+        }
+
+        public string DisplayTanggalFormat1
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.Day} {DisplayTextBulan} {Tanggal.Year} , {Tanggal.Hour}:{Tanggal.Minute}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
+                }
+            }
+        }
+
+        public string DisplayTextBulan
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.ToString("MMMMMMMM", CultureInfo.InvariantCulture)}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
+                }
+            }
+        }
+
+        public string DisplayTextHari
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.ToString("dddddddd", CultureInfo.InvariantCulture)}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
                 }
             }
         }

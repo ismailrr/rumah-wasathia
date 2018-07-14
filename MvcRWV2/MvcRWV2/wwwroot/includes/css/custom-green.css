@@ -94,7 +94,7 @@ z-index: 3000; /* makes sure it stays on top */
     position: absolute;
     left: 50%;
     top: 50%;
-    background-image: url(../images/general/wasathia-preloader.gif);
+    background-image: url(../../uploads/image/general/wasathia-preloader.gif);
     background-repeat: no-repeat;
     background-position: center;
     margin: -120px 0 0 -120px;
@@ -104,7 +104,7 @@ z-index: 3000; /* makes sure it stays on top */
 
 #scrollUp {
     background: #3D566E;
-    background-image: url("../images/general/top-wasathia.jpg");
+    background-image: url("../../uploads/image/general/top-wasathia.jpg");
     bottom: 20px;
     right: 20px;
     width: 38px; /* Width of image */
@@ -522,8 +522,8 @@ font-style: normal;
 
 /*4-4 SITE LOGO*/
 .header {
-background: url('../images/general/logo-green.png') repeat;
-background-image: url('~/rwtheme/images/general/pattern.jpeg');
+/*background: url('../../uploads/image/general/logo-green.png') repeat;*/
+/*/background-image: url('../../uploads/image/general/pattern.png');*/
 background-repeat: repeat;
 background-size: cover;
 background-position: center;
@@ -536,7 +536,7 @@ margin-top: 5px;
 text-indent: 100%;
 white-space: nowrap;
 overflow: hidden;
-background: url('../images/general/logo-green.png') no-repeat;
+background: url('../../uploads/image/general/logo-green.png') no-repeat;
 background-size: 100%;
 padding: 0;
 }
@@ -546,7 +546,7 @@ padding: 0;
 
 /*5-1 PARENT NAVIGATION*/
 .sticky-header {
-background-image: url('../images/general/islamic_ornament.jpg');
+background-image: url('../../uploads/image/general/islamic_ornament.jpg');
 background-repeat: repeat;
 }
 
@@ -2196,9 +2196,11 @@ margin-bottom: 50px;
     overflow:hidden;
 }
 .box-info {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding: 25px;
+    padding: 20px;
+}
+.box-body.pad
+{
+    padding-top:30px;
 }
 .btn-primary a {
     color:white;
@@ -2223,7 +2225,15 @@ tbody tr td a:hover {
 .hover-show{
     margin-top:10px;
     display:none;
+    color:black;
+}
+
+.hover-show.trash{
     color:red;
+}
+
+.hover-show.trash:hover{
+    color:darkred;
 }
 
 .hover-hide:hover .hover-show {
@@ -2264,7 +2274,7 @@ tbody tr td a:hover {
     margin-right: 10px;
 }
 
-.total-item p {
+.total-item span {
     margin: 20px;
     margin-right: 0;
     color:black;
@@ -2296,4 +2306,96 @@ tbody tr td a:hover {
 
 th{
     color:black;
+}
+
+.preview-edit{
+    width:100%;
+    height:100%;
+    margin-bottom:20px;
+}
+
+a.remove-cover{
+    color:darkred;
+}
+
+.fixed .main-header {
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.main-header{
+    height:32px;
+}
+
+.main-header .logo, .main-header .logo-lg{
+    height:32px;
+    font-size:13px;
+    line-height:32px;
+}
+
+.main-header .btn-link{
+    height:32px;
+    font-size:13px;
+    line-height:32px;
+}
+
+.navbar-right{
+    margin-right:30px;
+    float:right;
+}
+
+.navbar-link {
+    padding: 0px;
+    margin: 0px;
+    line-height: 32px;
+}
+
+.navbar-link, .goto-web-button{
+    color:white;
+    line-height:32px;
+    margin-left:10px;
+}
+
+.navbar.navbar-static-top{
+    min-height:32px;
+    max-height:32px;
+}
+
+.navbar-static-top i.fa-globe{
+    margin-left:20px;
+}
+
+.navbar-right-index{
+    margin-top:-42px;
+    line-height:32px;
+}
+
+.navbar-right-index .navbar-link{
+    color:black;
+    line-height: 44px;
+}
+
+.navbar-right-index .login-user{
+    padding: 0px;
+    padding-left:5px;
+    padding-right:5px;
+    margin: 0px;
+    margin-top:2px;
+    line-height: 44px;
+    font-size:13px;
+}
+
+.navbar-right a.login-user{
+    padding: 0px;
+    padding-left:5px;
+    padding-right:5px;
+    margin: 0px;
+    margin-top:2px;
+    line-height: 32px;
+    font-size:13px;
+}
+
+.fixed .content-wrapper, .fixed .right-side, .main-sidebar {
+    padding-top: 32px;
 }

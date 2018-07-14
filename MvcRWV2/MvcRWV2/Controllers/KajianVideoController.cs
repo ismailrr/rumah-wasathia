@@ -152,15 +152,15 @@ namespace MvcRWV2.Controllers
 
         // POST: KajianVideo/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianVideo kajianVideo)
         {
             if (ModelState.IsValid)
             {
                 kajianVideo.Tanggal = DateTime.Now;
-                kajianVideo.Link = kajianVideo.Link.Replace("watch?v=", "embed/");
+                kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
                 _context.Add(kajianVideo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -186,10 +186,10 @@ namespace MvcRWV2.Controllers
 
         // POST: KajianVideo/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianVideo kajianVideo)
         {
             if (id != kajianVideo.Id)
             {
@@ -201,7 +201,7 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     kajianVideo.Tanggal = DateTime.Now;
-                    kajianVideo.Link = kajianVideo.Link.Replace("watch?v=", "embed/");
+                    kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
                     _context.Update(kajianVideo);
                     await _context.SaveChangesAsync();
                 }
@@ -271,6 +271,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKajianVideo.Update(kajianVideo);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var kajianVideo = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            kajianVideo.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(kajianVideo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }

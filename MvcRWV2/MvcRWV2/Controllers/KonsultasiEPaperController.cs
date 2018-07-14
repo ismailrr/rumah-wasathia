@@ -161,7 +161,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiEPaper konsultasiEPaper)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] KonsultasiEPaper konsultasiEPaper)
         {
             if (ModelState.IsValid)
             {
@@ -194,7 +194,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiEPaper konsultasiEPaper)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] KonsultasiEPaper konsultasiEPaper)
         {
             if (id != konsultasiEPaper.Id)
             {
@@ -205,6 +205,7 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    konsultasiEPaper.Tanggal = DateTime.Now;
                     _context.Update(konsultasiEPaper);
                     await _context.SaveChangesAsync();
                 }
@@ -219,7 +220,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(konsultasiEPaper);
         }
@@ -274,6 +275,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKonsultasiEPaper.Update(konsultasiEPaper);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var kosultasiEPaper = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            kosultasiEPaper.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(kosultasiEPaper);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }

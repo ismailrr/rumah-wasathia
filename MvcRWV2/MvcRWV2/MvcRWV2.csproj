@@ -7,9 +7,21 @@
 
   <ItemGroup>
     <Compile Remove="Uploads\NewFolder1\**" />
+    <Compile Remove="wwwroot\music\**" />
+    <Compile Remove="wwwroot\pdf\**" />
+    <Compile Remove="wwwroot\video\**" />
     <Content Remove="Uploads\NewFolder1\**" />
+    <Content Remove="wwwroot\music\**" />
+    <Content Remove="wwwroot\pdf\**" />
+    <Content Remove="wwwroot\video\**" />
     <EmbeddedResource Remove="Uploads\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\music\**" />
+    <EmbeddedResource Remove="wwwroot\pdf\**" />
+    <EmbeddedResource Remove="wwwroot\video\**" />
     <None Remove="Uploads\NewFolder1\**" />
+    <None Remove="wwwroot\music\**" />
+    <None Remove="wwwroot\pdf\**" />
+    <None Remove="wwwroot\video\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,9 +52,10 @@
     <Folder Include="Uploads\Music\" />
     <Folder Include="Uploads\PDF\" />
     <Folder Include="Uploads\Video\" />
-    <Folder Include="wwwroot\music\" />
-    <Folder Include="wwwroot\pdf\" />
-    <Folder Include="wwwroot\video\" />
+    <Folder Include="wwwroot\uploads\image\" />
+    <Folder Include="wwwroot\uploads\audio\" />
+    <Folder Include="wwwroot\uploads\video\" />
+    <Folder Include="wwwroot\uploads\pdf\" />
   </ItemGroup>
 
 </Project>

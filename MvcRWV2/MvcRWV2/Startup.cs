@@ -12,6 +12,8 @@ using MvcRWV2.Data;
 using MvcRWV2.Models;
 using MvcRWV2.Services;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace MvcRWV2
 {
@@ -75,6 +77,15 @@ namespace MvcRWV2
                     name: "default",
                     template: "{controller=rumahwasathia}/{action=Index}/{id?}");
             });
+
+            var locale = Configuration["SiteLocale"];
+            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+            {
+                SupportedCultures = new List<CultureInfo> { new CultureInfo(locale) },
+                SupportedUICultures = new List<CultureInfo> { new CultureInfo(locale) },
+                DefaultRequestCulture = new RequestCulture(locale)
+            };
+            app.UseRequestLocalization(localizationOptions);
         }
     }
 }

@@ -990,7 +990,7 @@ throw new Error('AdminLTE requires jQuery')
  * @Usage: $('.my-menu').tree(options)
  *         or add [data-widget="tree"] to the ul element
  *         Pass any option as data-option="value"
- */
+ 
 +function ($) {
   'use strict';
 
@@ -1022,9 +1022,10 @@ throw new Error('AdminLTE requires jQuery')
     collapsed: 'collapsed.tree',
     expanded : 'expanded.tree'
   };
-
+  */
   // Tree Class Definition
   // =====================
+    /**
   var Tree = function (element, options) {
     this.element = element;
     this.options = options;
@@ -1055,7 +1056,11 @@ throw new Error('AdminLTE requires jQuery')
       this.expand(treeviewMenu, parentLi);
     }
   };
-
+  
+   * 
+   * @param {any} tree
+   * @param {any} parent
+   
   Tree.prototype.expand = function (tree, parent) {
     var expandedEvent = $.Event(Event.expanded);
 
@@ -1081,6 +1086,7 @@ throw new Error('AdminLTE requires jQuery')
       $(this.element).trigger(collapsedEvent);
     }.bind(this));
   };
+  
 
   // Private
   
@@ -1091,7 +1097,7 @@ throw new Error('AdminLTE requires jQuery')
       that.toggle($(this), event);
     });
   };
-
+  */
   // Plugin Definition
   // =================
   function Plugin(option) {

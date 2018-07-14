@@ -198,7 +198,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiInfografis infografis)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] KonsultasiInfografis infografis)
         {
             if (ModelState.IsValid)
             {
@@ -231,7 +231,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiInfografis infografis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] KonsultasiInfografis infografis)
         {
             if (id != infografis.Id)
             {
@@ -242,6 +242,7 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    infografis.Tanggal = DateTime.Now;
                     _context.Update(infografis);
                     await _context.SaveChangesAsync();
                 }
@@ -256,7 +257,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(infografis);
         }
@@ -311,6 +312,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKonsultasiInfografis.Update(konsultasiInfografis);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var infografis = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            infografis.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(infografis);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }

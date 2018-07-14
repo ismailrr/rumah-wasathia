@@ -214,7 +214,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,Path")] Buku buku)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status")] Buku buku)
         {
             if (ModelState.IsValid)
             {
@@ -247,7 +247,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,Path")] Buku buku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status")] Buku buku)
         {
             if (id != buku.Id)
             {
@@ -328,6 +328,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarBuku.Update(buku);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var buku = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            buku.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(buku);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }

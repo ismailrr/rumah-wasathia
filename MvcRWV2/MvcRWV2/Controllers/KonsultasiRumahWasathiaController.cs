@@ -173,15 +173,34 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
+            DetailsKonsultasiRWViewModel mymodel = new DetailsKonsultasiRWViewModel();
+
             var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia
                 .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
+
             if (konsultasiRumahWasathia == null)
             {
                 return NotFound();
             }
 
-            return View(konsultasiRumahWasathia);
+            mymodel.KonsultasiRumahWasathiaModel = konsultasiRumahWasathia;
+            return View(mymodel);
         }
 
         // GET: KonsultasiRumahWasathia/Create
@@ -195,11 +214,15 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PenulisKonten,Judul,Tanggal,Pertanyaan,Jawaban,Path,Kategori,Tag,Penulis,Status")] KonsultasiRumahWasathia konsultasiRumahWasathia)
+        public async Task<IActionResult> Create([Bind("Id,PenulisKonten,Judul,Tanggal,Pertanyaan,Jawaban,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (ModelState.IsValid)
             {
                 konsultasiRumahWasathia.Tanggal = DateTime.Now;
+                if(konsultasiRumahWasathia.PenulisKonten == null)
+                {
+                    konsultasiRumahWasathia.PenulisKonten = "admin";
+                }
                 _context.Add(konsultasiRumahWasathia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -228,7 +251,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PenulisKonten,Judul,Tanggal,Pertanyaan,Jawaban,Path,Kategori,Tag,Penulis,Status")] KonsultasiRumahWasathia konsultasiRumahWasathia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PenulisKonten,Judul,Tanggal,Pertanyaan,Jawaban,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRumahWasathia konsultasiRumahWasathia)
         {
             if (id != konsultasiRumahWasathia.Id)
             {
@@ -239,6 +262,16 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    konsultasiRumahWasathia.Tanggal = DateTime.Now;
+                    if (konsultasiRumahWasathia.FImage != null)
+                    {
+                        konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("file/d/", "uc?id=");
+                        konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (konsultasiRumahWasathia.PenulisKonten == null)
+                    {
+                        konsultasiRumahWasathia.PenulisKonten = "admin";
+                    }
                     _context.Update(konsultasiRumahWasathia);
                     await _context.SaveChangesAsync();
                 }
@@ -253,7 +286,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(konsultasiRumahWasathia);
         }
@@ -308,6 +341,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRumahWasathia);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiRumahWasathia.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRumahWasathia);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Edit", new { Id = id });
         }
     }
 }

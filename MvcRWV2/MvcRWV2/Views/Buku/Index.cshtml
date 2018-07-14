@@ -33,7 +33,7 @@
                                     <p>
                                         <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
                                         <input type="submit" value="Cari" class="btn btn-default" /> |
-                                        <a asp-action="Index">Hapus Filter</a>
+                                        <a asp-action="Index">Hapus Pencarian</a>
                                     </p>
                                 </div>
                             </form>
@@ -43,7 +43,7 @@
                             <div class="col-md-4 col-sm-8">
                                 <div class="item topic text-center">
                                     <a asp-action="Details" asp-route-id="@item.Id">
-                                        <img class="img-thumbnail book-cover" src="~/rwtheme/images/book/@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                        <img class="img-thumbnail book-cover" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
                                         <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                     </a>
 
@@ -107,7 +107,7 @@
                                             <li>
                                                 <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
                                                     <div class="row">
-                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/rwtheme/images/general/pdf.png" alt="" /> </div>
+                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
                                                         <div class="col-sm-11">
                                                             <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
                                                             <div class="text-danger sub-info">

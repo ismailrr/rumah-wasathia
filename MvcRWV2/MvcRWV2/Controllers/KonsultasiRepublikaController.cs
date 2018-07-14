@@ -172,15 +172,34 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
+           DetailsKonsultasiRepublikaViewModel mymodel = new DetailsKonsultasiRepublikaViewModel();
+
             var konsultasiRepublika = await _context.DaftarKonsultasiRepublika
                 .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                                where s.Status == published
+                                select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                                   where s.Status == published
+                                   select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
+
             if (konsultasiRepublika == null)
             {
                 return NotFound();
             }
 
-            return View(konsultasiRepublika);
+            mymodel.KonsultasiRepublikaModel = konsultasiRepublika;
+            return View(mymodel);
         }
 
         // GET: KonsultasiRepublika/Create
@@ -194,7 +213,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Link,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
         {
             if (ModelState.IsValid)
             {
@@ -227,7 +246,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Link,Tanggal,Path,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
         {
             if (id != konsultasiRepublika.Id)
             {
@@ -238,6 +257,7 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    konsultasiRepublika.Tanggal = DateTime.Now;
                     _context.Update(konsultasiRepublika);
                     await _context.SaveChangesAsync();
                 }
@@ -252,7 +272,7 @@ namespace MvcRWV2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(konsultasiRepublika);
         }
@@ -307,6 +327,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKonsultasiRepublika.Update(konsultasiRepublika);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var konsultasiRepublika = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            konsultasiRepublika.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRepublika);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }

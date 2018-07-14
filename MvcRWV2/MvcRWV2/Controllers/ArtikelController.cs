@@ -198,13 +198,15 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] Artikel artikel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     artikel.Tanggal = DateTime.Now;
+                    artikel.Penulis = "admin";
+                    artikel.Status = 1;
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(List));
@@ -242,7 +244,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Penulis,Status")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] Artikel artikel)
         {
             if (id != artikel.Id)
             {
@@ -255,7 +257,6 @@ namespace MvcRWV2.Controllers
                     artikel.Tanggal = DateTime.Now;
                     _context.Update(artikel);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(List));
                 }
                 catch (DbUpdateException /* ex */)
                 {
@@ -264,6 +265,7 @@ namespace MvcRWV2.Controllers
                         "Try again, and if the problem persists, " +
                         "see your system administrator.");
                 }
+                return RedirectToAction(nameof(List));
             }
             return View(artikel);
         }
@@ -318,6 +320,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarArtikel.Update(artikel);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new{ status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var artikel = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            artikel.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(artikel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Edit", new { Id = id });
         }
     }
 }

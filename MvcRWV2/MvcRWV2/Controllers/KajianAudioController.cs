@@ -152,16 +152,16 @@ namespace MvcRWV2.Controllers
 
         // POST: KajianAudio/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianAudio kajianAudio)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianAudio kajianAudio)
         {
             if (ModelState.IsValid)
             {
                 kajianAudio.Tanggal = DateTime.Now;
-                kajianAudio.Link = kajianAudio.Link.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"","");
-                kajianAudio.Link = kajianAudio.Link.Replace("\"></iframe>", "");
+                kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"","");
+                kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
                 _context.Add(kajianAudio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -187,10 +187,10 @@ namespace MvcRWV2.Controllers
 
         // POST: KajianAudio/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Link,Tanggal,Kategori,Tag,Penulis,Status,Path")] KajianAudio kajianAudio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianAudio kajianAudio)
         {
             if (id != kajianAudio.Id)
             {
@@ -202,8 +202,8 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     kajianAudio.Tanggal = DateTime.Now;
-                    kajianAudio.Link = kajianAudio.Link.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
-                    kajianAudio.Link = kajianAudio.Link.Replace("\"></iframe>", "");
+                    kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
+                    kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
                     _context.Update(kajianAudio);
                     await _context.SaveChangesAsync();
                 }
@@ -273,6 +273,15 @@ namespace MvcRWV2.Controllers
             _context.DaftarKajianAudio.Update(kajianAudio);
             await _context.SaveChangesAsync();
             return RedirectToAction("List", new { status = trash });
+        }
+
+        public async Task<IActionResult> RemoveCover(int id)
+        {
+            var kajianAudio = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            kajianAudio.FImage = "";
+            _context.DaftarKonsultasiRumahWasathia.Update(kajianAudio);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }
