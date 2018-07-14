@@ -94,11 +94,23 @@
                                         @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
                                         {
                                             <li>
-                                                
+                                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-sm-16">
+                                                            <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
+                                                            <div class="text-danger sub-info">
+                                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </li>
                                         }
                                     </ul>
-                                    <a href="~/KonsultasiRepublika/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                    <div class="row">
+                                        <a href="~/KonsultasiRepublika/Index" class="btn btn-default btn-sidebar" role="button">Lihat Semua</a>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="artikel">
                                     <ul class="list-unstyled kajian">
@@ -120,7 +132,9 @@
                                             </li>
                                         }
                                     </ul>
-                                    <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                                    <div class="row">
+                                        <a href="~/Artikel/Index" class="btn btn-default btn-sidebar" role="button">Lihat Semua</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
