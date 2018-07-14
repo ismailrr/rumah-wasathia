@@ -2273,6 +2273,14 @@ tbody tr td a:hover {
     margin-right: 10px;
 }
 
+.page-number:hover,.btn-filter:hover {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+    border-radius: 3px;
+    border: 1px solid transparent;
+}
+
 .total-item span {
     margin: 20px;
     margin-right: 0;
@@ -2293,14 +2301,6 @@ tbody tr td a:hover {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-}
-
-.page-number-hover {
-    background-color: #f4f4f4;
-    color: #444;
-    border-color: #ddd;
-    border-radius: 3px;
-    border: 1px solid transparent;
 }
 
 th{
@@ -2403,4 +2403,37 @@ a.remove-cover{
     margin:0 auto;
     width:100%;
     border-radius:0;
+}
+
+.main-title-outer{
+    padding-bottom:20px;
+}
+
+.index-content-header {
+    padding: 0px 10px;
+}
+
+hr{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.form-control{
+    display:inline-block;
+}
+
+.btn-filter {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    border-color: #ccc
 }

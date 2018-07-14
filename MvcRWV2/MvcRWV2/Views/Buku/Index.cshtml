@@ -21,56 +21,80 @@
             <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
                     <div class="main-title left-side">Kumpulan Buku</div>
-                    <div class="row">
-                        <div class="col-sm-16 text-center">
-                            <p>Urutan Sesuai :</p>
-                            <p>
-                                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
-                            </p>
-
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
+                        </div>
+                        <div class="col-sm-11">
                             <form asp-action="Index" method="get">
-                                <div class="form-actions no-color">
-                                    <p>
-                                        <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                                        <input type="submit" value="Cari" class="btn btn-default" /> |
-                                        <a asp-action="Index">Hapus Pencarian</a>
-                                    </p>
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
                                 </div>
                             </form>
                         </div>
-                        @foreach (Buku item in Model.BukuModel)
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-16">
+                            @foreach (Buku item in Model.BukuModel)
                         {
-                            <div class="col-md-4 col-sm-8">
-                                <div class="item topic text-center">
-                                    <a asp-action="Details" asp-route-id="@item.Id">
-                                        <img class="img-thumbnail book-cover" src="@item.Path.Path" alt="" />
-                                        <h4>@item.DisplayTextJudul</h4>
-                                    </a>
+                                <div class="col-md-4 col-sm-8">
+                                    <div class="item topic text-center">
+                                        <a asp-action="Details" asp-route-id="@item.Id">
+                                            <img class="img-thumbnail book-cover" src="@item.Path.Path" alt="" />
+                                            <h4>@item.DisplayTextJudul</h4>
+                                        </a>
 
+                                    </div>
                                 </div>
-                            </div>
                         }
-                        <div class="row">
-                            <div class="col-sm-16 text-center">
-                                @{
-                                    var prevDisabled = !Model.BukuModel.HasPreviousPage ? "disabled" : "";
-                                    var nextDisabled = !Model.BukuModel.HasNextPage ? "disabled" : "";
-                                }
-                                <a asp-action="Index"
-                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                   asp-route-page="@(Model.BukuModel.PageIndex - 1)"
-                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-default @prevDisabled">
-                                    Previous
-                                </a>
-                                <a asp-action="Index"
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col-md-16 text-center">
+                            @{
+                                var prevDisabled1 = !Model.BukuModel.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled1 = !Model.BukuModel.HasNextPage ? "disabled" : "";
+                            }
+                            @if(Model.BukuModel.TotalPages > 5)
+                            { 
+                             <a asp-action="List"
+                                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-page="@(Model.BukuModel.PageIndex - 1)"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                class="btn btn-default @prevDisabled1">
+                                 Previous
+                             </a>
+                            }
+                            
+                            @for (var i = 1; i <= Model.BukuModel.TotalPages; i++)
+                            {
+                                <a asp-route-page="@i">
+                                @if (Model.BukuModel.PageIndex == @i)
+                            {
+                                <span class="page-number btn btn-default"><strong>@i</strong></span>
+                            }
+                            else
+                            {
+                                <span class="page-number page-number-unselected">@i</span>
+                            }
+                            </a>
+                            }
+                             @if (Model.BukuModel.TotalPages > 5)
+                             {
+                                 <a asp-action="List"
                                    asp-route-sortOrder="@ViewData["CurrentSort"]"
                                    asp-route-page="@(Model.BukuModel.PageIndex + 1)"
                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-default @nextDisabled">
+                                   class="btn btn-default @nextDisabled1">
                                     Next
                                 </a>
-                            </div>
+                             }
+                            
                         </div>
                     </div>
                 </div>

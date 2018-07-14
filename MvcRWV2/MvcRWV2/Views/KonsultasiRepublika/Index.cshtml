@@ -22,56 +22,76 @@
             <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
                     <div class="main-title left-side">Konsultasi Republika</div>
-                    <div class="row">
-                        <div class="col-sm-16 text-center">
-                            <p>Urutan Sesuai :</p>
-                            <p>
-                                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
-                            </p>
-
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
+                        </div>
+                        <div class="col-sm-11">
                             <form asp-action="Index" method="get">
-                                <div class="form-actions no-color">
-                                    <p>
-                                        Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                                        <input type="submit" value="Cari" class="btn btn-default" /> |
-                                        <a asp-action="Index">Back to Full List</a>
-                                    </p>
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-16">
-                            <div id="accordion">
-                                <ul id="x">
-                                    @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-16 accordion">
+                            <ul id="x">
+                                @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
                                     {
                                         <li>
-                                            <h2><a href="@item.Source" target="_blank">@item.DisplayTextJudul)</a></h2>
+                                            <h2><a href="@item.Source" target="_blank">@item.DisplayTextJudul</a></h2>
                                         </li>
                                     }
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-16 text-center">
+                         <div class="col-md-16 text-center">
                             @{
-                                var prevDisabled = !Model.KonsultasiRepublikaModel.HasPreviousPage ? "disabled" : "";
-                                var nextDisabled = !Model.KonsultasiRepublikaModel.HasNextPage ? "disabled" : "";
+                                var prevDisabled1 = !Model.KonsultasiRepublikaModel.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled1 = !Model.KonsultasiRepublikaModel.HasNextPage ? "disabled" : "";
                             }
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.KonsultasiRepublikaModel.PageIndex - 1)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-default @prevDisabled">
-                                Previous
-                            </a>
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.KonsultasiRepublikaModel.PageIndex + 1)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-default @nextDisabled">
-                                Next
-                            </a>
+                            @if(Model.KonsultasiRepublikaModel.TotalPages > 5)
+                            { 
+                             <a asp-action="List"
+                                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-page="@(Model.KonsultasiRepublikaModel.PageIndex - 1)"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                class="btn btn-default @prevDisabled1">
+                                 Previous
+                             </a>
+                            }
+                            
+                            @for (var i = 1; i <= Model.KonsultasiRepublikaModel.TotalPages; i++)
+                            {
+                                <a asp-route-page="@i">
+                                    @if (Model.KonsultasiRepublikaModel.PageIndex == @i)
+                                    {
+                                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="page-number page-number-unselected">@i</span>
+                                    }
+                                </a>
+                            }
+                             @if (Model.KonsultasiRepublikaModel.TotalPages > 5)
+                             {
+                                 <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.KonsultasiRepublikaModel.PageIndex + 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @nextDisabled1">
+                                    Next
+                                </a>
+                             }
+                            
                         </div>
                     </div>
                 </div>
