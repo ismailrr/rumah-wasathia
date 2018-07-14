@@ -1022,10 +1022,9 @@ throw new Error('AdminLTE requires jQuery')
     collapsed: 'collapsed.tree',
     expanded : 'expanded.tree'
   };
-  */
+
   // Tree Class Definition
   // =====================
-    /**
   var Tree = function (element, options) {
     this.element = element;
     this.options = options;
@@ -1098,6 +1097,7 @@ throw new Error('AdminLTE requires jQuery')
     });
   };
   */
+
   // Plugin Definition
   // =================
   function Plugin(option) {

@@ -47,7 +47,7 @@
                             <div class="item topic col-md-4 col-xs-8">
                                 <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path)} else {@item.Source}" target="_blank">
                                     <img class="img-thumbnail icon-effect" src="~/uploads/image/general/chart.png" alt="" />
-                                    <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
+                                    <h4>@item.DisplayTextJudul</h4>
                                 </a>
                             </div>
                         }
@@ -98,11 +98,11 @@
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <div class="library-wrapper">
-                                                            <img class="img-thumbnail" src="@Html.DisplayFor(modelItem => item.Path.Path)" alt="" />
+                                                            <img class="img-thumbnail" src="@item.Path.Path" alt="" />
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-12 book-desc">
-                                                        <h3>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h3>
+                                                        <h3>@item.DisplayTextJudul</h3>
                                                         <div class="download">
                                                             <a href="@Url.Action("Details","Buku",new {id=item.Id })">
                                                                 <i class="fas fa-tasks"></i>Lihat Detail
@@ -126,9 +126,9 @@
                                                     <div class="row">
                                                         <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
                                                         <div class="col-sm-11">
-                                                            <h4>@Html.DisplayFor(modelItem => item.DisplayTextJudul)</h4>
+                                                            <h4>@item.DisplayTextJudul</h4>
                                                             <div class="text-danger sub-info">
-                                                                <div class="time"><span class="ion-android-data icon"></span>@Html.DisplayFor(modelItem => item.Tanggal)</div>
+                                                                <div class="time"><span class="ion-android-data icon"></span>@item.Tanggal</div>
                                                                 <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
                                                             </div>
                                                         </div>

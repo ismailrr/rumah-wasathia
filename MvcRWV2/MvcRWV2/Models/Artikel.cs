@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,51 @@ namespace MvcRWV2.Models
                 else
                 {
                     return $"{Judul}";
+                }
+            }
+        }
+
+        public string DisplayTanggalFormat1
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.Day} {DisplayTextBulan} {Tanggal.Year} , {Tanggal.Hour}:{Tanggal.Minute}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
+                }
+            }
+        }
+
+        public string DisplayTextBulan
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.ToString("MMMMMMMM", CultureInfo.InvariantCulture)}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
+                }
+            }
+        }
+
+        public string DisplayTextHari
+        {
+            get
+            {
+                if (Tanggal != null)
+                {
+                    return $"{Tanggal.ToString("dddddddd", CultureInfo.InvariantCulture)}";
+                }
+                else
+                {
+                    return $"{Tanggal}";
                 }
             }
         }

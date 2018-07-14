@@ -116,7 +116,7 @@
                                                 else
                                                 {
                                                     <a asp-action="Edit" asp-route-id="@item.Id">
-                                                        @Html.DisplayFor(modelItem => item.DisplayTextJudul)
+                                                        @item.DisplayTextJudul
                                                     </a>
                                                     <div>
                                                         <a href="@Url.Action("Details","KonsultasiEPaper",new { Id = item.Id})" target="_blank" class="hover-show">Lihat<span> | </span></a>
@@ -140,7 +140,7 @@
                                                  }
                                                 else
                                                 {
-                                                    @Html.DisplayFor(modelItem => item.Penulis)
+                                                    @item.Penulis
 
                                                 }
                                             </td>
@@ -151,7 +151,7 @@
                                                  }
                                                 else
                                                 {
-                                                    @Html.DisplayFor(modelItem => item.Kategori)
+                                                    @item.Kategori
 
                                                 }
                                             </td>
@@ -162,7 +162,7 @@
                                             }
                                             else
                                             {
-                                                @Html.DisplayFor(modelItem => item.Tag)
+                                                @item.Tag
 
                                             }
                                             </td>
@@ -181,7 +181,7 @@
                                                     {
                                                         <p>Terakhir diubah</p>  
                                                     }
-                                                    @Html.DisplayFor(modelItem => item.Tanggal)
+                                                    @item.Tanggal
                                                 }
                                             </td>
                                         </tr>
