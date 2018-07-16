@@ -1,5 +1,4 @@
-﻿
-@model PaginatedList<MvcRWV2.Models.KajianVideo>
+﻿@model MvcRWV2.Models.KajianVideoViewModels.IndexKajianVideoViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -21,36 +20,81 @@
         <!-- breadcrumb end -->
         <!-- Kolom artikel Begin -->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="row video-wasathia">
-                @foreach (var item in Model)
-                {
-                    <div class="item topic custom-grid">
-                        <iframe src="@item.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="main-title-outer center-block">
+                    <div class="main-title left-side">Kajian Video</div>
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
+                        </div>
+                        <div class="col-sm-11">
+                            <form asp-action="Index" method="get">
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                }
-            </div>
-            <div class="row">
-                <div class="col-sm-16 text-center">
-                    @{
-                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                    }
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-page="@(Model.PageIndex - 1)"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-default @prevDisabled">
-                        Previous
-                    </a>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-page="@(Model.PageIndex + 1)"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-default @nextDisabled">
-                        Next
-                    </a>
+                    <hr>
+                    <div class="row video-wasathia">
+                        @foreach (var item in Model.KajianVideoModel)
+                        {
+                            <div class="item topic col-md-8">
+                                <iframe src="@item.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                        }
+                    </div>
+                    <div class="row">
+                        <div class="col-md-16 text-center">
+                            @{
+                                var prevDisabled1 = !Model.KajianVideoModel.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled1 = !Model.KajianVideoModel.HasNextPage ? "disabled" : "";
+                            }
+                            @if (Model.KajianVideoModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.KajianVideoModel.PageIndex - 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @prevDisabled1">
+                                    Previous
+                                </a>
+                            }
+
+                            @for (var i = 1; i <= Model.KajianVideoModel.TotalPages; i++)
+                            {
+                                <a asp-route-page="@i">
+                                    @if (Model.KajianVideoModel.PageIndex == @i)
+                                    {
+                                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="page-number page-number-unselected">@i</span>
+                                    }
+                                </a>
+                            }
+                            @if (Model.KajianVideoModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.KajianVideoModel.PageIndex + 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @nextDisabled1">
+                                    Next
+                                </a>
+                            }
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- right sec start -->
+            @await Html.PartialAsync("_SideBarLayout")
         </div>
         <!-- Second Section Begin -->
     </div>

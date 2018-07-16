@@ -20,7 +20,7 @@
         <!-- breadcrumb end -->
         <!-- Kolom artikel Begin -->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
                     <div class="main-title left-side">Infografis</div>
                     <div class="row index-content-header">
@@ -43,132 +43,63 @@
                     <div class="row">
                         <div class="col-sm-16">
                             @foreach (KonsultasiInfografis item in Model.KonsultasiInfografisModel)
-                        {
-                                <div class="item topic col-md-4 col-xs-8">
-                                    <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path)} else {@item.Source}" target="_blank">
-                                        <img class="img-thumbnail icon-effect" src="~/uploads/image/general/chart.png" alt="" />
-                                        <h4>@item.DisplayTextJudul</h4>
-                                    </a>
-                                </div>
-                        }
+                    {
+                        <div class="item topic col-md-4 col-xs-8">
+                            <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path)} else {@item.Source}" target="_blank">
+                                <img class="img-thumbnail icon-effect" src="~/uploads/image/general/chart.png" alt="" />
+                                <h4>@item.DisplayTextJudul</h4>
+                            </a>
+                        </div>
+            }
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col-md-16 text-center">
+                        <div class="col-md-16 text-center">
                             @{
-                                var prevDisabled1 = !Model.KonsultasiInfografisModel.HasPreviousPage ? "disabled" : "";
-                                var nextDisabled1 = !Model.KonsultasiInfografisModel.HasNextPage ? "disabled" : "";
+                        var prevDisabled1 = !Model.KonsultasiInfografisModel.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled1 = !Model.KonsultasiInfografisModel.HasNextPage ? "disabled" : "";
                             }
-                            @if(Model.KonsultasiInfografisModel.TotalPages > 5)
-                            { 
-                             <a asp-action="List"
-                                asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                asp-route-page="@(Model.KonsultasiInfografisModel.PageIndex - 1)"
-                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                class="btn btn-default @prevDisabled1">
-                                 Previous
-                             </a>
-                            }
-                            
+                            @if (Model.KonsultasiInfografisModel.TotalPages > 5)
+                    {
+                        <a asp-action="List"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.KonsultasiInfografisModel.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @prevDisabled1">
+                            Previous
+                        </a>
+            }
+
                             @for (var i = 1; i <= Model.KonsultasiInfografisModel.TotalPages; i++)
-                            {
-                                <a asp-route-page="@i">
-                                @if (Model.KonsultasiInfografisModel.PageIndex == @i)
-                            {
-                                <span class="page-number btn btn-default"><strong>@i</strong></span>
-                            }
-                            else
-                            {
-                                <span class="page-number page-number-unselected">@i</span>
-                            }
-                            </a>
-                            }
-                             @if (Model.KonsultasiInfografisModel.TotalPages > 5)
-                             {
-                                 <a asp-action="List"
-                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                                   asp-route-page="@(Model.KonsultasiInfografisModel.PageIndex + 1)"
-                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                   class="btn btn-default @nextDisabled1">
-                                    Next
-                                </a>
-                             }
-                            
+                    {
+                        <a asp-route-page="@i">
+                            @if (Model.KonsultasiInfografisModel.PageIndex == @i)
+                    {
+                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+            }
+            else
+            {
+                <span class="page-number page-number-unselected">@i</span>
+    }
+                        </a>
+            }
+                            @if (Model.KonsultasiInfografisModel.TotalPages > 5)
+                    {
+                        <a asp-action="List"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.KonsultasiInfografisModel.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @nextDisabled1">
+                            Next
+                        </a>
+            }
+
                         </div>
                     </div>
                 </div>
             </div>
             <!-- right sec start -->
-            <div class="col-sm-5 hidden-ms right-sec">
-                <div class="bordered">
-                    <div class="row ">
-                        <!-- activities start -->
-                        <div class="col-sm-16 bt-space wow fadeInUp animated" data-wow-delay="1s" data-wow-offset="130">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs nav-justified " role="tablist">
-                                <li class="active"><a href="#infografis" role="tab" data-toggle="tab">Buku</a></li>
-                                <li><a href="#artikel" role="tab" data-toggle="tab">Artikel</a></li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="infografis">
-                                    <ul class="list-unstyled kajian">
-                                        @foreach (Buku item in Model.BukuModel)
-                                        {
-                                            <li>
-                                                <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <div class="library-wrapper">
-                                                            <img class="img-thumbnail" src="@item.Path.Path" alt="" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-12 book-desc">
-                                                        <h3>@item.DisplayTextJudul</h3>
-                                                        <div class="download">
-                                                            <a href="@Url.Action("Details","Buku",new {id=item.Id })">
-                                                                <i class="fas fa-tasks"></i>Lihat Detail
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                    <div class="row">
-                                        <a href="~/Buku/Index" class="btn btn-default btn-sidebar" role="button">Lihat Semua</a>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="artikel">
-                                    <ul class="list-unstyled kajian">
-                                        @foreach (Artikel item in Model.ArtikelModel)
-                                        {
-                                            <li>
-                                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
-                                                    <div class="row">
-                                                        <div class="col-sm-5"><img class="img-thumbnail pull-left" src="~/uploads/image/general/pdf.png" alt="" /> </div>
-                                                        <div class="col-sm-11">
-                                                            <h4>@item.DisplayTextJudul</h4>
-                                                            <div class="text-danger sub-info">
-                                                                <div class="time"><span class="ion-android-data icon"></span>@item.Tanggal</div>
-                                                                <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        }
-                                    </ul>
-                                    <div class="row">
-                                        <a href="~/Artikel/Index" class="btn btn-default btn-sidebar" role="button">Lihat Semua</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- activities end -->
-                    </div>
-                </div>
-            </div>
+            @await Html.PartialAsync("_SideBarLayout")
         </div>
         <!-- Second Section Begin -->
     </div>

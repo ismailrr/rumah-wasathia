@@ -1,4 +1,4 @@
-﻿@model PaginatedList<MvcRWV2.Models.Galeri>
+﻿@model MvcRWV2.Models.GaleriViewModels.IndexGaleriViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -17,48 +17,99 @@
             </ol>
         </div>
         <!-- breadcrumb end -->
-        <!-- Masonry Begin -->
-        <div class="masonry-wrapper">
-            <div class="masonry text-center">
-                @foreach (var item in Model)
-                {
-                    <div class="item">
-                        <a class="gallery-item popup-img" href="~/uploads/image/galeri/@{@item.Judul}">
-                            <div class="thumb-box">
-                                <span class="ion-arrow-expand"></span>
-                                <img alt="" src="~/uploads/image/galeri/@{@item.Judul}" class="img-thumbnail">
-                            </div>
-                            <div class="album-desc">
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
+        <div class="col-sm-16 banner-outer gapTop">
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="main-title-outer center-block">
+                    <div class="main-title left-side">Konsultasi E Paper</div>
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
+                        </div>
+                        <div class="col-sm-11">
+                            <form asp-action="Index" method="get">
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                }
+                    <hr>
+                    <!-- Masonry Begin -->
+                    <div class="row">
+                        <div class="col-md-16">
+                            <div class="masonry-wrapper">
+                                <div class="masonry text-center">
+                                    @foreach (var item in Model.GaleriModel)
+                                    {
+                                        <div class="item">
+                                            <a class="gallery-item popup-img" href="~/uploads/image/galeri/@{@item.Judul}">
+                                                <div class="thumb-box">
+                                                    <span class="ion-arrow-expand"></span>
+                                                    <img alt="" src="~/uploads/image/galeri/@{@item.Judul}" class="img-thumbnail">
+                                                </div>
+                                                <div class="album-desc">
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Masonry End -->
+                    <div class="row">
+                        <div class="col-md-16 text-center">
+                            @{
+                                var prevDisabled1 = !Model.GaleriModel.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled1 = !Model.GaleriModel.HasNextPage ? "disabled" : "";
+                            }
+                            @if (Model.GaleriModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.GaleriModel.PageIndex - 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @prevDisabled1">
+                                    Previous
+                                </a>
+                            }
+
+                            @for (var i = 1; i <= Model.GaleriModel.TotalPages; i++)
+                            {
+                                <a asp-route-page="@i">
+                                    @if (Model.GaleriModel.PageIndex == @i)
+                                    {
+                                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="page-number page-number-unselected">@i</span>
+                                    }
+                                </a>
+                            }
+                            @if (Model.GaleriModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.GaleriModel.PageIndex + 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @nextDisabled1">
+                                    Next
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- Masonry End -->
-        <div class="row">
-            <div class="col-sm-16 text-center">
-                @{
-                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                }
-                <a asp-action="Index"
-                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-page="@(Model.PageIndex - 1)"
-                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                   class="btn btn-default @prevDisabled">
-                    Previous
-                </a>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-page="@(Model.PageIndex + 1)"
-                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                   class="btn btn-default @nextDisabled">
-                    Next
-                </a>
-            </div>
+            <!-- right sec start -->
+            @await Html.PartialAsync("_SideBarLayout")
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-﻿@model PaginatedList<MvcRWV2.Models.KonsultasiEPaper>
+﻿@model MvcRWV2.Models.KonsultasiEPaperViewModels.IndexKonsultasiEPaperViewModel
+
 
 @{
     ViewData["Title"] = "Index";
@@ -19,56 +20,89 @@
         <!-- breadcrumb end -->
         <!-- Kolom artikel Begin -->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="row text-center">
-                <!-- gallery start -->
-                <div class="gallery">
-                    <div class="row">
-                        <div class="col-sm-16 text-center">
-                            <p>Urutan Sesuai :</p>
-                            <p>
-                                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Judul</a>
-                            </p>
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="main-title-outer center-block">
+                    <div class="main-title left-side">Konsultasi E Paper</div>
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
                         </div>
-                        <div class="col-md-16">
-                            @foreach (var item in Model)
-                            {
-                                <div class="col-md-16">
-                                    <a class="gallery-item popup-img" href="~/uploads/image/epaper/@{@item.Judul}">
-                                        <div class="thumb-box">
-                                            <span class="ion-arrow-expand"></span>
-                                            <img width="1600" height="972" alt="" src="~/uploads/image/epaper/@{@item.Judul}" class="img-thumbnail">
-                                        </div>
-                                        <div class="album-desc">Jual Beli Melalui Market Place</div>
-                                    </a>
+                        <div class="col-sm-11">
+                            <form asp-action="Index" method="get">
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
                                 </div>
-                            }
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-16">
+                            @foreach (var item in Model.KonsultasiEPaperModel)
+                    {
+                        <div class="col-md-16">
+                            <a class="gallery-item popup-img" href="~/uploads/image/epaper/@{@item.Judul}">
+                                <div class="thumb-box">
+                                    <span class="ion-arrow-expand"></span>
+                                    <img width="1600" height="972" alt="" src="~/uploads/image/epaper/@{@item.Judul}" class="img-thumbnail">
+                                </div>
+                                <div class="album-desc">Jual Beli Melalui Market Place</div>
+                            </a>
+                        </div>
+            }
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-16 text-center">
+                        <div class="col-md-16 text-center">
                             @{
-                                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                        var prevDisabled1 = !Model.KonsultasiEPaperModel.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled1 = !Model.KonsultasiEPaperModel.HasNextPage ? "disabled" : "";
                             }
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.PageIndex - 1)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-default @prevDisabled">
-                                Previous
-                            </a>
-                            <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-page="@(Model.PageIndex + 1)"
-                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                               class="btn btn-default @nextDisabled">
-                                Next
-                            </a>
+                            @if (Model.KonsultasiEPaperModel.TotalPages > 5)
+                    {
+                        <a asp-action="List"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.KonsultasiEPaperModel.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @prevDisabled1">
+                            Previous
+                        </a>
+            }
+
+                            @for (var i = 1; i <= Model.KonsultasiEPaperModel.TotalPages; i++)
+                    {
+                        <a asp-route-page="@i">
+                            @if (Model.KonsultasiEPaperModel.PageIndex == @i)
+                    {
+                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+            }
+            else
+            {
+                <span class="page-number page-number-unselected">@i</span>
+    }
+                        </a>
+            }
+                            @if (Model.KonsultasiEPaperModel.TotalPages > 5)
+                    {
+                        <a asp-action="List"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@(Model.KonsultasiEPaperModel.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           class="btn btn-default @nextDisabled1">
+                            Next
+                        </a>
+            }
+
                         </div>
                     </div>
                 </div>
-                <!-- gallery end -->
             </div>
+            <!-- right sec start -->
+            @await Html.PartialAsync("_SideBarLayout")
         </div>
     </div>
 </div>

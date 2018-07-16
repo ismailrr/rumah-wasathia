@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
+using MvcRWV2.Models.KonsultasiEPaperViewModels;
 
 namespace MvcRWV2.Controllers
 {
@@ -34,11 +35,28 @@ namespace MvcRWV2.Controllers
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
+            IndexKonsultasiEPaperViewModel mymodel = new IndexKonsultasiEPaperViewModel();
+
             var konsultasiEPaper = from s in _context.DaftarKonsultasiEPaper
                                    .Include(ee => ee.Path)
                                    .Include(ee => ee.Kategori)
                                    where s.Status == published
                                    select s;
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
 
             switch (sortOrder)
             {
@@ -57,7 +75,8 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 15;
-            return View(await PaginatedList<KonsultasiEPaper>.CreateAsync(konsultasiEPaper.AsNoTracking(), page ?? 1, pageSize));
+            mymodel.KonsultasiEPaperModel = await PaginatedList<KonsultasiEPaper>.CreateAsync(konsultasiEPaper.AsNoTracking(), page ?? 1, pageSize);
+            return View(mymodel);
         }
 
         public async Task<IActionResult> List(

@@ -38,30 +38,32 @@
                         <input asp-for="Judul" class="form-control" />
                         <span asp-validation-for="Judul" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-10">
                         <label asp-for="PenulisBuku" class="control-label"></label>
                         <input asp-for="PenulisBuku" class="form-control" />
                         <span asp-validation-for="PenulisBuku" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-2">
                         <label asp-for="Terbitan" class="control-label"></label>
                         <input asp-for="Terbitan" class="form-control" />
                         <span asp-validation-for="Terbitan" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-10">
                         <label asp-for="ISBN" class="control-label"></label>
                         <input asp-for="ISBN" class="form-control" />
                         <span asp-validation-for="ISBN" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Deskripsi" class="control-label"></label>
-                        <input asp-for="Deskripsi" class="form-control" />
-                        <span asp-validation-for="Deskripsi" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-2">
                         <label asp-for="Tebal" class="control-label"></label>
                         <input asp-for="Tebal" class="form-control" />
                         <span asp-validation-for="Tebal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Deskripsi" class="control-label"></label>
+                        <textarea asp-for="Deskripsi" class="form-control" id="editor1" rows="10" cols="80">
+                            Pertanyaan
+                        </textarea>
+                        <span asp-validation-for="Deskripsi" class="text-danger"></span>
                     </div>
                 </div>
             </div>

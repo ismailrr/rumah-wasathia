@@ -27,6 +27,7 @@
   <ItemGroup>
     <Compile Remove="Models\KonsultasiMedsosKatgeori.cs" />
     <Compile Remove="Models\KonsultasiRepublikaKategori.cs" />
+    <Compile Remove="SideBar.cs" />
   </ItemGroup>
 
 
@@ -45,9 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\GaleriViewModels\" />
-    <Folder Include="Models\KonsultasiEPaperViewModels\" />
-    <Folder Include="Models\PathArtikelViewModels\" />
     <Folder Include="Uploads\Image\" />
     <Folder Include="Uploads\Music\" />
     <Folder Include="Uploads\PDF\" />

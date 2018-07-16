@@ -12,7 +12,7 @@
         <!-- Sesi Pertama (Main Slider) -->
         <div class="col-sm-16 banner-outer">
             <div class="row">
-                <div class="col-sm-16 col-md-10 col-lg-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="col-sm-16 col-md-11 col-lg-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                     <!-- carousel start -->
                     <div id="sync1" class="owl-carousel">
                         <div class="box item">
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm col-md-6 col-lg-6 wrap-content wow fadeInRight animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="col-sm col-md-5 col-lg-6 wrap-content wow fadeInRight animated" data-wow-delay="1s" data-wow-offset="50">
                     <div class="absolute-text-item">
                         <div class="relative-block">
                             <div id="vid-first" class="tab-pane embed-responsive embed-responsive-16by9 active">
@@ -260,7 +260,7 @@
         <!-- Sesi Pertama (Main Slider) Selesai -->
         <!-- second Section Begin -->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="col-sm-16 col-md-10 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
                     <div class="main-title left-side">Galeri</div>
                     <!-- Masonry Begin -->
@@ -283,17 +283,19 @@
 
                             }
                         </div>
-                        <a href="~/Galeri/Index" class="btn btn-info" role="button">Lihat Semua</a>
                     </div>
                     <!-- Masonry End -->
+                    <div class="row">
+                        <a href="~/Galeri/Index" class="btn btn-default btn-sidebar-index" role="button">Lihat Semua</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-16 col-md-6 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
+            <div class="col-sm-16 col-md-5 right-side-style wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
                 <div class="row">
                     <div class="col-sm-16">
                         <div class="main-title-outer">
                             <div class="main-title right-side">Perpustakaan</div>
-                            <ul class="list-unstyled kitab">
+                            <ul class="list-unstyled kitab-index">
                                 @foreach (Buku item in Model.BukuModel)
                                 {
                                 <li>
@@ -317,7 +319,9 @@
                                 }
                                 
                             </ul>
-                            <a href="~/Buku/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                            <div class="row">
+                                <a href="~/Buku/Index" class="btn btn-default btn-sidebar-index" role="button">Lihat Semua</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -326,7 +330,7 @@
         <!-- Second Section Begin -->
         <!--Third Section Begin-->
         <div class="col-sm-16 banner-outer gapTop">
-            <div class="col-md-10 col-sm-16 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+            <div class="col-md-11 col-sm-16 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
                 <div class="main-title-outer center-block">
                     <div class="main-title left-side">Kumpulan Artikel</div>
                     <div class="row text-center">
@@ -342,13 +346,15 @@
                         }
                         
                     </div>
-                    <a href="~/Artikel/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                    <div class="row">
+                        <a href="~/Artikel/Index" class="btn btn-default btn-sidebar-index" role="button">Lihat Semua</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-16 right-side-style hidden-xs wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
+            <div class="col-md-5 col-sm-16 right-side-style hidden-xs wow fadeInDown animated" data-wow-delay="1s" data-wow-offset="40">
                 <div class="main-title-outer pull-left">
                     <div class="main-title right-side">Kajian Audio</div>
-                    <ul class="list-unstyled kajian">
+                    <ul class="list-unstyled kajian-index">
                         @foreach (KajianAudio item in Model.KajianAudioModel)
                         {
                             <li>
@@ -362,7 +368,9 @@
                                 </li>
                         }
                             </ul>
-                            <a href="~/KajianAudio/Index" class="btn btn-info" role="button">Lihat Semua</a>
+                    <div class="row">
+                        <a href="~/KajianAudio/Index" class="btn btn-default btn-sidebar-index" role="button">Lihat Semua</a>
+                    </div>
                 </div>
             </div>
         </div>

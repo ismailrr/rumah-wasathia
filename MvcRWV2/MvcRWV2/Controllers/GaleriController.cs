@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcRWV2.Data;
 using MvcRWV2.Models;
+using MvcRWV2.Models.GaleriViewModels;
 
 namespace MvcRWV2.Controllers
 {
@@ -16,6 +17,8 @@ namespace MvcRWV2.Controllers
     public class GaleriController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private int published = 1;
+        private int trash = 2;
 
         public GaleriController(ApplicationDbContext context)
         {
@@ -32,10 +35,28 @@ namespace MvcRWV2.Controllers
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
 
+            IndexGaleriViewModel mymodel = new IndexGaleriViewModel();
+
             var galeri = from s in _context.DaftarGaleri
                          .Include(ee => ee.Path)
                          .Include(ee => ee.Kategori)
                          select s;
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                       where s.Status == published
+                       select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
+            
 
             switch (sortOrder)
             {
@@ -54,7 +75,8 @@ namespace MvcRWV2.Controllers
             }
 
             int pageSize = 15;
-            return View(await PaginatedList<Galeri>.CreateAsync(galeri.AsNoTracking(), page ?? 1, pageSize));
+            mymodel.GaleriModel = await PaginatedList<Galeri>.CreateAsync(galeri.AsNoTracking(), page ?? 1, pageSize);
+            return View(mymodel);
         }
 
         public async Task<IActionResult> List(

@@ -382,7 +382,11 @@ html {
 .kajian,
 .sering-dibaca {
     padding: 10px;
-    padding-top: 25px;
+}
+
+.kitab-index, .kajian-index {
+    padding: 10px;
+    padding-bottom: 30px;
 }
 
 .list-menu {
