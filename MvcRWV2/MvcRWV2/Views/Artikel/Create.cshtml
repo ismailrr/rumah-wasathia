@@ -6,7 +6,7 @@
 }
 <div class="row">
     <div class="col-md-4">
-        <h1 class="inline">Artikel</h1>
+        <a href="@Url.Action("List","Artikel")" class="inline title-admin-page">Artikel</a>
         <div type="button" class="btn btn-primary">
             <a asp-action="Create">Buat Baru</a>
         </div>
@@ -15,7 +15,7 @@
 <hr />
 <div class="row">
     <form asp-action="Create" method="post" enctype="multipart/form-data">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="box box-info">
                 <div class="box-header">
                     <h3 class="box-title">Create Artikel</h3>
@@ -38,11 +38,6 @@
                         <input type="file" name="file" id="file" />
                         <span asp-validation-for="Source" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Path" class="control-label"></label>
-                        <input asp-for="Path" class="form-control" type="file" name="upload" accept="pdf" />
-                        <span asp-validation-for="Path" class="text-danger"></span>
-                    </div>
                     <!--
                     <div class="form-group">
                         <label asp-for="Path" class="col-md-3 control-label">Upload File</label>
@@ -56,7 +51,7 @@
             </div>
             <!-- /.box -->
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">

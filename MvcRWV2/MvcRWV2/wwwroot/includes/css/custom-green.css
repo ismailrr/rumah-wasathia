@@ -2458,3 +2458,18 @@ hr{
     border-radius: 4px;
     border-color: #ccc
 }
+
+.body-pad-video{
+    height:800px;
+}
+
+.body-pad-audio {
+    height: 200px;
+}
+
+.title-admin-page {
+    font-weight: 900;
+    font-size: 32px;
+    color: #ECB20E;
+    line-height:42px;
+}

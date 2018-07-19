@@ -1,33 +1,157 @@
 ﻿@model MvcRWV2.Models.Galeri
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>Create</h2>
-
-<h4>Galeri</h4>
-<hr />
 <div class="row">
-    <div class="col-md-2">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Judul" class="control-label"></label>
-                <input asp-for="Judul" class="form-control" />
-                <span asp-validation-for="Judul" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+    <div class="col-md-4">
+        <a href="@Url.Action("List","Galeri")" class="inline title-admin-page">Galeri</a>
+        <div type="button" class="btn btn-primary">
+            <a asp-action="Create">Buat Baru</a>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="List">Kembali</a>
+<hr />
+<div class="row">
+    <form asp-action="Edit">
+        <div class="col-md-9">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3 class="box-title">Edit Galeri</h3>
+                    <div class="pull-right box-tools">
+                        <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body pad">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Status" />
+                    <input type="hidden" asp-for="Tag" />
+                    <input type="hidden" asp-for="Kategori" />
+                    <input type="hidden" asp-for="Penulis" />
+                    <input type="hidden" asp-for="Jumlah" />
+                    <input type="hidden" asp-for="DriveId" />
+                    <input type="hidden" asp-for="Path" />
+                    <input type="hidden" asp-for="FImage" />
+                    <input type="hidden" asp-for="Source" />
+                    <div class="form-group">
+                        <label asp-for="Judul" class="control-label"></label>
+                        <input asp-for="Judul" class="form-control" />
+                        <span asp-validation-for="Judul" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Source" class="control-label"></label>
+                        <textarea asp-for="Source" class="form-control" id="editor3" rows="10" cols="80">
+                            Pertanyaan
+                        </textarea>
+                        <span asp-validation-for="Source" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Publish</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <span class="pull-right">
+                                <input type="submit" value="Simpan" class="btn btn-default" />
+                                <a asp-action="List" class="btn btn-info" role="button">Kembali</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Tag</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <select class="form-control" id="sel2" asp-for="Tag">
+                                <option value="null"></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <span asp-validation-for="Tag" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Kategori</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                            <select class="form-control" id="sel1" asp-for="Kategori">
+                                <option value="null"></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <span asp-validation-for="Kategori" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Gambar Cover</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group">
+                                <span>Pilih Gambar Cover</span>
+                                <div class="form-group">
+                                    <label asp-for="FImage" class="control-label"></label>
+                                    <input asp-for="FImage" class="form-control" />
+                                    <span asp-validation-for="FImage" class="text-danger"></span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+    </form>
+    <!-- /.col-->
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<!-- ./row -->

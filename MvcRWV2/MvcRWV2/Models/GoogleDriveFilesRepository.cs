@@ -271,7 +271,8 @@ namespace MvcRWV2.Models
                     throw new ArgumentNullException("service");
 
                 // Make the request.
-                service.Files.Delete(id).Execute();
+                if(id != null)
+                    service.Files.Delete(id).Execute();
             }
             catch (Exception ex)
             {

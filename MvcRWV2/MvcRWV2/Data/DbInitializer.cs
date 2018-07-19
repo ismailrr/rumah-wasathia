@@ -329,7 +329,7 @@ namespace MvcRWV2.Data
              */
             var kajianAudio = new KajianAudio[]
             {
-                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
+                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/268727142&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/224844275&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/292675007&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
@@ -361,7 +361,7 @@ namespace MvcRWV2.Data
              */
             var kajianVideo = new KajianVideo[]
             {
-                new KajianVideo{ Source = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
+                new KajianVideo{ Source = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/INK1IvY4WSA", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/HXOy6M8Vedk", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/8bPY1JfdHoo", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },

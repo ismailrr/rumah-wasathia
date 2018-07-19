@@ -6,7 +6,7 @@
 }
 <div class="row">
     <div class="col-md-4">
-        <h1 class="inline">Kajian Video</h1>
+        <a href="@Url.Action("List","KajianVideo")" class="inline title-admin-page">Kajian Video</a>
         <div type="button" class="btn btn-primary">
             <a asp-action="Create">Buat Baru</a>
         </div>
@@ -34,6 +34,9 @@
                     <input type="hidden" asp-for="Kategori" />
                     <input type="hidden" asp-for="Penulis" />
                     <input type="hidden" asp-for="DriveId" />
+                    <input type="hidden" asp-for="Path" />
+                    <input type="hidden" asp-for="FImage" />
+                    <input type="hidden" asp-for="Source" />
                     <div class="form-group">
                         <label asp-for="Judul" class="control-label"></label>
                         <input asp-for="Judul" class="form-control" />
@@ -41,12 +44,41 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Source" class="control-label"></label>
-                        <input asp-for="Source" class="form-control" />
+                        <input asp-for="Source" class="form-control" disabled />
                         <span asp-validation-for="Source" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             <!-- /.box -->
+            <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">Konten</h3>
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body pad">
+                        <div class="form-group body-pad-video">
+                            @if (@Model.FImage != null && @Model.FImage != "")
+                            {
+                            <iframe class="preview-edit" width="150" src="@Model.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            }
+                            else
+                            {
+                                <span>Pilih Gambar Cover</span>
+                                <div class="form-group">
+                                    <label asp-for="FImage" class="control-label"></label>
+                                    <input asp-for="FImage" class="form-control" />
+                                    <span asp-validation-for="FImage" class="text-danger"></span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box -->
         </div>
         <div class="col-md-3">
             <div class="col-md-12">
@@ -73,6 +105,7 @@
                             <a asp-action="Trash" asp-route-id="@Model.Id" style="color:darkred;">Pindah ke Trash</a>
                             <span class="pull-right">
                                 <input type="submit" value="Simpan" class="btn btn-default" />
+                                <a href="@Model.Source" target="_blank" class="btn btn-primary" role="button">Lihat</a>
                                 <a asp-action="List" class="btn btn-info" role="button">Kembali</a>
                             </span>
                         </div>
@@ -128,38 +161,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="box box-info">
-                    <div class="box-header">
-                        <h3 class="box-title">Gambar Cover</h3>
-                        <div class="pull-right box-tools">
-                            <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip"
-                                    title="Collapse">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="box-body pad">
-                        <div class="form-group">
-                            @if (@Model.FImage != null && @Model.FImage != "")
-                            {
-                            <iframe class="preview-edit" width="150" src="@Model.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                <a asp-action="RemoveCover" asp-route-id="@Model.Id" class="remove-cover">Hapus Gambar Cover</a>
-                            }
-                            else
-                            {
-                                <span>Pilih Gambar Cover</span>
-                                <div class="form-group">
-                                    <label asp-for="FImage" class="control-label"></label>
-                                    <input asp-for="FImage" class="form-control" />
-                                    <span asp-validation-for="FImage" class="text-danger"></span>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box -->
             </div>
         </div>
     </form>

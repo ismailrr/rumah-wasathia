@@ -6,7 +6,7 @@
 }
 <div class="row">
     <div class="col-md-4">
-        <h1 class="inline">Artikel</h1>
+        <a href="@Url.Action("List","Artikel")" class="inline title-admin-page">Artikel</a>
         <div type="button" class="btn btn-primary">
             <a asp-action="Create">Buat Baru</a>
         </div>
@@ -34,14 +34,17 @@
                     <input type="hidden" asp-for="Kategori" />
                     <input type="hidden" asp-for="Penulis" />
                     <input type="hidden" asp-for="DriveId" />
+                    <input type="hidden" asp-for="Path" />
+                    <input type="hidden" asp-for="FImage" />
+                    <input type="hidden" asp-for="Source" />
                     <div class="form-group">
                         <label asp-for="Judul" class="control-label"></label>
-                        <input asp-for="Judul" class="form-control" />
+                        <input asp-for="Judul" class="form-control"/>
                         <span asp-validation-for="Judul" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Source" class="control-label"></label>
-                        <input asp-for="Source" class="form-control" />
+                        <input asp-for="Source" class="form-control" disabled />
                         <span asp-validation-for="Source" class="text-danger"></span>
                     </div>
                 </div>
@@ -71,6 +74,7 @@
                             <a asp-action="Trash" asp-route-id="@Model.Id" style="color:darkred;">Pindah ke Trash</a>
                             <span class="pull-right">
                                 <input type="submit" value="Simpan" class="btn btn-default" />
+                                <a href="@Model.Source" target="_blank" class="btn btn-primary" role="button">Lihat</a>
                                 <a asp-action="List" class="btn btn-info" role="button">Kembali</a>
                             </span>
                         </div>

@@ -24,6 +24,7 @@ namespace MvcRWV2.Models
         public string Jawaban { get; set; }
         public PathKonsultasiRumahWasathia Path { get; set; }
         public string FImage { get; set; }
+        public string Source { get; set; }
         public KategoriKonsultasi Kategori { get; set; }
         public Tag Tag { get; set; }
         public string Penulis { get; set; }

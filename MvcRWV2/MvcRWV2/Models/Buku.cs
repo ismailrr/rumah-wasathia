@@ -24,6 +24,7 @@ namespace MvcRWV2.Models
         public int Tebal { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
+        public string Source { get; set; }
         public PathBuku Path { get; set; }
         public string FImage { get; set; }
         public KategoriBuku Kategori { get; set; }

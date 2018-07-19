@@ -10,7 +10,7 @@
 <!-- Content Wrapper. Contains page content -->
         <div class="row">
             <div class="col-md-4">
-                <h1 class="inline">Artikel</h1>
+                <a href="@Url.Action("List","Artikel")" class="inline title-admin-page">Artikel</a>
                 <div type="button" class="btn btn-primary">
                     <a asp-action="Create">Buat Baru</a>
                 </div>
@@ -26,6 +26,9 @@
                     </div>
                 </form>
             </div>
+        </div>
+        <hr>
+        <div class="row">
             <div class="col-md-4 text-left">
                 <a asp-action="List">Semua (@Model.TotalItem)</a> |
                 <a asp-action="List" asp-route-status="2">Trash (@Model.TotalTrash)</a>
@@ -36,6 +39,7 @@
                 </span>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">

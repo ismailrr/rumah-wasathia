@@ -218,6 +218,10 @@ namespace MvcRWV2.Controllers
                         artikel.FImage = artikel.FImage.Replace("file/d/", "uc?id=");
                         artikel.FImage = artikel.FImage.Replace("/view?usp=sharing", "");
                     }
+                    if (artikel.FImage == null)
+                    {
+                        artikel.FImage = "/uploads/image/general/pdf.png";
+                    }
                     if (artikel.Penulis == null)
                     {
                         artikel.Penulis = "admin";
@@ -249,7 +253,7 @@ namespace MvcRWV2.Controllers
                     artikel.DriveId = fileUploaded.Id;
                     artikel.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
                     artikel.Judul = file.FileName;
-                    artikel.FImage = "/uploads/image/general/pdf.png";
+                    
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(List));
@@ -353,8 +357,8 @@ namespace MvcRWV2.Controllers
                 if (service == null)
                     throw new ArgumentNullException("service");
 
-
-                service.Files.Delete(driveId).Execute();
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
 
             }
             catch (Exception ex)
