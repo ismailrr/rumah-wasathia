@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +23,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
 
-        public KajianVideoController(ApplicationDbContext context)
+        public KajianVideoController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: KajianVideo
@@ -174,22 +182,57 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage,DriveId,Parents")] KajianVideo kajianVideo, IFormFile file)
         {
             if (ModelState.IsValid)
             {
                 kajianVideo.Tanggal = DateTime.Now;
-                kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
+                if (kajianVideo.Source != null)
+                {
+                    kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
+                }
                 if (kajianVideo.FImage != null)
                 {
                     kajianVideo.FImage = kajianVideo.FImage.Replace("file/d/", "uc?id=");
                     kajianVideo.FImage = kajianVideo.FImage.Replace("/view?usp=sharing", "");
+                }
+                else
+                {
+                    kajianVideo.FImage = "";
                 }
                 if (kajianVideo.Penulis == null)
                 {
                     kajianVideo.Penulis = "admin";
                 }
                 kajianVideo.Status = 1;
+
+                DriveService service = driveService.GetService();
+                var folderId = "1baYXzsU1YKek7HMSq9NDCyiP9jqJ4cpu";
+                string path = Path.GetTempFileName();
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = Path.GetFileName(file.FileName),
+                    Parents = new List<string>
+                        {
+                            folderId
+                        }
+                };
+                FilesResource.CreateMediaUpload request;
+
+                using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                {
+                    await file.CopyToAsync(stream);
+                    request = service.Files.Create(
+                       fileMetadata, stream, "video/mp4");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var fileUploaded = request.ResponseBody;
+                kajianVideo.DriveId = fileUploaded.Id;
+                kajianVideo.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                kajianVideo.Judul = file.FileName;
+                kajianVideo.Parents = folderId;
+
                 _context.Add(kajianVideo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -218,7 +261,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianVideo kajianVideo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage,DriveId,Parents")] KajianVideo kajianVideo)
         {
             if (id != kajianVideo.Id)
             {

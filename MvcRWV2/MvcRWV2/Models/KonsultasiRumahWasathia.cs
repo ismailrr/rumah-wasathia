@@ -12,15 +12,15 @@ namespace MvcRWV2.Models
     {
 
         public int Id { get; set; }
-        [Required, StringLength(200)]
+        [StringLength(200)]
         public string Judul { get; set; }
         [StringLength(200)]
         public string PenulisKonten { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
-        [Required, StringLength(5000)]
+        [StringLength(5000)]
         public string Pertanyaan { get; set; }
-        [Required, StringLength(5000)]
+        [StringLength(5000)]
         public string Jawaban { get; set; }
         public PathKonsultasiRumahWasathia Path { get; set; }
         public string FImage { get; set; }

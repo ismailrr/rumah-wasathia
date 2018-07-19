@@ -206,7 +206,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId")] Artikel artikel, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] Artikel artikel, IFormFile file)
         {
             try
             {
@@ -253,6 +253,7 @@ namespace MvcRWV2.Controllers
                     artikel.DriveId = fileUploaded.Id;
                     artikel.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
                     artikel.Judul = file.FileName;
+                    artikel.Parents = folderId;
                     
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
@@ -291,7 +292,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] Artikel artikel)
         {
             if (id != artikel.Id)
             {

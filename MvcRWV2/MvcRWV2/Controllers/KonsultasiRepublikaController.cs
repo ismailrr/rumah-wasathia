@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +21,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
 
-        public KonsultasiRepublikaController(ApplicationDbContext context)
+        public KonsultasiRepublikaController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: KonsultasiRepublika
@@ -213,7 +219,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiRepublika konsultasiRepublika, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -256,7 +262,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status")] KonsultasiRepublika konsultasiRepublika)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiRepublika konsultasiRepublika)
         {
             if (id != konsultasiRepublika.Id)
             {

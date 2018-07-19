@@ -16,7 +16,7 @@ namespace MvcRWV2.Models
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }
         public PathKajianVideo Path { get; set; }
-        [Required, StringLength(500)]
+        [StringLength(500)]
         public string Source { get; set; }
         public string FImage { get; set; }
         public KategoriKajian Kategori { get; set; }

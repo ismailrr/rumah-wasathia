@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +23,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
 
-        public KajianAudioController(ApplicationDbContext context)
+        public KajianAudioController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: KajianAudio
@@ -174,26 +182,72 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianAudio kajianAudio)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage,DriveId,Parents")] KajianAudio kajianAudio, IFormFile file)
         {
-            if (ModelState.IsValid)
+            try
             {
-                kajianAudio.Tanggal = DateTime.Now;
-                kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"","");
-                kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
-                if (kajianAudio.FImage != null)
+                if (ModelState.IsValid && file.Length > 0)
                 {
-                    kajianAudio.FImage = kajianAudio.FImage.Replace("file/d/", "uc?id=");
-                    kajianAudio.FImage = kajianAudio.FImage.Replace("/view?usp=sharing", "");
+                    kajianAudio.Tanggal = DateTime.Now;
+                    if (kajianAudio.Source != null)
+                    {
+                        kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
+                        kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
+                    }
+                    if (kajianAudio.FImage != null)
+                    {
+                        kajianAudio.FImage = kajianAudio.FImage.Replace("file/d/", "uc?id=");
+                        kajianAudio.FImage = kajianAudio.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    else
+                    {
+                        kajianAudio.FImage = "";
+                    }
+                    if (kajianAudio.Penulis == null)
+                    {
+                        kajianAudio.Penulis = "admin";
+                    }
+                    kajianAudio.Status = 1;
+
+                    DriveService service = driveService.GetService();
+                    var folderId = "1qzo_cMZ6OTQPvtFSCcSY73_j3tRx_U9W";
+                    string path = Path.GetTempFileName();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(file.FileName),
+                        Parents = new List<string>
+                        {
+                            folderId
+                        }
+                    };
+                    FilesResource.CreateMediaUpload request;
+
+                    using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    {
+                        await file.CopyToAsync(stream);
+                        request = service.Files.Create(
+                           fileMetadata, stream, "video/ogg");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var fileUploaded = request.ResponseBody;
+                    kajianAudio.DriveId = fileUploaded.Id;
+                    kajianAudio.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                    kajianAudio.Judul = file.FileName;
+                    kajianAudio.Parents = folderId;
+
+                    _context.Add(kajianAudio);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(List));
                 }
-                if (kajianAudio.Penulis == null)
-                {
-                    kajianAudio.Penulis = "admin";
-                }
-                kajianAudio.Status = 1;
-                _context.Add(kajianAudio);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(List));
+                return View(kajianAudio);
+            }
+            catch
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
             }
             return View(kajianAudio);
         }
@@ -219,7 +273,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?SourceId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage")] KajianAudio kajianAudio)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Kategori,Tag,Penulis,Status,Path,Source,FImage,DriveId,Parents")] KajianAudio kajianAudio)
         {
             if (id != kajianAudio.Id)
             {

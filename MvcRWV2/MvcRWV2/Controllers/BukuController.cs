@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +21,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
 
-        public BukuController(ApplicationDbContext context)
+        public BukuController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: Buku
@@ -214,7 +220,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status")] Buku buku)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,DriveId,Parents")] Buku buku, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -257,7 +263,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status")] Buku buku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,DriveId,Parents")] Buku buku)
         {
             if (id != buku.Id)
             {

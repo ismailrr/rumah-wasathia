@@ -99,7 +99,7 @@ namespace MvcRWV2.Models
             return FileList;
         }
 
-        public List<GoogleDriveFiles> GetDriveFilesArtikel()
+        public List<GoogleDriveFiles> GetDriveFiles(string parentId)
         {
             DriveService service = GetService();
 
@@ -119,7 +119,7 @@ namespace MvcRWV2.Models
             {
                 foreach (var file in files)
                 {
-                    if (file.MimeType.Equals("application/pdf") && file.Parents.Contains("1MeEImyGO6ma6mn9m-UiiNDNb9OX_F63S"))
+                    if (file.Parents.Contains(parentId))
                     {
                         GoogleDriveFiles File = new GoogleDriveFiles
                         {
@@ -185,11 +185,11 @@ namespace MvcRWV2.Models
             }
         }
 
-        public async void FileUploadTo(IFormFile file, string parentId)
+        public async void FileUpload(IFormFile file, string parentId)
         {
             DriveService service = GetService();
             var folderId = parentId;
-            string path = Path.Combine(_environment.WebRootPath, "uploads\\pdf\\artikel");
+            string path = Path.GetTempFileName();
             var fileMetadata = new Google.Apis.Drive.v3.Data.File()
             {
                 Name = Path.GetFileName(file.FileName),
@@ -203,11 +203,11 @@ namespace MvcRWV2.Models
             {
                 using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
                 {
+                    await file.CopyToAsync(stream);
                     request = service.Files.Create(
                         fileMetadata, stream, "application/pdf");
                     request.Fields = "id";
                     request.Upload();
-                    await file.CopyToAsync(stream);
                 }
             }
                 

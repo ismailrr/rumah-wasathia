@@ -11,7 +11,7 @@ namespace MvcRWV2.Models
     public class KonsultasiInfografis
     {
         public int Id { get; set; }
-        [Required, StringLength(200)]
+        [StringLength(200)]
         public string Judul { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; }

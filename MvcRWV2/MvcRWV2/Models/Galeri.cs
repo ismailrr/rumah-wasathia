@@ -10,7 +10,7 @@ namespace MvcRWV2.Models
     public class Galeri
     {
         public int Id { get; set; }
-        [Required, StringLength(200)]
+        [StringLength(200)]
         public string Judul { get; set; }
         [DataType(DataType.Date)]
         public DateTime Tanggal { get; set; } 
@@ -37,5 +37,20 @@ namespace MvcRWV2.Models
         public int Like { get; set; }
         public int Download { get; set; }
         public int Share { get; set; }
+
+        public string DisplayTextJudul
+        {
+            get
+            {
+                if (Judul != null && Judul.Length > 50)
+                {
+                    return $"{Judul.Substring(0, 50)}...";
+                }
+                else
+                {
+                    return $"{Judul}";
+                }
+            }
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace MvcRWV2.Controllers
         [HttpGet]
         public ActionResult GetGoogleDriveFiles()
         {
-            return View(driveService.GetDriveFilesArtikel());
+            return View(driveService.GetDriveFiles());
         }
 
         [HttpPost]

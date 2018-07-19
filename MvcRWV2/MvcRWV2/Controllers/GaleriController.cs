@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +21,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
 
-        public GaleriController(ApplicationDbContext context)
+        public GaleriController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: Galeri
@@ -195,7 +201,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis")] Galeri galeri)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis,DriveId,Parents")] Galeri galeri, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -239,7 +245,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis")] Galeri galeri)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis,DriveId,Parents")] Galeri galeri)
         {
             if (id != galeri.Id)
             {
