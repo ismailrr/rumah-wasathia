@@ -40,6 +40,10 @@ namespace MvcRWV2.Models
         public string IconLink { get; set; }
         public string WebViewLink { get; set; }
         public string Parents { get; set; }
+        public int View { get; set; }
+        public int Like { get; set; }
+        public int Download { get; set; }
+        public int Share { get; set; }
 
         public string DisplayTextPath
         {

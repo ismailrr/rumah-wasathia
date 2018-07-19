@@ -31,6 +31,12 @@ namespace MvcRWV2.Models
         public string IconLink { get; set; }
         public string WebViewLink { get; set; }
         public string Parents { get; set; }
+        [StringLength(5000)]
+        public string Deskripsi { get; set; }
+        public int View { get; set; }
+        public int Like { get; set; }
+        public int Download { get; set; }
+        public int Share { get; set; }
 
         public string DisplayTextJudul
         {
