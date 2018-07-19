@@ -1,52 +1,116 @@
-﻿@model MvcRWV2.Models.Galeri
+﻿@model MvcRWV2.Models.GaleriViewModels.DetailsGaleriViewModel
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RWLayout.cshtml";
 }
 
-<h2>Details</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-info">
-                    <div>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Judul)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Judul)
-                            </dd>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Tanggal)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(model => model.Tanggal)
-                            </dd>
-                        </dl>
+<!--data start galeri.cshtml-->
+<div class="container blogging-style">
+    <div class="row">
+        <!-- breadcrumb start -->
+        <div class="page-header">
+            <ol class="breadcrumb">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Galeri</a></li>
+                <li class="active">Kegiatan Ust Oni</li>
+            </ol>
+        </div>
+        <!-- breadcrumb end -->
+        <div class="col-sm-16 banner-outer gapTop">
+            <div class="col-sm-16 col-md-11 wow fadeInLeft animated" data-wow-delay="1s" data-wow-offset="50">
+                <div class="main-title-outer center-block">
+                    <div class="main-title left-side">Konsultasi E Paper</div>
+                    <div class="row index-content-header">
+                        <div class="col-sm-5">
+                            <p>Urutkan bedasarkan :</p>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Judul <i class="fa fa-sort"></i></a>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" role="button" class="btn btn-filter">Terbaru</a>
+                        </div>
+                        <div class="col-sm-11">
+                            <form asp-action="Index" method="get">
+                                <div class="form-actions no-color pull-right">
+                                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                                    <a asp-action="Index">Hapus Pencarian</a>
+                                    <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="gallery-detail col-sm-5">
-                        <a class="open-popup-link" href="#gallery-detail-popup" data-effect="mfp-zoom-in">
-                            <img class="img-thumbnail" src="@Html.DisplayFor(model => model.Path.Path)" alt="" />
-                            <span class="download-icon"><span class="ion-bag"></span>Beli Buku</span>
-                        </a>
+                    <hr>
+                    <!-- Masonry Begin -->
+                    <div class="row">
+                        <div class="col-md-16">
+                            <div class="masonry-wrapper">
+                                <div class="masonry text-center">
+                                    @foreach (var item in Model.GaleriModel)
+                                    {
+                                        <div class="item">
+                                            <a class="gallery-item popup-img" href="@item.FImage">
+                                                <div class="thumb-box">
+                                                    <span class="ion-arrow-expand"></span>
+                                                    <img alt="" src="@item.FImage" class="img-thumbnail">
+                                                </div>
+                                                <div class="album-desc">
+                                                    <span></span>
+                                                    <span></span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Masonry End -->
+                    <div class="row">
+                        <div class="col-md-16 text-center">
+                            @{
+                                var prevDisabled1 = !Model.GaleriModel.HasPreviousPage ? "disabled" : "";
+                                var nextDisabled1 = !Model.GaleriModel.HasNextPage ? "disabled" : "";
+                            }
+                            @if (Model.GaleriModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.GaleriModel.PageIndex - 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @prevDisabled1">
+                                    Previous
+                                </a>
+                            }
+
+                            @for (var i = 1; i <= Model.GaleriModel.TotalPages; i++)
+                            {
+                                <a asp-route-page="@i">
+                                    @if (Model.GaleriModel.PageIndex == @i)
+                                    {
+                                        <span class="page-number btn btn-default"><strong>@i</strong></span>
+                                    }
+                                    else
+                                    {
+                                        <span class="page-number page-number-unselected">@i</span>
+                                    }
+                                </a>
+                            }
+                            @if (Model.GaleriModel.TotalPages > 5)
+                            {
+                                <a asp-action="List"
+                                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                   asp-route-page="@(Model.GaleriModel.PageIndex + 1)"
+                                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                   class="btn btn-default @nextDisabled1">
+                                    Next
+                                </a>
+                            }
+
+                        </div>
                     </div>
                 </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col-->
-        </div>
-        <!-- ./row -->
-<div id="gallery-detail-popup" class="white-popup mfp-with-anim mfp-hide">
-    <div class="row">
-        <div class="col-xs-16">
-            <div class="buying-book">
-                <div class="ion-bag"></div>
-                <p>Untuk Pembelian buku bisa hubungi tim kami melalui kontak berikut:</p>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                <a asp-action="List">Kembali</a>
-            </div>
+            <!-- right sec start -->
+            @await Html.PartialAsync("_SideBarLayout")
         </div>
     </div>
 </div>
-
+<!-- data end -->   

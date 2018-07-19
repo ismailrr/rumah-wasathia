@@ -34,8 +34,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             if (searchString != null)
             {
@@ -81,10 +81,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     infografis = infografis.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     infografis = infografis.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     infografis = infografis.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -105,8 +105,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -151,10 +151,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiInfografis = konsultasiInfografis.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiInfografis = konsultasiInfografis.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiInfografis = konsultasiInfografis.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -167,7 +167,6 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: Infografis/Details/5
-        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -203,6 +202,16 @@ namespace MvcRWV2.Controllers
             if (ModelState.IsValid)
             {
                 infografis.Tanggal = DateTime.Now;
+                if (infografis.FImage != null)
+                {
+                    infografis.FImage = infografis.FImage.Replace("file/d/", "uc?id=");
+                    infografis.FImage = infografis.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (infografis.Penulis == null)
+                {
+                    infografis.Penulis = "admin";
+                }
+                infografis.Status = 1;
                 _context.Add(infografis);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -243,6 +252,15 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     infografis.Tanggal = DateTime.Now;
+                    if (infografis.FImage != null)
+                    {
+                        infografis.FImage = infografis.FImage.Replace("file/d/", "uc?id=");
+                        infografis.FImage = infografis.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (infografis.Penulis == null)
+                    {
+                        infografis.Penulis = "admin";
+                    }
                     _context.Update(infografis);
                     await _context.SaveChangesAsync();
                 }

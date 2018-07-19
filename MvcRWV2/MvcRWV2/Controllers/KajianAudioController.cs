@@ -32,8 +32,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             IndexKajianAudioViewModel mymodel = new IndexKajianAudioViewModel();
 
@@ -60,7 +60,7 @@ namespace MvcRWV2.Controllers
 
             switch (sortOrder)
             {
-                case "Date":
+                case "date":
                     kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -81,8 +81,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -127,10 +127,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     kajianAudio = kajianAudio.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     kajianAudio = kajianAudio.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     kajianAudio = kajianAudio.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -181,6 +181,16 @@ namespace MvcRWV2.Controllers
                 kajianAudio.Tanggal = DateTime.Now;
                 kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"","");
                 kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
+                if (kajianAudio.FImage != null)
+                {
+                    kajianAudio.FImage = kajianAudio.FImage.Replace("file/d/", "uc?id=");
+                    kajianAudio.FImage = kajianAudio.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (kajianAudio.Penulis == null)
+                {
+                    kajianAudio.Penulis = "admin";
+                }
+                kajianAudio.Status = 1;
                 _context.Add(kajianAudio);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -223,6 +233,15 @@ namespace MvcRWV2.Controllers
                     kajianAudio.Tanggal = DateTime.Now;
                     kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
                     kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
+                    if (kajianAudio.FImage != null)
+                    {
+                        kajianAudio.FImage = kajianAudio.FImage.Replace("file/d/", "uc?id=");
+                        kajianAudio.FImage = kajianAudio.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (kajianAudio.Penulis == null)
+                    {
+                        kajianAudio.Penulis = "admin";
+                    }
                     _context.Update(kajianAudio);
                     await _context.SaveChangesAsync();
                 }

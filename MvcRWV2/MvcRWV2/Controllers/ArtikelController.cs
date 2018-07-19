@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +24,14 @@ namespace MvcRWV2.Controllers
         private readonly ApplicationDbContext _context;
         private int published = 1;
         private int trash = 2;
-
-        public ArtikelController(ApplicationDbContext context)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        GoogleDriveFilesRepository driveService;
+        
+        public ArtikelController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            driveService = new GoogleDriveFilesRepository(_hostingEnvironment);
         }
 
         // GET: Artikel
@@ -34,8 +43,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             if (searchString != null)
             {
@@ -80,10 +89,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     artikel = artikel.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     artikel = artikel.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     artikel = artikel.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -104,8 +113,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -150,10 +159,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     artikel = artikel.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     artikel = artikel.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     artikel = artikel.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -166,7 +175,6 @@ namespace MvcRWV2.Controllers
         }
 
         // GET: Artikel/Details/5
-        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -198,15 +206,50 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] Artikel artikel)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId")] Artikel artikel, IFormFile file)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && file.Length > 0)
                 {
                     artikel.Tanggal = DateTime.Now;
-                    artikel.Penulis = "admin";
+                    if (artikel.FImage != null)
+                    {
+                        artikel.FImage = artikel.FImage.Replace("file/d/", "uc?id=");
+                        artikel.FImage = artikel.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (artikel.Penulis == null)
+                    {
+                        artikel.Penulis = "admin";
+                    }
                     artikel.Status = 1;
+
+                    DriveService service = driveService.GetService();
+                    var folderId = "1MeEImyGO6ma6mn9m-UiiNDNb9OX_F63S";
+                    string path = Path.GetTempFileName();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(file.FileName),
+                        Parents = new List<string>
+                        {
+                            folderId
+                        }
+                    };
+                    FilesResource.CreateMediaUpload request;
+   
+                    using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    {
+                         await file.CopyToAsync(stream);
+                         request = service.Files.Create(
+                            fileMetadata, stream, "application/pdf");
+                         request.Fields = "id";
+                         request.Upload();
+                    }
+                    var fileUploaded = request.ResponseBody;
+                    artikel.DriveId = fileUploaded.Id;
+                    artikel.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                    artikel.Judul = file.FileName;
+                    artikel.FImage = "/uploads/image/general/pdf.png";
                     _context.Add(artikel);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(List));
@@ -244,7 +287,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status")] Artikel artikel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId")] Artikel artikel)
         {
             if (id != artikel.Id)
             {
@@ -255,6 +298,15 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     artikel.Tanggal = DateTime.Now;
+                    if (artikel.FImage != null)
+                    {
+                        artikel.FImage = artikel.FImage.Replace("file/d/", "uc?id=");
+                        artikel.FImage = artikel.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (artikel.Penulis == null)
+                    {
+                        artikel.Penulis = "admin";
+                    }
                     _context.Update(artikel);
                     await _context.SaveChangesAsync();
                 }
@@ -291,9 +343,24 @@ namespace MvcRWV2.Controllers
         // POST: Artikel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id,string driveId)
         {
             var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+
+                service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarArtikel.Remove(artikel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));

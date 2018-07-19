@@ -32,8 +32,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             IndexKajianVideoViewModel mymodel = new IndexKajianVideoViewModel();
 
@@ -60,7 +60,7 @@ namespace MvcRWV2.Controllers
 
             switch (sortOrder)
             {
-                case "Date":
+                case "date":
                     kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -81,8 +81,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -127,10 +127,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     kajianVideo = kajianVideo.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     kajianVideo = kajianVideo.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     kajianVideo = kajianVideo.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -180,6 +180,16 @@ namespace MvcRWV2.Controllers
             {
                 kajianVideo.Tanggal = DateTime.Now;
                 kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
+                if (kajianVideo.FImage != null)
+                {
+                    kajianVideo.FImage = kajianVideo.FImage.Replace("file/d/", "uc?id=");
+                    kajianVideo.FImage = kajianVideo.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (kajianVideo.Penulis == null)
+                {
+                    kajianVideo.Penulis = "admin";
+                }
+                kajianVideo.Status = 1;
                 _context.Add(kajianVideo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -221,6 +231,15 @@ namespace MvcRWV2.Controllers
                 {
                     kajianVideo.Tanggal = DateTime.Now;
                     kajianVideo.Source = kajianVideo.Source.Replace("watch?v=", "embed/");
+                    if (kajianVideo.FImage != null)
+                    {
+                        kajianVideo.FImage = kajianVideo.FImage.Replace("file/d/", "uc?id=");
+                        kajianVideo.FImage = kajianVideo.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (kajianVideo.Penulis == null)
+                    {
+                        kajianVideo.Penulis = "admin";
+                    }
                     _context.Update(kajianVideo);
                     await _context.SaveChangesAsync();
                 }

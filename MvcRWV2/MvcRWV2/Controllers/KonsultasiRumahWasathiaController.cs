@@ -34,8 +34,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             if (searchString != null)
             {
@@ -79,10 +79,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiRumahWasathia = konsultasiRumahWasathia.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiRumahWasathia = konsultasiRumahWasathia.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -219,10 +219,16 @@ namespace MvcRWV2.Controllers
             if (ModelState.IsValid)
             {
                 konsultasiRumahWasathia.Tanggal = DateTime.Now;
-                if(konsultasiRumahWasathia.PenulisKonten == null)
+                if (konsultasiRumahWasathia.FImage != null)
+                {
+                    konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("file/d/", "uc?id=");
+                    konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (konsultasiRumahWasathia.PenulisKonten == null)
                 {
                     konsultasiRumahWasathia.PenulisKonten = "admin";
                 }
+                konsultasiRumahWasathia.Status = 1;
                 _context.Add(konsultasiRumahWasathia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

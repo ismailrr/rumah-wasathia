@@ -34,8 +34,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             if (searchString != null)
             {
@@ -80,10 +80,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     buku = buku.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     buku = buku.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     buku = buku.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -104,8 +104,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -149,10 +149,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     buku = buku.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     buku = buku.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     buku = buku.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -219,6 +219,16 @@ namespace MvcRWV2.Controllers
             if (ModelState.IsValid)
             {
                 buku.Tanggal = DateTime.Now;
+                if (buku.FImage != null)
+                {
+                    buku.FImage = buku.FImage.Replace("file/d/", "uc?id=");
+                    buku.FImage = buku.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (buku.Penulis == null)
+                {
+                    buku.Penulis = "admin";
+                }
+                buku.Status = 1;
                 _context.Add(buku);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -258,6 +268,15 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    if (buku.FImage != null)
+                    {
+                        buku.FImage = buku.FImage.Replace("file/d/", "uc?id=");
+                        buku.FImage = buku.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (buku.Penulis == null)
+                    {
+                        buku.Penulis = "admin";
+                    }
                     buku.Tanggal = DateTime.Now;
                     _context.Update(buku);
                     await _context.SaveChangesAsync();

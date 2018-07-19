@@ -34,8 +34,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             if (searchString != null)
             {
@@ -79,10 +79,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiRepublika = konsultasiRepublika.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -103,8 +103,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -148,10 +148,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiRepublika = konsultasiRepublika.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiRepublika = konsultasiRepublika.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -218,6 +218,16 @@ namespace MvcRWV2.Controllers
             if (ModelState.IsValid)
             {
                 konsultasiRepublika.Tanggal = DateTime.Now;
+                if (konsultasiRepublika.FImage != null)
+                {
+                    konsultasiRepublika.FImage = konsultasiRepublika.FImage.Replace("file/d/", "uc?id=");
+                    konsultasiRepublika.FImage = konsultasiRepublika.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (konsultasiRepublika.Penulis == null)
+                {
+                    konsultasiRepublika.Penulis = "admin";
+                }
+                konsultasiRepublika.Status = 1;
                 _context.Add(konsultasiRepublika);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -258,6 +268,15 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     konsultasiRepublika.Tanggal = DateTime.Now;
+                    if (konsultasiRepublika.FImage != null)
+                    {
+                        konsultasiRepublika.FImage = konsultasiRepublika.FImage.Replace("file/d/", "uc?id=");
+                        konsultasiRepublika.FImage = konsultasiRepublika.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (konsultasiRepublika.Penulis == null)
+                    {
+                        konsultasiRepublika.Penulis = "admin";
+                    }
                     _context.Update(konsultasiRepublika);
                     await _context.SaveChangesAsync();
                 }

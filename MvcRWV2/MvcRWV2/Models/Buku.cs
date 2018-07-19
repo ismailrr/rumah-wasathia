@@ -30,6 +30,15 @@ namespace MvcRWV2.Models
         public Tag Tag { get; set; }
         public string Penulis { get; set; }
         public int Status { get; set; }
+        public string DriveId { get; set; } // Id
+        public long? Size { get; set; }
+        public long? Version { get; set; }
+        public string Type { get; set; } //MIME Type
+        public bool? Thumbnail { get; set; }
+        public string ThumbnailLink { get; set; }
+        public string IconLink { get; set; }
+        public string WebViewLink { get; set; }
+        public string Parents { get; set; }
 
         public string DisplayTextPath
         {

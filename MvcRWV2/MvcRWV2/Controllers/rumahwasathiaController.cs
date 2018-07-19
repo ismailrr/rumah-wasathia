@@ -24,7 +24,7 @@ namespace MvcRWV2.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(
+        public IActionResult Index(
             string sortOrder,
             string currentFilter,
             string searchString,

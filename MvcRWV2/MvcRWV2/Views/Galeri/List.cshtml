@@ -9,79 +9,270 @@
 <!-- =============================================== -->
 <!-- Content Wrapper. Contains page content -->
 <div class="row">
-            <div class="col-md-4">
-                <h1 class="inline">Gambar</h1>
-                <div type="button" class="btn btn-primary">
-                    <a asp-action="Create">Upload Gambar</a>
-                </div>
-            </div>
-            <div class="col-md-4 text-right total-item">
+    <div class="col-md-4">
+        <h1 class="inline">Galeri</h1>
+        <div type="button" class="btn btn-primary">
+            <a asp-action="Create">Buat Baru</a>
+        </div>
+    </div>
+    <div class="col-md-8 text-right">
+        <form asp-action="List" method="get">
+            <div class="form-actions no-color">
                 <p>
-                    @Model.TotalItem Gambar              
+                    <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    <input type="submit" value="Cari" class="btn btn-default" /> |
+                    <a asp-action="List">Hapus Pencarian</a>
                 </p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box box-info">
-                    <!-- Masonry Begin -->
-                    <div class="masonry-wrapper">
-                        <div class="masonry">
+        </form>
+    </div>
+    <div class="col-md-4 text-left">
+        <a asp-action="List">Semua (@Model.TotalItem)</a> |
+        <a asp-action="List" asp-route-status="2">Trash (@Model.TotalTrash)</a>
+    </div>
+    <div class="col-md-8 text-right total-item">
+        <span>
+            @Model.TotalItem Post
+        </span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    @{
+                        var prevDisabled1 = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled1 = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <a asp-action="List"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled1">
+                        Previous
+                    </a>
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <a asp-route-page="@i">
+                            @if (Model.PageIndex == @i)
+                            {
+                                <span class="page-number btn btn-default"><strong>@i</strong></span>
+                            }
+                            else
+                            {
+                                <span class="page-number page-number-unselected">@i</span>
+                            }
+                        </a>
+                    }
+                    <a asp-action="List"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled1">
+                        Next
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <div class="sort-button">
+                                            Judul <i class="fa fa-sort"></i>
+                                        </div>
+                                    </a>
+                                </th>
+                                <th>
+                                    Preview
+                                </th>
+                                <th>
+                                    Penulis
+                                </th>
+                                <th>
+                                    Kategori
+                                </th>
+                                <th>
+                                    Tag
+                                </th>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <div class="sort-button">
+                                            Tanggal <i class="fa fa-sort"></i>
+                                        </div>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
                             @foreach (var item in Model)
                             {
-                            <div class="item hover-hide">
-                                <a class="gallery-item popup-img" href="~/uploads/image/galeri/@{@item.Judul}">
-                                    <div class="thumb-box">
-                                        <span class="ion-arrow-expand"></span>
-                                        <img alt="" src="~/uploads/image/galeri/@{@item.Judul}" class="img-thumbnail">
-                                    </div>
-                                </a>
-                                <div class="album-desc">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="hover-delete">
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="hover-show"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show"><i class="fa fa-window-close" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
+                                <tr>
+                                    <td class="hover-hide">
+                                        @if (item.Judul == null)
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                                @item.Judul
+                                            </a>
+                                            <div>
+                                                <a href="@Url.Action("Details","Galeri",new { Id = item.Id})" target="_blank" class="hover-show">Lihat<span> | </span></a>
+                                                @if (@item.Status == 1)
+                                                {
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="hover-show">Edit<span style="color:black"> | </span></a>
+                                                    <a asp-action="Trash" asp-route-id="@item.Id" class="hover-show trash">Trash</a>
+                                                }
+                                                else if (@item.Status == 2)
+                                                {
+                                                    <a asp-action="Restore" asp-route-id="@item.Id" class="hover-show">Restore | </a>
+                                                    <a asp-action="Delete" asp-route-id="@item.Id" class="hover-show trash">Delete</a>
+                                                }
+                                            </div>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.FImage == null)
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            <img class="preview" src="@item.FImage" alt="" />
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (item.Penulis == null || item.Penulis == "")
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            @item.Penulis
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Kategori == null)
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            @item.Kategori
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Tag == null)
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            @item.Tag
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Tanggal == null)
+                                        {
+                                            <span>—</span>
+                                        }
+                                        else
+                                        {
+                                            @if (item.Status == 1)
+                                            {
+                                                <p>di publish</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Terakhir diubah</p>
+                                            }
+                                            @item.Tanggal
+                                        }
+                                    </td>
+                                </tr>
                             }
-                        </div>
-                    </div>
-                    <!-- Masonry End -->
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <div class="sort-button">
+                                            Judul <i class="fa fa-sort"></i>
+                                        </div>
+                                    </a>
+                                </th>
+                                <th>
+                                    Preview
+                                </th>
+                                <th>
+                                    Penulis
+                                </th>
+                                <th>
+                                    Kategori
+                                </th>
+                                <th>
+                                    Tag
+                                </th>
+                                <th class="no-padding">
+                                    <a asp-action="List" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <div class="sort-button">
+                                            Tanggal <i class="fa fa-sort"></i>
+                                        </div>
+                                    </a>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="col-md-4">
-                                    <a asp-action="Details" asp-route-id=""><img alt="" src="~/uploads/image/galeri/" class="gallery-preview" /></a>
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col-->
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <a asp-action="List"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled">
+                        Previous
+                    </a>
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <a asp-route-page="@i">
+                            @if (Model.PageIndex == @i)
+                            {
+                                <span class="page-number btn btn-default"><strong>@i</strong></span>
+                            }
+                            else
+                            {
+                                <span class="page-number page-number-unselected">@i</span>
+                            }
+                        </a>
+                    }
+                    <a asp-action="List"
+                       asp-route-sortOrder="@ViewData["CurrentSort"]"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled">
+                        Next
+                    </a>
+                </div>
+            </div>
         </div>
-        <!-- ./row -->
+        <!-- /.box -->
+    </div>
+    <!-- /.col-->
+</div>
+<!-- ./row -->

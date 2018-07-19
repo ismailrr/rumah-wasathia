@@ -32,14 +32,15 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             IndexGaleriViewModel mymodel = new IndexGaleriViewModel();
 
             var galeri = from s in _context.DaftarGaleri
                          .Include(ee => ee.Path)
                          .Include(ee => ee.Kategori)
+                         where s.Status == published
                          select s;
 
             mymodel.BukuModel = from s in _context.DaftarBuku
@@ -63,10 +64,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     galeri = galeri.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     galeri = galeri.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     galeri = galeri.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -81,26 +82,55 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> List(
            string sortOrder,
-           int? page)
+           string currentFilter,
+            string searchString,
+            int? page,
+            int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
+            ViewData["Status"] = status;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
 
             var galeri = from s in _context.DaftarGaleri
                          .Include(ee => ee.Path)
                          .Include(ee => ee.Kategori)
                          select s;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                galeri = galeri.Where(s => s.Judul.Contains(searchString));
+            }
+
+            if (status == null)
+            {
+                galeri = galeri.Where(s => s.Status == published);
+            }
+            else if (status == trash)
+            {
+                galeri = galeri.Where(s => s.Status == trash);
+            }
+
             switch (sortOrder)
             {
                 case "name_desc":
                     galeri = galeri.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     galeri = galeri.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     galeri = galeri.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -121,16 +151,37 @@ namespace MvcRWV2.Controllers
                 return NotFound();
             }
 
+            DetailsGaleriViewModel mymodel = new DetailsGaleriViewModel();
+
             var galeri = await _context.DaftarGaleri
-                .Include(ee => ee.Path)
                 .Include(ee => ee.Kategori)
                 .SingleOrDefaultAsync(m => m.Id == id);
+
+            mymodel.BukuModel = from s in _context.DaftarBuku
+                       .Include(ee => ee.Kategori)
+                       .Include(ee => ee.Path)
+                       .Take(4)
+                                where s.Status == published
+                                select s;
+            mymodel.ArtikelModel = from s in _context.DaftarArtikel
+                       .Include(ee => ee.Kategori)
+                       .Take(4)
+                                   where s.Status == published
+                                   select s;
+
+            var buku = mymodel.BukuModel;
+            var atikel = mymodel.ArtikelModel;
+            var sourceImage = galeri.Source.Split(
+                            new[] { "\r\n", "\r", "\n" },
+                            StringSplitOptions.None
+                        );
             if (galeri == null)
             {
                 return NotFound();
             }
-
-            return View(galeri);
+            mymodel.GaleriModel = galeri;
+            mymodel.SourceImage = sourceImage;
+            return View(mymodel);
         }
 
         // GET: Galeri/Create
@@ -144,11 +195,22 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Status")] Galeri galeri)
+        public async Task<IActionResult> Create([Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis")] Galeri galeri)
         {
             if (ModelState.IsValid)
             {
                 galeri.Tanggal = DateTime.Now;
+                if (galeri.FImage != null)
+                {
+                    galeri.FImage = galeri.FImage.Replace("file/d/", "uc?id=");
+                    galeri.FImage = galeri.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (galeri.Penulis == null)
+                {
+                    galeri.Penulis = "admin";
+                }
+                galeri.Status = 1;
+                galeri.Jumlah = galeri.Source.Length;
                 _context.Add(galeri);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));
@@ -177,7 +239,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Kategori,Tag,Status")] Galeri galeri)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,FImage,Tanggal,Path,Kategori,Tag,Status,Jumlah,Penulis")] Galeri galeri)
         {
             if (id != galeri.Id)
             {
@@ -189,9 +251,17 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     galeri.Tanggal = DateTime.Now;
+                    if (galeri.FImage != null)
+                    {
+                        galeri.FImage = galeri.FImage.Replace("file/d/", "uc?id=");
+                        galeri.FImage = galeri.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (galeri.Penulis == null)
+                    {
+                        galeri.Penulis = "admin";
+                    }
                     _context.Update(galeri);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(List));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

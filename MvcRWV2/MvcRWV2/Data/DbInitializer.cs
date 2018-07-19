@@ -1,4 +1,5 @@
 ﻿using MvcRWV2.Models;
+using MvcRWV2.Models.AccountViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,20 +24,6 @@ namespace MvcRWV2.Data
             {
                 return;
             }
-
-            /* 
-             * Admin 
-             */
-            var admin = new Admin[]
-            {
-            new Admin{NamaPengguna="RWAdmin",KataSandi="RWMVCAdmin9090",Tanggal= DateTime.Now}
-            };
-
-            foreach (Admin a in admin)
-            {
-                context.DaftarAdmin.Add(a);
-            }
-            context.SaveChanges();
 
             /* 
              * Path Artikel 
@@ -239,7 +226,7 @@ namespace MvcRWV2.Data
 
             /*
              * Artikel
-             */
+             
             var artikel = new List<Artikel>();
 
             foreach (PathArtikel s in pathArtikel)
@@ -255,6 +242,19 @@ namespace MvcRWV2.Data
                 context.DaftarArtikel.Add(a);
             }
             context.SaveChanges();
+            
+            List<GoogleDriveFiles> FileList = GoogleDriveFilesRepository.GetDriveFilesArtikel();
+            var artikel = new List<Artikel>();
+            foreach (var file in FileList)
+            {
+                artikel.Add(new Artikel { Judul = file.Name, Tanggal = file.CreatedTime, Status = 1, Penulis = "admin", Source = file.WebContentLink, FImage = "/uploads/image/general/pdf.png" });
+            }
+            foreach (Artikel a in artikel)
+            {
+                context.DaftarArtikel.Add(a);
+            }
+            context.SaveChanges();
+            */
 
             /*
              * Buku
@@ -285,11 +285,21 @@ namespace MvcRWV2.Data
                 string MyString = s.Path.ToString();
                 //int index = MyString.LastIndexOf(".");
                 string JudulString = MyString.Replace(".pdf", "");
-                JudulString = JudulString.Replace("/uploads/image/galeri/", "");
-                galeri.Add(new Galeri { Judul = JudulString, Tanggal = DateTime.Now, Path = s });
+                JudulString = JudulString.Replace("/uploads/image/galeri/",  "");
+                galeri.Add(new Galeri { Judul = JudulString, Tanggal = DateTime.Now, Path = s, Source = s.Path, FImage = s.Path, Status = 1 });
             }
-
-            foreach (Galeri a in galeri)
+            var galeri2 = new List<Galeri>();
+            galeri2.Add(new Galeri { Judul = "Galeri 1", Tanggal = DateTime.Now, Status = 1});
+            for (int i = 0;i<galeri.Count-1;i++)
+            {
+                galeri2[0].Source += galeri[i].Path.Path + "\n";
+                if (i == galeri.Count-1)
+                {
+                    galeri2[0].FImage += galeri[i].Path.Path + "\n";
+                }
+                
+            }
+            foreach (Galeri a in galeri2)
             {
                 context.DaftarGaleri.Add(a);
             }

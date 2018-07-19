@@ -33,6 +33,7 @@
                     <input type="hidden" asp-for="Tag" />
                     <input type="hidden" asp-for="Kategori" />
                     <input type="hidden" asp-for="Penulis" />
+                    <input type="hidden" asp-for="DriveId" />
                     <div class="form-group">
                         <label asp-for="Judul" class="control-label"></label>
                         <input asp-for="Judul" class="form-control" />
@@ -42,11 +43,6 @@
                         <label asp-for="Source" class="control-label"></label>
                         <input asp-for="Source" class="form-control" />
                         <span asp-validation-for="Source" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Path" class="control-label"></label>
-                        <input asp-for="Path" class="form-control" type="file" name="upload" accept="pdf" />
-                        <span asp-validation-for="Path" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -69,7 +65,7 @@
                         {<strong>dipublish</strong>}
                         else
                         {<strong>tidak dipublish</strong>}</p>
-                        <p><i class="fa fa-calendar-alt"></i> Di Publish Pada: <strong>@Model.Tanggal.Date</strong></p>
+                        <p><i class="fa fa-calendar-alt"></i> Di Publish Pada: <strong>@Model.Tanggal</strong></p>
                         <hr>
                         <div class="form-group">
                             <a asp-action="Trash" asp-route-id="@Model.Id" style="color:darkred;">Pindah ke Trash</a>

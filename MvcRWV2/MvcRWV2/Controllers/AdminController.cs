@@ -50,7 +50,6 @@ namespace MvcRWV2.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

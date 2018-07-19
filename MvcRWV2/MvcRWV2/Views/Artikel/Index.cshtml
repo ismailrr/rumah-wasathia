@@ -10,10 +10,21 @@
     <div class="row">
         <!-- breadcrumb start -->
         <div class="page-header">
-            <ol class="breadcrumb">
-                <li><a href="#">Beranda</a></li>
-                <li class="active">Artikel</li>
-            </ol>
+            <div class="col-sm-5">
+                <ol class="breadcrumb">
+                    <li><a href="#">Beranda</a></li>
+                    <li class="active">Artikel</li>
+                </ol>
+            </div>
+            <div class="col-sm-11">
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color pull-right">
+                        <input type="submit" value="Cari" class="btn btn-default" /> |
+                        <a asp-action="Index">Hapus Pencarian</a>
+                        <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    </div>
+                </form>
+            </div>
         </div>
         <!--tes-->
         <!-- breadcrumb end -->
@@ -46,7 +57,7 @@
                                 <div class="item topic col-md-4 col-xs-8">
                                     <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path.Path)} else {@item.Source} " target="_blank">
                                         <img class="img-thumbnail icon-effect" src="~/uploads/image/general/pdf.png" alt="" />
-                                        <h4>@item.DisplayTextJudul)</h4>
+                                        <h4>@item.DisplayTextJudul</h4>
                                     </a>
                                 </div>
                             }

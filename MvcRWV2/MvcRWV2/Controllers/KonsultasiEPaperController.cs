@@ -32,8 +32,8 @@ namespace MvcRWV2.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
 
             IndexKonsultasiEPaperViewModel mymodel = new IndexKonsultasiEPaperViewModel();
 
@@ -63,10 +63,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -87,8 +87,8 @@ namespace MvcRWV2.Controllers
             int? status)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : "date";
             ViewData["Status"] = status;
 
             if (searchString != null)
@@ -133,10 +133,10 @@ namespace MvcRWV2.Controllers
                 case "name_desc":
                     konsultasiEPaper = konsultasiEPaper.OrderByDescending(s => s.Judul);
                     break;
-                case "Name":
+                case "name":
                     konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Judul);
                     break;
-                case "Date":
+                case "date":
                     konsultasiEPaper = konsultasiEPaper.OrderBy(s => s.Tanggal);
                     break;
                 default:
@@ -185,6 +185,16 @@ namespace MvcRWV2.Controllers
             if (ModelState.IsValid)
             {
                 konsultasiEPaper.Tanggal = DateTime.Now;
+                if (konsultasiEPaper.FImage != null)
+                {
+                    konsultasiEPaper.FImage = konsultasiEPaper.FImage.Replace("file/d/", "uc?id=");
+                    konsultasiEPaper.FImage = konsultasiEPaper.FImage.Replace("/view?usp=sharing", "");
+                }
+                if (konsultasiEPaper.Penulis == null)
+                {
+                    konsultasiEPaper.Penulis = "admin";
+                }
+                konsultasiEPaper.Status = 1;
                 _context.Add(konsultasiEPaper);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -225,6 +235,15 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     konsultasiEPaper.Tanggal = DateTime.Now;
+                    if (konsultasiEPaper.FImage != null)
+                    {
+                        konsultasiEPaper.FImage = konsultasiEPaper.FImage.Replace("file/d/", "uc?id=");
+                        konsultasiEPaper.FImage = konsultasiEPaper.FImage.Replace("/view?usp=sharing", "");
+                    }
+                    if (konsultasiEPaper.Penulis == null)
+                    {
+                        konsultasiEPaper.Penulis = "admin";
+                    }
                     _context.Update(konsultasiEPaper);
                     await _context.SaveChangesAsync();
                 }

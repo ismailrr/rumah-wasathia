@@ -33,6 +33,7 @@
                     <input type="hidden" asp-for="Tag" />
                     <input type="hidden" asp-for="Kategori" />
                     <input type="hidden" asp-for="Penulis" />
+                    <input type="hidden" asp-for="DriveId" />
                     <div class="form-group">
                         <label asp-for="Judul" class="control-label"></label>
                         <input asp-for="Judul" class="form-control" />
@@ -45,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Pertanyaan" class="control-label"></label>
-                        <textarea asp-for="Pertanyaan" class="form-control"  id="editor1" rows="10" cols="80">
+                        <textarea asp-for="Pertanyaan" class="form-control" id="editor1" rows="10" cols="80">
                             Pertanyaan
                         </textarea>
                         <span asp-validation-for="Pertanyaan" class="text-danger"></span>
