@@ -28,15 +28,6 @@
                 </div>
                 <div class="box-body pad">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />
-                    <input type="hidden" asp-for="Status" />
-                    <input type="hidden" asp-for="Tag" />
-                    <input type="hidden" asp-for="Kategori" />
-                    <input type="hidden" asp-for="Penulis" />
-                    <input type="hidden" asp-for="DriveId" />
-                    <input type="hidden" asp-for="Path" />
-                    <input type="hidden" asp-for="FImage" />
-                    <input type="hidden" asp-for="Source" />
                     <div class="form-group">
                         <label asp-for="Judul" class="control-label"></label>
                         <input asp-for="Judul" class="form-control" />
@@ -150,11 +141,11 @@
                     </div>
                     <div class="box-body pad">
                         <div class="form-group"><span>Pilih Gambar Cover</span>
-                                <div class="form-group">
-                                    <label asp-for="FImage" class="control-label"></label>
-                                    <input asp-for="FImage" class="form-control" />
-                                    <span asp-validation-for="FImage" class="text-danger"></span>
-                                </div>
+                                                <div class="form-group">
+                                                    <label for="file">Upload file:</label>
+                                                    <input type="file" name="file" id="file" />
+                                                    <span asp-validation-for="FImage" class="text-danger"></span>
+                                                </div>
                         </div>
                     </div>
                 </div>
