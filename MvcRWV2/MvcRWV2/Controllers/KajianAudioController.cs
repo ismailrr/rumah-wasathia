@@ -191,7 +191,7 @@ namespace MvcRWV2.Controllers
                     kajianAudio.Tanggal = DateTime.Now;
                     if (kajianAudio.Source != null)
                     {
-                        kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
+                        kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"", "");
                         kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
                     }
                     if (kajianAudio.FImage != null)
@@ -285,7 +285,7 @@ namespace MvcRWV2.Controllers
                 try
                 {
                     kajianAudio.Tanggal = DateTime.Now;
-                    kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"", "");
+                    kajianAudio.Source = kajianAudio.Source.Replace("<iframe width=\"100%\" height=\"300\" scrolling=\"no\" frameborder=\"no\" src=\"", "");
                     kajianAudio.Source = kajianAudio.Source.Replace("\"></iframe>", "");
                     if (kajianAudio.FImage != null)
                     {

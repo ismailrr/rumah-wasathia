@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -234,9 +236,38 @@ namespace MvcRWV2.Controllers
                     konsultasiRepublika.Penulis = "admin";
                 }
                 konsultasiRepublika.Status = 1;
+
+                DriveService service = driveService.GetService();
+                var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                string path = Path.GetTempFileName();
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = Path.GetFileName(file.FileName),
+                    Parents = new List<string>
+                        {
+                            folderId
+                        }
+                };
+                FilesResource.CreateMediaUpload request;
+
+                using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                {
+                    await file.CopyToAsync(stream);
+                    request = service.Files.Create(
+                       fileMetadata, stream, "image/jpeg");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var fileUploaded = request.ResponseBody;
+                konsultasiRepublika.DriveId = fileUploaded.Id;
+                konsultasiRepublika.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                konsultasiRepublika.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                konsultasiRepublika.Judul = file.FileName;
+                konsultasiRepublika.Parents = folderId;
+
                 _context.Add(konsultasiRepublika);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return RedirectToPage("Create");
         }

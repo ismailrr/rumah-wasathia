@@ -44,7 +44,7 @@
                         @foreach (var item in Model.KajianVideoModel)
                         {
                             <div class="item topic col-md-8">
-                                <iframe src="@item.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <video src="@item.Source" frameborder="0" controls></video>
                             </div>
                         }
                     </div>

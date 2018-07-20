@@ -61,9 +61,9 @@
                 </div>
                 <div class="box-body pad">
                         <div class="form-group body-pad-audio">
-                            @if (@Model.FImage != null && @Model.FImage != "")
+                            @if (@Model.Source != null && @Model.Source != "")
                             {
-                                <iframe class="preview-edit" scrolling="no" frameborder="0" allow="autoplay" src="@Model.Source"></iframe>
+                                <audio class="preview-edit" scrolling="no" frameborder="0" src="@Model.Source"></audio>
                             }
                             else
                             {

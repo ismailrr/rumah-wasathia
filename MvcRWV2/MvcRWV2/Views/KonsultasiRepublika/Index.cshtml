@@ -45,8 +45,18 @@
                                 @foreach (KonsultasiRepublika item in Model.KonsultasiRepublikaModel)
                                     {
                                         <li>
-                                            <h2><a href="@item.Source" target="_blank">@item.DisplayTextJudul</a></h2>
-                                        </li>
+                                                <a href="~/pdf/artikel/@{@item.Judul}.pdf" target="_blank">
+                                                    <div class="row">
+                                                        <div class="col-sm-16">
+                                                            <h4>@item.DisplayTextJudul</h4>
+                                                            <div class="text-danger sub-info">
+                                                                <div class="time"><span class="ion-android-data icon"></span>@item.Tanggal</div>
+                                                                <div class="stars"><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star"></span><span class="ion-ios7-star-half"></span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
                                     }
                             </ul>
                         </div>

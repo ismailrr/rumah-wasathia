@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -235,6 +237,35 @@ namespace MvcRWV2.Controllers
                     buku.Penulis = "admin";
                 }
                 buku.Status = 1;
+
+                DriveService service = driveService.GetService();
+                var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                string path = Path.GetTempFileName();
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = Path.GetFileName(file.FileName),
+                    Parents = new List<string>
+                        {
+                            folderId
+                        }
+                };
+                FilesResource.CreateMediaUpload request;
+
+                using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                {
+                    await file.CopyToAsync(stream);
+                    request = service.Files.Create(
+                       fileMetadata, stream, "image/jpeg");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var fileUploaded = request.ResponseBody;
+                buku.DriveId = fileUploaded.Id;
+                buku.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                buku.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                buku.Judul = file.FileName;
+                buku.Parents = folderId;
+
                 _context.Add(buku);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(List));

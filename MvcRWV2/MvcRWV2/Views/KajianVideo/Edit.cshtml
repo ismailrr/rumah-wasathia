@@ -62,18 +62,18 @@
                     </div>
                     <div class="box-body pad">
                         <div class="form-group body-pad-video">
-                            @if (@Model.FImage != null && @Model.FImage != "")
+                            @if (@Model.Source != null && @Model.Source != "")
                             {
-                            <iframe class="preview-edit" width="150" src="@Model.Source" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <video class="preview-edit" src="@Model.Source" frameborder="0" controls></video>
                             }
                             else
                             {
-                                <span>Pilih Gambar Cover</span>
-                                <div class="form-group">
-                                    <label asp-for="FImage" class="control-label"></label>
-                                    <input asp-for="FImage" class="form-control" />
-                                    <span asp-validation-for="FImage" class="text-danger"></span>
-                                </div>
+                            <span>Pilih Gambar Cover</span>
+                            <div class="form-group">
+                                <label asp-for="FImage" class="control-label"></label>
+                                <input asp-for="FImage" class="form-control" />
+                                <span asp-validation-for="FImage" class="text-danger"></span>
+                            </div>
                             }
                         </div>
                     </div>

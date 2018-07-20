@@ -20,7 +20,7 @@ namespace MvcRWV2.Data
             var extPdf = new List<string> { ".pdf"};
 
             //Cek jika data sudah dibuat
-            if (context.DaftarArtikel.Any())
+            if (context.DaftarArtikel.Any() || context.DaftarBuku.Any())
             {
                 return;
             }
@@ -329,14 +329,14 @@ namespace MvcRWV2.Data
              */
             var kajianAudio = new KajianAudio[]
             {
-                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa" },
+                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/357475985&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin"},
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/268727142&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/224844275&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/292675007&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/224844275&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now , Status = 1,Penulis="admin"},
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212773651&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/413160264&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
-                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/196296200&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin" }
+                new KajianAudio{ Source = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/196296200&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa"  }
             };
             
             //var kajianAudio = new List<KajianAudio>();
@@ -361,7 +361,7 @@ namespace MvcRWV2.Data
              */
             var kajianVideo = new KajianVideo[]
             {
-                new KajianVideo{ Source = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa" },
+                new KajianVideo{ Source = "https://www.youtube.com/embed/NhCwuonQaMA", Tanggal = DateTime.Now, Status = 1,Penulis="admin"},
                 new KajianVideo{ Source = "https://www.youtube.com/embed/INK1IvY4WSA", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/HXOy6M8Vedk", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/8bPY1JfdHoo", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
@@ -394,7 +394,7 @@ namespace MvcRWV2.Data
                 new KajianVideo{ Source = "https://www.youtube.com/embed/BkY3zK14b4k", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/7KiO2FjOJkU", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
                 new KajianVideo{ Source = "https://www.youtube.com/embed/YleGMu9qILE", Tanggal = DateTime.Now, Status = 1,Penulis="admin" },
-                new KajianVideo{ Source = "https://www.youtube.com/embed/4E-oEEvw5G8", Tanggal = DateTime.Now, Status = 1,Penulis="admin" }
+                new KajianVideo{ Source = "https://www.youtube.com/embed/4E-oEEvw5G8", Tanggal = DateTime.Now, Status = 1,Penulis="admin", Judul = "aaaaaaaaaaaaaa"  }
             };
 
             
