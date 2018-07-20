@@ -293,7 +293,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiRepublika konsultasiRepublika)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Source,Tanggal,Path,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiRepublika konsultasiRepublika, IFormFile file)
         {
             if (id != konsultasiRepublika.Id)
             {
@@ -304,6 +304,30 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    DriveService service = driveService.GetService();
+                    var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                    string path = Path.GetTempFileName();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(file.FileName),
+                        Parents = new List<string>
+                        {
+                            folderId
+                        }
+                    };
+                    FilesResource.CreateMediaUpload request;
+
+                    using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    {
+                        await file.CopyToAsync(stream);
+                        request = service.Files.Create(
+                           fileMetadata, stream, "image/jpeg");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var fileUploaded = request.ResponseBody;
+                    konsultasiRepublika.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+
                     konsultasiRepublika.Tanggal = DateTime.Now;
                     if (konsultasiRepublika.FImage != null)
                     {
@@ -354,12 +378,27 @@ namespace MvcRWV2.Controllers
         // POST: KonsultasiRepublika/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var konsultasiRepublika = await _context.DaftarKonsultasiRepublika.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarKonsultasiRepublika.Remove(konsultasiRepublika);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool KonsultasiRepublikaExists(int id)
@@ -387,9 +426,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var konsultasiRepublika = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var konsultasiRepublika = await _context.DaftarKonsultasiRepublika.SingleOrDefaultAsync(m => m.Id == id);
             konsultasiRepublika.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(konsultasiRepublika);
+            _context.DaftarKonsultasiRepublika.Update(konsultasiRepublika);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

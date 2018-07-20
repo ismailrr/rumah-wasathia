@@ -294,7 +294,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,DriveId,Parents")] Buku buku)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Path,FImage,PenulisBuku,Terbitan,ISBN,Deskripsi,Tebal,Tanggal,Kategori,Tag,Penulis,Status,DriveId,Parents")] Buku buku, IFormFile file)
         {
             if (id != buku.Id)
             {
@@ -305,6 +305,30 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    DriveService service = driveService.GetService();
+                    var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                    string path = Path.GetTempFileName();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(file.FileName),
+                        Parents = new List<string>
+                        {
+                            folderId
+                        }
+                    };
+                    FilesResource.CreateMediaUpload request;
+
+                    using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    {
+                        await file.CopyToAsync(stream);
+                        request = service.Files.Create(
+                           fileMetadata, stream, "image/jpeg");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var fileUploaded = request.ResponseBody;
+                    buku.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+
                     if (buku.FImage != null)
                     {
                         buku.FImage = buku.FImage.Replace("file/d/", "uc?id=");
@@ -355,9 +379,24 @@ namespace MvcRWV2.Controllers
         // POST: Buku/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var buku = await _context.DaftarBuku.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarBuku.Remove(buku);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
@@ -388,9 +427,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var buku = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var buku = await _context.DaftarBuku.SingleOrDefaultAsync(m => m.Id == id);
             buku.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(buku);
+            _context.DaftarBuku.Update(buku);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

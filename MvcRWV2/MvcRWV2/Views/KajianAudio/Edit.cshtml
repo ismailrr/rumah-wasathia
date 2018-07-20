@@ -14,7 +14,7 @@
 </div>
 <hr />
 <div class="row">
-    <form asp-action="Edit">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
         <div class="col-md-9">
             <div class="box box-info">
                 <div class="box-header">
@@ -63,7 +63,7 @@
                         <div class="form-group body-pad-audio">
                             @if (@Model.Source != null && @Model.Source != "")
                             {
-                                <audio class="preview-edit" scrolling="no" frameborder="0" src="@Model.Source"></audio>
+                                <audio class="preview-edit" scrolling="no" frameborder="0" src="@Model.Source" controls></audio>
                             }
                             else
                             {

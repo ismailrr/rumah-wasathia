@@ -64,8 +64,9 @@
                         @Html.DisplayFor(model => model.Tanggal)
                     </dd>
                 </dl>
-                <form asp-action="Delete">
-                    <input type="hidden" asp-for="Id" />
+                <form asp-action="Delete" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" name=Id />
+                    <input type="hidden" asp-for="DriveId" name=driveId />
                     <input type="submit" value="Delete" class="btn btn-danger" /> |
                     <a asp-action="List" asp-route-status="2">Kembali</a>
                 </form>

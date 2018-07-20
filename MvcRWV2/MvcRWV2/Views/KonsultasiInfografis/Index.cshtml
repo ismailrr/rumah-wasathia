@@ -46,7 +46,7 @@
                     {
                         <div class="item topic col-md-4 col-xs-8">
                             <a href="@if (item.Path != null && item.Path.Path != "") {@String.Format("{0}",item.Path)} else {@item.Source}" target="_blank">
-                                <img class="img-thumbnail icon-effect" src="~/uploads/image/general/chart.png" alt="" />
+                                <img class="img-thumbnail icon-effect" src="@item.FImage" alt="" />
                                 <h4>@item.DisplayTextJudul</h4>
                             </a>
                         </div>

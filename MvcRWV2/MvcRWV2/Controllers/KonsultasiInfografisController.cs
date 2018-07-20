@@ -215,6 +215,10 @@ namespace MvcRWV2.Controllers
                     infografis.FImage = infografis.FImage.Replace("file/d/", "uc?id=");
                     infografis.FImage = infografis.FImage.Replace("/view?usp=sharing", "");
                 }
+                if (infografis.FImage == null)
+                {
+                    infografis.FImage = "/uploads/image/general/pdf.png";
+                }
                 if (infografis.Penulis == null)
                 {
                     infografis.Penulis = "admin";
@@ -276,7 +280,7 @@ namespace MvcRWV2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiInfografis infografis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Judul,Tanggal,Path,Source,FImage,Kategori,Tag,Penulis,Status,DriveId,Parents")] KonsultasiInfografis infografis, IFormFile file)
         {
             if (id != infografis.Id)
             {
@@ -287,6 +291,30 @@ namespace MvcRWV2.Controllers
             {
                 try
                 {
+                    DriveService service = driveService.GetService();
+                    var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                    string path = Path.GetTempFileName();
+                    var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                    {
+                        Name = Path.GetFileName(file.FileName),
+                        Parents = new List<string>
+                        {
+                            folderId
+                        }
+                    };
+                    FilesResource.CreateMediaUpload request;
+
+                    using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    {
+                        await file.CopyToAsync(stream);
+                        request = service.Files.Create(
+                           fileMetadata, stream, "image/jpeg");
+                        request.Fields = "id";
+                        request.Upload();
+                    }
+                    var fileUploaded = request.ResponseBody;
+                    infografis.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+
                     infografis.Tanggal = DateTime.Now;
                     if (infografis.FImage != null)
                     {
@@ -337,12 +365,27 @@ namespace MvcRWV2.Controllers
         // POST: Infografis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var infografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarKonsultasiInfografis.Remove(infografis);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool InfografisExists(int id)
@@ -370,9 +413,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var infografis = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var infografis = await _context.DaftarKonsultasiInfografis.SingleOrDefaultAsync(m => m.Id == id);
             infografis.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(infografis);
+            _context.DaftarKonsultasiInfografis.Update(infografis);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

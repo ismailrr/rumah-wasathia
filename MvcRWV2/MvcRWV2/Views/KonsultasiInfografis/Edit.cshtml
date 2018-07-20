@@ -14,7 +14,7 @@
 </div>
 <hr />
 <div class="row">
-    <form asp-action="Edit">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
         <div class="col-md-9">
             <div class="box box-info">
                 <div class="box-header">
@@ -155,8 +155,8 @@
                             {
                                 <span>Pilih Gambar Cover</span>
                                 <div class="form-group">
-                                    <label asp-for="FImage" class="control-label"></label>
-                                    <input asp-for="FImage" class="form-control" />
+                                    <label for="file">Upload file:</label>
+                                    <input type="file" name="file" id="file" />
                                     <span asp-validation-for="FImage" class="text-danger"></span>
                                 </div>
                             }

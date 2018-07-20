@@ -141,7 +141,7 @@
                                                 }
                                             </td>
                                             <td>
-                                                @if (item.Source == null || item.Source == "")
+                                                @if (item.Source == null || item.Source.Equals(""))
                                                  {
                                                     <span>—</span>
                                                 }
@@ -152,8 +152,8 @@
                                                 
                                             </td>
                                             <td>
-                                                @if (item.Penulis == null)
-                                                 {
+                                                @if (item.Penulis == null || item.Penulis.Equals(""))
+                                                {
                                                     <span>—</span>
                                                  }
                                                 else

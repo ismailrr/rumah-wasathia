@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Drive.v3;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -201,6 +203,35 @@ namespace MvcRWV2.Controllers
                     konsultasiEPaper.Penulis = "admin";
                 }
                 konsultasiEPaper.Status = 1;
+
+                DriveService service = driveService.GetService();
+                var folderId = "1aB_0pJ9qsHjP3DhOERmWacA2Mn1jDW7H";
+                string path = Path.GetTempFileName();
+                var fileMetadata = new Google.Apis.Drive.v3.Data.File()
+                {
+                    Name = Path.GetFileName(file.FileName),
+                    Parents = new List<string>
+                        {
+                            folderId
+                        }
+                };
+                FilesResource.CreateMediaUpload request;
+
+                using (var stream = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                {
+                    await file.CopyToAsync(stream);
+                    request = service.Files.Create(
+                       fileMetadata, stream, "image/jpeg");
+                    request.Fields = "id";
+                    request.Upload();
+                }
+                var fileUploaded = request.ResponseBody;
+                konsultasiEPaper.DriveId = fileUploaded.Id;
+                konsultasiEPaper.Source = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                konsultasiEPaper.FImage = "https://drive.google.com/uc?id=" + fileUploaded.Id;
+                konsultasiEPaper.Judul = file.FileName;
+                konsultasiEPaper.Parents = folderId;
+
                 _context.Add(konsultasiEPaper);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -290,12 +321,27 @@ namespace MvcRWV2.Controllers
         // POST: KonsultasiEPaper/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var konsultasiEPaper = await _context.DaftarKonsultasiEPaper.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarKonsultasiEPaper.Remove(konsultasiEPaper);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool KonsultasiEPaperExists(int id)
@@ -323,9 +369,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var kosultasiEPaper = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var kosultasiEPaper = await _context.DaftarKonsultasiEPaper.SingleOrDefaultAsync(m => m.Id == id);
             kosultasiEPaper.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(kosultasiEPaper);
+            _context.DaftarKonsultasiEPaper.Update(kosultasiEPaper);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

@@ -311,7 +311,7 @@ namespace MvcRWV2.Controllers
                         konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("file/d/", "uc?id=");
                         konsultasiRumahWasathia.FImage = konsultasiRumahWasathia.FImage.Replace("/view?usp=sharing", "");
                     }
-                    if (konsultasiRumahWasathia.PenulisKonten == null)
+                    if (konsultasiRumahWasathia.PenulisKonten == null || konsultasiRumahWasathia.PenulisKonten.Equals(""))
                     {
                         konsultasiRumahWasathia.PenulisKonten = "admin";
                     }
@@ -355,12 +355,27 @@ namespace MvcRWV2.Controllers
         // POST: KonsultasiRumahWasathia/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var konsultasiRumahWasathia = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarKonsultasiRumahWasathia.Remove(konsultasiRumahWasathia);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool KonsultasiRumahWasathiaExists(int id)

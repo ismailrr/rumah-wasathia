@@ -323,9 +323,24 @@ namespace MvcRWV2.Controllers
         // POST: KajianVideo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string driveId)
         {
             var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
+            DriveService service = driveService.GetService();
+            try
+            {
+                // Initial validation.
+                if (service == null)
+                    throw new ArgumentNullException("service");
+
+                if (driveId != null)
+                    service.Files.Delete(driveId).Execute();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request Files.Delete failed.", ex);
+            }
             _context.DaftarKajianVideo.Remove(kajianVideo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
@@ -356,9 +371,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var kajianVideo = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var kajianVideo = await _context.DaftarKajianVideo.SingleOrDefaultAsync(m => m.Id == id);
             kajianVideo.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(kajianVideo);
+            _context.DaftarKajianVideo.Update(kajianVideo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(List));
         }

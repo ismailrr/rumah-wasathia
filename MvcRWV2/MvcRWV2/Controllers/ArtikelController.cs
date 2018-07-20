@@ -220,7 +220,7 @@ namespace MvcRWV2.Controllers
                     }
                     if (artikel.FImage == null)
                     {
-                        artikel.FImage = "/uploads/image/general/pdf.png";
+                        artikel.FImage = "/uploads/image/general/chart.png";
                     }
                     if (artikel.Penulis == null)
                     {
@@ -396,9 +396,9 @@ namespace MvcRWV2.Controllers
 
         public async Task<IActionResult> RemoveCover(int id)
         {
-            var artikel = await _context.DaftarKonsultasiRumahWasathia.SingleOrDefaultAsync(m => m.Id == id);
+            var artikel = await _context.DaftarArtikel.SingleOrDefaultAsync(m => m.Id == id);
             artikel.FImage = "";
-            _context.DaftarKonsultasiRumahWasathia.Update(artikel);
+            _context.DaftarArtikel.Update(artikel);
             await _context.SaveChangesAsync();
             return RedirectToAction("Edit", new { Id = id });
         }

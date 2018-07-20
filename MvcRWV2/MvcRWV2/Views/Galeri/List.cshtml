@@ -142,7 +142,7 @@
                                         }
                                     </td>
                                     <td>
-                                        @if (item.FImage == null)
+                                        @if (item.FImage == null || item.FImage.Equals(""))
                                         {
                                             <span>—</span>
                                         }
@@ -153,7 +153,7 @@
 
                                     </td>
                                     <td>
-                                        @if (item.Penulis == null || item.Penulis == "")
+                                        @if (item.Penulis == null || item.Penulis.Equals(""))
                                         {
                                             <span>—</span>
                                         }
