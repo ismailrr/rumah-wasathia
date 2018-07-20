@@ -234,7 +234,7 @@ namespace MvcRWV2.Controllers
 
                 _context.Add(konsultasiEPaper);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
             return View(konsultasiEPaper);
         }
